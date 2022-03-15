@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="BindingOfIsaac.h" />
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Shooter.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Obstruction.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Familiar.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PickableObject.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PassiveItem.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadReason.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleBackGround.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BindingOfIsaac.cpp" />
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooter.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Obstruction.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Familiar.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PickableObject.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PassiveItem.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadReason.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleBackGround.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Level">
+      <UniqueIdentifier>{6d578fb7-24fd-493c-81ce-7d1531a96225}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Title">
+      <UniqueIdentifier>{2c1b1d01-03f2-451c-8b59-c442f165872b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play">
+      <UniqueIdentifier>{5498417a-4a71-49f2-baad-3bfd3f856b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ending">
+      <UniqueIdentifier>{b655c147-3cb0-49c4-9a45-dd964b5dc99c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
