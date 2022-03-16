@@ -20,5 +20,5 @@ void Player::Update()
 
 void Player::Render()
 {
-	Rectangle(GameEngineWindow::GETDC(), 500, 500, 550, 550);
+	Rectangle(GameEngineWindow::GetHDC(), 500, 500, 550, 550);
 }

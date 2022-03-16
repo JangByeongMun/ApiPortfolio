@@ -1,6 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include <string>
+#include "GameEngineMath.h"
 
 // Ό³Έν :
 class GameEngineWindow
@@ -26,11 +27,16 @@ public:
 	void CreateGameWindow(HINSTANCE _hInst, const std::string& _Title);
 	void ShowGameWindow();
 	void MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)());
+	void SetWindowScaleAndPosition(float4 _pos, float4 _scale);
 	void Off();
 
-	static inline HDC GETDC()
+	static inline HDC GetHDC()
 	{
 		return Inst_->hDC_;
+	}
+	static inline float4 GetScale()
+	{
+		return Inst_->scale_;
 	}
 
 protected:
@@ -41,6 +47,7 @@ private:
 	HINSTANCE hInst_;
 	HWND hWnd_;
 	HDC hDC_;
+	float4 scale_;
 	
 	// constrcuter destructer
 	GameEngineWindow();

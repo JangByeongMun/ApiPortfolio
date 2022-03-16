@@ -32,6 +32,9 @@ protected:
 		ActorType* newActor = new ActorType();
 		newActor->SetName(_name);
 		newActor->SetLevel(this);
+		GameEngineActor* engineActor = newActor;
+		engineActor->Start();
+		
 		// ------------------------------------------
 		//std::map<int, std::list<GameEngineActor*>>::iterator findIter = allActor_.find(_order);
 		//if (findIter == allActor_.end())
