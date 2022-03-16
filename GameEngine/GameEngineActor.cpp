@@ -12,6 +12,18 @@ GameEngineActor::~GameEngineActor()
 {
 }
 
+void GameEngineActor::Start()
+{
+}
+
+void GameEngineActor::Update()
+{
+}
+
+void GameEngineActor::Render()
+{
+}
+
 void GameEngineActor::DebugRectRender()
 {
 	GameEngineRect DebugRect(position_, scale_);

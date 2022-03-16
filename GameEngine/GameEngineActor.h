@@ -34,10 +34,11 @@ public:
 	{
 		return scale_;
 	}
+
 protected:
-	virtual void Start()  {}
-	virtual void Update() {}
-	virtual void Render() {}
+	virtual void Start();
+	virtual void Update();
+	virtual void Render();
 
 	void DebugRectRender();
 private:
@@ -49,6 +50,5 @@ private:
 	{
 		level_ = _level;
 	}
-	
 };
 

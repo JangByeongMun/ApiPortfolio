@@ -9,7 +9,7 @@ class GameEngine
 public:
 	// constrcuter destructer
 	GameEngine();
-	~GameEngine();
+	virtual ~GameEngine();
 
 	// delete Function
 	GameEngine(const GameEngine& _Other) = delete;
@@ -33,7 +33,7 @@ public:
 		EngineEnd();
 	}
 
-	static GameEngine& GlobalEngine()
+	inline static GameEngine& GlobalEngine()
 	{
 		if (nullptr == userContents_)
 		{

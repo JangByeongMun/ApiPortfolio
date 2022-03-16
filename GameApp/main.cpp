@@ -1,6 +1,4 @@
 #include <Windows.h>
-#include <GameEngineBase/GameEngineWindow.h>
-#include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineContents/BindingOfIsaac.h>
 
 // main함수를 오버로딩 해서 사용한것

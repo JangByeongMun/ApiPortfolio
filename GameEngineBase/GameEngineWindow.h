@@ -30,11 +30,11 @@ public:
 	void SetWindowScaleAndPosition(float4 _pos, float4 _scale);
 	void Off();
 
-	static inline HDC GetHDC()
+	inline static HDC GetHDC()
 	{
 		return Inst_->hDC_;
 	}
-	static inline float4 GetScale()
+	inline static float4 GetScale()
 	{
 		return Inst_->scale_;
 	}

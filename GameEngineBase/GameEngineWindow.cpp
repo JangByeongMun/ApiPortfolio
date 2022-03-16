@@ -123,10 +123,12 @@ void GameEngineWindow::Off()
 }
 
 GameEngineWindow::GameEngineWindow()
-    : hInst_(nullptr)
+    : Title_("")
+    , hInst_(nullptr)
     , hWnd_(nullptr)
     , windowOn_(true)
     , hDC_(nullptr)
+    , scale_({})
 {
 }
 

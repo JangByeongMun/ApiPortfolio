@@ -1,6 +1,7 @@
 #include "BindingOfIsaac.h"
 #include "TitleLevel.h"
 #include "PlayLevel.h"
+#include "LoadingLevel.h"
 #include "EndingLevel.h"
 #include <conio.h>
 #include <GameEngineBase/GameEngineWindow.h>
@@ -20,6 +21,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
+	CreateLevel<LoadingLevel>("Loading");
 	ChangeLevel("Title");
 }
 

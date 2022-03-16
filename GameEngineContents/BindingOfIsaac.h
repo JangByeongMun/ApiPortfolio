@@ -16,10 +16,10 @@ public:
 	BindingOfIsaac& operator=(const BindingOfIsaac& _Other) = delete;
 	BindingOfIsaac& operator=(BindingOfIsaac&& _Other) noexcept = delete;
 
+protected:
 	void GameInit() override;
 	void GameLoop() override;
 	void GameEnd() override;
-protected:
 
 private:
 
