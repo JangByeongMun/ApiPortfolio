@@ -105,7 +105,7 @@ public:
 	}
 };
 
-struct GameEngineRect
+class GameEngineRect
 {
 public:
 	float4 pos;

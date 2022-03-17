@@ -56,6 +56,15 @@
     <ClInclude Include="TitleBackGround.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="CardUI.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniMap.h">
+      <Filter>Play</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -112,6 +121,15 @@
     </ClCompile>
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="CardUI.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniMap.cpp">
+      <Filter>Play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

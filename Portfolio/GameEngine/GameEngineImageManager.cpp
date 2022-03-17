@@ -1,6 +1,5 @@
 #include "GameEngineImageManager.h"
 #include "GameEngineBase/GameEngineDebug.h"
-#include "GameEngineImage.h"
 
 GameEngineImageManager* GameEngineImageManager::inst_ = new GameEngineImageManager();
 
