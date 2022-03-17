@@ -1,5 +1,6 @@
 #include "GameEngineActor.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include "GameEngine.h"
 
 GameEngineActor::GameEngineActor() 
 	: level_(nullptr)
@@ -28,7 +29,7 @@ void GameEngineActor::DebugRectRender()
 {
 	GameEngineRect DebugRect(position_, scale_);
 	Rectangle(
-		GameEngineWindow::GetHDC(),
+		GameEngine::BackBufferDC(),
 		DebugRect.GetCenterLeft(),
 		DebugRect.GetCenterTop(),
 		DebugRect.GetCenterRight(),

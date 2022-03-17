@@ -1,11 +1,14 @@
 #include "GameEngine.h"
 #include "GameEngineLevel.h"
+#include "GameEngineImage.h"
+#include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineWindow.h>
 
 std::map<std::string, GameEngineLevel*> GameEngine::allLevel_;
 GameEngineLevel* GameEngine::currentLevel_ = nullptr;
 GameEngineLevel* GameEngine::nextLevel_ = nullptr;
 GameEngine* GameEngine::userContents_ = nullptr;
+GameEngineImage* GameEngine::backBufferImage_ = nullptr;
 
 GameEngine::GameEngine() 
 {
@@ -38,6 +41,8 @@ void GameEngine::WindowCreate()
 void GameEngine::EngineInit()
 {
 	userContents_->GameInit();
+	backBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetInst().GetScale());
+
 }
 
 void GameEngine::EngineLoop()
@@ -48,14 +53,14 @@ void GameEngine::EngineLoop()
 	{
 		if (nullptr != currentLevel_)
 		{
-			currentLevel_->SceneChangeEnd();
+			currentLevel_->LevelChangeEnd();
 		}
 		
 		currentLevel_ = nextLevel_;
 		
 		if (nullptr != currentLevel_)
 		{
-			currentLevel_->SceneChangeStart();
+			currentLevel_->LevelChangeStart();
 		}
 
 		nextLevel_ = nullptr;
@@ -86,5 +91,11 @@ void GameEngine::EngineEnd()
 		delete StartIter->second;
 	}
 
+	GameEngineImageManager::Destroy();
 	GameEngineWindow::Destroy();
+}
+
+HDC GameEngine::BackBufferDC()
+{
+	return backBufferImage_->ImageDC();
 }

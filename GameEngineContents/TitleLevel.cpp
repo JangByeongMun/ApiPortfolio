@@ -23,11 +23,11 @@ void TitleLevel::Update()
 	//GameEngine::GlobalEngine().ChangeLevel("Play");
 }
 
-void TitleLevel::SceneChangeStart()
+void TitleLevel::LevelChangeStart()
 {
 }
 
-void TitleLevel::SceneChangeEnd()
+void TitleLevel::LevelChangeEnd()
 {
 }
 

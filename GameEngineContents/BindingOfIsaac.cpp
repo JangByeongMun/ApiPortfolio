@@ -28,12 +28,11 @@ void BindingOfIsaac::GameInit()
 int testI = 0;
 void BindingOfIsaac::GameLoop()
 {
-	++testI;
-	if (testI >= 10)
-	{
-		ChangeLevel("Play");
-	}
-	int a = 0;
+	//++testI;
+	//if (testI >= 10)
+	//{
+	//	ChangeLevel("Play");
+	//}
 }
 
 void BindingOfIsaac::GameEnd()

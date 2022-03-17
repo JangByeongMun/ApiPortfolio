@@ -16,10 +16,10 @@ void LoadingLevel::Update()
 {
 }
 
-void LoadingLevel::SceneChangeStart()
+void LoadingLevel::LevelChangeStart()
 {
 }
 
-void LoadingLevel::SceneChangeEnd()
+void LoadingLevel::LevelChangeEnd()
 {
 }

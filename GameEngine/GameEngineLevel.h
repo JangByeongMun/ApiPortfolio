@@ -23,8 +23,8 @@ protected:
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
 
-	virtual void SceneChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
-	virtual void SceneChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
+	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
+	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
 	
 	template<typename ActorType>
 	ActorType* CreateActor(const std::string& _name , int _order)

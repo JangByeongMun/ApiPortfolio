@@ -41,5 +41,8 @@
     <Filter Include="Math">
       <UniqueIdentifier>{f6b77887-dfa5-4ff5-96bc-cd03e34fd612}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{0cecfa8e-947c-4e49-8872-239b30faf57d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

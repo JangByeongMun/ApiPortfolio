@@ -18,12 +18,12 @@ void PlayLevel::Update()
 {
 }
 
-void PlayLevel::SceneChangeStart()
+void PlayLevel::LevelChangeStart()
 {
 	int a = 0;
 }
 
-void PlayLevel::SceneChangeEnd()
+void PlayLevel::LevelChangeEnd()
 {
 	int a = 0;
 }

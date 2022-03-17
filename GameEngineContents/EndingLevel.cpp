@@ -16,11 +16,11 @@ void EndingLevel::Update()
 {
 }
 
-void EndingLevel::SceneChangeStart()
+void EndingLevel::LevelChangeStart()
 {
 }
 
-void EndingLevel::SceneChangeEnd()
+void EndingLevel::LevelChangeEnd()
 {
 }
 

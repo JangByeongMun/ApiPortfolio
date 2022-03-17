@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 
 class GameEngineLevel;
+class GameEngineImage;
 class GameEngine
 {
 public:
@@ -16,6 +17,12 @@ public:
 	GameEngine(GameEngine&& _Other) noexcept = delete;
 	GameEngine& operator=(const GameEngine& _Other) = delete;
 	GameEngine& operator=(GameEngine&& _Other) noexcept = delete;
+
+	inline static GameEngineImage* BackBufferImage()
+	{
+		return backBufferImage_;
+	}
+	static HDC BackBufferDC();
 
 	virtual void GameInit() = 0;
 	virtual void GameLoop() = 0;
@@ -61,6 +68,7 @@ private:
 	static GameEngineLevel* currentLevel_;
 	static GameEngineLevel* nextLevel_;
 	static GameEngine* userContents_;
+	static GameEngineImage* backBufferImage_;
 
 	static void WindowCreate();
 	static void EngineInit();
