@@ -1,6 +1,6 @@
 #pragma once
 
-// 설명 : 먹을수 있는 패시브 아이템
+// 설명 : 특수 능력을 가진 패시브 아이템들 기본
 class PassiveItem
 {
 public:

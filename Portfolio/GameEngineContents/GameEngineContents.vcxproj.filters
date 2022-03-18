@@ -14,56 +14,116 @@
     <ClInclude Include="TitleLogo.h">
       <Filter>Title</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="Credit.h">
       <Filter>Ending</Filter>
     </ClInclude>
     <ClInclude Include="LoadingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Shooter.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Projectile.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Obstruction.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Familiar.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Bomb.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="PickableObject.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="PassiveItem.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="Option.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="DeadReason.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="TitleBackGround.h">
       <Filter>Title</Filter>
     </ClInclude>
-    <ClInclude Include="ItemUI.h">
-      <Filter>Play</Filter>
-    </ClInclude>
     <ClInclude Include="CardUI.h">
-      <Filter>Play</Filter>
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HavingItemUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpacebarUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HpUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BombItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Fire.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FireBlue.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FireRed.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Hole.h">
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="MiniMap.h">
-      <Filter>Play</Filter>
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadReasonUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Poop.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="PoopRed.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="OptionUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="StoneBlack.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Familiar.h">
+      <Filter>Play\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="MoneyBlack.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Thorn.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="PickableObject.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PassiveItem.h">
+      <Filter>Play\Passive</Filter>
+    </ClInclude>
+    <ClInclude Include="Accessory.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Bomb.h">
+      <Filter>Play\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageableActor.h">
+      <Filter>Play\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Shooter.h">
+      <Filter>Play\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.h">
+      <Filter>Play\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuLevel.h">
+      <Filter>Level</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -80,56 +140,116 @@
     <ClCompile Include="TitleLogo.cpp">
       <Filter>Title</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
     <ClCompile Include="Credit.cpp">
       <Filter>Ending</Filter>
     </ClCompile>
     <ClCompile Include="LoadingLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Shooter.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Projectile.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Obstruction.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Familiar.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Bomb.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="PickableObject.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="PassiveItem.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="Option.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="DeadReason.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
     <ClCompile Include="TitleBackGround.cpp">
       <Filter>Title</Filter>
     </ClCompile>
-    <ClCompile Include="ItemUI.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
     <ClCompile Include="CardUI.cpp">
-      <Filter>Play</Filter>
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HavingItemUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpacebarUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="HpUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BombItem.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FireBlue.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FireRed.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Hole.cpp">
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="MiniMap.cpp">
-      <Filter>Play</Filter>
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DeadReasonUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Poop.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="PoopRed.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="OptionUI.cpp">
+      <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="StoneBlack.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Familiar.cpp">
+      <Filter>Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyItem.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyItem.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="MoneyBlack.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="PickableObject.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PassiveItem.cpp">
+      <Filter>Play\Passive</Filter>
+    </ClCompile>
+    <ClCompile Include="Accessory.cpp">
+      <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Bomb.cpp">
+      <Filter>Play\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageableActor.cpp">
+      <Filter>Play\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Shooter.cpp">
+      <Filter>Play\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Play\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +264,30 @@
     </Filter>
     <Filter Include="Ending">
       <UniqueIdentifier>{b655c147-3cb0-49c4-9a45-dd964b5dc99c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\UI">
+      <UniqueIdentifier>{af947d87-4d93-4416-9936-e5e60aff98b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Item">
+      <UniqueIdentifier>{a2238290-3634-49cc-8394-8329c82d191b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Map">
+      <UniqueIdentifier>{5f746567-a322-4fac-af26-4bb71bc32038}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Monster">
+      <UniqueIdentifier>{03f9b8a5-9ede-404b-b9fb-c418396cacb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Player">
+      <UniqueIdentifier>{500bb78d-14b5-490e-a0c2-51c05cfaf254}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Passive">
+      <UniqueIdentifier>{96d79c5d-7cd7-418f-9546-0f54f768656c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Object">
+      <UniqueIdentifier>{7b14ea41-1737-4d85-92ad-e27668cffda2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Base">
+      <UniqueIdentifier>{5c4d13d7-575c-4d20-b999-4f4424381eba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

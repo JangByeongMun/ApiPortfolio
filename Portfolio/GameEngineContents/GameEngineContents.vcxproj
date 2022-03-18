@@ -154,11 +154,19 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Accessory.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="BindingOfIsaac.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Bomb.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="BombItem.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -170,7 +178,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="DeadReason.h">
+    <ClInclude Include="DamageableActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="DeadReasonUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Door.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -182,7 +198,35 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Fire.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FireBlue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="FireRed.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="HavingItemUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Hole.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="HpUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ItemUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="KeyItem.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -190,7 +234,19 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MenuLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MiniMap.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MoneyBlack.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MoneyItem.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -198,15 +254,15 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Obstruction.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Option.h">
+    <ClInclude Include="OptionUI.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PassiveItem.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PauseUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -222,11 +278,35 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Poop.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PoopRed.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Projectile.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="Shooter.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="SpacebarUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stone.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="StoneBlack.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Thorn.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -244,11 +324,19 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Accessory.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="BindingOfIsaac.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Bomb.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="BombItem.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -260,7 +348,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="DeadReason.cpp">
+    <ClCompile Include="DamageableActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="DeadReasonUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Door.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -272,7 +368,35 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Fire.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FireBlue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FireRed.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HavingItemUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Hole.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="HpUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ItemUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="KeyItem.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -280,7 +404,19 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MenuLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MiniMap.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MoneyBlack.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MoneyItem.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -288,15 +424,15 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Obstruction.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Option.cpp">
+    <ClCompile Include="OptionUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PassiveItem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PauseUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -312,11 +448,35 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Poop.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PoopRed.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Projectile.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="Shooter.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="SpacebarUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stone.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StoneBlack.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Thorn.cpp">
       <SubType>
       </SubType>
     </ClCompile>
