@@ -8,6 +8,7 @@ std::map<std::string, GameEngineLevel*> GameEngine::allLevel_;
 GameEngineLevel* GameEngine::currentLevel_ = nullptr;
 GameEngineLevel* GameEngine::nextLevel_ = nullptr;
 GameEngine* GameEngine::userContents_ = nullptr;
+GameEngineImage* GameEngine::windowMainImage_ = nullptr;
 GameEngineImage* GameEngine::backBufferImage_ = nullptr;
 
 GameEngine::GameEngine() 
@@ -41,8 +42,8 @@ void GameEngine::WindowCreate()
 void GameEngine::EngineInit()
 {
 	userContents_->GameInit();
+	windowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
 	backBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetInst().GetScale());
-
 }
 
 void GameEngine::EngineLoop()
@@ -74,6 +75,7 @@ void GameEngine::EngineLoop()
 	currentLevel_->Update();
 	currentLevel_->ActorUpdate();
 	currentLevel_->ActorRender();
+	windowMainImage_->BitCopy(backBufferImage_);
 }
 
 void GameEngine::EngineEnd()
@@ -93,6 +95,11 @@ void GameEngine::EngineEnd()
 
 	GameEngineImageManager::Destroy();
 	GameEngineWindow::Destroy();
+}
+
+HDC GameEngine::WindowMainDC()
+{
+	return windowMainImage_->ImageDC();
 }
 
 HDC GameEngine::BackBufferDC()

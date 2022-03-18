@@ -25,14 +25,9 @@ void BindingOfIsaac::GameInit()
 	ChangeLevel("Title");
 }
 
-int testI = 0;
 void BindingOfIsaac::GameLoop()
 {
-	//++testI;
-	//if (testI >= 10)
-	//{
-	//	ChangeLevel("Play");
-	//}
+
 }
 
 void BindingOfIsaac::GameEnd()

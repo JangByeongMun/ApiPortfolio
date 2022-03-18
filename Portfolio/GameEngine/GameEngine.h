@@ -22,6 +22,7 @@ public:
 	{
 		return backBufferImage_;
 	}
+	static HDC WindowMainDC();
 	static HDC BackBufferDC();
 
 	virtual void GameInit() = 0;
@@ -68,6 +69,7 @@ private:
 	static GameEngineLevel* currentLevel_;
 	static GameEngineLevel* nextLevel_;
 	static GameEngine* userContents_;
+	static GameEngineImage* windowMainImage_;
 	static GameEngineImage* backBufferImage_;
 
 	static void WindowCreate();
