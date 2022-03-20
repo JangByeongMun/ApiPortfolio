@@ -125,6 +125,12 @@
     <ClInclude Include="MenuLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="RandomRoomManager.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="RoomData.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -250,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="MenuLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomRoomManager.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomData.cpp">
+      <Filter>Play\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

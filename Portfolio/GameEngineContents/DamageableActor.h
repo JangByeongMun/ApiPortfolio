@@ -17,6 +17,15 @@ public:
 
 	virtual void Death(bool _isDeath);
 
+	inline float GetHP()
+	{
+		return hp_;
+	}
+	inline void SetHP(float _value)
+	{
+		hp_ = _value;
+	}
+
 protected:
 	virtual void DamageTake(float _value);
 
