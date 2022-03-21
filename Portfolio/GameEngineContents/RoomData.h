@@ -35,7 +35,7 @@ public:
 protected:
 
 private:
-	int allBlock_[7][13];
+	char allBlock_[7][13];
 	int startX = 200;
 	int startY = 100;
 	int scaleX = 50;

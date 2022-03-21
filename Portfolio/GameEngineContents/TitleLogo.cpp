@@ -1,6 +1,6 @@
+#include "TitleLogo.h"
 #include <Windows.h>
 #include <GameEngineBase/GameEngineWindow.h>
-#include "TitleLogo.h"
 
 TitleLogo::TitleLogo()
 {
@@ -13,7 +13,6 @@ TitleLogo::~TitleLogo()
 void TitleLogo::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
-	SetScale({ 500, 500 });
 }
 
 void TitleLogo::Update()
@@ -22,5 +21,8 @@ void TitleLogo::Update()
 
 void TitleLogo::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
+	CreateRenderer("MakeBy.bmp", RenderPivot::CENTER, { -180, -220 });
+	CreateRenderer("TitleLogoText.bmp", RenderPivot::CENTER, { 0, -70 });
+	CreateRenderer("TitleLogo.bmp", RenderPivot::CENTER, { 0, 100 });
 }

@@ -57,6 +57,13 @@ void GameEngine::EngineLoop()
 			currentLevel_->LevelChangeEnd();
 		}
 		
+		Rectangle(
+			BackBufferDC(),
+			0,
+			0,
+			GameEngineWindow::GetScale().ix(),
+			GameEngineWindow::GetScale().iy()
+		);
 		currentLevel_ = nextLevel_;
 		
 		if (nullptr != currentLevel_)

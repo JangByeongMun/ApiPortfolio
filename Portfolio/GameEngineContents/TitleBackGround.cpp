@@ -21,5 +21,6 @@ void TitleBackGround::Update()
 
 void TitleBackGround::Render()
 {
-	DebugRectRender();
+	//DebugRectRender();
+	CreateRenderer("Title.bmp");
 }

@@ -131,6 +131,9 @@
     <ClInclude Include="RoomData.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
+    <ClInclude Include="MenuUI.h">
+      <Filter>Menu</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -263,6 +266,9 @@
     <ClCompile Include="RoomData.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
+    <ClCompile Include="MenuUI.cpp">
+      <Filter>Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -300,6 +306,9 @@
     </Filter>
     <Filter Include="Play\Base">
       <UniqueIdentifier>{5c4d13d7-575c-4d20-b999-4f4424381eba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menu">
+      <UniqueIdentifier>{08fba377-ff7e-4495-bfa9-5854ff00c625}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
