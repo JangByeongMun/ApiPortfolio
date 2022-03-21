@@ -19,18 +19,20 @@ public:
 	{
 		name_ = _name;
 	}
-	const inline std::string GetName() 
+	inline const std::string GetName()
 	{
 		return name_;
 	}
-	const inline std::string& GetNameRef()
+	inline const std::string& GetNameRef()
 	{
 		return name_;
 	}
-	const inline char* GetNamePtr()
+	inline const char* GetNamePtr()
 	{
 		return name_.c_str();
 	}
+
+protected:
 
 private:
 	std::string name_;

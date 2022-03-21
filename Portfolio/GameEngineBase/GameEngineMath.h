@@ -74,6 +74,15 @@ public:
 		return { x * 0.5f, y * 0.5f, z * 0.5f, 1.0f };
 	}
 
+	float4 operator-(const float4& _other) const
+	{
+		return { x - _other.x, y - _other.y, z - _other.z, 1.0f };
+	}
+	float4 operator+(const float4& _other) const
+	{
+		return { x + _other.x, y + _other.y, z + _other.z, 1.0f };
+	}
+
 public:
 	float4()
 		: x(0)
@@ -112,19 +121,19 @@ public:
 	float4 scale;
 
 public:
-	inline int GetCenterLeft() 
+	inline int GetCenterLeft() const
 	{
 		return pos.ix() - scale.hix();
 	}
-	inline int GetCenterRight()
+	inline int GetCenterRight() const
 	{
 		return pos.ix() + scale.hix();
 	}
-	inline int GetCenterTop()
+	inline int GetCenterTop() const
 	{
 		return pos.iy() - scale.hiy();
 	}
-	inline int GetCenterBot()
+	inline int GetCenterBot() const
 	{
 		return pos.iy() + scale.hiy();
 	}

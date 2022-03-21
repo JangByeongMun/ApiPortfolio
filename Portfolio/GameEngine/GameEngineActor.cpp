@@ -1,6 +1,7 @@
 #include "GameEngineActor.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngine.h"
+#include "GameEngineImageManager.h"
 
 GameEngineActor::GameEngineActor() 
 	: level_(nullptr)
@@ -35,4 +36,26 @@ void GameEngineActor::DebugRectRender()
 		DebugRect.GetCenterRight(),
 		DebugRect.GetCenterBot()
 	);
+}
+
+void GameEngineActor::CreateRenderer(const std::string& _image, RenderPivot _pivotType, float4 _addPivot)
+{
+	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image);
+	if (nullptr == findImage)
+	{
+		MsgBoxAssert("플레이어 이미지를 찾지 못했습니다.");
+		return;	
+	}
+
+	switch (_pivotType)
+	{
+	case RenderPivot::CENTER:
+		GameEngine::BackBufferImage()->BitCopyCenterPivot(findImage, GetPosition(), _addPivot);
+		break;
+	case RenderPivot::BOT:
+		GameEngine::BackBufferImage()->BitCopyBotPivot(findImage, GetPosition(), _addPivot);
+		break;
+	default:
+		break;
+	}
 }

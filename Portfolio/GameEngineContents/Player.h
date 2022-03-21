@@ -16,11 +16,10 @@ public:
 	Player& operator=(Player&& _Other) noexcept = delete;
 
 protected:
+	
+private:
 	void Start() override;
 	void Update() override;
 	void Render() override;
-
-private:
-
 };
 

@@ -32,7 +32,9 @@ protected:
 		ActorType* newActor = new ActorType();
 		newActor->SetName(_name);
 		newActor->SetLevel(this);
-		GameEngineActor* engineActor = newActor;
+
+		// 각 액터들마다 start가 다를수 있는데 이를 가상함수로 제작한후 밖에서 호출하지 못하도록 막은후 GameEngineActor에서만 호출가능하도록 구현
+		GameEngineActor* engineActor = newActor; 
 		engineActor->Start();
 		
 		// ------------------------------------------

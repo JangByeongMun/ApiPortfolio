@@ -1,5 +1,6 @@
 #pragma once
 #include <crtdbg.h>
+#include <string>
 #include <assert.h>
 #include <Windows.h>
 

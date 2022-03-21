@@ -49,8 +49,12 @@ bool GameEngineImage::Create(float4 _scale)
 	}
 
 	bitmap_ = CreateCompatibleBitmap(GameEngineWindow::GetHDC(), _scale.ix(), _scale.iy());
+	if (nullptr == bitmap_)
+	{
+		MsgBoxAssert("bitmap_ 생성에 실패 했습니다.");
+	}
+
 	imageDC_ = CreateCompatibleDC(nullptr);
-	
 	if (nullptr == imageDC_)
 	{
 		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
@@ -83,17 +87,43 @@ bool GameEngineImage::Load(const std::string& _path)
 	return true;
 }
 
-void GameEngineImage::BitCopy(GameEngineImage* _other)
+void GameEngineImage::BitCopy(const GameEngineImage* _other)
 {
 	BitCopy(_other, { 0, 0 }, { 0, 0 }, _other->GetScale());
 }
 
-void GameEngineImage::BitCopy(GameEngineImage* _other, const float4& _copyPos)
+void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copyPos)
 {
 	BitCopy(_other, _copyPos, { 0, 0 }, _other->GetScale());
 }
 
-void GameEngineImage::BitCopy(GameEngineImage* _other, const float4& _copyPos, const float4& _otherPivot, const float4& _otherPivotScale)
+void GameEngineImage::BitCopyCenter(const GameEngineImage* _other, const float4& _copyPos)
+{
+	BitCopy(_other, _copyPos - _other->GetScale().Half(), {0, 0}, _other->GetScale());
+}
+
+void GameEngineImage::BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot)
+{
+	BitCopy(_other, _copyPos - _other->GetScale().Half() + addPivot, { 0, 0 }, _other->GetScale());
+}
+
+void GameEngineImage::BitCopyBot(const GameEngineImage* _other, const float4& _CopyPos)
+{
+	float4 ImagePivot = _other->GetScale().Half();
+	ImagePivot.y = _other->GetScale().y;
+
+	BitCopy(_other, _CopyPos - ImagePivot, float4{ 0, 0 }, _other->GetScale());
+}
+
+void GameEngineImage::BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot)
+{
+	float4 ImagePivot = _other->GetScale().Half();
+	ImagePivot.y = _other->GetScale().y;
+
+	BitCopy(_other, _copyPos - ImagePivot + addPivot, float4{ 0, 0 }, _other->GetScale());
+}
+
+void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _otherPivot, const float4& _otherPivotScale)
 {
 	BitBlt
 	(

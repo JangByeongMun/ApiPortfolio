@@ -43,7 +43,7 @@ void GameEngine::EngineInit()
 {
 	userContents_->GameInit();
 	windowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
-	backBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetInst().GetScale());
+	backBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 }
 
 void GameEngine::EngineLoop()

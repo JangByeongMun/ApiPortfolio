@@ -21,18 +21,22 @@ public:
 	bool Create(float4 _scale);
 	bool Load(const std::string& _path);
 
-	inline float4 GetScale()
+	inline float4 GetScale() const
 	{
 		return float4(static_cast<float>(info_.bmWidth), static_cast<float>(info_.bmHeight));
 	}
-	inline HDC ImageDC()
+	inline HDC ImageDC() const
 	{
 		return imageDC_;
 	}
 
-	void BitCopy(GameEngineImage* _other);
-	void BitCopy(GameEngineImage* _other, const float4& _copyPos);
-	void BitCopy(GameEngineImage* _other, const float4& _coplyPos, const float4& _otherPivot, const float4& _otherPivotScale);
+	void BitCopy(const GameEngineImage* _other);
+	void BitCopy(const GameEngineImage* _other, const float4& _copyPos);
+	void BitCopyCenter(const GameEngineImage* _other, const float4& _copyPos);
+	void BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot);
+	void BitCopyBot(const GameEngineImage* _other, const float4& _copyPos);
+	void BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot);
+	void BitCopy(const GameEngineImage* _other, const float4& _coplyPos, const float4& _otherPivot, const float4& _otherPivotScale);
 
 protected:
 

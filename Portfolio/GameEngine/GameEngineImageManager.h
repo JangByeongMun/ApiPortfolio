@@ -27,6 +27,15 @@ public:
 	}
 
 public:
+	GameEngineImage* Find(const std::string& _name);
+	GameEngineImage* Create(const std::string& _name, const float4& _scale);
+	GameEngineImage* Create(const std::string& _name, HDC _scale);
+	GameEngineImage* Load(const std::string& _path);
+	GameEngineImage* Load(const std::string& _path, const std::string& _name);
+
+protected:
+
+private:
 	// constrcuter destructer
 	GameEngineImageManager();
 	~GameEngineImageManager();
@@ -37,15 +46,6 @@ public:
 	GameEngineImageManager& operator=(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
 
-	GameEngineImage* Find(const std::string& _name);
-	GameEngineImage* Create(const std::string& _name, const float4& _scale);
-	GameEngineImage* Create(const std::string& _name, HDC _scale);
-	GameEngineImage* Load(const std::string& _path);
-	GameEngineImage* Load(const std::string& _path, const std::string& _name);
-
-protected:
-
-private:
 	std::map<std::string, GameEngineImage*> allRes;
 };
 
