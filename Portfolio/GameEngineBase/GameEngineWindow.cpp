@@ -111,7 +111,7 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
 void GameEngineWindow::SetWindowScaleAndPosition(float4 _pos, float4 _scale)
 {
     scale_ = _scale;
-    RECT rect = { 0, 0, _scale.x, _scale.y };
+    RECT rect = { 0, 0, static_cast<long>(_scale.x), static_cast<long>(_scale.y)};
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
     SetWindowPos(hWnd_, nullptr, _pos.ix(), _pos.iy(), rect.right - rect.left, rect.bottom - rect.top, SWP_NOZORDER);

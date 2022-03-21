@@ -62,18 +62,44 @@ bool GameEngineImage::Create(float4 _scale)
 	return true;
 }
 
+bool GameEngineImage::Load(const std::string& _path)
+{
+	bitmap_ = static_cast<HBITMAP>(LoadImageA(nullptr, _path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
+	if (nullptr	== bitmap_)
+	{
+		MsgBoxAssertString(_path + "이미지 로드에 실패 했습니다.");
+		return false;
+	}
+
+	imageDC_ = CreateCompatibleDC(nullptr);
+	if (nullptr == imageDC_)
+	{
+		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
+		return false;
+	}
+	oldBitmap_ = (HBITMAP)SelectObject(imageDC_, bitmap_);
+
+	ImageScaleCheck();
+	return true;
+}
+
 void GameEngineImage::BitCopy(GameEngineImage* _other)
 {
 	BitCopy(_other, { 0, 0 }, { 0, 0 }, _other->GetScale());
 }
 
-void GameEngineImage::BitCopy(GameEngineImage* _other, const float4& _coplyPos, const float4& _otherPivot, const float4& _otherPivotScale)
+void GameEngineImage::BitCopy(GameEngineImage* _other, const float4& _copyPos)
+{
+	BitCopy(_other, _copyPos, { 0, 0 }, _other->GetScale());
+}
+
+void GameEngineImage::BitCopy(GameEngineImage* _other, const float4& _copyPos, const float4& _otherPivot, const float4& _otherPivotScale)
 {
 	BitBlt
 	(
 		imageDC_,
-		_coplyPos.ix(),
-		_coplyPos.iy(),
+		_copyPos.ix(),
+		_copyPos.iy(),
 		_otherPivotScale.ix(),
 		_otherPivotScale.iy(),
 		_other->imageDC_,

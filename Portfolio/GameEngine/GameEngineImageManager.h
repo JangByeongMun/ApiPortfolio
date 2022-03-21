@@ -37,8 +37,11 @@ public:
 	GameEngineImageManager& operator=(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
 
-	GameEngineImage* Create(std::string _name, float4 _scale);
-	GameEngineImage* Create(std::string _name, HDC _scale);
+	GameEngineImage* Find(const std::string& _name);
+	GameEngineImage* Create(const std::string& _name, const float4& _scale);
+	GameEngineImage* Create(const std::string& _name, HDC _scale);
+	GameEngineImage* Load(const std::string& _path);
+	GameEngineImage* Load(const std::string& _path, const std::string& _name);
 
 protected:
 
