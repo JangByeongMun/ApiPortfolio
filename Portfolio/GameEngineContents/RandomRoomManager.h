@@ -32,8 +32,8 @@ public:
 protected:
 
 private:
-	//map<int, vector<RoomData*>> allMaps_;
-	//map<float4, RoomData*> currentMaps_;
+	map<int, vector<RoomData*>> allMaps_;
+	map<float4, RoomData*> currentMaps_;
 	int currentFloor_;
 	int currentMapCount_;
 

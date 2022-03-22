@@ -1,10 +1,13 @@
 #pragma once
-#include "GameEngineImage.h"
 #include "GameEngineEnum.h"
+#include "GameEngineActorSubObject.h"
+#include <GameEngineBase/GameEngineMath.h>
 
 // Ό³Έν :
-class GameEngineRenderer
+class GameEngineImage;
+class GameEngineRenderer : public GameEngineActorSubObject
 {
+	friend GameEngineActor;
 public:
 	// constrcuter destructer
 	GameEngineRenderer();
@@ -16,18 +19,38 @@ public:
 	GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
 	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
 	
-	inline void SetType(const RenderPivot& _type) 
+	void SetImage(const std::string& _name);
+	inline void SetType(const RenderPivot& _type)
 	{
 		pivotType_ = _type;
 	}
-	void SetImage(const std::string& _name);
+	inline void SetScaleMode(const RenderScaleMode& _mode)
+	{
+		scaleMode_ = _mode;
+	}
+	inline void SetPivot(const float4& _pivot)
+	{
+		renderPivot_ = _pivot;
+	}
+	inline void SetScale(const float4& _scale)
+	{
+		renderScale_ = _scale;
+	}
+	inline void SetTransColor(unsigned int _color)
+	{
+		TransColor_ = _color;
+	}
+
 	void Render();
-	float4 GetPosition();
 
 protected:
 
 private:
 	GameEngineImage* image_;
 	RenderPivot pivotType_;
+	RenderScaleMode scaleMode_;
+	float4 renderPivot_;
+	float4 renderScale_;
+	unsigned int TransColor_;
 };
 

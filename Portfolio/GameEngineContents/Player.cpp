@@ -18,6 +18,8 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	SetScale({ 100, 100 });
+	
+	CreateRenderer("Player.bmp", RenderPivot::CENTER, { 0, 0 });
 }
 
 void Player::Update()
@@ -26,8 +28,6 @@ void Player::Update()
 
 void Player::Render()
 {
-	//Rectangle(GameEngineWindow::GetHDC(), 500, 500, 550, 550);
-	
 	//GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find("Player.bmp");
 	//if (nullptr == findImage)
 	//{
@@ -36,5 +36,5 @@ void Player::Render()
 	//}
 	//GameEngine::BackBufferImage()->BitCopyCenter(findImage, GetPosition());
 
-	CreateRenderer("Player.bmp", RenderPivot::CENTER, { 0, 0 });
+	//CreateRenderer("Player.bmp", RenderPivot::CENTER, { 0, 0 });
 }

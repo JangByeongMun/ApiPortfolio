@@ -58,9 +58,12 @@ private:
 
 	// ·»´õ ±â´É
 public:
-	void CreateRenderer(const std::string& _image, RenderPivot _pivotType = RenderPivot::CENTER, float4 _addPivot = {0, 0});
+	GameEngineRenderer* CreateRenderer(const std::string& _image, RenderPivot _pivotType = RenderPivot::CENTER, float4 _pivotPos = {0, 0});
+	void Rendering();
 
 private:
-	std::list<GameEngineRenderer*> renderList_;;
+	std::list<GameEngineRenderer*> renderList_;
+	std::list<GameEngineRenderer*>::iterator startRenderIter;
+	std::list<GameEngineRenderer*>::iterator endRenderIter;
 };
 

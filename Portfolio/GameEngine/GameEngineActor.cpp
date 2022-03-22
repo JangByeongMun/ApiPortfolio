@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngine.h"
 #include "GameEngineImageManager.h"
+#include "GameEngineRenderer.h"
 
 GameEngineActor::GameEngineActor() 
 	: level_(nullptr)
@@ -12,6 +13,17 @@ GameEngineActor::GameEngineActor()
 
 GameEngineActor::~GameEngineActor() 
 {
+	std::list<GameEngineRenderer*>::iterator beginIter = renderList_.begin();
+	std::list<GameEngineRenderer*>::iterator endIter = renderList_.end();
+	for (; beginIter != endIter; ++beginIter)
+	{
+		if (nullptr == (*beginIter))
+		{
+			continue;
+		}
+		delete (*beginIter);
+		(*beginIter) = nullptr;
+	}
 }
 
 void GameEngineActor::Start()
@@ -38,24 +50,34 @@ void GameEngineActor::DebugRectRender()
 	);
 }
 
-void GameEngineActor::CreateRenderer(const std::string& _image, RenderPivot _pivotType, float4 _addPivot)
+GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _image, RenderPivot _pivotType, float4 _pivotPos)
 {
-	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image);
-	if (nullptr == findImage)
-	{
-		MsgBoxAssert("플레이어 이미지를 찾지 못했습니다.");
-		return;	
-	}
+	GameEngineRenderer* newRenderer = new GameEngineRenderer();
 
-	switch (_pivotType)
+	newRenderer->SetActor(this);
+	newRenderer->SetImage(_image);
+	newRenderer->SetType(_pivotType);
+	newRenderer->SetPivot(_pivotPos);
+
+	renderList_.push_back(newRenderer);
+	return newRenderer;
+
+	//GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image); 
+	//if (nullptr == findImage)
+	//{
+	//	MsgBoxAssert("플레이어 이미지를 찾지 못했습니다.");
+	//	return;	
+	//}
+	//
+
+}
+
+void GameEngineActor::Rendering()
+{
+	startRenderIter = renderList_.begin();
+	endRenderIter = renderList_.end();
+	for (; startRenderIter != endRenderIter; ++startRenderIter)
 	{
-	case RenderPivot::CENTER:
-		GameEngine::BackBufferImage()->BitCopyCenterPivot(findImage, GetPosition(), _addPivot);
-		break;
-	case RenderPivot::BOT:
-		GameEngine::BackBufferImage()->BitCopyBotPivot(findImage, GetPosition(), _addPivot);
-		break;
-	default:
-		break;
+		(*startRenderIter)->Render();
 	}
 }

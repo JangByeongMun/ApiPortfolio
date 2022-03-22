@@ -9,19 +9,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
     case WM_DESTROY:
         GameEngineWindow::GetInst().Off();
-        return DefWindowProc(hWnd, message, wParam, lParam);
+        break;
+    case WM_CLOSE:
+        GameEngineWindow::GetInst().Off();
+        break;
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
         EndPaint(hWnd, &ps);
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    default:
         break;
     }
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
 
-    return DefWindowProc(hWnd, message, wParam, lParam);
+    return 0;
 }
 
 GameEngineWindow* GameEngineWindow::Inst_ = new GameEngineWindow();

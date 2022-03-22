@@ -33,11 +33,16 @@ public:
 	void BitCopy(const GameEngineImage* _other);
 	void BitCopy(const GameEngineImage* _other, const float4& _copyPos);
 	void BitCopyCenter(const GameEngineImage* _other, const float4& _copyPos);
-	void BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot);
+	void BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot);
 	void BitCopyBot(const GameEngineImage* _other, const float4& _copyPos);
-	void BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& addPivot);
-	void BitCopy(const GameEngineImage* _other, const float4& _coplyPos, const float4& _otherPivot, const float4& _otherPivotScale);
+	void BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot);
+	void BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot);
 
+	void TransCopyCenter(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor);
+	void TransCopyCenterScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor);
+	void TransCopy(const GameEngineImage* _other, const float4& _copyPos,
+		const float4& _copyScale, const float4& _otherPivot,
+		const float4& _otherScale, unsigned int _transColor );
 protected:
 
 private:

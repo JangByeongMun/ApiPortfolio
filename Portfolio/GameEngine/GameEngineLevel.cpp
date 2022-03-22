@@ -51,7 +51,21 @@ void GameEngineLevel::ActorRender()
 {
 	std::map<int, std::list<GameEngineActor*>>::iterator beginIter = allActor_.begin();
 	std::map<int, std::list<GameEngineActor*>>::iterator endIter = allActor_.end();
+	for (; beginIter != endIter; ++beginIter)
+	{
+		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
 
+		std::list<GameEngineActor*>::iterator beginListIter = tmpGroup.begin();
+		std::list<GameEngineActor*>::iterator endListIter = tmpGroup.end();
+		for (; beginListIter != endListIter; ++beginListIter)
+		{
+			(*beginListIter)->Rendering();
+		}
+	}
+
+
+	beginIter = allActor_.begin();
+	endIter = allActor_.end();
 	for (; beginIter != endIter; ++beginIter)
 	{
 		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
