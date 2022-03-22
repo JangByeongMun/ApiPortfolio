@@ -11,9 +11,6 @@
     <ClInclude Include="EndingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Title</Filter>
-    </ClInclude>
     <ClInclude Include="Credit.h">
       <Filter>Ending</Filter>
     </ClInclude>
@@ -134,6 +131,12 @@
     <ClInclude Include="MenuUI.h">
       <Filter>Menu</Filter>
     </ClInclude>
+    <ClInclude Include="IntroPage.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleForeGround.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -145,9 +148,6 @@
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="Credit.cpp">
       <Filter>Ending</Filter>
@@ -268,6 +268,12 @@
     </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <Filter>Menu</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroPage.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleForeGround.cpp">
+      <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

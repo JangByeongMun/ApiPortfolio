@@ -7,10 +7,17 @@
 
 #pragma comment(lib, "msimg32.lib")
 
+RenderScaleMode scaleMode_;
+float4 renderPivot_;
+float4 renderScale_;
+unsigned int TransColor_;
+
 GameEngineRenderer::GameEngineRenderer() 
 	: image_(nullptr)
 	, pivotType_(RenderPivot::CENTER)
+	, scaleMode_(RenderScaleMode::Image)
 	, renderPivot_{0, 0}
+	, renderScale_{0, 0}
 	, TransColor_(RGB(255, 0, 255))
 {
 }
@@ -42,6 +49,16 @@ void GameEngineRenderer::Render()
 
 	float4 renderPos = GetActor()->GetPosition() + renderPivot_;
 	float4 renderScale = renderScale_;
+	switch (scaleMode_)
+	{
+	case RenderScaleMode::Image:
+		renderScale = image_->GetScale();
+		break;
+	case RenderScaleMode::User:
+		break;
+	default:
+		break;
+	}
 
 	switch (pivotType_)
 	{
@@ -49,7 +66,7 @@ void GameEngineRenderer::Render()
 		GameEngine::BackBufferImage()->TransCopyCenterScale(image_, renderPos, renderScale, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		//GameEngine::BackBufferImage()->BitCopyBotPivot(image_, GetActor()->GetPosition(), renderPivot_);
+		GameEngine::BackBufferImage()->TransCopyBotScale(image_, renderPos, renderScale, TransColor_);
 		break;
 	default:
 		break;

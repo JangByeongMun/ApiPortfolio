@@ -61,15 +61,6 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _image, R
 
 	renderList_.push_back(newRenderer);
 	return newRenderer;
-
-	//GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image); 
-	//if (nullptr == findImage)
-	//{
-	//	MsgBoxAssert("플레이어 이미지를 찾지 못했습니다.");
-	//	return;	
-	//}
-	//
-
 }
 
 void GameEngineActor::Rendering()

@@ -40,6 +40,8 @@ public:
 
 	void TransCopyCenter(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor);
 	void TransCopyCenterScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor);
+	void TransCopyBot(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor);
+	void TransCopyBotScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor);
 	void TransCopy(const GameEngineImage* _other, const float4& _copyPos,
 		const float4& _copyScale, const float4& _otherPivot,
 		const float4& _otherScale, unsigned int _transColor );

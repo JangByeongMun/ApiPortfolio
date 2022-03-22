@@ -2,7 +2,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-#pragma comment(lib, "msimg32.lib")
+//#pragma comment(lib, "msimg32.lib")
 
 GameEngineImage::GameEngineImage() 
 	: imageDC_(nullptr)
@@ -117,7 +117,6 @@ void GameEngineImage::BitCopyBotPivot(const GameEngineImage* _other, const float
 
 	BitCopy(_other, _copyPos - ImagePivot + _copyPivot, _other->GetScale(), float4{ 0, 0 });
 }
-void BitCopy(const GameEngineImage* _other, const float4& _coplyPos, const float4& _copyScale, const float4& _otherPivot);
 void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot)
 {
 	BitBlt
@@ -138,12 +137,24 @@ void GameEngineImage::TransCopyCenter(const GameEngineImage* _other, const float
 {
 	TransCopy(_other, _copyPos - _other->GetScale().Half(), _other->GetScale(), float4{ 0, 0 }, _other->GetScale(), _transColor);
 }
-
 void GameEngineImage::TransCopyCenterScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor)
 {
 	TransCopy(_other, _copyPos - _renderScale.Half(), _renderScale, float4{ 0, 0 }, _other->GetScale(), _transColor);
 }
+void GameEngineImage::TransCopyBot(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor)
+{
+	float4 ImagePivot = _other->GetScale().Half();
+	ImagePivot.y = _other->GetScale().y;
 
+	TransCopy(_other, _copyPos - ImagePivot, _other->GetScale(), float4{ 0, 0 }, _other->GetScale(), _transColor);
+}
+void GameEngineImage::TransCopyBotScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor)
+{
+	float4 ImagePivot = _other->GetScale().Half();
+	ImagePivot.y = _other->GetScale().y;
+
+	TransCopy(_other, _copyPos - ImagePivot, _renderScale, float4{ 0, 0 }, _other->GetScale(), _transColor);
+}
 void GameEngineImage::TransCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot, const float4& _otherScale, unsigned int _transColor)
 {
 	TransparentBlt

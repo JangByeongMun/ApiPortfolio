@@ -10,9 +10,6 @@
 #include <string>
 #include <time.h>
 
-std::string home = "D:\\AssortRock\\ApiPortfolio\\Portfolio\\Resources\\Image";
-std::string notebook = "C:\\CppProject\\ApiPortfolio\\Portfolio\\Resources\\Image";
-
 BindingOfIsaac::BindingOfIsaac() 
 {
 }
@@ -25,38 +22,56 @@ time_t startTime = 0;
 void BindingOfIsaac::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
-	GameEngineImageManager::GetInst()->Load(notebook + "\\Player\\Player.bmp", "Player.bmp");
-	GameEngineImageManager::GetInst()->Load(notebook + "\\UI\\Title.bmp", "Title.bmp");
-	GameEngineImageManager::GetInst()->Load(notebook + "\\UI\\TitleLogo.bmp", "TitleLogo.bmp");
-	GameEngineImageManager::GetInst()->Load(notebook + "\\UI\\TitleLogoText.bmp", "TitleLogoText.bmp");
-	GameEngineImageManager::GetInst()->Load(notebook + "\\UI\\MakeBy.bmp", "MakeBy.bmp");
-	GameEngineImageManager::GetInst()->Load(notebook + "\\UI\\Lobby.bmp", "Lobby.bmp");
-
+	ImageLoad();
+	
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MenuLevel>("Menu");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 	CreateLevel<LoadingLevel>("Loading");
-	ChangeLevel("Title");
+	ChangeLevel("Menu");
 
 	startTime = time(NULL);
 }
 
+void BindingOfIsaac::ImageLoad()
+{
+	std::string home = "D:\\AssortRock\\ApiPortfolio\\Portfolio\\Resources\\Image";
+	std::string notebook = "C:\\CppProject\\ApiPortfolio\\Portfolio\\Resources\\Image";
+
+	// 타이틀
+	GameEngineImageManager::GetInst()->Load(home + "\\Player\\Player.bmp", "Player.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\TitleBG.bmp", "TitleBG.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Intro.bmp", "Intro.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroGameBy.bmp", "IntroGameBy.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroPage.bmp", "IntroPage.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroIcon1.bmp", "IntroIcon1.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroIcon2.bmp", "IntroIcon2.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroName.bmp", "IntroName.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\TitleOverlay.bmp", "TitleOverlay.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Titleshadow.bmp", "Titleshadow.bmp");
+
+	// 메뉴
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Menu.bmp", "Menu.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuName.bmp", "MenuName.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuIcon1.bmp", "MenuIcon1.bmp");
+	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuIcon2.bmp", "MenuIcon2.bmp");
+}
+
 void BindingOfIsaac::GameLoop()
 {
-	time_t currentTime = time(NULL);
-	if (currentTime - startTime >= 5)
-	{
-		if (currentTime - startTime >= 10)
-		{
-			ChangeLevel("Play");
-		}
-		else
-		{
-			ChangeLevel("Menu");
-		}
-	}
-	
+	//time_t currentTime = time(NULL);
+	//if (currentTime - startTime >= 5)
+	//{
+	//	if (currentTime - startTime >= 10)
+	//	{
+	//		ChangeLevel("Play");
+	//	}
+	//	else
+	//	{
+	//		ChangeLevel("Menu");
+	//	}
+	//}
 }
 
 void BindingOfIsaac::GameEnd()
