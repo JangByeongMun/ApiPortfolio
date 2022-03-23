@@ -1,6 +1,7 @@
 #include "GameEngineActor.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngine.h"
+#include "GameEngineImage.h"
 #include "GameEngineImageManager.h"
 #include "GameEngineRenderer.h"
 
@@ -56,6 +57,21 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _image, R
 
 	newRenderer->SetActor(this);
 	newRenderer->SetImage(_image);
+	newRenderer->SetImageScale();
+	newRenderer->SetType(_pivotType);
+	newRenderer->SetPivot(_pivotPos);
+
+	renderList_.push_back(newRenderer);
+	return newRenderer;
+}
+
+GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _image, float4 _scale, RenderPivot _pivotType, float4 _pivotPos)
+{
+	GameEngineRenderer* newRenderer = new GameEngineRenderer();
+
+	newRenderer->SetActor(this);
+	newRenderer->SetImage(_image);
+	newRenderer->SetScale(_scale);
 	newRenderer->SetType(_pivotType);
 	newRenderer->SetPivot(_pivotPos);
 

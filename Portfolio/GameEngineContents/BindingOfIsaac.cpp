@@ -4,9 +4,13 @@
 #include "LoadingLevel.h"
 #include "EndingLevel.h"
 #include "MenuLevel.h"
-#include <conio.h>
+
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include <GameEngineBase/GameEngineDirectory.h>
+#include <GameEngineBase/GameEngineFile.h>
+
+#include <conio.h>
 #include <string>
 #include <time.h>
 
@@ -29,33 +33,34 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 	CreateLevel<LoadingLevel>("Loading");
-	ChangeLevel("Menu");
+	ChangeLevel("Title");
 
 	startTime = time(NULL);
 }
 
 void BindingOfIsaac::ImageLoad()
 {
-	std::string home = "D:\\AssortRock\\ApiPortfolio\\Portfolio\\Resources\\Image";
-	std::string notebook = "C:\\CppProject\\ApiPortfolio\\Portfolio\\Resources\\Image";
+	GameEngineDirectory resourcesDirectory;
+	resourcesDirectory.MoveParent("Portfolio");
+	resourcesDirectory.Move("Resources");
+	resourcesDirectory.Move("Image");
+	resourcesDirectory.Move("UI");
+	
+	std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
+	for (int i = 0; i < allFileVec.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+	}
 
-	// 타이틀
-	GameEngineImageManager::GetInst()->Load(home + "\\Player\\Player.bmp", "Player.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\TitleBG.bmp", "TitleBG.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Intro.bmp", "Intro.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroGameBy.bmp", "IntroGameBy.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroPage.bmp", "IntroPage.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroIcon1.bmp", "IntroIcon1.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroIcon2.bmp", "IntroIcon2.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\IntroName.bmp", "IntroName.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\TitleOverlay.bmp", "TitleOverlay.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Titleshadow.bmp", "Titleshadow.bmp");
-
-	// 메뉴
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\Menu.bmp", "Menu.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuName.bmp", "MenuName.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuIcon1.bmp", "MenuIcon1.bmp");
-	GameEngineImageManager::GetInst()->Load(home + "\\UI\\MenuIcon2.bmp", "MenuIcon2.bmp");
+	resourcesDirectory.MoveParent("Portfolio");
+	resourcesDirectory.Move("Resources");
+	resourcesDirectory.Move("Image");
+	resourcesDirectory.Move("Player");
+	allFileVec = resourcesDirectory.GetAllFile();
+	for (int i = 0; i < allFileVec.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+	}
 }
 
 void BindingOfIsaac::GameLoop()

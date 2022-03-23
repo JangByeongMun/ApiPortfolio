@@ -34,8 +34,10 @@ public:
 	}
 	inline void SetScale(const float4& _scale)
 	{
+		scaleMode_ = RenderScaleMode::User;
 		renderScale_ = _scale;
 	}
+	void SetImageScale();
 	inline void SetTransColor(unsigned int _color)
 	{
 		TransColor_ = _color;

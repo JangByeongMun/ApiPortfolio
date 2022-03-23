@@ -59,6 +59,7 @@ private:
 	// ·»´õ ±â´É
 public:
 	GameEngineRenderer* CreateRenderer(const std::string& _image, RenderPivot _pivotType = RenderPivot::CENTER, float4 _pivotPos = {0, 0});
+	GameEngineRenderer* CreateRendererToScale(const std::string& _image, float4 _scale, RenderPivot _pivotType = RenderPivot::CENTER, float4 _pivotPos = {0, 0});
 	void Rendering();
 
 private:

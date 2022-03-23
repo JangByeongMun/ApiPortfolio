@@ -28,13 +28,5 @@ void Player::Update()
 
 void Player::Render()
 {
-	//GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find("Player.bmp");
-	//if (nullptr == findImage)
-	//{
-	//	MsgBoxAssert("플레이어 이미지를 찾지 못했습니다.");
-	//	return;	
-	//}
-	//GameEngine::BackBufferImage()->BitCopyCenter(findImage, GetPosition());
-
-	//CreateRenderer("Player.bmp", RenderPivot::CENTER, { 0, 0 });
+	
 }

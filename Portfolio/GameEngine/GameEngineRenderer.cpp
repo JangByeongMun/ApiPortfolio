@@ -39,6 +39,13 @@ void GameEngineRenderer::SetImage(const std::string& _name)
 	image_ = findImage;
 }
 
+
+void GameEngineRenderer::SetImageScale()
+{
+	scaleMode_ = RenderScaleMode::Image;
+	renderScale_ = image_->GetScale();
+}
+
 void GameEngineRenderer::Render()
 {
 	if (nullptr == image_)
@@ -48,25 +55,14 @@ void GameEngineRenderer::Render()
 	}
 
 	float4 renderPos = GetActor()->GetPosition() + renderPivot_;
-	float4 renderScale = renderScale_;
-	switch (scaleMode_)
-	{
-	case RenderScaleMode::Image:
-		renderScale = image_->GetScale();
-		break;
-	case RenderScaleMode::User:
-		break;
-	default:
-		break;
-	}
 
 	switch (pivotType_)
 	{
 	case RenderPivot::CENTER:
-		GameEngine::BackBufferImage()->TransCopyCenterScale(image_, renderPos, renderScale, TransColor_);
+		GameEngine::BackBufferImage()->TransCopyCenterScale(image_, renderPos, renderScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		GameEngine::BackBufferImage()->TransCopyBotScale(image_, renderPos, renderScale, TransColor_);
+		GameEngine::BackBufferImage()->TransCopyBotScale(image_, renderPos, renderScale_, TransColor_);
 		break;
 	default:
 		break;
