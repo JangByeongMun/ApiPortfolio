@@ -137,6 +137,9 @@
     <ClInclude Include="TitleForeGround.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="OptionWindow.h">
+      <Filter>Play\Option</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -275,6 +278,9 @@
     <ClCompile Include="TitleForeGround.cpp">
       <Filter>Title</Filter>
     </ClCompile>
+    <ClCompile Include="OptionWindow.cpp">
+      <Filter>Play\Option</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -315,6 +321,9 @@
     </Filter>
     <Filter Include="Menu">
       <UniqueIdentifier>{08fba377-ff7e-4495-bfa9-5854ff00c625}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Option">
+      <UniqueIdentifier>{9d9b9cb5-3c69-4152-93c9-5712cd91a36e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

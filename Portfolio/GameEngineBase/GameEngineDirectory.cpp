@@ -48,7 +48,7 @@ bool GameEngineDirectory::IsRoot()
 	return path_ == path_.root_directory();
 }
 
-
+// 확장자명을 받아서 현재위치의 해당 확장자를 가진 파일들 전부 가져오는함수
 std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _ext)
 {
 	// 현재 위치 iterator

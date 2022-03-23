@@ -17,6 +17,7 @@ void GameEnginePath::SetCurrentPath()
 {
 	path_ = std::filesystem::current_path();
 }
+
 bool GameEnginePath::IsExists()
 {
 	return std::filesystem::exists(path_);

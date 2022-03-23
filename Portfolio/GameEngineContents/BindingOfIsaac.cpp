@@ -33,7 +33,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
 	CreateLevel<LoadingLevel>("Loading");
-	ChangeLevel("Title");
+	ChangeLevel("Play");
 
 	startTime = time(NULL);
 }
@@ -52,9 +52,7 @@ void BindingOfIsaac::ImageLoad()
 		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
 	}
 
-	resourcesDirectory.MoveParent("Portfolio");
-	resourcesDirectory.Move("Resources");
-	resourcesDirectory.Move("Image");
+	resourcesDirectory.MoveParent("Image");
 	resourcesDirectory.Move("Player");
 	allFileVec = resourcesDirectory.GetAllFile();
 	for (int i = 0; i < allFileVec.size(); i++)
