@@ -3,6 +3,8 @@
 #include "GameEngineImage.h"
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 std::map<std::string, GameEngineLevel*> GameEngine::allLevel_;
 GameEngineLevel* GameEngine::currentLevel_ = nullptr;
@@ -48,6 +50,7 @@ void GameEngine::EngineInit()
 
 void GameEngine::EngineLoop()
 {
+	GameEngineTime::GetInst()->Update();
 	userContents_->GameLoop();
 
 	if (nullptr != nextLevel_)
@@ -72,12 +75,15 @@ void GameEngine::EngineLoop()
 		}
 
 		nextLevel_ = nullptr;
+		GameEngineTime::GetInst()->Reset();
 	}
 
 	if (nullptr == currentLevel_)
 	{
 		MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
 	}
+	
+	GameEngineInput::GetInst()->Update();
 
 	currentLevel_->Update();
 	currentLevel_->ActorUpdate();
@@ -102,6 +108,8 @@ void GameEngine::EngineEnd()
 
 	GameEngineImageManager::Destroy();
 	GameEngineWindow::Destroy();
+	GameEngineInput::Destroy();
+	GameEngineTime::Destroy();
 }
 
 HDC GameEngine::WindowMainDC()

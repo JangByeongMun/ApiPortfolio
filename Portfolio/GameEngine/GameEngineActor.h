@@ -22,6 +22,10 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
 	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
 
+	inline void SetMove(float4 _value)
+	{
+		position_ += _value;
+	}
 	inline void SetPosition(float4 _value)
 	{
 		position_ = _value;

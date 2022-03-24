@@ -23,6 +23,12 @@ private:
 class float4
 {
 public:
+	static float4 Left;
+	static float4 Right;
+	static float4 Up;
+	static float4 Down;
+
+public:
 	float x;
 	float y;
 	float z;
@@ -81,6 +87,14 @@ public:
 	float4 operator+(const float4& _other) const
 	{
 		return { x + _other.x, y + _other.y, z + _other.z, 1.0f };
+	}
+	float4& operator+=(const float4& _other)
+	{
+		x += _other.x;
+		y += _other.y;
+		z += _other.z;
+
+		return *this;
 	}
 
 public:
