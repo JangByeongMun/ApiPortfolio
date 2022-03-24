@@ -3,11 +3,6 @@
 
 GameEngineTime* GameEngineTime::inst_ = new GameEngineTime();
 
-GameEngineTime* GameEngineTime::GetInst()
-{
-	return inst_;
-}
-
 void GameEngineTime::Reset()
 {
 	QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&prevCount_));
@@ -24,11 +19,6 @@ void GameEngineTime::Update()
 	prevCount_ = currentCount_;
 
 	deltaTime_ = static_cast<float>(realDeltaTime_);
-}
-
-float GameEngineTime::GetDeltaTime()
-{
-	return 0.0f;
 }
 
 GameEngineTime::GameEngineTime()

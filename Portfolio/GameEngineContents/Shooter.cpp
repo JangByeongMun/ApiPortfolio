@@ -8,3 +8,7 @@ Shooter::~Shooter()
 {
 }
 
+void Shooter::Shoot(const Projectile& _projectile)
+{
+}
+

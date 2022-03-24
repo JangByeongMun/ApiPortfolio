@@ -2,12 +2,13 @@
 #include <map>
 #include <vector>
 #include <GameEngineBase/GameEngineMath.h>
+#include "MapPos.h"
 
 using namespace std;
 
 // Ό³Έν :
 class RoomData;
-class RandomRoomManager
+	class RandomRoomManager
 {
 private:
 	static RandomRoomManager* inst_;
@@ -33,7 +34,7 @@ protected:
 
 private:
 	map<int, vector<RoomData*>> allMaps_;
-	map<float4, RoomData*> currentMaps_;
+	map<MapPos, RoomData*> currentMaps_;
 	int currentFloor_;
 	int currentMapCount_;
 
@@ -47,4 +48,3 @@ private:
 	RandomRoomManager& operator=(const RandomRoomManager& _Other) = delete;
 	RandomRoomManager& operator=(RandomRoomManager&& _Other) noexcept = delete;
 };
-

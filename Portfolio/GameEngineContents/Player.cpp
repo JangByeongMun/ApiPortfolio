@@ -32,6 +32,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("AttckRight", VK_RIGHT);
 		GameEngineInput::GetInst()->CreateKey("AttckUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("AttckDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("Bomb", VK_SPACE);
 	}
 }
 
@@ -50,6 +51,23 @@ void Player::Update()
 		SetMove(float4::Up);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+	{
+		SetMove(float4::Down);
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("AttckLeft"))
+	{
+		SetMove(float4::Left/* * GameEngineTime::GetInst()->GetDeltaTime()*/);
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("AttckRight"))
+	{
+		SetMove(float4::Right);
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("AttckUp"))
+	{
+		SetMove(float4::Up);
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("AttckDown"))
 	{
 		SetMove(float4::Down);
 	}

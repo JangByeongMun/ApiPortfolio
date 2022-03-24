@@ -18,6 +18,7 @@ enum class BlockData
 };
 
 // 설명 : 각 방의 정보를 저장하는 데이터
+union MapPos;
 class RoomData
 {
 public:
@@ -31,6 +32,8 @@ public:
 	RoomData& operator=(RoomData&& _Other) noexcept = delete;
 
 	void Render();
+
+	bool operator()(const MapPos& _left, const MapPos& _right);
 
 protected:
 

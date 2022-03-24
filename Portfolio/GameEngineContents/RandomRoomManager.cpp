@@ -23,7 +23,7 @@ bool RandomRoomManager::ChangeFloor(const int& _floor)
 
 	// 일단 새로만든 룸데이터를 만들고 여기에 값을 복사하도록 깊은복사를 만드는식으로?
 	RoomData* newRoomData = new RoomData();
-	//currentMaps_.insert(make_pair(float4(6, 6), newRoomData));
+	currentMaps_.insert(make_pair(MapPos(), newRoomData));
 
 	return true;
 }

@@ -4,11 +4,13 @@
 #include "LoadingLevel.h"
 #include "EndingLevel.h"
 #include "MenuLevel.h"
+#include "CharacterTypeManager.h"
 
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 #include <conio.h>
 #include <string>
@@ -30,10 +32,20 @@ void BindingOfIsaac::GameInit()
 	
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MenuLevel>("Menu");
+	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	CreateLevel<LoadingLevel>("Loading");
 	ChangeLevel("Play");
+
+	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
+	{
+		GameEngineInput::GetInst()->CreateKey("Exit", VK_ESCAPE);
+		GameEngineInput::GetInst()->CreateKey("LevelChangeTitle", 'Z');
+		GameEngineInput::GetInst()->CreateKey("LevelChangeMenu", 'X');
+		GameEngineInput::GetInst()->CreateKey("LevelChangeLoading", 'C');
+		GameEngineInput::GetInst()->CreateKey("LevelChangePlay", 'V');
+		GameEngineInput::GetInst()->CreateKey("LevelChangeEnding", 'B');
+	}
 
 	startTime = time(NULL);
 }
@@ -63,21 +75,32 @@ void BindingOfIsaac::ImageLoad()
 
 void BindingOfIsaac::GameLoop()
 {
-	//time_t currentTime = time(NULL);
-	//if (currentTime - startTime >= 5)
-	//{
-	//	if (currentTime - startTime >= 10)
-	//	{
-	//		ChangeLevel("Play");
-	//	}
-	//	else
-	//	{
-	//		ChangeLevel("Menu");
-	//	}
-	//}
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeTitle"))
+	{
+		ChangeLevel("Title");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeMenu"))
+	{
+		ChangeLevel("Menu");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeLoading"))
+	{
+		ChangeLevel("Loading");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChangePlay"))
+	{
+		ChangeLevel("Play");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeEnding"))
+	{
+		ChangeLevel("Ending");
+	}
+
 }
 
 void BindingOfIsaac::GameEnd()
 {
 	int a = 0;
+
+	CharacterTypeManager::Destroy();
 }

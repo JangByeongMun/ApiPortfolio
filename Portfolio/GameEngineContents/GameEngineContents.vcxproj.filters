@@ -140,6 +140,18 @@
     <ClInclude Include="OptionWindow.h">
       <Filter>Play\Option</Filter>
     </ClInclude>
+    <ClInclude Include="MapPos.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingPage.h">
+      <Filter>Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingCharacter.h">
+      <Filter>Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="CharacterTypeManager.h">
+      <Filter>Play\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -281,6 +293,15 @@
     <ClCompile Include="OptionWindow.cpp">
       <Filter>Play\Option</Filter>
     </ClCompile>
+    <ClCompile Include="LoadingPage.cpp">
+      <Filter>Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingCharacter.cpp">
+      <Filter>Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="CharacterTypeManager.cpp">
+      <Filter>Play\Base</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -324,6 +345,9 @@
     </Filter>
     <Filter Include="Play\Option">
       <UniqueIdentifier>{9d9b9cb5-3c69-4152-93c9-5712cd91a36e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Loading">
+      <UniqueIdentifier>{9f0e4753-aa67-47e0-be75-a7c761f9c87e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

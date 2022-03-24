@@ -1,6 +1,7 @@
 #include "RoomData.h"
 #include <Windows.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include "MapPos.h"
 
 RoomData::RoomData() 
 	:allBlock_{}
@@ -28,3 +29,7 @@ void RoomData::Render()
 	}
 }
 
+bool RoomData::operator()(const MapPos& _left, const MapPos& _right)
+{
+	return _left.n < _right.n;
+}
