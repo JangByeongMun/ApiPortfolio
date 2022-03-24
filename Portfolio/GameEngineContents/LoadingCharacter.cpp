@@ -11,7 +11,7 @@ LoadingCharacter::~LoadingCharacter()
 
 void LoadingCharacter::Start()
 {
-	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
+	SetPosition(GameEngineWindow::GetInst().GetScale().Half() + float4{0, 150});
 
 	CreateRenderer("LoadingCharacter1.bmp");
 }
