@@ -36,7 +36,7 @@ void GameEngine::ChangeLevel(const std::string& _name)
 
 void GameEngine::WindowCreate()
 {
-	GameEngineWindow::GetInst().CreateGameWindow(nullptr, "GameWindow");
+	GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Binding of Isaac: Rebirth");
 	GameEngineWindow::GetInst().ShowGameWindow();
 	GameEngineWindow::GetInst().MessageLoop(EngineInit, EngineLoop);
 }
