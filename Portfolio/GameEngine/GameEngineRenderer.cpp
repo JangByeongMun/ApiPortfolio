@@ -39,6 +39,7 @@ void GameEngineRenderer::SetImage(const std::string& _name)
 	}
 
 	image_ = findImage;
+	SetImageScale();
 }
 
 
@@ -49,7 +50,7 @@ void GameEngineRenderer::SetImageScale()
 	renderImageScale_ = image_->GetScale();
 }
 
-void GameEngineRenderer::SetIndex(const size_t _index)
+void GameEngineRenderer::SetIndex(const size_t _index, float4 _scale)
 {
 	if (false == image_->IsCut())
 	{
@@ -57,7 +58,14 @@ void GameEngineRenderer::SetIndex(const size_t _index)
 		return;
 	}
 
-	renderScale_ = image_->GetCutScale(_index);
+	if (-1.0f == _scale.x || -1.0f == _scale.y)
+	{
+		renderScale_ = image_->GetCutScale(_index);
+	}
+	else
+	{
+		renderScale_ = _scale;
+	}
 	renderImagePivot_ = image_->GetCutPivot(_index);
 	renderImageScale_ = image_->GetCutScale(_index);
 }

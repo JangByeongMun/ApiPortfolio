@@ -43,7 +43,7 @@ public:
 		TransColor_ = _color;
 	}
 
-	void SetIndex(const size_t _index);
+	void SetIndex(const size_t _index, float4 _scale = { -1.0, -1.0 });
 
 protected:
 	void Render();
