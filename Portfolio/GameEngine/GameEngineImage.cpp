@@ -133,28 +133,6 @@ void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copy
 	);
 }
 
-void GameEngineImage::TransCopyCenter(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor)
-{
-	TransCopy(_other, _copyPos - _other->GetScale().Half(), _other->GetScale(), float4{ 0, 0 }, _other->GetScale(), _transColor);
-}
-void GameEngineImage::TransCopyCenterScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor)
-{
-	TransCopy(_other, _copyPos - _renderScale.Half(), _renderScale, float4{ 0, 0 }, _other->GetScale(), _transColor);
-}
-void GameEngineImage::TransCopyBot(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor)
-{
-	float4 ImagePivot = _other->GetScale().Half();
-	ImagePivot.y = _other->GetScale().y;
-
-	TransCopy(_other, _copyPos - ImagePivot, _other->GetScale(), float4{ 0, 0 }, _other->GetScale(), _transColor);
-}
-void GameEngineImage::TransCopyBotScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor)
-{
-	float4 ImagePivot = _other->GetScale().Half();
-	ImagePivot.y = _other->GetScale().y;
-
-	TransCopy(_other, _copyPos - ImagePivot, _renderScale, float4{ 0, 0 }, _other->GetScale(), _transColor);
-}
 void GameEngineImage::TransCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot, const float4& _otherScale, unsigned int _transColor)
 {
 	TransparentBlt
@@ -171,6 +149,29 @@ void GameEngineImage::TransCopy(const GameEngineImage* _other, const float4& _co
 		_otherScale.iy(),
 		_transColor
 	);
+}
+
+void GameEngineImage::Cut(const float4& _cutSize)
+{
+	if (0 != GetScale().ix() % _cutSize.ix())
+	{
+		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
+	}
+	if (0 != GetScale().iy() % _cutSize.iy())
+	{
+		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
+	}
+
+	int xCount = GetScale().ix() / _cutSize.ix();
+	int yCount = GetScale().iy() / _cutSize.iy();
+	for (int y = 0; y < yCount; y++)
+	{
+		for (int x = 0; x < xCount; x++)
+		{
+			cutPivot_.push_back({ static_cast<float>(x * _cutSize.ix()), static_cast<float>(y * _cutSize.iy()) });
+			cutScale_.push_back(_cutSize);
+		}
+	}
 }
 
 void GameEngineImage::ImageScaleCheck()

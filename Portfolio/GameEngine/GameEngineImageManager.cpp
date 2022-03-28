@@ -28,7 +28,7 @@ GameEngineImageManager::~GameEngineImageManager()
 GameEngineImage* GameEngineImageManager::Find(const std::string& _name)
 {
 	std::string engineName = GameEngineString::ToUpperReturn(_name);
-	std::map<std::string, GameEngineImage*>::iterator findIter = allRes.find(_name);
+	std::map<std::string, GameEngineImage*>::iterator findIter = allRes.find(engineName);
 	if (allRes.end() == findIter)
 	{
 		return nullptr;

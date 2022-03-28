@@ -19,15 +19,13 @@ public:
 			inst_ = nullptr;
 		}
 	}
+	static inline float GetDeltaTime()
+	{
+		return inst_->deltaTime_;
+	}
 
-public:
 	void Reset();
 	void Update();
-
-	inline float GetDeltaTime()
-	{
-		return deltaTime_;
-	}
 
 protected:
 

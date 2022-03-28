@@ -1,11 +1,13 @@
 #pragma once
 #include <GameEngine/GameEngine.h>
-
+#include <GameEngine/GameEngineEnum.h>
 
 // Ό³Έν :
 class BindingOfIsaac : public GameEngine
 {
 public:
+	static CharacterType characterType;
+
 	// constrcuter destructer
 	BindingOfIsaac();
 	~BindingOfIsaac();
@@ -23,5 +25,6 @@ protected:
 
 private:
 	void ImageLoad();
+	void ImageCut();
 };
 

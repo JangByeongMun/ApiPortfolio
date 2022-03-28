@@ -13,6 +13,6 @@ void LoadingPage::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
 
-	CreateRenderer("LoadingBackground.bmp");
+	CreateRenderer("bgblack.bmp");
 	CreateRenderer("LoadingLight.bmp");
 }

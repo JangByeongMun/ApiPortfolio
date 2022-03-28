@@ -175,10 +175,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="CharacterTypeManager.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Credit.h">
       <SubType>
       </SubType>
@@ -244,6 +240,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LoadingLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="LoadingMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -378,10 +378,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="CharacterTypeManager.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Credit.cpp">
       <SubType>
       </SubType>
@@ -447,6 +443,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LoadingLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="LoadingMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

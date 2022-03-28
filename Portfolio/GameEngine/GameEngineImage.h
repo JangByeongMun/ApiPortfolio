@@ -2,6 +2,7 @@
 #include <Windows.h>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <vector>
 
 // Ό³Έν :
 class GameEngineImage : public GameEngineNameObject
@@ -38,13 +39,34 @@ public:
 	void BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot);
 	void BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot);
 
-	void TransCopyCenter(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor);
-	void TransCopyCenterScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor);
-	void TransCopyBot(const GameEngineImage* _other, const float4& _copyPos, unsigned int _transColor);
-	void TransCopyBotScale(GameEngineImage* _other, const float4& _copyPos, const float4& _renderScale, unsigned int _transColor);
-	void TransCopy(const GameEngineImage* _other, const float4& _copyPos,
-		const float4& _copyScale, const float4& _otherPivot,
-		const float4& _otherScale, unsigned int _transColor );
+	void TransCopy(
+		const GameEngineImage* _other,
+		const float4& _copyPos,
+		const float4& _copyScale,
+		const float4& _otherPivot,
+		const float4& _otherScale,
+		unsigned int _transColor 
+	);
+
+	void Cut(const float4& _cutSize);
+	inline bool IsCut()
+	{
+		return 0 != cutPivot_.size();
+	}
+	inline float4 GetCutPivot(size_t _Index)
+	{
+		return cutPivot_[_Index];
+	}
+	inline float4 GetCutScale(size_t _Index)
+	{
+		return cutScale_[_Index];
+	}
+	inline void Cut(const float4& _CutScale, const float4& _CutPos)
+	{
+		cutPivot_.push_back(_CutPos);
+		cutScale_.push_back(_CutScale);
+	}
+
 protected:
 
 private:
@@ -52,6 +74,9 @@ private:
 	HBITMAP bitmap_;
 	HBITMAP oldBitmap_;
 	BITMAP info_;
+
+	std::vector<float4> cutPivot_;
+	std::vector<float4> cutScale_;
 
 	void ImageScaleCheck();
 };

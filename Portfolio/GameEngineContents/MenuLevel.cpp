@@ -19,7 +19,7 @@ void MenuLevel::Update()
 
 void MenuLevel::LevelChangeStart()
 {
-	CreateActor<MenuUI>("MenuUI", 0);
+	CreateActor<MenuUI>( 0);
 }
 
 void MenuLevel::LevelChangeEnd()

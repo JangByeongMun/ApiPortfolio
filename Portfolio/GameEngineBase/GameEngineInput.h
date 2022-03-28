@@ -84,12 +84,12 @@ public:
 
 	void Update();
 
-	void CreateKey(std::string _name, int _key);
-	bool IsDown(std::string _name);
-	bool IsUp(std::string _name);
-	bool IsPress(std::string _name);
-	bool IsFree(std::string _name);
-	bool IsKey(std::string _name);
+	void CreateKey(const std::string& _name, int _key);
+	bool IsDown(const std::string& _name);
+	bool IsUp(const std::string& _name);
+	bool IsPress(const std::string& _name);
+	bool IsFree(const std::string& _name);
+	bool IsKey(const std::string& _name);
 
 protected:
 

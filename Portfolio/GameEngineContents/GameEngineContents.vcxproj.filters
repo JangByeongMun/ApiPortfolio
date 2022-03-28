@@ -149,8 +149,8 @@
     <ClInclude Include="LoadingCharacter.h">
       <Filter>Loading</Filter>
     </ClInclude>
-    <ClInclude Include="CharacterTypeManager.h">
-      <Filter>Play\Base</Filter>
+    <ClInclude Include="LoadingMap.h">
+      <Filter>Loading</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,8 +299,8 @@
     <ClCompile Include="LoadingCharacter.cpp">
       <Filter>Loading</Filter>
     </ClCompile>
-    <ClCompile Include="CharacterTypeManager.cpp">
-      <Filter>Play\Base</Filter>
+    <ClCompile Include="LoadingMap.cpp">
+      <Filter>Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

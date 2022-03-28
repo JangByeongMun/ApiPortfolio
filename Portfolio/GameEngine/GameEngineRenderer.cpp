@@ -19,6 +19,8 @@ GameEngineRenderer::GameEngineRenderer()
 	, renderPivot_{0, 0}
 	, renderScale_{0, 0}
 	, TransColor_(RGB(255, 0, 255))
+	, renderImagePivot_{0, 0}
+	, renderImageScale_{0, 0}
 {
 }
 
@@ -44,6 +46,20 @@ void GameEngineRenderer::SetImageScale()
 {
 	scaleMode_ = RenderScaleMode::Image;
 	renderScale_ = image_->GetScale();
+	renderImageScale_ = image_->GetScale();
+}
+
+void GameEngineRenderer::SetIndex(const size_t _index)
+{
+	if (false == image_->IsCut())
+	{
+		MsgBoxAssert("잘려져있지 않은 이미지입니다.");
+		return;
+	}
+
+	renderScale_ = image_->GetCutScale(_index);
+	renderImagePivot_ = image_->GetCutPivot(_index);
+	renderImageScale_ = image_->GetCutScale(_index);
 }
 
 void GameEngineRenderer::Render()
@@ -59,10 +75,11 @@ void GameEngineRenderer::Render()
 	switch (pivotType_)
 	{
 	case RenderPivot::CENTER:
-		GameEngine::BackBufferImage()->TransCopyCenterScale(image_, renderPos, renderScale_, TransColor_);
+		GameEngine::BackBufferImage()->TransCopy(image_, renderPos - renderScale_.Half(), renderScale_, renderImagePivot_, renderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		GameEngine::BackBufferImage()->TransCopyBotScale(image_, renderPos, renderScale_, TransColor_);
+		// 밑을 기준으로 할 일이 당분간 없으니 우선 비우고 다른것부터 작업
+		//GameEngine::BackBufferImage()->TransCopy(image_, renderPos - renderScale_.Half(), renderScale_, renderImagePivot_, renderImageScale_, TransColor_);
 		break;
 	default:
 		break;

@@ -1,22 +1,5 @@
 #pragma once
 
-// 설명 : 각 블럭의 정보
-enum class BlockData
-{
-	NORMAL = 0,
-	FIRE,
-	FIREBLUE,
-	FIRERED,
-	HOLE,
-	POOP,
-	POOPRED,
-	STONE,
-	STONEBLACK,
-	THORN,
-
-	END,
-};
-
 // 설명 : 각 방의 정보를 저장하는 데이터
 union MapPos;
 class RoomData

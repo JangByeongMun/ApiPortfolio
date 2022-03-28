@@ -19,24 +19,17 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
-protected:
-	virtual void Loading() = 0;
-	virtual void Update() = 0;
-
-	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
-	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
-	
 	template<typename ActorType>
-	ActorType* CreateActor(const std::string& _name , int _order)
+	ActorType* CreateActor(int _order = 0, const std::string& _name = "")
 	{
 		ActorType* newActor = new ActorType();
 		newActor->SetName(_name);
 		newActor->SetLevel(this);
 
 		// 각 액터들마다 start가 다를수 있는데 이를 가상함수로 제작한후 밖에서 호출하지 못하도록 막은후 GameEngineActor에서만 호출가능하도록 구현
-		GameEngineActor* engineActor = newActor; 
+		GameEngineActor* engineActor = newActor;
 		engineActor->Start();
-		
+
 		// ------------------------------------------
 		//std::map<int, std::list<GameEngineActor*>>::iterator findIter = allActor_.find(_order);
 		//if (findIter == allActor_.end())
@@ -50,8 +43,15 @@ protected:
 		std::list<GameEngineActor*>& group = allActor_[_order];
 		group.push_back(newActor);
 
-		return nullptr;
+		return newActor;
 	}
+
+protected:
+	virtual void Loading() = 0;
+	virtual void Update() = 0;
+
+	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
+	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
 
 private:
 	// 키값 == 업데이트의 우선순위
@@ -62,5 +62,6 @@ private:
 
 	void ActorUpdate();
 	void ActorRender();
+	void ActorRelease();
 };
 

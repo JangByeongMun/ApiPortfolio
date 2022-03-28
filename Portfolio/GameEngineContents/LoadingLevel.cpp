@@ -1,6 +1,8 @@
 #include "LoadingLevel.h"
 #include "LoadingPage.h"
 #include "LoadingCharacter.h"
+#include "LoadingMap.h"
+
 
 LoadingLevel::LoadingLevel() 
 {
@@ -12,8 +14,9 @@ LoadingLevel::~LoadingLevel()
 
 void LoadingLevel::Loading()
 {
-	CreateActor<LoadingPage>("LoadingPage", 0);
-	CreateActor<LoadingCharacter>("LoadingCharacter", 0);
+	CreateActor<LoadingPage>(0);
+	CreateActor<LoadingCharacter>(1);
+	CreateActor<LoadingMap>(2);
 }
 
 void LoadingLevel::Update()

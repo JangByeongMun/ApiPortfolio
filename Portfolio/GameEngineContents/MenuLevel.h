@@ -15,6 +15,7 @@ public:
 	MenuLevel& operator=(const MenuLevel& _Other) = delete;
 	MenuLevel& operator=(MenuLevel&& _Other) noexcept = delete;
 
+
 protected:
 	void Loading() override;
 	void Update() override;

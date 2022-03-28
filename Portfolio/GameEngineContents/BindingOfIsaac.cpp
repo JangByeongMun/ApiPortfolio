@@ -4,7 +4,6 @@
 #include "LoadingLevel.h"
 #include "EndingLevel.h"
 #include "MenuLevel.h"
-#include "CharacterTypeManager.h"
 
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -29,7 +28,8 @@ void BindingOfIsaac::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
 	ImageLoad();
-	
+	ImageCut();
+
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MenuLevel>("Menu");
 	CreateLevel<LoadingLevel>("Loading");
@@ -40,13 +40,13 @@ void BindingOfIsaac::GameInit()
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
 		GameEngineInput::GetInst()->CreateKey("Exit", VK_ESCAPE);
-		GameEngineInput::GetInst()->CreateKey("LevelChangeTitle", 'Z');
-		GameEngineInput::GetInst()->CreateKey("LevelChangeMenu", 'X');
-		GameEngineInput::GetInst()->CreateKey("LevelChangeLoading", 'C');
-		GameEngineInput::GetInst()->CreateKey("LevelChangePlay", 'V');
-		GameEngineInput::GetInst()->CreateKey("LevelChangeEnding", 'B');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelTitle", 'Z');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelMenu", 'X');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelLoading", 'C');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelPlay", 'V');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelEnding", 'B');
 	}
-
+	
 	startTime = time(NULL);
 }
 
@@ -57,8 +57,14 @@ void BindingOfIsaac::ImageLoad()
 	resourcesDirectory.Move("Resources");
 	resourcesDirectory.Move("Image");
 	resourcesDirectory.Move("UI");
-	
 	std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
+	for (int i = 0; i < allFileVec.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+	}
+
+	resourcesDirectory.Move("LoadingLevel");
+	allFileVec = resourcesDirectory.GetAllFile();
 	for (int i = 0; i < allFileVec.size(); i++)
 	{
 		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
@@ -73,34 +79,44 @@ void BindingOfIsaac::ImageLoad()
 	}
 }
 
+void BindingOfIsaac::ImageCut()
+{
+	GameEngineImage* Image = nullptr;
+	Image = GameEngineImageManager::GetInst()->Find("character_001_isaac.bmp");
+	Image->Cut({ 96, 100 });
+	
+	Image = GameEngineImageManager::GetInst()->Find("tears.bmp");
+	Image->Cut({ 96, 96 });
+
+	Image = GameEngineImageManager::GetInst()->Find("LoadingMap.bmp");
+	Image->Cut({ 96, 96 });
+
+}
+
 void BindingOfIsaac::GameLoop()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeTitle"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelTitle"))
 	{
 		ChangeLevel("Title");
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeMenu"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelMenu"))
 	{
 		ChangeLevel("Menu");
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeLoading"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelLoading"))
 	{
 		ChangeLevel("Loading");
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangePlay"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelPlay"))
 	{
 		ChangeLevel("Play");
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChangeEnding"))
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelEnding"))
 	{
 		ChangeLevel("Ending");
 	}
-
 }
 
 void BindingOfIsaac::GameEnd()
 {
-	int a = 0;
-
-	CharacterTypeManager::Destroy();
 }

@@ -88,6 +88,10 @@ public:
 	{
 		return { x + _other.x, y + _other.y, z + _other.z, 1.0f };
 	}
+	float4 operator*(const float& _value) const
+	{
+		return { x * _value, y * _value, z * _value, 1.0f };
+	}
 	float4& operator+=(const float4& _other)
 	{
 		x += _other.x;

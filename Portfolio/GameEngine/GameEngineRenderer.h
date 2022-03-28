@@ -43,9 +43,10 @@ public:
 		TransColor_ = _color;
 	}
 
-	void Render();
+	void SetIndex(const size_t _index);
 
 protected:
+	void Render();
 
 private:
 	GameEngineImage* image_;
@@ -53,6 +54,10 @@ private:
 	RenderScaleMode scaleMode_;
 	float4 renderPivot_;
 	float4 renderScale_;
+
+	float4 renderImageScale_;
+	float4 renderImagePivot_;
+
 	unsigned int TransColor_;
 };
 

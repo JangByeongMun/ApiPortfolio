@@ -22,6 +22,11 @@ void GameEngineTime::Update()
 }
 
 GameEngineTime::GameEngineTime()
+	: secondCount_(0)
+	, currentCount_(0)
+	, prevCount_(0)
+	, deltaTime_(0)
+	, realDeltaTime_(0)
 {
 }
 
