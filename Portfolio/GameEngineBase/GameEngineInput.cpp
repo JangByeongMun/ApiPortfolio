@@ -2,6 +2,48 @@
 #include "GameEngineDebug.h"
 #include "GameEngineString.h"
 
+//////////////////////////////////////////////////
+void GameEngineInput::GameEngineKey::Update()
+{
+	if (true == KeyCheck())
+	{
+		int a = 0;
+		if (true == Free_)
+		{
+			Down_ = true;
+			Press_ = true;
+			Up_ = false;
+			Free_ = false;
+		}
+		else if (true == Press_)
+		{
+			Down_ = false;
+			Press_ = true;
+			Up_ = false;
+			Free_ = false;
+		}
+	}
+	else
+	{
+		if (true == Press_)
+		{
+			Down_ = false;
+			Press_ = false;
+			Up_ = true;
+			Free_ = false;
+		}
+		else if (true == Up_)
+		{
+			Down_ = false;
+			Press_ = false;
+			Up_ = false;
+			Free_ = true;
+		}
+	}
+}
+//////////////////////////////////////////////////
+
+
 GameEngineInput* GameEngineInput::inst_ = new GameEngineInput();
 
 GameEngineInput::GameEngineInput() 

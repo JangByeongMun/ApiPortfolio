@@ -5,8 +5,8 @@ GameEnginePath::GameEnginePath()
 }
 
 GameEnginePath::GameEnginePath(const std::filesystem::path _path)
+	:path_(_path)
 {
-	path_ = _path;
 }
 
 GameEnginePath::~GameEnginePath() 

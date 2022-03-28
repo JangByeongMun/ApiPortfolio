@@ -17,47 +17,10 @@ private:
 		bool Free_;  
 		int Key_;    
 
+		void Update();
 		bool KeyCheck()
 		{
 			return 0 != GetAsyncKeyState(Key_);
-		}
-		void Update()
-		{
-			if (true == KeyCheck())
-			{
-				int a = 0;
-				if (true == Free_)
-				{
-					Down_ = true;
-					Press_ = true;
-					Up_ = false;
-					Free_ = false;
-				}
-				else if (true == Press_)
-				{
-					Down_ = false;
-					Press_ = true;
-					Up_ = false;
-					Free_ = false;
-				}
-			}
-			else
-			{
-				if (true == Press_)
-				{
-					Down_ = false;
-					Press_ = false;
-					Up_ = true;
-					Free_ = false;
-				}
-				else if (true == Up_)
-				{
-					Down_ = false;
-					Press_ = false;
-					Up_ = false;
-					Free_ = true;
-				}
-			}
 		}
 		void Reset()
 		{
@@ -83,8 +46,8 @@ public:
 	}
 
 	void Update();
-
 	void CreateKey(const std::string& _name, int _key);
+
 	bool IsDown(const std::string& _name);
 	bool IsUp(const std::string& _name);
 	bool IsPress(const std::string& _name);
@@ -94,13 +57,14 @@ public:
 protected:
 
 private:
+	std::map<std::string, GameEngineKey> allInputKey_;
+
 	GameEngineInput();
 	~GameEngineInput();
+
 	GameEngineInput(const GameEngineInput& _Other) = delete;
 	GameEngineInput(GameEngineInput&& _Other) noexcept = delete;
 	GameEngineInput& operator=(const GameEngineInput& _Other) = delete;
 	GameEngineInput& operator=(GameEngineInput&& _Other) noexcept = delete;
-	
-	std::map<std::string, GameEngineKey> allInputKey_;
 };
 

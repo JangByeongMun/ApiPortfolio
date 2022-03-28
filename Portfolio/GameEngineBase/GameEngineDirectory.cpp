@@ -14,16 +14,16 @@ GameEngineDirectory::~GameEngineDirectory()
 
 void GameEngineDirectory::Move(const std::string& _name)
 {
-	std::filesystem::path tmpPath = path_;
-	tmpPath.append(_name);
+	std::filesystem::path checkPath = path_;
+	checkPath.append(_name);
 	
-	if (false == std::filesystem::exists(tmpPath))
+	if (false == std::filesystem::exists(checkPath))
 	{
-		MsgBoxAssertString(_name + " directory is not exists");
+		MsgBoxAssertString(_name + " Path is not exists");
 		return;
 	}
 
-	path_ = tmpPath;
+	path_ = checkPath;
 }
 
 void GameEngineDirectory::MoveParent()

@@ -21,6 +21,8 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
+	CreateActor<Player>((int)ORDER::PLAYER);
+	CreateActor<HpUI>((int)ORDER::UI);
 }
 
 void PlayLevel::Update()
@@ -29,8 +31,6 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart()
 {
-	CreateActor<Player>((int)ORDER::PLAYER);
-	CreateActor<HpUI>((int)ORDER::UI);
 }
 
 void PlayLevel::LevelChangeEnd()

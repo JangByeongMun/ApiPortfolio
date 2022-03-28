@@ -70,10 +70,6 @@ public:
 	{
 		return static_cast<int>(z * 0.5f);
 	}
-	int hiw() const
-	{
-		return static_cast<int>(w * 0.5f);
-	}
 
 	float4 Half() const
 	{

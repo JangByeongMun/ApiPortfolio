@@ -70,6 +70,14 @@ void BindingOfIsaac::ImageLoad()
 		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
 	}
 
+	resourcesDirectory.MoveParent("UI");
+	resourcesDirectory.Move("EndingLevel");
+	allFileVec = resourcesDirectory.GetAllFile();
+	for (int i = 0; i < allFileVec.size(); i++)
+	{
+		GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+	}
+
 	resourcesDirectory.MoveParent("Image");
 	resourcesDirectory.Move("Player");
 	allFileVec = resourcesDirectory.GetAllFile();

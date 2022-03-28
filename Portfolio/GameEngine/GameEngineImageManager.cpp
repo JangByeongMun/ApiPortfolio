@@ -12,15 +12,15 @@ GameEngineImageManager::GameEngineImageManager()
 
 GameEngineImageManager::~GameEngineImageManager() 
 {
-	std::map<std::string, GameEngineImage*>::iterator beginIter = allRes.begin();
+	std::map<std::string, GameEngineImage*>::iterator startIter = allRes.begin();
 	std::map<std::string, GameEngineImage*>::iterator endIter = allRes.end();
 
-	for (; beginIter != endIter; ++beginIter)
+	for (; startIter != endIter; ++startIter)
 	{
-		if (nullptr != beginIter->second)
+		if (nullptr != startIter->second)
 		{
-			delete beginIter->second;
-			beginIter->second = nullptr;
+			delete startIter->second;
+			startIter->second = nullptr;
 		}
 	}
 }

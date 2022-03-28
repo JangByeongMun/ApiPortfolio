@@ -12,19 +12,3 @@ GameEngineUpdateObject::GameEngineUpdateObject()
 GameEngineUpdateObject::~GameEngineUpdateObject() 
 {
 }
-
-void GameEngineUpdateObject::ReleaseUpdate()
-{
-	if (false == isReleaseUpdate_)
-	{
-		return;
-	}
-
-	deathTime_ -= GameEngineTime::GetDeltaTime();
-
-	if (0.0f >= deathTime_)
-	{
-		isDeath_ = true;
-	}
-}
-

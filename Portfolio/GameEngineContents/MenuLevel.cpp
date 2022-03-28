@@ -11,6 +11,7 @@ MenuLevel::~MenuLevel()
 
 void MenuLevel::Loading()
 {
+	CreateActor<MenuUI>(0);
 }
 
 void MenuLevel::Update()
@@ -19,7 +20,6 @@ void MenuLevel::Update()
 
 void MenuLevel::LevelChangeStart()
 {
-	CreateActor<MenuUI>( 0);
 }
 
 void MenuLevel::LevelChangeEnd()

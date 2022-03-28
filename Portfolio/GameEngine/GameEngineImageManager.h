@@ -36,16 +36,14 @@ public:
 protected:
 
 private:
-	// constrcuter destructer
+	std::map<std::string, GameEngineImage*> allRes;
+
 	GameEngineImageManager();
 	~GameEngineImageManager();
 
-	// delete Function
 	GameEngineImageManager(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager(GameEngineImageManager&& _Other) noexcept = delete;
 	GameEngineImageManager& operator=(const GameEngineImageManager& _Other) = delete;
 	GameEngineImageManager& operator=(GameEngineImageManager&& _Other) noexcept = delete;
-
-	std::map<std::string, GameEngineImage*> allRes;
 };
 

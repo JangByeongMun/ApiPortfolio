@@ -7,12 +7,12 @@ GameEngineLevel::GameEngineLevel()
 
 GameEngineLevel::~GameEngineLevel() 
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator beginIter = allActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator endIter = allActor_.end();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupStart = allActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupEnd = allActor_.end();
 
-	for (; beginIter != endIter; ++beginIter)
+	for (; groupStart != groupEnd; ++groupStart)
 	{
-		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
+		std::list<GameEngineActor*>& tmpGroup = groupStart->second;
 
 		std::list<GameEngineActor*>::iterator beginListIter = tmpGroup.begin();
 		std::list<GameEngineActor*>::iterator endListIter = tmpGroup.end();
@@ -31,12 +31,12 @@ GameEngineLevel::~GameEngineLevel()
 
 void GameEngineLevel::ActorUpdate()
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator beginIter = allActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator endIter = allActor_.end();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupStart = allActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupEnd = allActor_.end();
 
-	for (; beginIter != endIter; ++beginIter)
+	for (; groupStart != groupEnd; ++groupStart)
 	{
-		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
+		std::list<GameEngineActor*>& tmpGroup = groupStart->second;
 
 		std::list<GameEngineActor*>::iterator beginListIter = tmpGroup.begin();
 		std::list<GameEngineActor*>::iterator endListIter = tmpGroup.end();
@@ -55,52 +55,52 @@ void GameEngineLevel::ActorUpdate()
 
 void GameEngineLevel::ActorRender()
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator beginIter = allActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator endIter = allActor_.end();
-	for (; beginIter != endIter; ++beginIter)
+	std::map<int, std::list<GameEngineActor*>>::iterator groupStart = allActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupEnd = allActor_.end();
+	for (; groupStart != groupEnd; ++groupStart)
 	{
-		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
+		std::list<GameEngineActor*>& tmpGroup = groupStart->second;
 
-		std::list<GameEngineActor*>::iterator beginListIter = tmpGroup.begin();
-		std::list<GameEngineActor*>::iterator endListIter = tmpGroup.end();
-		for (; beginListIter != endListIter; ++beginListIter)
+		std::list<GameEngineActor*>::iterator startActor = tmpGroup.begin();
+		std::list<GameEngineActor*>::iterator endActor = tmpGroup.end();
+		for (; startActor != endActor; ++startActor)
 		{
-			if (false == (*beginListIter)->IsUpdate())
+			if (false == (*startActor)->IsUpdate())
 			{
 				continue;
 			}
 
-			(*beginListIter)->Rendering();
+			(*startActor)->Rendering();
 		}
 	}
 
-	beginIter = allActor_.begin();
-	endIter = allActor_.end();
-	for (; beginIter != endIter; ++beginIter)
+	groupStart = allActor_.begin();
+	groupEnd = allActor_.end();
+	for (; groupStart != groupEnd; ++groupStart)
 	{
-		std::list<GameEngineActor*>& tmpGroup = beginIter->second;
+		std::list<GameEngineActor*>& tmpGroup = groupStart->second;
 
-		std::list<GameEngineActor*>::iterator beginListIter = tmpGroup.begin();
-		std::list<GameEngineActor*>::iterator endListIter = tmpGroup.end();
-		for (; beginListIter != endListIter; ++beginListIter)
+		std::list<GameEngineActor*>::iterator startActor = tmpGroup.begin();
+		std::list<GameEngineActor*>::iterator endActor = tmpGroup.end();
+		for (; startActor != endActor; ++startActor)
 		{
-			if (false == (*beginListIter)->IsUpdate())
+			if (false == (*startActor)->IsUpdate())
 			{
 				continue;
 			}
 
-			(*beginListIter)->Render();
+			(*startActor)->Render();
 		}
 	}
 }
 
 void GameEngineLevel::ActorRelease()
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator beginIter = allActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator endIter = allActor_.end();
-	for (; beginIter != endIter; ++beginIter)
+	std::map<int, std::list<GameEngineActor*>>::iterator groupStart = allActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator groupEnd = allActor_.end();
+	for (; groupStart != groupEnd; ++groupStart)
 	{
-		std::list<GameEngineActor*>& group = beginIter->second;
+		std::list<GameEngineActor*>& group = groupStart->second;
 
 		std::list<GameEngineActor*>::iterator beginListIter = group.begin();
 		std::list<GameEngineActor*>::iterator endListIter = group.end();

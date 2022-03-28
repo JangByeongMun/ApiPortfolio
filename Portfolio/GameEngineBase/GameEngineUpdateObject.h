@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include "GameEngineTime.h"
 
 // Ό³Έν :
 class GameEngineUpdateObject
@@ -14,7 +16,20 @@ public:
 	GameEngineUpdateObject& operator=(const GameEngineUpdateObject& _Other) = delete;
 	GameEngineUpdateObject& operator=(GameEngineUpdateObject&& _Other) noexcept = delete;
 
-	void ReleaseUpdate();
+	inline void ReleaseUpdate()
+	{
+		if (false == isReleaseUpdate_)
+		{
+			return;
+		}
+
+		deathTime_ -= GameEngineTime::GetDeltaTime();
+
+		if (0.0f >= deathTime_)
+		{
+			isDeath_ = true;
+		}
+	}
 
 	inline void On()
 	{

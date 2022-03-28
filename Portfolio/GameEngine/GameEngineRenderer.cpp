@@ -1,9 +1,7 @@
 #include "GameEngineRenderer.h"
 #include "GameEngine.h"
-#include "GameEngineImage.h"
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineDebug.h>
-#include <GameEngineBase/GameEngineString.h>
 
 #pragma comment(lib, "msimg32.lib")
 
@@ -30,8 +28,7 @@ GameEngineRenderer::~GameEngineRenderer()
 
 void GameEngineRenderer::SetImage(const std::string& _name)
 {
-	std::string engineName = GameEngineString::ToUpperReturn(_name);
-	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(engineName);
+	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_name);
 	if (nullptr == findImage)
 	{
 		MsgBoxAssertString(_name + " 존재하지 않는 이미지를 렌더러에 세팅하려고 했습니다.");
