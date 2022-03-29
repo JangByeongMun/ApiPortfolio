@@ -35,7 +35,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Play");
+	ChangeLevel("Ending");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -120,6 +120,46 @@ void BindingOfIsaac::ImageCut()
 	Image = GameEngineImageManager::GetInst()->Find("LoadingMap.bmp");
 	Image->Cut({ 96, 96 });
 
+	Image = GameEngineImageManager::GetInst()->Find("IntroIcon.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("MenuIcon.bmp");
+	Image->CutCount(2, 1);
+
+
+	/////////////////////////////////// Ending Level 
+	Image = GameEngineImageManager::GetInst()->Find("epilogue01_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue02_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue03_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue04_1.bmp");
+	Image->CutCount(1, 2);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue04_2.bmp");
+	Image->CutCount(1, 2);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue05_1.bmp");
+	Image->CutCount(1, 2);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue07_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue08_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue09_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue10_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue10_2.bmp");
+	Image->CutCount(1, 2);
 }
 
 void BindingOfIsaac::GameLoop()

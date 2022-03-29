@@ -1,5 +1,6 @@
 #include "LoadingCharacter.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 LoadingCharacter::LoadingCharacter() 
 {
@@ -12,12 +13,30 @@ LoadingCharacter::~LoadingCharacter()
 void LoadingCharacter::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half() + float4{0, 190});
+	StartX = GetPosition().x;
 
 	CreateRenderer("Loading_01_isaac.bmp");
-	CreateRenderer("LoadingBubble3.bmp", RenderPivot::CENTER, { 0, -250 });
-	CreateRenderer("LoadingBubble2.bmp", RenderPivot::CENTER, { -130, -80 });
-	CreateRenderer("LoadingBubble1.bmp", RenderPivot::CENTER, { -60, -45 });
-	//CreateRenderer("nightmare_9_1.bmp", RenderPivot::CENTER, { -50, -240 });
-	//CreateRenderer("nightmare_9_1.bmp", RenderPivot::CENTER, { 0, -240 });
+}
+
+void LoadingCharacter::Update()
+{
+	if (IsLeft)
+	{
+		SetMove(float4(-100, 0) * GameEngineTime::GetInst()->GetDeltaTime());
+
+		if (StartX - GetPosition().x >= 3.0f)
+		{
+			IsLeft = !IsLeft;
+		}
+	}
+	else
+	{
+		SetMove(float4(100, 0) * GameEngineTime::GetInst()->GetDeltaTime());
+
+		if (GetPosition().x - StartX >= 3.0f)
+		{
+			IsLeft = !IsLeft;
+		}
+	}
 }
 

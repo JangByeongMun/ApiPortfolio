@@ -1,5 +1,6 @@
 #include "IntroPage.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 IntroPage::IntroPage() 
 {
@@ -15,8 +16,10 @@ void IntroPage::Start()
 	CreateRenderer("IntroPage.bmp");
 	CreateRenderer("IntroGameBy.bmp", RenderPivot::CENTER, {-250, -210});
 	CreateRenderer("IntroName.bmp", RenderPivot::CENTER, { 0, -70 });
-	CreateRenderer("IntroIcon1.bmp", RenderPivot::CENTER, { 0, 100 });
-	CreateRenderer("IntroIcon2.bmp", RenderPivot::CENTER, { 0, 100 });
+
+	GameEngineRenderer* IntroAnim = CreateRenderer(RenderPivot::CENTER, {0, 100});
+	IntroAnim->CreateAnimation("IntroIcon.bmp", "IntroIcon", 0, 1, 0.25f, true);
+	IntroAnim->ChangeAnimation("IntroIcon");
 }
 
 void IntroPage::Update()

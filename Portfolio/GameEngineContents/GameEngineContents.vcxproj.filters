@@ -11,9 +11,6 @@
     <ClInclude Include="EndingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Credit.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
     <ClInclude Include="LoadingLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
@@ -158,6 +155,39 @@
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingBubble.h">
+      <Filter>Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit08.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit09.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit10.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit01.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit02.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit03.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit04.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit05.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit06.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit07.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -169,9 +199,6 @@
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
       <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit.cpp">
-      <Filter>Ending</Filter>
     </ClCompile>
     <ClCompile Include="LoadingLevel.cpp">
       <Filter>Level</Filter>
@@ -309,6 +336,39 @@
       <Filter>Loading</Filter>
     </ClCompile>
     <ClCompile Include="EndingBackGround.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingBubble.cpp">
+      <Filter>Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit08.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit09.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit10.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit01.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit02.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit03.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit04.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit05.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit06.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit07.cpp">
       <Filter>Ending</Filter>
     </ClCompile>
   </ItemGroup>
