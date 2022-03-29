@@ -1,11 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
-
-enum class ProjectileType
-{
-
-};
-
+#include "ContentsEnum.h"
 
 // 설명 : 투사체
 class Projectile : public GameEngineActor
@@ -33,6 +28,7 @@ public:
 protected:
 
 private:
+	ProjectileType _type;
 	float4 vec_;
 	float speed_;
 

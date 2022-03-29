@@ -3,7 +3,7 @@
 #include "Shooter.h"
 
 // 설명 : 플레이어
-class Player : public GameEngineActor, public Shooter
+class Player : public Shooter
 {
 public:
 	// constrcuter destructer

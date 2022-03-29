@@ -175,6 +175,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="Credit.h">
       <SubType>
       </SubType>

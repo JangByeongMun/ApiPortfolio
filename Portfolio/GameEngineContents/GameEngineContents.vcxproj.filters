@@ -155,6 +155,9 @@
     <ClInclude Include="EndingBackGround.h">
       <Filter>Ending</Filter>
     </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -354,6 +357,9 @@
     </Filter>
     <Filter Include="Loading">
       <UniqueIdentifier>{9f0e4753-aa67-47e0-be75-a7c761f9c87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{9bf2df0f-c5ca-4f98-8f35-0579ace57b98}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

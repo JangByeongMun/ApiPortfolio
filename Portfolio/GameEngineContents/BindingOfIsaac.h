@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngine.h>
 #include <GameEngine/GameEngineEnum.h>
+#include "ContentsEnum.h"
 
 // Ό³Έν :
 class BindingOfIsaac : public GameEngine

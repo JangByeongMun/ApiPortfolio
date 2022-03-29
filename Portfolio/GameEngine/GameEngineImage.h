@@ -49,6 +49,8 @@ public:
 	);
 
 	void Cut(const float4& _cutSize);
+	void CutCount(int _x, int _y);
+
 	inline bool IsCut()
 	{
 		return 0 != cutPivot_.size();

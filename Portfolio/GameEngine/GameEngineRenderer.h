@@ -2,12 +2,14 @@
 #include "GameEngineEnum.h"
 #include "GameEngineActorSubObject.h"
 #include <GameEngineBase/GameEngineMath.h>
+#include <map>
 
 // 설명 :
 class GameEngineImage;
 class GameEngineRenderer : public GameEngineActorSubObject
 {
 	friend GameEngineActor;
+	friend class FrameAnimation;
 public:
 	// constrcuter destructer
 	GameEngineRenderer();
@@ -40,6 +42,10 @@ public:
 	{
 		TransColor_ = _color;
 	}
+	inline GameEngineImage* GetImage()
+	{
+		return image_;
+	}
 
 	void SetImageScale();
 	void SetImage(const std::string& _name);
@@ -59,5 +65,53 @@ private:
 	float4 renderImagePivot_;
 
 	unsigned int TransColor_;
+
+	/////////////////////////////////////////// 애니메이션
+private:
+	class FrameAnimation
+	{
+	public:
+		GameEngineRenderer* renderer_;
+		GameEngineImage* image_;
+		int currentFrame_;
+		int startFrame_;
+		int endFrame_;
+		float currentInterTime_;
+		float interTime_;
+		bool loop_;
+
+	public:
+		FrameAnimation()
+			: renderer_(nullptr)
+			, image_(nullptr)
+			, currentFrame_(-1)
+			, startFrame_(-1)
+			, endFrame_(-1)
+			, currentInterTime_(0.1f)
+			, interTime_(0.1f)
+			, loop_(true)
+		{
+		}
+		~FrameAnimation()
+		{
+		}
+
+	public:
+		void Update();
+
+		inline void Reset()
+		{
+			currentFrame_ = startFrame_;
+			currentInterTime_ = interTime_;
+		}
+	};
+
+public:
+	void CreateAnimation(const std::string& _image, const std::string& _name, int _startIndex, int _endIndex, float _interTime, bool _loop = true);
+	void ChangeAnimation(const std::string& _name);
+
+private:
+	std::map<std::string, FrameAnimation> animations_;
+	FrameAnimation* currentAnimation_;
 };
 

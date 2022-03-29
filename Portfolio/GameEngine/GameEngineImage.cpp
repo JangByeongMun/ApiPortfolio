@@ -174,6 +174,12 @@ void GameEngineImage::Cut(const float4& _cutSize)
 	}
 }
 
+void GameEngineImage::CutCount(int _x, int _y)
+{
+	float4 scale = { GetScale().x / _x, GetScale().y / _y };
+	Cut(scale);
+}
+
 void GameEngineImage::ImageScaleCheck()
 {
 	HBITMAP currentBitMap = (HBITMAP)GetCurrentObject(imageDC_, OBJ_BITMAP);

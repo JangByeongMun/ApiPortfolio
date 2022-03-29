@@ -2,6 +2,8 @@
 #include "GameEngine.h"
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineDebug.h>
+#include <GameEngineBase/GameEngineTime.h>
+
 
 #pragma comment(lib, "msimg32.lib")
 
@@ -69,6 +71,11 @@ void GameEngineRenderer::SetIndex(const size_t _index, float4 _scale)
 
 void GameEngineRenderer::Render()
 {
+	if (nullptr != currentAnimation_)
+	{
+		currentAnimation_->Update();
+	}
+
 	if (nullptr == image_)
 	{
 		MsgBoxAssert("렌더러에 이미지를 세팅하지 않았습니다.");
@@ -89,4 +96,78 @@ void GameEngineRenderer::Render()
 	default:
 		break;
 	}
+}
+
+//////////////////////////// 애니메이션
+
+
+void GameEngineRenderer::CreateAnimation(
+	const std::string& _image,
+	const std::string& _name,
+	int _startIndex,
+	int _endIndex,
+	float _interTime,
+	bool _loop
+)
+{
+	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image);
+	if (nullptr == findImage)
+	{
+		MsgBoxAssert("존재하지 않는 이미지로 애니메이션을 만들려고 했습니다.");
+		return;
+	}
+
+	std::map<std::string, FrameAnimation>::iterator findIter = animations_.find(_name);
+	if (animations_.end() != findIter)
+	{
+		MsgBoxAssert("이미 존재하는 애니메이션에 추가하려고 했습니다.");
+		return;
+	}
+
+	FrameAnimation& newAnimation = animations_[_name];
+	newAnimation.renderer_ = this;
+	newAnimation.image_ = findImage;
+	newAnimation.currentFrame_ = _startIndex;
+	newAnimation.startFrame_ = _startIndex;
+	newAnimation.endFrame_ = _endIndex;
+	newAnimation.currentInterTime_ = _interTime;
+	newAnimation.interTime_ = _interTime;
+	newAnimation.loop_ = _loop;
+}
+
+void GameEngineRenderer::ChangeAnimation(const std::string& _name)
+{
+	std::map<std::string, FrameAnimation>::iterator findIter = animations_.find(_name);
+	if (animations_.end() == findIter)
+	{
+		MsgBoxAssert("존재하지 않는 애니메이션으로 변경하려 했습니다.");
+		return;
+	}
+
+	currentAnimation_ = &findIter->second;
+}
+
+void GameEngineRenderer::FrameAnimation::Update()
+{
+	currentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+	if (0 >= currentInterTime_)
+	{
+		currentInterTime_ = interTime_;
+		++currentFrame_;
+
+		if (endFrame_ < currentFrame_)
+		{
+			if (true == loop_)
+			{
+				currentFrame_ = startFrame_;
+			}
+			else
+			{
+				currentFrame_ = endFrame_;
+			}
+		}
+	}
+
+	renderer_->image_ = image_;
+	renderer_->SetIndex(currentFrame_);
 }
