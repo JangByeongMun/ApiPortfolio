@@ -20,7 +20,7 @@ public:
 
 	inline static GameEngineImage* BackBufferImage()
 	{
-		return backBufferImage_;
+		return BackBufferImage_;
 	}
 	static HDC WindowMainDC();
 	static HDC BackBufferDC();
@@ -35,7 +35,7 @@ public:
 		GameEngineDebug::LeakCheckOn();
 
 		GameType UserGame;
-		userContents_ = &UserGame;
+		UserContents_ = &UserGame;
 
 		WindowCreate();
 		EngineEnd();
@@ -43,34 +43,34 @@ public:
 
 	inline static GameEngine& GlobalEngine()
 	{
-		if (nullptr == userContents_)
+		if (nullptr == UserContents_)
 		{
 			MsgBoxAssert("Engine is not Start");
 		}
 
-		return *userContents_;
+		return *UserContents_;
 	}
 
-	void ChangeLevel(const std::string& _name);
+	void ChangeLevel(const std::string& _Name);
 
 protected:
 	template<typename levelType>
-	void CreateLevel(const std::string& _name)
+	void CreateLevel(const std::string& _Name)
 	{
 		levelType* newLevel = new levelType();
-		newLevel->SetName(_name);
+		newLevel->SetName(_Name);
 		GameEngineLevel* level = newLevel;
 		level->Loading();
-		allLevel_.insert(std::make_pair(_name, newLevel));
+		AllLevel_.insert(std::make_pair(_Name, newLevel));
 	}
 
 private:
-	static std::map<std::string, GameEngineLevel*> allLevel_;
-	static GameEngineLevel* currentLevel_;
-	static GameEngineLevel* nextLevel_;
-	static GameEngine* userContents_;
-	static GameEngineImage* windowMainImage_;
-	static GameEngineImage* backBufferImage_;
+	static std::map<std::string, GameEngineLevel*> AllLevel_;
+	static GameEngineLevel* CurrentLevel_;
+	static GameEngineLevel* NextLevel_;
+	static GameEngine* UserContents_;
+	static GameEngineImage* WindowMainImage_;
+	static GameEngineImage* BackBufferImage_;
 
 	static void WindowCreate();
 	static void EngineInit();

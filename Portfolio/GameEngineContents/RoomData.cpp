@@ -4,7 +4,7 @@
 #include "MapPos.h"
 
 RoomData::RoomData() 
-	:allBlock_{}
+	:AllBlock_{}
 {
 }
 
@@ -20,16 +20,16 @@ void RoomData::Render()
 		{
 			Rectangle(
 				GameEngineWindow::GetHDC(),
-				startX + (x * scaleX),
-				startY + (y * scaleY),
-				startX + ((x+1) * scaleX),
-				startY + ((y+1) * scaleY)
+				StartX + (x * ScaleX),
+				StartY + (y * ScaleY),
+				StartX + ((x+1) * ScaleX),
+				StartY + ((y+1) * ScaleY)
 				);
 		}
 	}
 }
 
-bool RoomData::operator()(const MapPos& _left, const MapPos& _right)
+bool RoomData::operator()(const MapPos& _Left, const MapPos& _Right)
 {
-	return _left.n < _right.n;
+	return _Left.n < _Right.n;
 }

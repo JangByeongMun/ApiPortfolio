@@ -12,31 +12,31 @@ GameEngineDirectory::~GameEngineDirectory()
 {
 }
 
-void GameEngineDirectory::Move(const std::string& _name)
+void GameEngineDirectory::Move(const std::string& _Name)
 {
-	std::filesystem::path checkPath = path_;
-	checkPath.append(_name);
+	std::filesystem::path CheckPath = Path_;
+	CheckPath.append(_Name);
 	
-	if (false == std::filesystem::exists(checkPath))
+	if (false == std::filesystem::exists(CheckPath))
 	{
-		MsgBoxAssertString(_name + " Path is not exists");
+		MsgBoxAssertString(_Name + " Path is not exists");
 		return;
 	}
 
-	path_ = checkPath;
+	Path_ = CheckPath;
 }
 
 void GameEngineDirectory::MoveParent()
 {
-	path_ = path_.parent_path();
+	Path_ = Path_.parent_path();
 }
 
-void GameEngineDirectory::MoveParent(const std::string& _name)
+void GameEngineDirectory::MoveParent(const std::string& _Name)
 {
 	while (false == IsRoot())
 	{
-		path_ = path_.parent_path();
-		if (GetFileName() == _name)
+		Path_ = Path_.parent_path();
+		if (GetFileName() == _Name)
 		{
 			break;
 		}
@@ -45,47 +45,47 @@ void GameEngineDirectory::MoveParent(const std::string& _name)
 
 bool GameEngineDirectory::IsRoot()
 {
-	return path_ == path_.root_directory();
+	return Path_ == Path_.root_directory();
 }
 
 // 확장자명을 받아서 현재위치의 해당 확장자를 가진 파일들 전부 가져오는함수
-std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _ext)
+std::vector<GameEngineFile> GameEngineDirectory::GetAllFile(const std::string& _Ext)
 {
 	// 현재 위치 iterator
-	std::filesystem::directory_iterator DirIter(path_);
+	std::filesystem::directory_iterator DirIter(Path_);
 
 	// 확장자를 대문자로 변환 및 .을 넣어주었는지 아닌지 확인
-	std::string ext = _ext;
-	if (ext != "")
+	std::string Ext = _Ext;
+	if (Ext != "")
 	{
-		GameEngineString::ToUpper(ext);
-		if (std::string::npos == ext.find("."))
+		GameEngineString::ToUpper(Ext);
+		if (std::string::npos == Ext.find("."))
 		{
-			ext = "." + ext;
+			Ext = "." + Ext;
 		}
 	}
 
 	std::vector<GameEngineFile> Return;
-	for (const std::filesystem::directory_entry& entry : DirIter)
+	for (const std::filesystem::directory_entry& Entry : DirIter)
 	{
-		if (true == entry.is_directory())
+		if (true == Entry.is_directory())
 		{
 			continue;
 		}
 
-		if (ext != "")
+		if (Ext != "")
 		{
-			GameEnginePath NewPath = entry.path();
+			GameEnginePath NewPath = Entry.path();
 			std::string OtherExt = NewPath.GetExtension();
 			GameEngineString::ToUpper(OtherExt);
 
-			if (OtherExt != ext)
+			if (OtherExt != Ext)
 			{
 				continue;
 			}
 		}
 
-		Return.push_back(GameEngineFile(entry.path()));
+		Return.push_back(GameEngineFile(Entry.path()));
 	}
 
 	return Return;

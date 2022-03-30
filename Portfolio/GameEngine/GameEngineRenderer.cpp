@@ -4,23 +4,18 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineTime.h>
 
-
 #pragma comment(lib, "msimg32.lib")
 
-RenderScaleMode scaleMode_;
-float4 renderPivot_;
-float4 renderScale_;
-unsigned int TransColor_;
-
 GameEngineRenderer::GameEngineRenderer() 
-	: image_(nullptr)
-	, pivotType_(RenderPivot::CENTER)
-	, scaleMode_(RenderScaleMode::Image)
-	, renderPivot_{0, 0}
-	, renderScale_{0, 0}
+	: Image_(nullptr)
+	, PivotType_(RenderPivot::CENTER)
+	, ScaleMode_(RenderScaleMode::Image)
+	, RenderPivot_{0, 0}
+	, RenderScale_{0, 0}
 	, TransColor_(RGB(255, 0, 255))
-	, renderImagePivot_{0, 0}
-	, renderImageScale_{0, 0}
+	, RenderImagePivot_{0, 0}
+	, RenderImageScale_{0, 0}
+	, CurrentAnimation_(nullptr)
 {
 }
 
@@ -28,66 +23,66 @@ GameEngineRenderer::~GameEngineRenderer()
 {
 }
 
-void GameEngineRenderer::SetImage(const std::string& _name)
+void GameEngineRenderer::SetImage(const std::string& _Name)
 {
-	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_name);
-	if (nullptr == findImage)
+	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Name);
+	if (nullptr == FindImage)
 	{
-		MsgBoxAssertString(_name + " 존재하지 않는 이미지를 렌더러에 세팅하려고 했습니다.");
+		MsgBoxAssertString(_Name + " 존재하지 않는 이미지를 렌더러에 세팅하려고 했습니다.");
 		return;
 	}
 
-	image_ = findImage;
+	Image_ = FindImage;
 	SetImageScale();
 }
 
 
 void GameEngineRenderer::SetImageScale()
 {
-	scaleMode_ = RenderScaleMode::Image;
-	renderScale_ = image_->GetScale();
-	renderImageScale_ = image_->GetScale();
+	ScaleMode_ = RenderScaleMode::Image;
+	RenderScale_ = Image_->GetScale();
+	RenderImageScale_ = Image_->GetScale();
 }
 
-void GameEngineRenderer::SetIndex(const size_t _index, float4 _scale)
+void GameEngineRenderer::SetIndex(const size_t _Index, float4 _Scale)
 {
-	if (false == image_->IsCut())
+	if (false == Image_->IsCut())
 	{
 		MsgBoxAssert("잘려져있지 않은 이미지입니다.");
 		return;
 	}
 
-	if (-1.0f == _scale.x || -1.0f == _scale.y)
+	if (-1.0f == _Scale.x || -1.0f == _Scale.y)
 	{
-		renderScale_ = image_->GetCutScale(_index);
+		RenderScale_ = Image_->GetCutScale(_Index);
 	}
 	else
 	{
-		renderScale_ = _scale;
+		RenderScale_ = _Scale;
 	}
-	renderImagePivot_ = image_->GetCutPivot(_index);
-	renderImageScale_ = image_->GetCutScale(_index);
+	RenderImagePivot_ = Image_->GetCutPivot(_Index);
+	RenderImageScale_ = Image_->GetCutScale(_Index);
 }
 
 void GameEngineRenderer::Render()
 {
-	if (nullptr != currentAnimation_)
+	if (nullptr != CurrentAnimation_)
 	{
-		currentAnimation_->Update();
+		CurrentAnimation_->Update();
 	}
 
-	if (nullptr == image_)
+	if (nullptr == Image_)
 	{
 		MsgBoxAssert("렌더러에 이미지를 세팅하지 않았습니다.");
 		return;
 	}
 
-	float4 renderPos = GetActor()->GetPosition() + renderPivot_;
+	float4 renderPos = GetActor()->GetPosition() + RenderPivot_;
 
-	switch (pivotType_)
+	switch (PivotType_)
 	{
 	case RenderPivot::CENTER:
-		GameEngine::BackBufferImage()->TransCopy(image_, renderPos - renderScale_.Half(), renderScale_, renderImagePivot_, renderImageScale_, TransColor_);
+		GameEngine::BackBufferImage()->TransCopy(Image_, renderPos - RenderScale_.Half(), RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
 		// 밑을 기준으로 할 일이 당분간 없으니 우선 비우고 다른것부터 작업
@@ -102,72 +97,72 @@ void GameEngineRenderer::Render()
 
 
 void GameEngineRenderer::CreateAnimation(
-	const std::string& _image,
-	const std::string& _name,
-	int _startIndex,
-	int _endIndex,
-	float _interTime,
-	bool _loop
+	const std::string& _Image,
+	const std::string& _Name,
+	int _StartIndex,
+	int _EndIndex,
+	float _InterTime,
+	bool _Loop
 )
 {
-	GameEngineImage* findImage = GameEngineImageManager::GetInst()->Find(_image);
-	if (nullptr == findImage)
+	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Image);
+	if (nullptr == FindImage)
 	{
 		MsgBoxAssert("존재하지 않는 이미지로 애니메이션을 만들려고 했습니다.");
 		return;
 	}
 
-	std::map<std::string, FrameAnimation>::iterator findIter = animations_.find(_name);
-	if (animations_.end() != findIter)
+	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
+	if (Animations_.end() != FindIter)
 	{
 		MsgBoxAssert("이미 존재하는 애니메이션에 추가하려고 했습니다.");
 		return;
 	}
 
-	FrameAnimation& newAnimation = animations_[_name];
-	newAnimation.renderer_ = this;
-	newAnimation.image_ = findImage;
-	newAnimation.currentFrame_ = _startIndex;
-	newAnimation.startFrame_ = _startIndex;
-	newAnimation.endFrame_ = _endIndex;
-	newAnimation.currentInterTime_ = _interTime;
-	newAnimation.interTime_ = _interTime;
-	newAnimation.loop_ = _loop;
+	FrameAnimation& NewAnimation = Animations_[_Name];
+	NewAnimation.Renderer_ = this;
+	NewAnimation.Image_ = FindImage;
+	NewAnimation.CurrentFrame_ = _StartIndex;
+	NewAnimation.StartFrame_ = _StartIndex;
+	NewAnimation.EndFrame_ = _EndIndex;
+	NewAnimation.CurrentInterTime_ = _InterTime;
+	NewAnimation.InterTime_ = _InterTime;
+	NewAnimation.Loop_ = _Loop;
 }
 
-void GameEngineRenderer::ChangeAnimation(const std::string& _name)
+void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 {
-	std::map<std::string, FrameAnimation>::iterator findIter = animations_.find(_name);
-	if (animations_.end() == findIter)
+	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
+	if (Animations_.end() == FindIter)
 	{
 		MsgBoxAssert("존재하지 않는 애니메이션으로 변경하려 했습니다.");
 		return;
 	}
 
-	currentAnimation_ = &findIter->second;
+	CurrentAnimation_ = &FindIter->second;
 }
 
 void GameEngineRenderer::FrameAnimation::Update()
 {
-	currentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
-	if (0 >= currentInterTime_)
+	CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+	if (0 >= CurrentInterTime_)
 	{
-		currentInterTime_ = interTime_;
-		++currentFrame_;
+		CurrentInterTime_ = InterTime_;
+		++CurrentFrame_;
 
-		if (endFrame_ < currentFrame_)
+		if (EndFrame_ < CurrentFrame_)
 		{
-			if (true == loop_)
+			if (true == Loop_)
 			{
-				currentFrame_ = startFrame_;
+				CurrentFrame_ = StartFrame_;
 			}
 			else
 			{
-				currentFrame_ = endFrame_;
+				CurrentFrame_ = EndFrame_;
 			}
 		}
 	}
 
-	renderer_->image_ = image_;
-	renderer_->SetIndex(currentFrame_);
+	Renderer_->Image_ = Image_;
+	Renderer_->SetIndex(CurrentFrame_);
 }

@@ -36,18 +36,18 @@ public:
 	}
 	inline static float4 GetScale()
 	{
-		return Inst_->scale_;
+		return Inst_->Scale_;
 	}
 
 protected:
 
 private:
 	std::string Title_;
-	bool windowOn_;
+	bool WindowOn_;
 	HINSTANCE hInst_;
 	HWND hWnd_;
 	HDC hDC_;
-	float4 scale_;
+	float4 Scale_;
 	
 	// constrcuter destructer
 	GameEngineWindow();

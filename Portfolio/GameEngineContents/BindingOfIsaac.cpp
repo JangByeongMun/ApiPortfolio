@@ -53,57 +53,57 @@ void BindingOfIsaac::GameInit()
 void BindingOfIsaac::ImageLoad()
 {
 	{
-		GameEngineDirectory resourcesDirectory;
-		resourcesDirectory.MoveParent("Portfolio");
-		resourcesDirectory.Move("Resources");
-		resourcesDirectory.Move("Image");
-		resourcesDirectory.Move("UI");
-		std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
-		for (int i = 0; i < allFileVec.size(); i++)
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
 		{
-			GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
 
 	{
-		GameEngineDirectory resourcesDirectory;
-		resourcesDirectory.MoveParent("Portfolio");
-		resourcesDirectory.Move("Resources");
-		resourcesDirectory.Move("Image");
-		resourcesDirectory.Move("UI");
-		resourcesDirectory.Move("LoadingLevel");
-		std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
-		for (int i = 0; i < allFileVec.size(); i++)
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("LoadingLevel");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
 		{
-			GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
 	
 
 	{
-		GameEngineDirectory resourcesDirectory;
-		resourcesDirectory.MoveParent("Portfolio");
-		resourcesDirectory.Move("Resources");
-		resourcesDirectory.Move("Image");
-		resourcesDirectory.Move("UI");
-		resourcesDirectory.Move("EndingLevel");
-		std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
-		for (int i = 0; i < allFileVec.size(); i++)
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("EndingLevel");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
 		{
-			GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
 
 	{
-		GameEngineDirectory resourcesDirectory;
-		resourcesDirectory.MoveParent("Portfolio");
-		resourcesDirectory.Move("Resources");
-		resourcesDirectory.Move("Image");
-		resourcesDirectory.Move("Player");
-		std::vector<GameEngineFile> allFileVec = resourcesDirectory.GetAllFile();
-		for (int i = 0; i < allFileVec.size(); i++)
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Player");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
 		{
-			GameEngineImageManager::GetInst()->Load(allFileVec[i].GetFullPath());
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
 }

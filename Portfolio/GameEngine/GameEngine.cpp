@@ -6,12 +6,12 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 
-std::map<std::string, GameEngineLevel*> GameEngine::allLevel_;
-GameEngineLevel* GameEngine::currentLevel_ = nullptr;
-GameEngineLevel* GameEngine::nextLevel_ = nullptr;
-GameEngine* GameEngine::userContents_ = nullptr;
-GameEngineImage* GameEngine::windowMainImage_ = nullptr;
-GameEngineImage* GameEngine::backBufferImage_ = nullptr;
+std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
+GameEngineLevel* GameEngine::CurrentLevel_ = nullptr;
+GameEngineLevel* GameEngine::NextLevel_ = nullptr;
+GameEngine* GameEngine::UserContents_ = nullptr;
+GameEngineImage* GameEngine::WindowMainImage_ = nullptr;
+GameEngineImage* GameEngine::BackBufferImage_ = nullptr;
 
 GameEngine::GameEngine() 
 {
@@ -21,17 +21,17 @@ GameEngine::~GameEngine()
 {
 }
 
-void GameEngine::ChangeLevel(const std::string& _name)
+void GameEngine::ChangeLevel(const std::string& _Name)
 {
-	std::map<std::string, GameEngineLevel*>::iterator findIter = allLevel_.find(_name);
+	std::map<std::string, GameEngineLevel*>::iterator FindIter = AllLevel_.find(_Name);
 	
-	if (allLevel_.end() == findIter)
+	if (AllLevel_.end() == FindIter)
 	{
 		MsgBoxAssert("Level Find Error");
 		return;
 	}
 
-	nextLevel_ = findIter->second;
+	NextLevel_ = FindIter->second;
 }
 
 void GameEngine::WindowCreate()
@@ -43,58 +43,58 @@ void GameEngine::WindowCreate()
 
 void GameEngine::EngineInit()
 {
-	userContents_->GameInit();
-	windowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
-	backBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
+	UserContents_->GameInit();
+	WindowMainImage_ = GameEngineImageManager::GetInst()->Create("WindowMain", GameEngineWindow::GetHDC());
+	BackBufferImage_ = GameEngineImageManager::GetInst()->Create("BackBuffer", GameEngineWindow::GetScale());
 }
 
 void GameEngine::EngineLoop()
 {
 	GameEngineTime::GetInst()->Update();
-	userContents_->GameLoop();
+	UserContents_->GameLoop();
 
-	if (nullptr != nextLevel_)
+	if (nullptr != NextLevel_)
 	{
-		if (nullptr != currentLevel_)
+		if (nullptr != CurrentLevel_)
 		{
-			currentLevel_->LevelChangeEnd();
+			CurrentLevel_->LevelChangeEnd();
 		}
 		
-		currentLevel_ = nextLevel_;
+		CurrentLevel_ = NextLevel_;
 		
-		if (nullptr != currentLevel_)
+		if (nullptr != CurrentLevel_)
 		{
-			currentLevel_->LevelChangeStart();
+			CurrentLevel_->LevelChangeStart();
 		}
 
-		nextLevel_ = nullptr;
+		NextLevel_ = nullptr;
 		GameEngineTime::GetInst()->Reset();
 
-		Rectangle(windowMainImage_->ImageDC(), 0, 0, windowMainImage_->GetScale().ix(), windowMainImage_->GetScale().iy());
-		Rectangle(backBufferImage_->ImageDC(), 0, 0, backBufferImage_->GetScale().ix(), backBufferImage_->GetScale().iy());
+		Rectangle(WindowMainImage_->ImageDC(), 0, 0, WindowMainImage_->GetScale().ix(), WindowMainImage_->GetScale().iy());
+		Rectangle(BackBufferImage_->ImageDC(), 0, 0, BackBufferImage_->GetScale().ix(), BackBufferImage_->GetScale().iy());
 	}
 
-	if (nullptr == currentLevel_)
+	if (nullptr == CurrentLevel_)
 	{
 		MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
 	}
 	
 	GameEngineInput::GetInst()->Update();
 
-	currentLevel_->Update();
-	currentLevel_->ActorUpdate();
-	currentLevel_->ActorRender();
-	windowMainImage_->BitCopy(backBufferImage_);
+	CurrentLevel_->Update();
+	CurrentLevel_->ActorUpdate();
+	CurrentLevel_->ActorRender();
+	WindowMainImage_->BitCopy(BackBufferImage_);
 
-	currentLevel_->ActorRelease();
+	CurrentLevel_->ActorRelease();
 }
 
 void GameEngine::EngineEnd()
 {
-	userContents_->GameEnd();
+	UserContents_->GameEnd();
 
-	std::map<std::string, GameEngineLevel*>::iterator StartIter = allLevel_.begin();
-	std::map<std::string, GameEngineLevel*>::iterator EndIter = allLevel_.end();
+	std::map<std::string, GameEngineLevel*>::iterator StartIter = AllLevel_.begin();
+	std::map<std::string, GameEngineLevel*>::iterator EndIter = AllLevel_.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
 		if (nullptr == StartIter->second)
@@ -112,10 +112,10 @@ void GameEngine::EngineEnd()
 
 HDC GameEngine::WindowMainDC()
 {
-	return windowMainImage_->ImageDC();
+	return WindowMainImage_->ImageDC();
 }
 
 HDC GameEngine::BackBufferDC()
 {
-	return backBufferImage_->ImageDC();
+	return BackBufferImage_->ImageDC();
 }

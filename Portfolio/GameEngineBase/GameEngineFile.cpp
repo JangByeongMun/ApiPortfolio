@@ -4,19 +4,19 @@ GameEngineFile::GameEngineFile()
 {
 }
 
-GameEngineFile::GameEngineFile(const std::string& _path)
+GameEngineFile::GameEngineFile(const std::string& _Path)
 {
-	path_ = _path;
+	Path_ = _Path;
 }
 
-GameEngineFile::GameEngineFile(std::filesystem::path _path)
+GameEngineFile::GameEngineFile(std::filesystem::path _Path)
 {
-	path_ = _path;
+	Path_ = _Path;
 }
 
 GameEngineFile::GameEngineFile(const GameEngineFile& _Other)
 {
-	path_ = _Other.path_;
+	Path_ = _Other.Path_;
 }
 
 GameEngineFile::~GameEngineFile() 

@@ -18,67 +18,67 @@ public:
 	GameEngineImage& operator=(const GameEngineImage& _Other) = delete;
 	GameEngineImage& operator=(GameEngineImage&& _Other) noexcept = delete;
 	
-	bool Create(HDC _dc);
-	bool Create(float4 _scale);
-	bool Load(const std::string& _path);
+	bool Create(HDC _DC);
+	bool Create(float4 _Scale);
+	bool Load(const std::string& _Path);
 
 	inline float4 GetScale() const
 	{
-		return float4(static_cast<float>(info_.bmWidth), static_cast<float>(info_.bmHeight));
+		return float4(static_cast<float>(Info_.bmWidth), static_cast<float>(Info_.bmHeight));
 	}
 	inline HDC ImageDC() const
 	{
-		return imageDC_;
+		return ImageDC_;
 	}
 
-	void BitCopy(const GameEngineImage* _other);
-	void BitCopy(const GameEngineImage* _other, const float4& _copyPos);
-	void BitCopyCenter(const GameEngineImage* _other, const float4& _copyPos);
-	void BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot);
-	void BitCopyBot(const GameEngineImage* _other, const float4& _copyPos);
-	void BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot);
-	void BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot);
+	void BitCopy(const GameEngineImage* _Other);
+	void BitCopy(const GameEngineImage* _Other, const float4& _CopyPos);
+	void BitCopyCenter(const GameEngineImage* _Other, const float4& _CopyPos);
+	void BitCopyCenterPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot);
+	void BitCopyBot(const GameEngineImage* _Other, const float4& _CopyPos);
+	void BitCopyBotPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot);
+	void BitCopy(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot);
 
 	void TransCopy(
-		const GameEngineImage* _other,
-		const float4& _copyPos,
-		const float4& _copyScale,
-		const float4& _otherPivot,
-		const float4& _otherScale,
-		unsigned int _transColor 
+		const GameEngineImage* _Other,
+		const float4& _CopyPos,
+		const float4& _CopyScale,
+		const float4& _OtherPivot,
+		const float4& _OtherScale,
+		unsigned int _TransColor 
 	);
 
-	void Cut(const float4& _cutSize);
+	void Cut(const float4& _CutSize);
 	void CutCount(int _x, int _y);
 
 	inline bool IsCut()
 	{
-		return 0 != cutPivot_.size();
+		return 0 != CutPivot_.size();
 	}
 	inline float4 GetCutPivot(size_t _Index)
 	{
-		return cutPivot_[_Index];
+		return CutPivot_[_Index];
 	}
 	inline float4 GetCutScale(size_t _Index)
 	{
-		return cutScale_[_Index];
+		return CutScale_[_Index];
 	}
 	inline void Cut(const float4& _CutScale, const float4& _CutPos)
 	{
-		cutPivot_.push_back(_CutPos);
-		cutScale_.push_back(_CutScale);
+		CutPivot_.push_back(_CutPos);
+		CutScale_.push_back(_CutScale);
 	}
 
 protected:
 
 private:
-	HDC imageDC_;
-	HBITMAP bitmap_;
-	HBITMAP oldBitmap_;
-	BITMAP info_;
+	HDC ImageDC_;
+	HBITMAP Bitmap_;
+	HBITMAP OldBitmap_;
+	BITMAP Info_;
 
-	std::vector<float4> cutPivot_;
-	std::vector<float4> cutScale_;
+	std::vector<float4> CutPivot_;
+	std::vector<float4> CutScale_;
 
 	void ImageScaleCheck();
 };

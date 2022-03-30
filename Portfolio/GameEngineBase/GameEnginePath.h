@@ -7,7 +7,7 @@ class GameEnginePath
 public:
 	// constrcuter destructer
 	GameEnginePath();
-	GameEnginePath(const std::filesystem::path _path);
+	GameEnginePath(const std::filesystem::path _Path);
 	~GameEnginePath();
 
 	// delete Function
@@ -23,7 +23,7 @@ public:
 	std::string GetFullPath();
 
 protected:
-	std::filesystem::path path_;
+	std::filesystem::path Path_;
 
 private:
 

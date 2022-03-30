@@ -16,21 +16,21 @@ public:
 	Projectile& operator=(const Projectile& _Other) = delete;
 	Projectile& operator=(Projectile&& _Other) noexcept = delete;
 
-	inline void SetVector(const float4& _value)
+	inline void SetVector(const float4& _Value)
 	{
-		vec_ = _value;
+		Vec_ = _Value;
 	}
-	inline void	SetSpeed(const float& _value)
+	inline void	SetSpeed(const float& _Value)
 	{
-		speed_ = _value;
+		Speed_ = _Value;
 	}
 
 protected:
 
 private:
-	ProjectileType _type;
-	float4 vec_;
-	float speed_;
+	ProjectileType _Type;
+	float4 Vec_;
+	float Speed_;
 
 	void Start() override;
 	void Update() override;

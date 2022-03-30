@@ -12,9 +12,9 @@
 #include "Projectile.h"
 
 Player::Player() 
-	: speed_(100.0f)
-	, bodyRender_()
-	, headRender_()
+	: Speed_(100.0f)
+	, BodyRender_()
+	, HeadRender_()
 {
 }
 
@@ -26,11 +26,11 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 
-	bodyRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 35 });
-	bodyRender_->SetIndex(8);
+	BodyRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 35 });
+	BodyRender_->SetIndex(8);
 	
-	headRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 0 });
-	headRender_->SetIndex(0);
+	HeadRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 0 });
+	HeadRender_->SetIndex(0);
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
@@ -51,48 +51,48 @@ void Player::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
-		SetMove(float4::Left * GameEngineTime::GetInst()->GetDeltaTime() * speed_);
+		SetMove(float4::Left * GameEngineTime::GetInst()->GetDeltaTime() * Speed_);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
 	{
-		SetMove(float4::Right * GameEngineTime::GetInst()->GetDeltaTime() * speed_);
+		SetMove(float4::Right * GameEngineTime::GetInst()->GetDeltaTime() * Speed_);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
-		SetMove(float4::Up * GameEngineTime::GetInst()->GetDeltaTime() * speed_);
+		SetMove(float4::Up * GameEngineTime::GetInst()->GetDeltaTime() * Speed_);
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		SetMove(float4::Down * GameEngineTime::GetInst()->GetDeltaTime() * speed_);
+		SetMove(float4::Down * GameEngineTime::GetInst()->GetDeltaTime() * Speed_);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("AttckLeft"))
 	{
-		Projectile* ptr = GetLevel()->CreateActor<Projectile>();
-		ptr->SetPosition(GetPosition());
-		ptr->SetVector(float4::Left);
-		ptr->SetSpeed(200.0f);
+		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+		Ptr->SetPosition(GetPosition());
+		Ptr->SetVector(float4::Left);
+		Ptr->SetSpeed(200.0f);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("AttckRight"))
 	{
-		Projectile* ptr = GetLevel()->CreateActor<Projectile>();
-		ptr->SetPosition(GetPosition());
-		ptr->SetVector(float4::Right);
-		ptr->SetSpeed(200.0f);
+		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+		Ptr->SetPosition(GetPosition());
+		Ptr->SetVector(float4::Right);
+		Ptr->SetSpeed(200.0f);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("AttckUp"))
 	{
-		Projectile* ptr = GetLevel()->CreateActor<Projectile>();
-		ptr->SetPosition(GetPosition());
-		ptr->SetVector(float4::Up);
-		ptr->SetSpeed(200.0f);
+		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+		Ptr->SetPosition(GetPosition());
+		Ptr->SetVector(float4::Up);
+		Ptr->SetSpeed(200.0f);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("AttckDown"))
 	{
-		Projectile* ptr = GetLevel()->CreateActor<Projectile>();
-		ptr->SetPosition(GetPosition());
-		ptr->SetVector(float4::Down);
-		ptr->SetSpeed(200.0f);
+		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+		Ptr->SetPosition(GetPosition());
+		Ptr->SetVector(float4::Down);
+		Ptr->SetSpeed(200.0f);
 	}
 }
 

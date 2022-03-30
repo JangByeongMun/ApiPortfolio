@@ -19,9 +19,9 @@ public:
 protected:
 	
 private:
-	float speed_;
-	GameEngineRenderer* bodyRender_;
-	GameEngineRenderer* headRender_;
+	float Speed_;
+	GameEngineRenderer* BodyRender_;
+	GameEngineRenderer* HeadRender_;
 
 	void Start() override;
 	void Update() override;

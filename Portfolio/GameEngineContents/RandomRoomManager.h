@@ -11,21 +11,21 @@ class RoomData;
 	class RandomRoomManager
 {
 private:
-	static RandomRoomManager* inst_;
+	static RandomRoomManager* Inst_;
 public:
 	inline static RandomRoomManager* GetInst()
 	{
-		return inst_;
+		return Inst_;
 	}
 	inline static void Destroy()
 	{
-		if (nullptr == inst_)
+		if (nullptr == Inst_)
 		{
 			return;
 		}
 
-		delete inst_;
-		inst_ = nullptr;
+		delete Inst_;
+		Inst_ = nullptr;
 	}
 
 	bool ChangeFloor(const int& _floor);
@@ -33,8 +33,8 @@ public:
 protected:
 
 private:
-	map<int, vector<RoomData*>> allMaps_;
-	map<MapPos, RoomData*> currentMaps_;
+	map<int, vector<RoomData*>> AllMaps_;
+	map<MapPos, RoomData*> CurrentMaps_;
 	int currentFloor_;
 	int currentMapCount_;
 

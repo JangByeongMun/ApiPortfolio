@@ -1,8 +1,8 @@
 #include "DamageableActor.h"
 
 DamageableActor::DamageableActor()
-	: hp_(1)
-	, isDeath_(false)
+	: HP_(1)
+	, IsDeath_(false)
 {
 }
 
@@ -10,22 +10,22 @@ DamageableActor::~DamageableActor()
 {
 }
 
-void DamageableActor::Death(bool _isDeath)
+void DamageableActor::Death(bool _IsDeath)
 {
-	isDeath_ = _isDeath;
+	IsDeath_ = _IsDeath;
 }
 
-void DamageableActor::DamageTake(float _value)
+void DamageableActor::DamageTake(float _Value)
 {
-	if (true == isDeath_)
+	if (true == IsDeath_)
 	{
 		return;
 	}
 
-	hp_ -= (_value);
-	if (0 >= hp_)
+	HP_ -= (_Value);
+	if (0 >= HP_)
 	{
-		hp_ = 0;
+		HP_ = 0;
 		
 	}
 }

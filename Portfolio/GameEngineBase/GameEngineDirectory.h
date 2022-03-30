@@ -15,9 +15,9 @@ public:
 	GameEngineDirectory& operator=(const GameEngineDirectory& _Other) = delete;
 	GameEngineDirectory& operator=(GameEngineDirectory&& _Other) noexcept = delete;
 
-	void Move(const std::string& _name);
+	void Move(const std::string& _Name);
 	void MoveParent();
-	void MoveParent(const std::string& _name);
+	void MoveParent(const std::string& _Name);
 	bool IsRoot();
 
 	// 확장자명을 받아서 현재위치의 해당 확장자를 가진 파일들 전부 가져오는함수

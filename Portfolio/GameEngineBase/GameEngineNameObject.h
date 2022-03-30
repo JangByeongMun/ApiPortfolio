@@ -15,26 +15,26 @@ public:
 	GameEngineNameObject& operator=(const GameEngineNameObject& _Other) = delete;
 	GameEngineNameObject& operator=(GameEngineNameObject&& _Other) noexcept = delete;
 
-	inline void SetName(const std::string& _name)
+	inline void SetName(const std::string& _Name)
 	{
-		name_ = _name;
+		Name_ = _Name;
 	}
 	inline const std::string GetName()
 	{
-		return name_;
+		return Name_;
 	}
 	inline const std::string& GetNameRef()
 	{
-		return name_;
+		return Name_;
 	}
 	inline const char* GetNamePtr()
 	{
-		return name_.c_str();
+		return Name_.c_str();
 	}
 
 protected:
 
 private:
-	std::string name_;
+	std::string Name_;
 };
 

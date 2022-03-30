@@ -17,15 +17,15 @@ public:
 
 	inline GameEngineActor* GetActor()
 	{
-		return actor_;
+		return Actor_;
 	}
 protected:
-	inline void SetActor(GameEngineActor* _actor)
+	inline void SetActor(GameEngineActor* _Actor)
 	{
-		actor_ = _actor;
+		Actor_ = _Actor;
 	}
 
 private:
-	GameEngineActor* actor_;
+	GameEngineActor* Actor_;
 };
 

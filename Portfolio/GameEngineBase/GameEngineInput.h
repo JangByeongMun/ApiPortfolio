@@ -32,32 +32,32 @@ private:
 	};
 
 private:
-	static GameEngineInput* inst_;
+	static GameEngineInput* Inst_;
 
 public:
 	static GameEngineInput* GetInst();
 	static void Destroy()
 	{
-		if (nullptr != inst_)
+		if (nullptr != Inst_)
 		{
-			delete inst_;
-			inst_ = nullptr;
+			delete Inst_;
+			Inst_ = nullptr;
 		}
 	}
 
 	void Update();
-	void CreateKey(const std::string& _name, int _key);
+	void CreateKey(const std::string& _Name, int _Key);
 
-	bool IsDown(const std::string& _name);
-	bool IsUp(const std::string& _name);
-	bool IsPress(const std::string& _name);
-	bool IsFree(const std::string& _name);
-	bool IsKey(const std::string& _name);
+	bool IsDown(const std::string& _Name);
+	bool IsUp(const std::string& _Name);
+	bool IsPress(const std::string& _Name);
+	bool IsFree(const std::string& _Name);
+	bool IsKey(const std::string& _Name);
 
 protected:
 
 private:
-	std::map<std::string, GameEngineKey> allInputKey_;
+	std::map<std::string, GameEngineKey> AllInputKey_;
 
 	GameEngineInput();
 	~GameEngineInput();

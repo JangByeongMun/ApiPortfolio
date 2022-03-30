@@ -8,35 +8,35 @@
 class GameEngineImageManager
 {
 private:
-	static GameEngineImageManager* inst_;
+	static GameEngineImageManager* Inst_;
 public:
 	inline static GameEngineImageManager* GetInst() 
 	{
-		return inst_;
+		return Inst_;
 	}
 	
 	inline static void Destroy()
 	{
-		if (nullptr == inst_)
+		if (nullptr == Inst_)
 		{
 			return;
 		}
 
-		delete inst_;
-		inst_ = nullptr;
+		delete Inst_;
+		Inst_ = nullptr;
 	}
 
 public:
-	GameEngineImage* Find(const std::string& _name);
-	GameEngineImage* Create(const std::string& _name, const float4& _scale);
-	GameEngineImage* Create(const std::string& _name, HDC _scale);
-	GameEngineImage* Load(const std::string& _path);
-	GameEngineImage* Load(const std::string& _path, const std::string& _name);
+	GameEngineImage* Find(const std::string& _Name);
+	GameEngineImage* Create(const std::string& _Name, const float4& _Scale);
+	GameEngineImage* Create(const std::string& _Name, HDC _DC);
+	GameEngineImage* Load(const std::string& _Path);
+	GameEngineImage* Load(const std::string& _Path, const std::string& _Name);
 
 protected:
 
 private:
-	std::map<std::string, GameEngineImage*> allRes;
+	std::map<std::string, GameEngineImage*> AllRes;
 
 	GameEngineImageManager();
 	~GameEngineImageManager();

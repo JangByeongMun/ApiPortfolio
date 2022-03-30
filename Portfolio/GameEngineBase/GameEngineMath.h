@@ -76,23 +76,23 @@ public:
 		return { x * 0.5f, y * 0.5f, z * 0.5f, 1.0f };
 	}
 
-	float4 operator-(const float4& _other) const
+	float4 operator-(const float4& _Other) const
 	{
-		return { x - _other.x, y - _other.y, z - _other.z, 1.0f };
+		return { x - _Other.x, y - _Other.y, z - _Other.z, 1.0f };
 	}
-	float4 operator+(const float4& _other) const
+	float4 operator+(const float4& _Other) const
 	{
-		return { x + _other.x, y + _other.y, z + _other.z, 1.0f };
+		return { x + _Other.x, y + _Other.y, z + _Other.z, 1.0f };
 	}
-	float4 operator*(const float& _value) const
+	float4 operator*(const float& _Value) const
 	{
-		return { x * _value, y * _value, z * _value, 1.0f };
+		return { x * _Value, y * _Value, z * _Value, 1.0f };
 	}
-	float4& operator+=(const float4& _other)
+	float4& operator+=(const float4& _Other)
 	{
-		x += _other.x;
-		y += _other.y;
-		z += _other.z;
+		x += _Other.x;
+		y += _Other.y;
+		z += _Other.z;
 
 		return *this;
 	}
@@ -131,31 +131,31 @@ public:
 class GameEngineRect
 {
 public:
-	float4 pos;
-	float4 scale;
+	float4 Pos;
+	float4 Scale;
 
 public:
 	inline int GetCenterLeft() const
 	{
-		return pos.ix() - scale.hix();
+		return Pos.ix() - Scale.hix();
 	}
 	inline int GetCenterRight() const
 	{
-		return pos.ix() + scale.hix();
+		return Pos.ix() + Scale.hix();
 	}
 	inline int GetCenterTop() const
 	{
-		return pos.iy() - scale.hiy();
+		return Pos.iy() - Scale.hiy();
 	}
 	inline int GetCenterBot() const
 	{
-		return pos.iy() + scale.hiy();
+		return Pos.iy() + Scale.hiy();
 	}
 
 public:
-	GameEngineRect(float4 _pos, float4 _scale)
-		: pos(_pos)
-		, scale(_scale)
+	GameEngineRect(float4 _Pos, float4 _Scale)
+		: Pos(_Pos)
+		, Scale(_Scale)
 	{
 	}
 };

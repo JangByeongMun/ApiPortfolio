@@ -6,24 +6,24 @@
 #include "GameEngineRenderer.h"
 
 GameEngineActor::GameEngineActor() 
-	: level_(nullptr)
-	, position_()
-	, scale_()
+	: Level_(nullptr)
+	, Position_()
+	, Scale_()
 {
 }
 
 GameEngineActor::~GameEngineActor() 
 {
-	std::list<GameEngineRenderer*>::iterator beginIter = renderList_.begin();
-	std::list<GameEngineRenderer*>::iterator endIter = renderList_.end();
-	for (; beginIter != endIter; ++beginIter)
+	std::list<GameEngineRenderer*>::iterator BeginIter = RenderList_.begin();
+	std::list<GameEngineRenderer*>::iterator EndIter = RenderList_.end();
+	for (; BeginIter != EndIter; ++BeginIter)
 	{
-		if (nullptr == (*beginIter))
+		if (nullptr == (*BeginIter))
 		{
 			continue;
 		}
-		delete (*beginIter);
-		(*beginIter) = nullptr;
+		delete (*BeginIter);
+		(*BeginIter) = nullptr;
 	}
 }
 
@@ -41,7 +41,7 @@ void GameEngineActor::Render()
 
 void GameEngineActor::DebugRectRender()
 {
-	GameEngineRect DebugRect(position_, scale_);
+	GameEngineRect DebugRect(Position_, Scale_);
 	Rectangle(
 		GameEngine::BackBufferDC(),
 		DebugRect.GetCenterLeft(),
@@ -59,43 +59,43 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType, cons
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetType(_PivotType);
 
-	renderList_.push_back(NewRenderer);
+	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
 
-GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _image, RenderPivot _pivotType, float4 _pivotPos)
+GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, RenderPivot _PivotType, float4 _PivotPos)
 {
-	GameEngineRenderer* newRenderer = new GameEngineRenderer();
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
-	newRenderer->SetActor(this);
-	newRenderer->SetImage(_image);
-	newRenderer->SetType(_pivotType);
-	newRenderer->SetPivot(_pivotPos);
+	NewRenderer->SetActor(this);
+	NewRenderer->SetImage(_Image);
+	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetPivot(_PivotPos);
 
-	renderList_.push_back(newRenderer);
-	return newRenderer;
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
 }
 
-GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _image, float4 _scale, RenderPivot _pivotType, float4 _pivotPos)
+GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, float4 _Scale, RenderPivot _PivotType, float4 _PivotPos)
 {
-	GameEngineRenderer* newRenderer = new GameEngineRenderer();
+	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
-	newRenderer->SetActor(this);
-	newRenderer->SetImage(_image);
-	newRenderer->SetScale(_scale);
-	newRenderer->SetType(_pivotType);
-	newRenderer->SetPivot(_pivotPos);
+	NewRenderer->SetActor(this);
+	NewRenderer->SetImage(_Image);
+	NewRenderer->SetScale(_Scale);
+	NewRenderer->SetType(_PivotType);
+	NewRenderer->SetPivot(_PivotPos);
 
-	renderList_.push_back(newRenderer);
-	return newRenderer;
+	RenderList_.push_back(NewRenderer);
+	return NewRenderer;
 }
 
 void GameEngineActor::Rendering()
 {
-	startRenderIter = renderList_.begin();
-	endRenderIter = renderList_.end();
-	for (; startRenderIter != endRenderIter; ++startRenderIter)
+	StartRenderIter = RenderList_.begin();
+	EndRenderIter = RenderList_.end();
+	for (; StartRenderIter != EndRenderIter; ++StartRenderIter)
 	{
-		(*startRenderIter)->Render();
+		(*StartRenderIter)->Render();
 	}
 }

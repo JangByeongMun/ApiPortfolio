@@ -20,5 +20,5 @@ protected:
 	void Update() override;
 
 private:
-
+	float ActorTime_;
 };

@@ -5,183 +5,183 @@
 //#pragma comment(lib, "msimg32.lib")
 
 GameEngineImage::GameEngineImage() 
-	: imageDC_(nullptr)
-	, bitmap_(nullptr)
-	, oldBitmap_(nullptr)
-	, info_()
+	: ImageDC_(nullptr)
+	, Bitmap_(nullptr)
+	, OldBitmap_(nullptr)
+	, Info_()
 {
 }
 
 GameEngineImage::~GameEngineImage() 
 {
-	if (nullptr != bitmap_)
+	if (nullptr != Bitmap_)
 	{
-		DeleteObject(bitmap_);
-		bitmap_ = nullptr;
+		DeleteObject(Bitmap_);
+		Bitmap_ = nullptr;
 	}
 
-	if (nullptr != oldBitmap_)
+	if (nullptr != OldBitmap_)
 	{
-		DeleteObject(oldBitmap_);
-		oldBitmap_ = nullptr;
+		DeleteObject(OldBitmap_);
+		OldBitmap_ = nullptr;
 	}
 
-	if (nullptr != imageDC_)
+	if (nullptr != ImageDC_)
 	{
-		DeleteDC(imageDC_);
-		imageDC_ = nullptr;
+		DeleteDC(ImageDC_);
+		ImageDC_ = nullptr;
 	}
 }
 
-bool GameEngineImage::Create(HDC _dc)
+bool GameEngineImage::Create(HDC _DC)
 {
-	imageDC_ = _dc;
+	ImageDC_ = _DC;
 	ImageScaleCheck();
 	return true;
 }
 
-bool GameEngineImage::Create(float4 _scale)
+bool GameEngineImage::Create(float4 _Scale)
 {
-	if (true == _scale.IsZero2D())
+	if (true == _Scale.IsZero2D())
 	{
 		MsgBoxAssert("크기가 0인 이미지를 제작하려고 했습니다.");
 		return false;
 	}
 
-	bitmap_ = CreateCompatibleBitmap(GameEngineWindow::GetHDC(), _scale.ix(), _scale.iy());
-	if (nullptr == bitmap_)
+	Bitmap_ = CreateCompatibleBitmap(GameEngineWindow::GetHDC(), _Scale.ix(), _Scale.iy());
+	if (nullptr == Bitmap_)
 	{
 		MsgBoxAssert("bitmap_ 생성에 실패 했습니다.");
 	}
 
-	imageDC_ = CreateCompatibleDC(nullptr);
-	if (nullptr == imageDC_)
+	ImageDC_ = CreateCompatibleDC(nullptr);
+	if (nullptr == ImageDC_)
 	{
 		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
 	}
-	oldBitmap_ = (HBITMAP)SelectObject(imageDC_, bitmap_);
+	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, Bitmap_);
 
 	ImageScaleCheck();
 
 	return true;
 }
 
-bool GameEngineImage::Load(const std::string& _path)
+bool GameEngineImage::Load(const std::string& _Path)
 {
-	bitmap_ = static_cast<HBITMAP>(LoadImageA(nullptr, _path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
-	if (nullptr	== bitmap_)
+	Bitmap_ = static_cast<HBITMAP>(LoadImageA(nullptr, _Path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
+	if (nullptr	== Bitmap_)
 	{
-		MsgBoxAssertString(_path + "이미지 로드에 실패 했습니다.");
+		MsgBoxAssertString(_Path + "이미지 로드에 실패 했습니다.");
 		return false;
 	}
 
-	imageDC_ = CreateCompatibleDC(nullptr);
-	if (nullptr == imageDC_)
+	ImageDC_ = CreateCompatibleDC(nullptr);
+	if (nullptr == ImageDC_)
 	{
 		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
 		return false;
 	}
-	oldBitmap_ = (HBITMAP)SelectObject(imageDC_, bitmap_);
+	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, Bitmap_);
 
 	ImageScaleCheck();
 	return true;
 }
 
-void GameEngineImage::BitCopy(const GameEngineImage* _other)
+void GameEngineImage::BitCopy(const GameEngineImage* _Other)
 {
-	BitCopy(_other, float4{ 0, 0 }, _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, float4{ 0, 0 }, _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copyPos)
+void GameEngineImage::BitCopy(const GameEngineImage* _Other, const float4& _CopyPos)
 {
-	BitCopy(_other, _copyPos, _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos, _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopyCenter(const GameEngineImage* _other, const float4& _copyPos)
+void GameEngineImage::BitCopyCenter(const GameEngineImage* _Other, const float4& _CopyPos)
 {
-	BitCopy(_other, _copyPos - _other->GetScale().Half(), _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - _Other->GetScale().Half(), _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopyCenterPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot)
+void GameEngineImage::BitCopyCenterPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot)
 {
-	BitCopy(_other, _copyPos - _other->GetScale().Half() + _copyPivot, _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - _Other->GetScale().Half() + _CopyPivot, _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopyBot(const GameEngineImage* _other, const float4& _CopyPos)
+void GameEngineImage::BitCopyBot(const GameEngineImage* _Other, const float4& _CopyPos)
 {
-	float4 ImagePivot = _other->GetScale().Half();
-	ImagePivot.y = _other->GetScale().y;
+	float4 ImagePivot = _Other->GetScale().Half();
+	ImagePivot.y = _Other->GetScale().y;
 
-	BitCopy(_other, _CopyPos - ImagePivot, _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - ImagePivot, _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopyBotPivot(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyPivot)
+void GameEngineImage::BitCopyBotPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot)
 {
-	float4 ImagePivot = _other->GetScale().Half();
-	ImagePivot.y = _other->GetScale().y;
+	float4 ImagePivot = _Other->GetScale().Half();
+	ImagePivot.y = _Other->GetScale().y;
 
-	BitCopy(_other, _copyPos - ImagePivot + _copyPivot, _other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - ImagePivot + _CopyPivot, _Other->GetScale(), float4{ 0, 0 });
 }
-void GameEngineImage::BitCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot)
+void GameEngineImage::BitCopy(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot)
 {
 	BitBlt
 	(
-		imageDC_,
-		_copyPos.ix(),
-		_copyPos.iy(),
-		_copyScale.ix(),
-		_copyScale.iy(),
-		_other->imageDC_,
-		_otherPivot.ix(),
-		_otherPivot.iy(),
+		ImageDC_,
+		_CopyPos.ix(),
+		_CopyPos.iy(),
+		_CopyScale.ix(),
+		_CopyScale.iy(),
+		_Other->ImageDC_,
+		_OtherPivot.ix(),
+		_OtherPivot.iy(),
 		SRCCOPY
 	);
 }
 
-void GameEngineImage::TransCopy(const GameEngineImage* _other, const float4& _copyPos, const float4& _copyScale, const float4& _otherPivot, const float4& _otherScale, unsigned int _transColor)
+void GameEngineImage::TransCopy(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, unsigned int _TransColor)
 {
 	TransparentBlt
 	(
-		imageDC_,
-		_copyPos.ix(),
-		_copyPos.iy(),
-		_copyScale.ix(),
-		_copyScale.iy(),
-		_other->imageDC_,
-		_otherPivot.ix(),
-		_otherPivot.iy(),
-		_otherScale.ix(),
-		_otherScale.iy(),
-		_transColor
+		ImageDC_,
+		_CopyPos.ix(),
+		_CopyPos.iy(),
+		_CopyScale.ix(),
+		_CopyScale.iy(),
+		_Other->ImageDC_,
+		_OtherPivot.ix(),
+		_OtherPivot.iy(),
+		_OtherScale.ix(),
+		_OtherScale.iy(),
+		_TransColor
 	);
 }
 
-void GameEngineImage::Cut(const float4& _cutSize)
+void GameEngineImage::Cut(const float4& _CutSize)
 {
-	if (0 != GetScale().ix() % _cutSize.ix())
+	if (0 != GetScale().ix() % _CutSize.ix())
 	{
 		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
 	}
-	if (0 != GetScale().iy() % _cutSize.iy())
+	if (0 != GetScale().iy() % _CutSize.iy())
 	{
 		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
 	}
 
-	int xCount = GetScale().ix() / _cutSize.ix();
-	int yCount = GetScale().iy() / _cutSize.iy();
-	for (int y = 0; y < yCount; y++)
+	int XCount = GetScale().ix() / _CutSize.ix();
+	int YCount = GetScale().iy() / _CutSize.iy();
+	for (int y = 0; y < YCount; y++)
 	{
-		for (int x = 0; x < xCount; x++)
+		for (int x = 0; x < XCount; x++)
 		{
-			cutPivot_.push_back({ static_cast<float>(x * _cutSize.ix()), static_cast<float>(y * _cutSize.iy()) });
-			cutScale_.push_back(_cutSize);
+			CutPivot_.push_back({ static_cast<float>(x * _CutSize.ix()), static_cast<float>(y * _CutSize.iy()) });
+			CutScale_.push_back(_CutSize);
 		}
 	}
 }
 
 void GameEngineImage::CutCount(int _x, int _y)
 {
-	float4 scale = { GetScale().x / _x, GetScale().y / _y };
-	Cut(scale);
+	float4 Scale = { GetScale().x / _x, GetScale().y / _y };
+	Cut(Scale);
 }
 
 void GameEngineImage::ImageScaleCheck()
 {
-	HBITMAP currentBitMap = (HBITMAP)GetCurrentObject(imageDC_, OBJ_BITMAP);
-	GetObject(bitmap_, sizeof(BITMAP), &info_);
+	HBITMAP CurrentBitMap = (HBITMAP)GetCurrentObject(ImageDC_, OBJ_BITMAP);
+	GetObject(Bitmap_, sizeof(BITMAP), &Info_);
 }

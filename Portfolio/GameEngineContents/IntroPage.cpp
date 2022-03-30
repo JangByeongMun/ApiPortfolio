@@ -1,8 +1,10 @@
 #include "IntroPage.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineTime.h>
 
-IntroPage::IntroPage() 
+IntroPage::IntroPage()
+	:ActorTime_(0.0f)
 {
 }
 
@@ -12,6 +14,7 @@ IntroPage::~IntroPage()
 
 void IntroPage::Start()
 {
+	ActorTime_ = 0.0f;
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
 	CreateRenderer("IntroPage.bmp");
 	CreateRenderer("IntroGameBy.bmp", RenderPivot::CENTER, {-250, -210});
@@ -24,5 +27,5 @@ void IntroPage::Start()
 
 void IntroPage::Update()
 {
-
+	ActorTime_ += GameEngineTime::GetDeltaTime();
 }

@@ -15,22 +15,22 @@ public:
 	DamageableActor& operator=(const DamageableActor& _Other) = delete;
 	DamageableActor& operator=(DamageableActor&& _Other) noexcept = delete;
 
-	virtual void Death(bool _isDeath);
+	virtual void Death(bool _IsDeath);
 
 	inline float GetHP()
 	{
-		return hp_;
+		return HP_;
 	}
-	inline void SetHP(float _value)
+	inline void SetHP(float _Value)
 	{
-		hp_ = _value;
+		HP_ = _Value;
 	}
 
 protected:
-	virtual void DamageTake(float _value);
+	virtual void DamageTake(float _Value);
 
 private:
-	float hp_;
-	bool isDeath_;
+	float HP_;
+	bool IsDeath_;
 };
 

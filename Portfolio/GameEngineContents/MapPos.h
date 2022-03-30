@@ -11,21 +11,21 @@ public:
 	__int64 n;
 
 public:
-	bool operator==(const MapPos& _other) const
+	bool operator==(const MapPos& _Other) const
 	{
-		return n == _other.n;
+		return n == _Other.n;
 	}
-	bool operator!=(const MapPos& _other) const
+	bool operator!=(const MapPos& _Other) const
 	{
-		return n != _other.n;
+		return n != _Other.n;
 	}
-	bool operator>(const MapPos& _other) const
+	bool operator>(const MapPos& _Other) const
 	{
-		return n > _other.n;
+		return n > _Other.n;
 	}
-	bool operator<(const MapPos& _other) const
+	bool operator<(const MapPos& _Other) const
 	{
-		return n < _other.n;
+		return n < _Other.n;
 	}
 
 	//MapPos(int _x, int _y)

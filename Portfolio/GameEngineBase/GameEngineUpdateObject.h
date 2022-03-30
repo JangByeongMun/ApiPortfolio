@@ -18,53 +18,53 @@ public:
 
 	inline void ReleaseUpdate()
 	{
-		if (false == isReleaseUpdate_)
+		if (false == IsReleaseUpdate_)
 		{
 			return;
 		}
 
-		deathTime_ -= GameEngineTime::GetDeltaTime();
+		DeathTime_ -= GameEngineTime::GetDeltaTime();
 
-		if (0.0f >= deathTime_)
+		if (0.0f >= DeathTime_)
 		{
-			isDeath_ = true;
+			IsDeath_ = true;
 		}
 	}
 
 	inline void On()
 	{
-		isUpdate_ = true;
+		IsUpdate_ = true;
 	}
 	inline void Off()
 	{
-		isUpdate_ = false;
+		IsUpdate_ = false;
 	}
 	virtual bool IsUpdate()
 	{
-		return isUpdate_ && false == isDeath_;
+		return IsUpdate_ && false == IsDeath_;
 	}
 
 	inline void Death()
 	{
-		isDeath_ = true;
+		IsDeath_ = true;
 	}
 	inline void Death(float _Time)
 	{
-		isReleaseUpdate_ = true;
-		deathTime_ = _Time;
+		IsReleaseUpdate_ = true;
+		DeathTime_ = _Time;
 	}
 	inline bool IsDeath()
 	{
-		return isDeath_;
+		return IsDeath_;
 	}
 
 protected:
 
 private:
-	bool isReleaseUpdate_;
-	bool isUpdate_;
+	bool IsReleaseUpdate_;
+	bool IsUpdate_;
 	
-	float deathTime_;
-	bool isDeath_;
+	float DeathTime_;
+	bool IsDeath_;
 };
 

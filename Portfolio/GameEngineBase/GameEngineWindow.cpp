@@ -92,7 +92,7 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
 
     MSG msg;
 
-    while (windowOn_)
+    while (WindowOn_)
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
@@ -111,27 +111,27 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
     }
 }
 
-void GameEngineWindow::SetWindowScaleAndPosition(float4 _pos, float4 _scale)
+void GameEngineWindow::SetWindowScaleAndPosition(float4 _Pos, float4 _Scale)
 {
-    scale_ = _scale;
-    RECT rect = { 0, 0, static_cast<long>(_scale.x), static_cast<long>(_scale.y)};
+    Scale_ = _Scale;
+    RECT rect = { 0, 0, static_cast<long>(_Scale.x), static_cast<long>(_Scale.y)};
     AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
-    SetWindowPos(hWnd_, nullptr, _pos.ix(), _pos.iy(), rect.right - rect.left, rect.bottom - rect.top, SWP_NOZORDER);
+    SetWindowPos(hWnd_, nullptr, _Pos.ix(), _Pos.iy(), rect.right - rect.left, rect.bottom - rect.top, SWP_NOZORDER);
 }
 
 void GameEngineWindow::Off()
 {
-    windowOn_ = false;
+    WindowOn_ = false;
 }
 
 GameEngineWindow::GameEngineWindow()
     : Title_("")
     , hInst_(nullptr)
     , hWnd_(nullptr)
-    , windowOn_(true)
+    , WindowOn_(true)
     , hDC_(nullptr)
-    , scale_({})
+    , Scale_({})
 {
 }
 

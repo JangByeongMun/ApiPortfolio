@@ -4,24 +4,24 @@
 class GameEngineTime
 {
 private:
-	static GameEngineTime* inst_;
+	static GameEngineTime* Inst_;
 
 public:
 	static GameEngineTime* GetInst()
 	{
-		return inst_;
+		return Inst_;
 	}
 	static void Destroy()
 	{
-		if (nullptr != inst_)
+		if (nullptr != Inst_)
 		{
-			delete inst_;
-			inst_ = nullptr;
+			delete Inst_;
+			Inst_ = nullptr;
 		}
 	}
 	static inline float GetDeltaTime()
 	{
-		return inst_->deltaTime_;
+		return Inst_->DeltaTime_;
 	}
 
 	void Reset();
@@ -30,11 +30,11 @@ public:
 protected:
 
 private:
-	__int64 secondCount_;
-	__int64 currentCount_;
-	__int64 prevCount_;
-	float deltaTime_;
-	double realDeltaTime_;
+	__int64 SecondCount_;
+	__int64 CurrentCount_;
+	__int64 PrevCount_;
+	float DeltaTime_;
+	double RealDeltaTime_;
 
 	GameEngineTime();
 	~GameEngineTime();

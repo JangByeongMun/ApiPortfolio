@@ -25,28 +25,28 @@ public:
 
 	inline GameEngineLevel* GetLevel()
 	{
-		return level_;
+		return Level_;
 	}
 
-	inline void SetMove(float4 _value)
+	inline void SetMove(float4 _Value)
 	{
-		position_ += _value;
+		Position_ += _Value;
 	}
-	inline void SetPosition(float4 _value)
+	inline void SetPosition(float4 _Value)
 	{
-		position_ = _value;
+		Position_ = _Value;
 	}
 	inline float4 GetPosition()
 	{
-		return position_;
+		return Position_;
 	}
-	inline void SetScale(float4 _value)
+	inline void SetScale(float4 _Value)
 	{
-		scale_ = _value;
+		Scale_ = _Value;
 	}
 	inline float4 GetScale()
 	{
-		return scale_;
+		return Scale_;
 	}
 
 protected:
@@ -56,26 +56,26 @@ protected:
 
 	void DebugRectRender();
 private:
-	GameEngineLevel* level_;
-	float4 position_;
-	float4 scale_;
+	GameEngineLevel* Level_;
+	float4 Position_;
+	float4 Scale_;
 
-	inline void SetLevel(GameEngineLevel* _level)
+	inline void SetLevel(GameEngineLevel* _Level)
 	{
-		level_ = _level;
+		Level_ = _Level;
 	}
 
 
 	// ·»´õ ±â´É
 public:
 	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-	GameEngineRenderer* CreateRenderer(const std::string& _image, RenderPivot _pivotType = RenderPivot::CENTER, float4 _pivotPos = {0, 0});
-	GameEngineRenderer* CreateRendererToScale(const std::string& _image, float4 _scale, RenderPivot _pivotType = RenderPivot::CENTER, float4 _pivotPos = {0, 0});
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
+	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, float4 _Scale, RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
 	void Rendering();
 
 private:
-	std::list<GameEngineRenderer*> renderList_;
-	std::list<GameEngineRenderer*>::iterator startRenderIter;
-	std::list<GameEngineRenderer*>::iterator endRenderIter;
+	std::list<GameEngineRenderer*> RenderList_;
+	std::list<GameEngineRenderer*>::iterator StartRenderIter;
+	std::list<GameEngineRenderer*>::iterator EndRenderIter;
 };
 

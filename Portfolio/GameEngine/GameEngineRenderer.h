@@ -21,48 +21,48 @@ public:
 	GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
 	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
 	
-	inline void SetType(const RenderPivot& _type)
+	inline void SetType(const RenderPivot& _Type)
 	{
-		pivotType_ = _type;
+		PivotType_ = _Type;
 	}
-	inline void SetScaleMode(const RenderScaleMode& _mode)
+	inline void SetScaleMode(const RenderScaleMode& _Mode)
 	{
-		scaleMode_ = _mode;
+		ScaleMode_ = _Mode;
 	}
-	inline void SetPivot(const float4& _pivot)
+	inline void SetPivot(const float4& _Pivot)
 	{
-		renderPivot_ = _pivot;
+		RenderPivot_ = _Pivot;
 	}
-	inline void SetScale(const float4& _scale)
+	inline void SetScale(const float4& _Scale)
 	{
-		scaleMode_ = RenderScaleMode::User;
-		renderScale_ = _scale;
+		ScaleMode_ = RenderScaleMode::User;
+		RenderScale_ = _Scale;
 	}
-	inline void SetTransColor(unsigned int _color)
+	inline void SetTransColor(unsigned int _Color)
 	{
-		TransColor_ = _color;
+		TransColor_ = _Color;
 	}
 	inline GameEngineImage* GetImage()
 	{
-		return image_;
+		return Image_;
 	}
 
 	void SetImageScale();
-	void SetImage(const std::string& _name);
-	void SetIndex(const size_t _index, float4 _scale = { -1.0, -1.0 });
+	void SetImage(const std::string& _Name);
+	void SetIndex(const size_t _Index, float4 _Scale = { -1.0, -1.0 });
 
 protected:
 	void Render();
 
 private:
-	GameEngineImage* image_;
-	RenderPivot pivotType_;
-	RenderScaleMode scaleMode_;
-	float4 renderPivot_;
-	float4 renderScale_;
+	GameEngineImage* Image_;
+	RenderPivot PivotType_;
+	RenderScaleMode ScaleMode_;
+	float4 RenderPivot_;
+	float4 RenderScale_;
 
-	float4 renderImageScale_;
-	float4 renderImagePivot_;
+	float4 RenderImageScale_;
+	float4 RenderImagePivot_;
 
 	unsigned int TransColor_;
 
@@ -71,25 +71,25 @@ private:
 	class FrameAnimation
 	{
 	public:
-		GameEngineRenderer* renderer_;
-		GameEngineImage* image_;
-		int currentFrame_;
-		int startFrame_;
-		int endFrame_;
-		float currentInterTime_;
-		float interTime_;
-		bool loop_;
+		GameEngineRenderer* Renderer_;
+		GameEngineImage* Image_;
+		int CurrentFrame_;
+		int StartFrame_;
+		int EndFrame_;
+		float CurrentInterTime_;
+		float InterTime_;
+		bool Loop_;
 
 	public:
 		FrameAnimation()
-			: renderer_(nullptr)
-			, image_(nullptr)
-			, currentFrame_(-1)
-			, startFrame_(-1)
-			, endFrame_(-1)
-			, currentInterTime_(0.1f)
-			, interTime_(0.1f)
-			, loop_(true)
+			: Renderer_(nullptr)
+			, Image_(nullptr)
+			, CurrentFrame_(-1)
+			, StartFrame_(-1)
+			, EndFrame_(-1)
+			, CurrentInterTime_(0.1f)
+			, InterTime_(0.1f)
+			, Loop_(true)
 		{
 		}
 		~FrameAnimation()
@@ -101,8 +101,8 @@ private:
 
 		inline void Reset()
 		{
-			currentFrame_ = startFrame_;
-			currentInterTime_ = interTime_;
+			CurrentFrame_ = StartFrame_;
+			CurrentInterTime_ = InterTime_;
 		}
 	};
 
@@ -111,7 +111,7 @@ public:
 	void ChangeAnimation(const std::string& _name);
 
 private:
-	std::map<std::string, FrameAnimation> animations_;
-	FrameAnimation* currentAnimation_;
+	std::map<std::string, FrameAnimation> Animations_;
+	FrameAnimation* CurrentAnimation_;
 };
 

@@ -16,7 +16,7 @@ public:
 	Shooter& operator=(const Shooter& _Other) = delete;
 	Shooter& operator=(Shooter&& _Other) noexcept = delete;
 
-	void Shoot(ProjectileType _type, float4 _vector);
+	void Shoot(ProjectileType _Type, float4 _Vector);
 
 protected:
 

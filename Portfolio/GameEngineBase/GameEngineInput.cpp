@@ -7,7 +7,6 @@ void GameEngineInput::GameEngineKey::Update()
 {
 	if (true == KeyCheck())
 	{
-		int a = 0;
 		if (true == Free_)
 		{
 			Down_ = true;
@@ -44,7 +43,7 @@ void GameEngineInput::GameEngineKey::Update()
 //////////////////////////////////////////////////
 
 
-GameEngineInput* GameEngineInput::inst_ = new GameEngineInput();
+GameEngineInput* GameEngineInput::Inst_ = new GameEngineInput();
 
 GameEngineInput::GameEngineInput() 
 {
@@ -56,13 +55,13 @@ GameEngineInput::~GameEngineInput()
 
 GameEngineInput* GameEngineInput::GetInst()
 {
-	return inst_;
+	return Inst_;
 }
 
 void GameEngineInput::Update()
 {
-	std::map<std::string, GameEngineKey>::iterator keyUpdateStart = allInputKey_.begin();
-	std::map<std::string, GameEngineKey>::iterator keyUpdateEnd = allInputKey_.end();
+	std::map<std::string, GameEngineKey>::iterator keyUpdateStart = AllInputKey_.begin();
+	std::map<std::string, GameEngineKey>::iterator keyUpdateEnd = AllInputKey_.end();
 	
 	for (; keyUpdateStart != keyUpdateEnd; ++keyUpdateStart)
 	{
@@ -70,73 +69,73 @@ void GameEngineInput::Update()
 	}
 }
 
-void GameEngineInput::CreateKey(const std::string& _name, int _key)
+void GameEngineInput::CreateKey(const std::string& _Name, int _Key)
 {
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	if (allInputKey_.end() != allInputKey_.find(upperName))
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	if (AllInputKey_.end() != AllInputKey_.find(UpperName))
 	{
 		MsgBoxAssert("이미 존재하는 이름의 키를 또 만들려고 했습니다");
 		return;
 	}
 
-	if ('a' <= _key && _key <= 'z')
+	if ('a' <= _Key && _Key <= 'z')
 	{
-		_key = std::toupper(_key);
+		_Key = std::toupper(_Key);
 	}
 
-	allInputKey_.insert(std::make_pair(upperName, GameEngineKey()));
-	allInputKey_[upperName].Key_ = _key;
-	allInputKey_[upperName].Reset();
+	AllInputKey_.insert(std::make_pair(UpperName, GameEngineKey()));
+	AllInputKey_[UpperName].Key_ = _Key;
+	AllInputKey_[UpperName].Reset();
 }
 
-bool GameEngineInput::IsDown(const std::string& _name)
+bool GameEngineInput::IsDown(const std::string& _Name)
 {
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	if (allInputKey_.end() == allInputKey_.find(upperName))
-	{
-		MsgBoxAssert("존재하지 않는 키 입니다.");
-		return false;
-	}
-	return allInputKey_[upperName].Down_;
-}
-
-bool GameEngineInput::IsUp(const std::string& _name)
-{
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	if (allInputKey_.end() == allInputKey_.find(upperName))
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	if (AllInputKey_.end() == AllInputKey_.find(UpperName))
 	{
 		MsgBoxAssert("존재하지 않는 키 입니다.");
 		return false;
 	}
-	return allInputKey_[upperName].Up_;
+	return AllInputKey_[UpperName].Down_;
 }
 
-bool GameEngineInput::IsPress(const std::string& _name)
+bool GameEngineInput::IsUp(const std::string& _Name)
 {
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	if (allInputKey_.end() == allInputKey_.find(upperName))
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	if (AllInputKey_.end() == AllInputKey_.find(UpperName))
 	{
 		MsgBoxAssert("존재하지 않는 키 입니다.");
 		return false;
 	}
-	return allInputKey_[upperName].Press_;
+	return AllInputKey_[UpperName].Up_;
 }
 
-bool GameEngineInput::IsFree(const std::string& _name)
+bool GameEngineInput::IsPress(const std::string& _Name)
 {
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	if (allInputKey_.end() == allInputKey_.find(upperName))
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	if (AllInputKey_.end() == AllInputKey_.find(UpperName))
 	{
 		MsgBoxAssert("존재하지 않는 키 입니다.");
 		return false;
 	}
-	return allInputKey_[upperName].Free_;
+	return AllInputKey_[UpperName].Press_;
 }
 
-bool GameEngineInput::IsKey(const std::string& _name)
+bool GameEngineInput::IsFree(const std::string& _Name)
 {
-	std::string upperName = GameEngineString::ToUpperReturn(_name);
-	return allInputKey_.end() != allInputKey_.find(upperName);
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	if (AllInputKey_.end() == AllInputKey_.find(UpperName))
+	{
+		MsgBoxAssert("존재하지 않는 키 입니다.");
+		return false;
+	}
+	return AllInputKey_[UpperName].Free_;
+}
+
+bool GameEngineInput::IsKey(const std::string& _Name)
+{
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+	return AllInputKey_.end() != AllInputKey_.find(UpperName);
 }
 
 

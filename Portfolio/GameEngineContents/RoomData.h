@@ -16,14 +16,14 @@ public:
 
 	void Render();
 
-	bool operator()(const MapPos& _left, const MapPos& _right);
+	bool operator()(const MapPos& _Left, const MapPos& _Right);
 
 protected:
 
 private:
-	char allBlock_[7][13];
-	int startX = 200;
-	int startY = 100;
-	int scaleX = 50;
-	int scaleY = 50;
+	char AllBlock_[7][13];
+	int StartX = 200;
+	int StartY = 100;
+	int ScaleX = 50;
+	int ScaleY = 50;
 };

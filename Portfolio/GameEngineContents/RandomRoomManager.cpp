@@ -1,11 +1,11 @@
 #include "RandomRoomManager.h"
 #include "RoomData.h"
 
-RandomRoomManager* RandomRoomManager::inst_ = new RandomRoomManager();
+RandomRoomManager* RandomRoomManager::Inst_ = new RandomRoomManager();
 
-bool RandomRoomManager::ChangeFloor(const int& _floor)
+bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
-	currentFloor_ = _floor;
+	currentFloor_ = _Floor;
 	switch (currentFloor_)
 	{
 	case 1:
@@ -22,8 +22,8 @@ bool RandomRoomManager::ChangeFloor(const int& _floor)
 	}
 
 	// 일단 새로만든 룸데이터를 만들고 여기에 값을 복사하도록 깊은복사를 만드는식으로?
-	RoomData* newRoomData = new RoomData();
-	currentMaps_.insert(make_pair(MapPos(), newRoomData));
+	RoomData* NewRoomData = new RoomData();
+	CurrentMaps_.insert(make_pair(MapPos(), NewRoomData));
 
 	return true;
 }
@@ -36,23 +36,23 @@ RandomRoomManager::RandomRoomManager()
 
 RandomRoomManager::~RandomRoomManager()
 {
-	map<int, vector<RoomData*>>::iterator beginIter = allMaps_.begin();
-	map<int, vector<RoomData*>>::iterator endIter = allMaps_.end();
-	for (; beginIter != endIter; ++beginIter)
+	map<int, vector<RoomData*>>::iterator BeginIter = AllMaps_.begin();
+	map<int, vector<RoomData*>>::iterator EndIter = AllMaps_.end();
+	for (; BeginIter != EndIter; ++BeginIter)
 	{
-		vector<RoomData*>& tmpGroup = beginIter->second;
+		vector<RoomData*>& TmpGroup = BeginIter->second;
 		
-		vector<RoomData*>::iterator beginVectorIter = tmpGroup.begin();
-		vector<RoomData*>::iterator endVectorIter = tmpGroup.end();
-		for (; beginVectorIter != endVectorIter; ++beginVectorIter)
+		vector<RoomData*>::iterator BeginVectorIter = TmpGroup.begin();
+		vector<RoomData*>::iterator EndVectorIter = TmpGroup.end();
+		for (; BeginVectorIter != EndVectorIter; ++BeginVectorIter)
 		{
-			if (nullptr == (*beginVectorIter))
+			if (nullptr == (*BeginVectorIter))
 			{
 				continue;
 			}
 	
-			delete (*beginVectorIter);
-			(*beginVectorIter) = nullptr;
+			delete (*BeginVectorIter);
+			(*BeginVectorIter) = nullptr;
 		}
 	}
 }

@@ -4,8 +4,8 @@ GameEnginePath::GameEnginePath()
 {
 }
 
-GameEnginePath::GameEnginePath(const std::filesystem::path _path)
-	:path_(_path)
+GameEnginePath::GameEnginePath(const std::filesystem::path _Path)
+	:Path_(_Path)
 {
 }
 
@@ -15,25 +15,25 @@ GameEnginePath::~GameEnginePath()
 
 void GameEnginePath::SetCurrentPath()
 {
-	path_ = std::filesystem::current_path();
+	Path_ = std::filesystem::current_path();
 }
 
 bool GameEnginePath::IsExists()
 {
-	return std::filesystem::exists(path_);
+	return std::filesystem::exists(Path_);
 }
 
 std::string GameEnginePath::GetExtension()
 {
-	return path_.extension().string();
+	return Path_.extension().string();
 }
 
 std::string GameEnginePath::GetFileName()
 {
-	return path_.filename().string();
+	return Path_.filename().string();
 }
 
 std::string GameEnginePath::GetFullPath()
 {
-	return path_.string();
+	return Path_.string();
 }
