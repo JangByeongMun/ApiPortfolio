@@ -8,7 +8,7 @@ class Shooter : public GameEngineActor
 public:
 	// constrcuter destructer
 	Shooter();
-	~Shooter();
+	virtual ~Shooter();
 
 	// delete Function
 	Shooter(const Shooter& _Other) = delete;

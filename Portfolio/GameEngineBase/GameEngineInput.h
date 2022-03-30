@@ -15,9 +15,11 @@ private:
 		bool Press_; 
 		bool Up_;    
 		bool Free_;  
+		
+		float Time_;
 		int Key_;    
 
-		void Update();
+		void Update(float _DeltaTime);
 		bool KeyCheck()
 		{
 			return 0 != GetAsyncKeyState(Key_);
@@ -45,9 +47,10 @@ public:
 		}
 	}
 
-	void Update();
+	void Update(float _DeltaTime = 0.0f);
 	void CreateKey(const std::string& _Name, int _Key);
 
+	float GetTime(const std::string& _Name);
 	bool IsDown(const std::string& _Name);
 	bool IsUp(const std::string& _Name);
 	bool IsPress(const std::string& _Name);

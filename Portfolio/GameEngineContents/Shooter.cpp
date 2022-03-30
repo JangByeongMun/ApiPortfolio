@@ -13,6 +13,6 @@ void Shooter::Shoot(ProjectileType _Type, float4 _vector)
 {
 	Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 	Ptr->SetPosition(GetPosition());
-	Ptr->SetVector(float4::Left);
+	Ptr->SetVector(float4::LEFT);
 	Ptr->SetSpeed(200.0f);
 }

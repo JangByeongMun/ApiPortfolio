@@ -23,7 +23,6 @@ BindingOfIsaac::~BindingOfIsaac()
 {
 }
 
-time_t startTime = 0;
 void BindingOfIsaac::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
@@ -46,8 +45,6 @@ void BindingOfIsaac::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelPlay", 'V');
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelEnding", 'B');
 	}
-	
-	startTime = time(NULL);
 }
 
 void BindingOfIsaac::ImageLoad()
@@ -160,6 +157,39 @@ void BindingOfIsaac::ImageCut()
 
 	Image = GameEngineImageManager::GetInst()->Find("epilogue10_2.bmp");
 	Image->CutCount(1, 2);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue11_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue11_3.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue11_4.bmp");
+	Image->CutCount(1, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue12_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue12_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue13_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue13_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue14_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue15_1.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue15_2.bmp");
+	Image->CutCount(2, 1);
+
+	Image = GameEngineImageManager::GetInst()->Find("epilogue15_3.bmp");
+	Image->CutCount(2, 1);
 }
 
 void BindingOfIsaac::GameLoop()

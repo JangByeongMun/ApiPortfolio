@@ -1,21 +1,23 @@
 #include "GameEngineRenderer.h"
 #include "GameEngine.h"
+#include "GameEngineLevel.h"
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineTime.h>
 
 #pragma comment(lib, "msimg32.lib")
 
-GameEngineRenderer::GameEngineRenderer() 
+GameEngineRenderer::GameEngineRenderer()
 	: Image_(nullptr)
 	, PivotType_(RenderPivot::CENTER)
 	, ScaleMode_(RenderScaleMode::Image)
-	, RenderPivot_{0, 0}
-	, RenderScale_{0, 0}
+	, RenderPivot_{ 0, 0 }
+	, RenderScale_{ 0, 0 }
 	, TransColor_(RGB(255, 0, 255))
-	, RenderImagePivot_{0, 0}
-	, RenderImageScale_{0, 0}
+	, RenderImagePivot_{ 0, 0 }
+	, RenderImageScale_{ 0, 0 }
 	, CurrentAnimation_(nullptr)
+	, IsCameraEffect_(true)
 {
 }
 
@@ -44,7 +46,7 @@ void GameEngineRenderer::SetImageScale()
 	RenderImageScale_ = Image_->GetScale();
 }
 
-void GameEngineRenderer::SetIndex(const size_t _Index, float4 _Scale)
+void GameEngineRenderer::SetIndex(const size_t _Index, const float4& _Scale)
 {
 	if (false == Image_->IsCut())
 	{
@@ -52,7 +54,7 @@ void GameEngineRenderer::SetIndex(const size_t _Index, float4 _Scale)
 		return;
 	}
 
-	if (-1.0f == _Scale.x || -1.0f == _Scale.y)
+	if (0 >= _Scale.x || 0 >= _Scale.y)
 	{
 		RenderScale_ = Image_->GetCutScale(_Index);
 	}
@@ -78,6 +80,10 @@ void GameEngineRenderer::Render()
 	}
 
 	float4 renderPos = GetActor()->GetPosition() + RenderPivot_;
+	if (true == IsCameraEffect_)
+	{
+		renderPos -= GetActor()->GetLevel()->GetCameraPos();
+	}
 
 	switch (PivotType_)
 	{
@@ -85,8 +91,12 @@ void GameEngineRenderer::Render()
 		GameEngine::BackBufferImage()->TransCopy(Image_, renderPos - RenderScale_.Half(), RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
 		break;
 	case RenderPivot::BOT:
-		// 밑을 기준으로 할 일이 당분간 없으니 우선 비우고 다른것부터 작업
-		//GameEngine::BackBufferImage()->TransCopy(image_, renderPos - renderScale_.Half(), renderScale_, renderImagePivot_, renderImageScale_, TransColor_);
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.y *= 2.0f;
+
+		GameEngine::BackBufferImage()->TransCopy(Image_, renderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+	}
 		break;
 	default:
 		break;

@@ -55,6 +55,7 @@ protected:
 	virtual void Render();
 
 	void DebugRectRender();
+
 private:
 	GameEngineLevel* Level_;
 	float4 Position_;
@@ -65,8 +66,7 @@ private:
 		Level_ = _Level;
 	}
 
-
-	// ·»´õ ±â´É
+	////////////////// ·»´õ ±â´É
 public:
 	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});

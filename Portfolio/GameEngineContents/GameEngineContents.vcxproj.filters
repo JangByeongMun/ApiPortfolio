@@ -188,6 +188,21 @@
     <ClInclude Include="Credit07.h">
       <Filter>Ending</Filter>
     </ClInclude>
+    <ClInclude Include="Credit11.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit12.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit13.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit14.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="Credit15.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -369,6 +384,21 @@
       <Filter>Ending</Filter>
     </ClCompile>
     <ClCompile Include="Credit07.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit11.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit12.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit13.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit14.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="Credit15.cpp">
       <Filter>Ending</Filter>
     </ClCompile>
   </ItemGroup>

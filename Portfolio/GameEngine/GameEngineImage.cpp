@@ -180,6 +180,11 @@ void GameEngineImage::CutCount(int _x, int _y)
 	Cut(Scale);
 }
 
+int GameEngineImage::GetImagePixel(int _x, int _y)
+{
+	return GetPixel(ImageDC_, _x, _y);
+}
+
 void GameEngineImage::ImageScaleCheck()
 {
 	HBITMAP CurrentBitMap = (HBITMAP)GetCurrentObject(ImageDC_, OBJ_BITMAP);

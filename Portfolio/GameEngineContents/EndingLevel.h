@@ -16,11 +16,17 @@ public:
 	EndingLevel& operator=(const EndingLevel& _Other) = delete;
 	EndingLevel& operator=(EndingLevel&& _Other) noexcept = delete;
 
+	inline void ChangeEndingCredit(int _Index)
+	{
+		CurrentIndex_ = _Index;
+	}
+
 protected:
 
 private:
 	std::vector<GameEngineActor*> AllActors_;
 	float LevelTime_;
+	int CurrentIndex_;
 
 	void Loading() override;
 	void Update() override;

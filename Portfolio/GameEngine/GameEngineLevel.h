@@ -2,6 +2,7 @@
 #include <list>
 #include <map>
 #include <GameEngineBase/GameEngineNameObject.h>
+#include <GameEngineBase/GameEngineMath.h>
 
 class GameEngine;
 class GameEngineActor;
@@ -46,6 +47,19 @@ public:
 		return newActor;
 	}
 
+	inline float4 GetCameraPos()
+	{
+		return CameraPos_;
+	}
+	inline void MoveCameraPos(const float4& _Value)
+	{
+		CameraPos_ += _Value;
+	}
+	inline void SetCameraPos(const float4& _Value)
+	{
+		CameraPos_ = _Value;
+	}
+
 protected:
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
@@ -56,6 +70,7 @@ protected:
 private:
 	// 키값 == 업데이트의 우선순위
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+	float4 CameraPos_;
 
 	// 키값 == 액터의 이름
 	//std::map<std::string, std::list<GameEngineActor*>> allActor_;

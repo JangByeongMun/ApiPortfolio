@@ -63,6 +63,16 @@ public:
 	{
 		return CutScale_[_Index];
 	}
+	inline size_t GetCutCount()
+	{
+		return CutPivot_.size();
+	}
+	inline int GetImagePixel(const float4& _Pos)
+	{
+		return GetImagePixel(_Pos.ix(), _Pos.iy());
+	}
+	int GetImagePixel(int _x, int _y);
+
 	inline void Cut(const float4& _CutScale, const float4& _CutPos)
 	{
 		CutPivot_.push_back(_CutPos);

@@ -186,6 +186,11 @@
     <ClInclude Include="Credit08.h" />
     <ClInclude Include="Credit09.h" />
     <ClInclude Include="Credit10.h" />
+    <ClInclude Include="Credit11.h" />
+    <ClInclude Include="Credit12.h" />
+    <ClInclude Include="Credit13.h" />
+    <ClInclude Include="Credit14.h" />
+    <ClInclude Include="Credit15.h" />
     <ClInclude Include="DamageableActor.h">
       <SubType>
       </SubType>
@@ -403,6 +408,11 @@
     <ClCompile Include="Credit08.cpp" />
     <ClCompile Include="Credit09.cpp" />
     <ClCompile Include="Credit10.cpp" />
+    <ClCompile Include="Credit11.cpp" />
+    <ClCompile Include="Credit12.cpp" />
+    <ClCompile Include="Credit13.cpp" />
+    <ClCompile Include="Credit14.cpp" />
+    <ClCompile Include="Credit15.cpp" />
     <ClCompile Include="DamageableActor.cpp">
       <SubType>
       </SubType>

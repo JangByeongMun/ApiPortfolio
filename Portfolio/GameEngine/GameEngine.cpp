@@ -79,7 +79,7 @@ void GameEngine::EngineLoop()
 		MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
 	}
 	
-	GameEngineInput::GetInst()->Update();
+	GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
 
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();

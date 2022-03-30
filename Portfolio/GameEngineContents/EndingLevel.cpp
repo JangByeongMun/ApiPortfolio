@@ -10,8 +10,15 @@
 #include "Credit08.h"
 #include "Credit09.h"
 #include "Credit10.h"
+#include "Credit11.h"
+#include "Credit12.h"
+#include "Credit13.h"
+#include "Credit14.h"
+#include "Credit15.h"
 
-EndingLevel::EndingLevel() 
+EndingLevel::EndingLevel()
+	: AllActors_({})
+	, LevelTime_(0.0f)
 {
 }
 
@@ -24,57 +31,23 @@ void EndingLevel::Loading()
 	CreateActor<EndingBackGround>(0);
 }
 
-int test = 0;
 void EndingLevel::Update()
 {
 	LevelTime_ += GameEngineTime::GetDeltaTime();
-
-	if (0.0f <= LevelTime_ && LevelTime_ < 3.0f)
+	
+	for (int i = 0; i < 15; i++)
 	{
-		test = 0;
-	}
-	else if (3.0f <= LevelTime_ && LevelTime_ < 6.0f)
-	{
-		test = 1;
-	}
-	else if (6.0f <= LevelTime_ && LevelTime_ < 9.0f)
-	{
-		test = 2;
-	}
-	else if (9.0f <= LevelTime_ && LevelTime_ < 12.0f)
-	{
-		test = 3;
-	}
-	else if (12.0f <= LevelTime_ && LevelTime_ < 15.0f)
-	{
-		test = 4;
-	}
-	else if (15.0f <= LevelTime_ && LevelTime_ < 18.0f)
-	{
-		test = 5;
-	}
-	else if (18.0f <= LevelTime_ && LevelTime_ < 21.0f)
-	{
-		test = 6;
-	}
-	else if (21.0f <= LevelTime_ && LevelTime_ < 24.0f)
-	{
-		test = 7;
-	}
-	else if (24.0f <= LevelTime_ && LevelTime_ < 27.0f)
-	{
-		test = 8;
-	}
-	else if (27.0f <= LevelTime_ && LevelTime_ < 30.0f)
-	{
-		test = 9;
+		if (i * 2.0f <= LevelTime_ && LevelTime_ < (i + 1) * 2.0f)
+		{
+			ChangeEndingCredit(i);
+		}
 	}
 
-	if (false == AllActors_[test]->IsUpdate())
+	if (false == AllActors_[CurrentIndex_]->IsUpdate())
 	{
 		for (int i = 0; i < AllActors_.size(); i++)
 		{
-			if (i == test)
+			if (i == CurrentIndex_)
 			{
 				AllActors_[i]->On();
 			}
@@ -99,6 +72,11 @@ void EndingLevel::LevelChangeStart()
 	AllActors_.push_back(CreateActor<Credit08>(1));
 	AllActors_.push_back(CreateActor<Credit09>(1));
 	AllActors_.push_back(CreateActor<Credit10>(1));
+	AllActors_.push_back(CreateActor<Credit11>(1));
+	AllActors_.push_back(CreateActor<Credit12>(1));
+	AllActors_.push_back(CreateActor<Credit13>(1));
+	AllActors_.push_back(CreateActor<Credit14>(1));
+	AllActors_.push_back(CreateActor<Credit15>(1));
 
 	for (int i = 0; i < AllActors_.size(); i++)
 	{
