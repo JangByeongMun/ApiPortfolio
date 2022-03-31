@@ -34,7 +34,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Ending");
+	ChangeLevel("Menu");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -68,6 +68,20 @@ void BindingOfIsaac::ImageLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("MenuLevel");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("LoadingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -75,7 +89,6 @@ void BindingOfIsaac::ImageLoad()
 			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
-	
 
 	{
 		GameEngineDirectory ResourcesDirectory;
@@ -90,7 +103,7 @@ void BindingOfIsaac::ImageLoad()
 			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
 		}
 	}
-
+	
 	{
 		GameEngineDirectory ResourcesDirectory;
 		ResourcesDirectory.MoveParent("Portfolio");

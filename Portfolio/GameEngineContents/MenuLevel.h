@@ -24,6 +24,6 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
-
+	int CurrentScreen_;
 };
 

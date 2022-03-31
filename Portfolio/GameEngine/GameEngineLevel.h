@@ -6,9 +6,13 @@
 
 class GameEngine;
 class GameEngineActor;
+class GameEngineCollision;
 class GameEngineLevel : public GameEngineNameObject
 {
 	friend GameEngine;
+	friend GameEngineActor;
+	friend GameEngineCollision;
+
 public:
 	// constrcuter destructer
 	GameEngineLevel();
@@ -78,5 +82,11 @@ private:
 	void ActorUpdate();
 	void ActorRender();
 	void ActorRelease();
+
+	//////////////////// 충돌 체크
+private:
+	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
+
+	void AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision);
 };
 

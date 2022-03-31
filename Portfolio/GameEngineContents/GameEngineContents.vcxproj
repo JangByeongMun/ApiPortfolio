@@ -272,6 +272,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="MapPos.h" />
+    <ClInclude Include="MenuFileSelect.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="MenuStart.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MenuUI.h">
       <SubType>
       </SubType>
@@ -357,6 +365,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="StoneBlack.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="TestMap.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -493,6 +505,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="MenuFileSelect.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MenuStart.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MenuUI.cpp">
       <SubType>
       </SubType>
@@ -578,6 +598,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="StoneBlack.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="TestMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

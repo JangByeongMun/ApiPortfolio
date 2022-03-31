@@ -1,5 +1,6 @@
 #include "GameEngineLevel.h"
 #include "GameEngineActor.h"
+#include "GameEngineCollision.h"
 
 GameEngineLevel::GameEngineLevel() 
 	: CameraPos_(float4::ZERO)
@@ -117,4 +118,9 @@ void GameEngineLevel::ActorRelease()
 			++BeginListIter;
 		}
 	}
+}
+
+void GameEngineLevel::AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision)
+{
+	AllCollision_[_GroupName].push_back(_Collision);
 }

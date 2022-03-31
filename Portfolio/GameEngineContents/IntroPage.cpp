@@ -28,4 +28,6 @@ void IntroPage::Start()
 void IntroPage::Update()
 {
 	ActorTime_ += GameEngineTime::GetDeltaTime();
+
+
 }

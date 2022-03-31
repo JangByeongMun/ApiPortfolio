@@ -22,6 +22,7 @@ private:
 	float Speed_;
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
+	GameEngineImage* MapColImage_;
 
 	void Start() override;
 	void Update() override;
