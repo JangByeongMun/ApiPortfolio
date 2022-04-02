@@ -1,6 +1,5 @@
 #include "GameEngineActor.h"
 #include "GameEngine.h"
-#include "GameEngineLevel.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineCollision.h"
 
@@ -15,16 +14,34 @@ GameEngineActor::GameEngineActor()
 
 GameEngineActor::~GameEngineActor() 
 {
-	std::list<GameEngineRenderer*>::iterator BeginIter = RenderList_.begin();
-	std::list<GameEngineRenderer*>::iterator EndIter = RenderList_.end();
-	for (; BeginIter != EndIter; ++BeginIter)
+	// 렌더리스트 삭제
 	{
-		if (nullptr == (*BeginIter))
+		std::list<GameEngineRenderer*>::iterator BeginIter = RenderList_.begin();
+		std::list<GameEngineRenderer*>::iterator EndIter = RenderList_.end();
+		for (; BeginIter != EndIter; ++BeginIter)
 		{
-			continue;
+			if (nullptr == (*BeginIter))
+			{
+				continue;
+			}
+			delete (*BeginIter);
+			(*BeginIter) = nullptr;
 		}
-		delete (*BeginIter);
-		(*BeginIter) = nullptr;
+	}
+
+	// 충돌 삭제
+	{
+		std::list<GameEngineCollision*>::iterator BeginIter = CollisionList_.begin();
+		std::list<GameEngineCollision*>::iterator EndIter = CollisionList_.end();
+		for (; BeginIter != EndIter; ++BeginIter)
+		{
+			if (nullptr == (*BeginIter))
+			{
+				continue;
+			}
+			delete (*BeginIter);
+			(*BeginIter) = nullptr;
+		}
 	}
 }
 
@@ -40,15 +57,54 @@ void GameEngineActor::Render()
 {
 }
 
+void GameEngineActor::Release()
+{
+	// 렌더가 종료된게 있으면 확인후 삭제
+	{
+		std::list<GameEngineRenderer*>::iterator StartIter = RenderList_.begin();
+		std::list<GameEngineRenderer*>::iterator EndIter = RenderList_.end();
+
+		for (; StartIter != EndIter;)
+		{
+			if (false == (*StartIter)->IsDeath())
+			{
+				++StartIter;
+				continue;
+			}
+
+			delete (*StartIter);
+			StartIter = RenderList_.erase(StartIter);
+		}
+	}
+
+	// 충돌이 종료된게 있으면 확인후 삭제
+	{
+		std::list<GameEngineCollision*>::iterator StartIter = CollisionList_.begin();
+		std::list<GameEngineCollision*>::iterator EndIter = CollisionList_.end();
+
+		for (; StartIter != EndIter;)
+		{
+			if (false == (*StartIter)->IsDeath())
+			{
+				++StartIter;
+				continue;
+			}
+
+			delete (*StartIter);
+			StartIter = CollisionList_.erase(StartIter);
+		}
+	}
+}
+
 void GameEngineActor::DebugRectRender()
 {
 	GameEngineRect DebugRect(Position_, Scale_);
 	Rectangle(
 		GameEngine::BackBufferDC(),
-		DebugRect.GetCenterLeft(),
-		DebugRect.GetCenterTop(),
-		DebugRect.GetCenterRight(),
-		DebugRect.GetCenterBot()
+		DebugRect.CenterLeft(),
+		DebugRect.CenterTop(),
+		DebugRect.CenterRight(),
+		DebugRect.CenterBot()
 	);
 }
 
@@ -97,6 +153,11 @@ void GameEngineActor::Rendering()
 	EndRenderIter = RenderList_.end();
 	for (; StartRenderIter != EndRenderIter; ++StartRenderIter)
 	{
+		if (false == (*StartRenderIter)->IsUpdate())
+		{
+			continue;
+		}
+
 		(*StartRenderIter)->Render();
 	}
 }
@@ -104,7 +165,11 @@ void GameEngineActor::Rendering()
 GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupName, float4 _Scale, float4 _Pivot)
 {
 	GameEngineCollision* NewCollision = new GameEngineCollision();
-	GetLevel()->AddCollision(_GroupName, NewCollision);
+	NewCollision->SetActor(this);
+	NewCollision->SetPivot(_Pivot);
+	NewCollision->SetScale(_Scale);
 
+	GetLevel()->AddCollision(_GroupName, NewCollision);
+	CollisionList_.push_back(NewCollision);
 	return NewCollision;
 }

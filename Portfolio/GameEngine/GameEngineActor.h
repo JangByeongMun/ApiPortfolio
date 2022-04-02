@@ -3,8 +3,10 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineUpdateObject.h>
 #include <list>
+
 #include "GameEngineEnum.h"
 #include "GameEngineImage.h"
+#include "GameEngineLevel.h"
 
 // Ό³Έν :
 class GameEngineLevel;
@@ -28,6 +30,10 @@ public:
 	inline GameEngineLevel* GetLevel()
 	{
 		return Level_;
+	}
+	inline float4 GetCameraEffectPosition()
+	{
+		return Position_ - GetLevel()->GetCameraPos();
 	}
 
 	inline void SetMove(float4 _Value)
@@ -56,6 +62,7 @@ protected:
 	virtual void Update();
 	virtual void Render();
 
+	void Release();
 	void DebugRectRender();
 
 private:

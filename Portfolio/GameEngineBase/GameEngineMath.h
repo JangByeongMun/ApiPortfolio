@@ -144,21 +144,46 @@ public:
 	float4 Scale;
 
 public:
-	inline int GetCenterLeft() const
+	inline int CenterLeft() const
 	{
 		return Pos.ix() - Scale.hix();
 	}
-	inline int GetCenterRight() const
+	inline int CenterRight() const
 	{
 		return Pos.ix() + Scale.hix();
 	}
-	inline int GetCenterTop() const
+	inline int CenterTop() const
 	{
 		return Pos.iy() - Scale.hiy();
 	}
-	inline int GetCenterBot() const
+	inline int CenterBot() const
 	{
 		return Pos.iy() + Scale.hiy();
+	}
+
+	inline bool OverLap(const GameEngineRect& _Other)
+	{
+		if (CenterBot() < _Other.CenterTop())
+		{
+			return false;
+		}
+
+		if (CenterTop() > _Other.CenterBot())
+		{
+			return false;
+		}
+
+		if (CenterRight() < _Other.CenterLeft())
+		{
+			return false;
+		}
+
+		if (CenterLeft() > _Other.CenterRight())
+		{
+			return false;
+		}
+
+		return true;
 	}
 
 public:

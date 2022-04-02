@@ -153,14 +153,14 @@ void GameEngineImage::TransCopy(const GameEngineImage* _Other, const float4& _Co
 
 void GameEngineImage::Cut(const float4& _CutSize)
 {
-	if (0 != GetScale().ix() % _CutSize.ix())
-	{
-		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
-	}
-	if (0 != GetScale().iy() % _CutSize.iy())
-	{
-		MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
-	}
+	//if (0 != GetScale().ix() % _CutSize.ix())
+	//{
+	//	MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
+	//}
+	//if (0 != GetScale().iy() % _CutSize.iy())
+	//{
+	//	MsgBoxAssert("자를수 있는 수치가 딱 맞지 않습니다.");
+	//}
 
 	int XCount = GetScale().ix() / _CutSize.ix();
 	int YCount = GetScale().iy() / _CutSize.iy();

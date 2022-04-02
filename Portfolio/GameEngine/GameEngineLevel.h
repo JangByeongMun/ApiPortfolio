@@ -82,6 +82,7 @@ private:
 	void ActorUpdate();
 	void ActorRender();
 	void ActorRelease();
+	void CollisionDebugRender();
 
 	//////////////////// 충돌 체크
 private:

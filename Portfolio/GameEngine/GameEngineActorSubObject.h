@@ -1,9 +1,11 @@
 #pragma once
 #include "GameEngineActor.h"
+
 // Ό³Έν :
-class GameEngineActorSubObject
+class GameEngineActorSubObject : public GameEngineUpdateObject
 {
 	friend GameEngineActor;
+
 public:
 	// constrcuter destructer
 	GameEngineActorSubObject();
@@ -19,6 +21,16 @@ public:
 	{
 		return Actor_;
 	}
+
+	inline bool IsUpdate() override
+	{
+		return GameEngineUpdateObject::IsUpdate() || Actor_->IsUpdate();
+	}
+	inline bool IsDeath() override
+	{
+		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();
+	}
+
 protected:
 	inline void SetActor(GameEngineActor* _Actor)
 	{

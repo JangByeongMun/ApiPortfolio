@@ -3,6 +3,10 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineTime.h>
 
+void MakeRenderer()
+{
+}
+
 IntroPage::IntroPage()
 	:ActorTime_(0.0f)
 {
@@ -28,6 +32,4 @@ void IntroPage::Start()
 void IntroPage::Update()
 {
 	ActorTime_ += GameEngineTime::GetDeltaTime();
-
-
 }

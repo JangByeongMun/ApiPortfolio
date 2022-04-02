@@ -98,24 +98,74 @@ void GameEngineLevel::ActorRender()
 
 void GameEngineLevel::ActorRelease()
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
+
+	// 충돌 삭제
+	{
+		std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupStart = AllCollision_.begin();
+		std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupEnd = AllCollision_.end();
+		for (; GroupStart != GroupEnd; ++GroupStart)
+		{
+			std::list<GameEngineCollision*>& Group = GroupStart->second;
+			std::list<GameEngineCollision*>::iterator StartCollision = Group.begin();
+			std::list<GameEngineCollision*>::iterator EndCollision = Group.end();
+			for (; StartCollision != EndCollision; )
+			{
+				if (false == (*StartCollision)->IsDeath())
+				{
+					++StartCollision;
+					continue;
+				}
+
+				StartCollision = Group.erase(StartCollision);
+			}
+		}
+	}
+
+	// 액터 삭제
+	{
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
+		for (; GroupStart != GroupEnd; ++GroupStart)
+		{
+			std::list<GameEngineActor*>& Group = GroupStart->second;
+
+			std::list<GameEngineActor*>::iterator StartActor = Group.begin();
+			std::list<GameEngineActor*>::iterator EndActor = Group.end();
+			for (; StartActor != EndActor;)
+			{
+				if (true == (*StartActor)->IsDeath())
+				{
+					delete (*StartActor);
+					StartActor = Group.erase(StartActor);
+					continue;
+				}
+
+				// 액터 내부의 충돌, 렌더 상태확인
+				(*StartActor)->Release();
+				++StartActor;
+			}
+		}
+	}
+}
+
+void GameEngineLevel::CollisionDebugRender()
+{
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupStart = AllCollision_.begin();
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupEnd = AllCollision_.end();
+
 	for (; GroupStart != GroupEnd; ++GroupStart)
 	{
-		std::list<GameEngineActor*>& Group = GroupStart->second;
-
-		std::list<GameEngineActor*>::iterator BeginListIter = Group.begin();
-		std::list<GameEngineActor*>::iterator EndListIter = Group.end();
-		for (; BeginListIter != EndListIter;)
+		std::list<GameEngineCollision*>& Group = GroupStart->second;
+		std::list<GameEngineCollision*>::iterator StartCollision = Group.begin();
+		std::list<GameEngineCollision*>::iterator EndCollision = Group.end();
+		for (; StartCollision != EndCollision; ++StartCollision)
 		{
-			if (true == (*BeginListIter)->IsDeath())
+			if (false == (*StartCollision)->IsUpdate())
 			{
-				delete (*BeginListIter);
-				BeginListIter = Group.erase(BeginListIter);
 				continue;
 			}
 
-			++BeginListIter;
+			(*StartCollision)->DebugRender();
 		}
 	}
 }

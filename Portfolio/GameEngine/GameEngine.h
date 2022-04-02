@@ -41,7 +41,7 @@ public:
 		EngineEnd();
 	}
 
-	inline static GameEngine& GlobalEngine()
+	inline static GameEngine& GetInst()
 	{
 		if (nullptr == UserContents_)
 		{
