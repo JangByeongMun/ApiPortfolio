@@ -5,8 +5,6 @@
 
 Intro03::Intro03() 
 	: ActorTime_(0)
-	, Check1(false)
-	, Check2(false)
 {
 }
 
@@ -23,9 +21,3 @@ void Intro03::Start()
 	renderer->CreateAnimation("Intro03_1.bmp", "Intro03_1", 0, 1, 0.1f, true);
 	renderer->ChangeAnimation("Intro03_1");
 }
-
-void Intro03::Update()
-{
-	ActorTime_ += GameEngineTime::GetDeltaTime();
-}
-

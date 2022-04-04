@@ -7,7 +7,6 @@ Intro06::Intro06()
 	: FaceRenderer_(nullptr)
 	, ActorTime_(0)
 	, Check1(false)
-	, Check2(false)
 {
 }
 
@@ -32,7 +31,11 @@ void Intro06::Start()
 		renderer->ChangeAnimation("Intro06_2"); 
 	}
 
-	FaceRenderer_ = CreateRenderer("intro06_4.bmp", RenderPivot::CENTER, { 30, -40 });
+
+	FaceRenderer_ = CreateRenderer(RenderPivot::CENTER, { 30, -40 });
+	FaceRenderer_->CreateAnimation("Intro06_3.bmp", "Intro06_3_1", 0, 0, 0.2f, false);
+	FaceRenderer_->CreateAnimation("Intro06_3.bmp", "Intro06_3_2", 0, 1, 0.2f, true);
+	FaceRenderer_->ChangeAnimation("Intro06_3_1");
 }
 
 void Intro06::Update()
@@ -42,15 +45,7 @@ void Intro06::Update()
 	if (ActorTime_ >= 2 && false == Check1)
 	{
 		Check1 = true;
-
-		FaceRenderer_->CreateAnimation("Intro06_3.bmp", "Intro06_3", 0, 1, 0.2f, true);
-		FaceRenderer_->ChangeAnimation("Intro06_3");
+		FaceRenderer_->ChangeAnimation("Intro06_3_2");
 	}
-
-	//if (ActorTime_ >= 3 && false == Check2)
-	//{
-	//	Check2 = true;
-	//	//CreateRenderer("Intro06_3.bmp", RenderPivot::CENTER, { 200, -90 });
-	//}
 }
 

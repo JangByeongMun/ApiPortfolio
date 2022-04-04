@@ -257,6 +257,36 @@
     <ClInclude Include="Intro15.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="Intro16.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro17.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro18.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro19.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro20.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro21.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro22.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro23.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro24.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro25.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -507,6 +537,36 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="Intro15.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro16.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro17.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro18.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro19.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro20.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro21.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro22.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro23.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro24.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro25.cpp">
       <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>

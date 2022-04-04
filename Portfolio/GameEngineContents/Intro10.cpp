@@ -19,11 +19,19 @@ void Intro10::Start()
 	ActorTime_ = 0.0f;
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
 
-	//CreateRenderer("epilogue01_1.bmp", RenderPivot::CENTER, { 0, 0 });
+	CreateRenderer("intro05_1.bmp", RenderPivot::CENTER, { 0, 0 });
 
-	GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { 0, 20 });
-	renderer->CreateAnimation("Intro10_1.bmp", "Intro10_1", 0, 1, 0.1f, true);
-	renderer->ChangeAnimation("Intro10_1");
+	{
+		GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -15, 10 });
+		renderer->CreateAnimation("Intro10_1.bmp", "Intro10_1", 0, 1, 0.1f, true);
+		renderer->ChangeAnimation("Intro10_1");
+	}
+
+	{
+		GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { 170, 220 });
+		renderer->CreateAnimation("Intro10_2.bmp", "Intro10_2", 0, 1, 0.1f, true);
+		renderer->ChangeAnimation("Intro10_2");
+	}
 }
 
 void Intro10::Update()

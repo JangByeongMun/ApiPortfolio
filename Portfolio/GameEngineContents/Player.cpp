@@ -36,8 +36,8 @@ void Player::Start()
 	BodyRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 35 });
 	BodyRender_->SetIndex(8);
 	
-	HeadRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 0 });
-	HeadRender_->SetIndex(0);
+	//HeadRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 0 });
+	//HeadRender_->SetIndex(0);
 
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))

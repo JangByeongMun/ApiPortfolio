@@ -23,8 +23,3 @@ void Intro02::Start()
 	renderer->CreateAnimation("intro02_1.bmp", "intro02_1", 0, 1, 0.1f, true);
 	renderer->ChangeAnimation("intro02_1");
 }
-
-void Intro02::Update()
-{
-	ActorTime_ += GameEngineTime::GetDeltaTime();
-}

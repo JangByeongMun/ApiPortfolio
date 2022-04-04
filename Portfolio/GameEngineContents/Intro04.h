@@ -19,10 +19,7 @@ protected:
 
 private:
 	float ActorTime_;
-	bool Check1;
-	bool Check2;
 
 	void Start() override;
-	void Update() override;
 };
 

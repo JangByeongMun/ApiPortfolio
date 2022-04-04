@@ -5,8 +5,6 @@
 
 Intro07::Intro07() 
 	: ActorTime_(0)
-	, Check1(false)
-	, Check2(false)
 {
 }
 
@@ -28,21 +26,3 @@ void Intro07::Start()
 	renderer->CreateAnimation("Intro07_2.bmp", "Intro07_2", 0, 1, 0.1f, true);
 	renderer->ChangeAnimation("Intro07_2");
 }
-
-void Intro07::Update()
-{
-	ActorTime_ += GameEngineTime::GetDeltaTime();
-
-	//if (ActorTime_ >= 2 && false == Check1)
-	//{
-	//	Check1 = true;
-	//	CreateRenderer("Intro07_2.bmp", RenderPivot::CENTER, { -170, -20 });
-	//}
-	//
-	//if (ActorTime_ >= 3 && false == Check2)
-	//{
-	//	Check2 = true;
-	//	CreateRenderer("Intro07_3.bmp", RenderPivot::CENTER, { 200, -90 });
-	//}
-}
-

@@ -257,6 +257,16 @@
     <ClInclude Include="Intro13.h" />
     <ClInclude Include="Intro14.h" />
     <ClInclude Include="Intro15.h" />
+    <ClInclude Include="Intro16.h" />
+    <ClInclude Include="Intro17.h" />
+    <ClInclude Include="Intro18.h" />
+    <ClInclude Include="Intro19.h" />
+    <ClInclude Include="Intro20.h" />
+    <ClInclude Include="Intro21.h" />
+    <ClInclude Include="Intro22.h" />
+    <ClInclude Include="Intro23.h" />
+    <ClInclude Include="Intro24.h" />
+    <ClInclude Include="Intro25.h" />
     <ClInclude Include="IntroPage.h">
       <SubType>
       </SubType>
@@ -509,6 +519,16 @@
     <ClCompile Include="Intro13.cpp" />
     <ClCompile Include="Intro14.cpp" />
     <ClCompile Include="Intro15.cpp" />
+    <ClCompile Include="Intro16.cpp" />
+    <ClCompile Include="Intro17.cpp" />
+    <ClCompile Include="Intro18.cpp" />
+    <ClCompile Include="Intro19.cpp" />
+    <ClCompile Include="Intro20.cpp" />
+    <ClCompile Include="Intro21.cpp" />
+    <ClCompile Include="Intro22.cpp" />
+    <ClCompile Include="Intro23.cpp" />
+    <ClCompile Include="Intro24.cpp" />
+    <ClCompile Include="Intro25.cpp" />
     <ClCompile Include="IntroPage.cpp">
       <SubType>
       </SubType>
