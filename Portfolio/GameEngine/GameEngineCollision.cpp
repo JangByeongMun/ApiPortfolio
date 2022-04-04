@@ -1,6 +1,7 @@
 #include "GameEngineCollision.h"
 #include "GameEngine.h"
 #include "GameEngineLevel.h"
+#include "GameEngineActor.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
 bool (*CollisionCheckArray[static_cast<int>(CollisionType::Max)][static_cast<int>(CollisionType::Max)])(GameEngineCollision*, GameEngineCollision*);
@@ -76,7 +77,7 @@ bool GameEngineCollision::CollisionCheck(
 
 bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::vector<GameEngineCollision*>& _ColResult, CollisionType _This, CollisionType _Target)
 {
-	size_t StartSize = _TargetGroup.size();
+	size_t StartSize = _ColResult.size();
 
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
 

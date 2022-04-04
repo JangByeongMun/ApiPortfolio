@@ -6,6 +6,7 @@
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineLevel.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -19,6 +20,7 @@ Player::Player()
 	: Speed_(300.0f)
 	, BodyRender_(nullptr)
 	, HeadRender_(nullptr)
+	, PlayerCollision(nullptr)
 	, MapColImage_(nullptr)
 {
 }
@@ -30,6 +32,7 @@ Player::~Player()
 void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+	PlayerCollision = CreateCollision("PlayerHitBox", { 100, 100 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -56,6 +59,7 @@ void Player::Start()
 
 void Player::Update()
 {
+	// 움직임 관리
 	{
 		float4 MoveDir = float4::ZERO;
 		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
@@ -86,36 +90,57 @@ void Player::Update()
 		}
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("AttckLeft"))
+	// 공격 입력
 	{
-		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-		Ptr->SetPosition(GetPosition());
-		Ptr->SetVector(float4::LEFT);
-		Ptr->SetSpeed(200.0f);
+		if (true == GameEngineInput::GetInst()->IsDown("AttckLeft"))
+		{
+			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+			Ptr->SetPosition(GetPosition());
+			Ptr->SetVector(float4::LEFT);
+			Ptr->SetSpeed(200.0f);
+		}
+		if (true == GameEngineInput::GetInst()->IsDown("AttckRight"))
+		{
+			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+			Ptr->SetPosition(GetPosition());
+			Ptr->SetVector(float4::RIGHT);
+			Ptr->SetSpeed(200.0f);
+		}
+		if (true == GameEngineInput::GetInst()->IsDown("AttckUp"))
+		{
+			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+			Ptr->SetPosition(GetPosition());
+			Ptr->SetVector(float4::UP);
+			Ptr->SetSpeed(200.0f);
+		}
+		if (true == GameEngineInput::GetInst()->IsDown("AttckDown"))
+		{
+			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+			Ptr->SetPosition(GetPosition());
+			Ptr->SetVector(float4::DOWN);
+			Ptr->SetSpeed(200.0f);
+		}
 	}
-	if (true == GameEngineInput::GetInst()->IsDown("AttckRight"))
+
+	// 충돌 체크
 	{
-		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-		Ptr->SetPosition(GetPosition());
-		Ptr->SetVector(float4::RIGHT);
-		Ptr->SetSpeed(200.0f);
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("AttckUp"))
-	{
-		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-		Ptr->SetPosition(GetPosition());
-		Ptr->SetVector(float4::UP);
-		Ptr->SetSpeed(200.0f);
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("AttckDown"))
-	{
-		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-		Ptr->SetPosition(GetPosition());
-		Ptr->SetVector(float4::DOWN);
-		Ptr->SetSpeed(200.0f);
+		CollisionCheck();
 	}
 }
 
 void Player::Render()
 {
+}
+
+void Player::CollisionCheck()
+{
+	std::vector<GameEngineCollision*> ColVec;
+
+	if (true == PlayerCollision->CollisionResult("Wall", ColVec, CollisionType::Rect, CollisionType::Rect))
+	{
+		for (int i = 0; i < ColVec.size(); i++)
+		{
+			ColVec[i]->Death();
+		}
+	}
 }

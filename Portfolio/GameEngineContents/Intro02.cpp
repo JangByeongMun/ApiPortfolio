@@ -5,8 +5,6 @@
 
 Intro02::Intro02() 
 	: ActorTime_(0)
-	, Check1(false)
-	, Check2(false)
 {
 }
 

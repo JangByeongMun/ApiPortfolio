@@ -22,9 +22,11 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
-	CreateActor<TestMap>((int)ORDER::BACKGROUND);
+	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HpUI>((int)ORDER::UI);
+
+	Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
 }
 
 void PlayLevel::Update()
