@@ -236,6 +236,27 @@
     <ClInclude Include="Intro08.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="Intro09.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro10.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro11.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro12.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro13.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro14.h">
+      <Filter>Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Intro15.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -465,6 +486,27 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="Intro08.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro09.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro10.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro11.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro12.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro13.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro14.cpp">
+      <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Intro15.cpp">
       <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>

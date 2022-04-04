@@ -250,6 +250,13 @@
     <ClInclude Include="Intro06.h" />
     <ClInclude Include="Intro07.h" />
     <ClInclude Include="Intro08.h" />
+    <ClInclude Include="Intro09.h" />
+    <ClInclude Include="Intro10.h" />
+    <ClInclude Include="Intro11.h" />
+    <ClInclude Include="Intro12.h" />
+    <ClInclude Include="Intro13.h" />
+    <ClInclude Include="Intro14.h" />
+    <ClInclude Include="Intro15.h" />
     <ClInclude Include="IntroPage.h">
       <SubType>
       </SubType>
@@ -495,6 +502,13 @@
     <ClCompile Include="Intro06.cpp" />
     <ClCompile Include="Intro07.cpp" />
     <ClCompile Include="Intro08.cpp" />
+    <ClCompile Include="Intro09.cpp" />
+    <ClCompile Include="Intro10.cpp" />
+    <ClCompile Include="Intro11.cpp" />
+    <ClCompile Include="Intro12.cpp" />
+    <ClCompile Include="Intro13.cpp" />
+    <ClCompile Include="Intro14.cpp" />
+    <ClCompile Include="Intro15.cpp" />
     <ClCompile Include="IntroPage.cpp">
       <SubType>
       </SubType>

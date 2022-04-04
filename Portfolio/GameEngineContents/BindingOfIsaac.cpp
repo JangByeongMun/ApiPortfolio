@@ -151,84 +151,139 @@ void BindingOfIsaac::ImageCut()
 	Image->CutCount(2, 1);
 
 	/////////////////////////////////// Intro
-	Image = GameEngineImageManager::GetInst()->Find("intro01_1.bmp");
-	Image->CutCount(2, 1);
+	{
+		Image = GameEngineImageManager::GetInst()->Find("intro01_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("intro02_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("intro02_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("intro03_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("intro03_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("intro04_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("intro04_1.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro05_2.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro05_3.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro05_5.bmp");
+		Image->CutCount(1, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro05_6.bmp");
+		Image->CutCount(1, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro06_1.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro06_2.bmp");
+		Image->CutCount(1, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro06_3.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro07_2.bmp");
+		Image->CutCount(1, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro08_1.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_01.bmp");
+		Image->CutCount(5, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_1.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_2.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_3.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_4.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_5.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_6.bmp");
+		Image->CutCount(4, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_7.bmp");
+		Image->CutCount(4, 1);
+	}
 
 	/////////////////////////////////// Ending
-	Image = GameEngineImageManager::GetInst()->Find("epilogue01_2.bmp");
-	Image->CutCount(2, 1);
+	{
+		Image = GameEngineImageManager::GetInst()->Find("epilogue01_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue02_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue02_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue03_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue03_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue04_1.bmp");
-	Image->CutCount(1, 2);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue04_1.bmp");
+		Image->CutCount(1, 2);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue04_2.bmp");
-	Image->CutCount(1, 2);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue04_2.bmp");
+		Image->CutCount(1, 2);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue05_1.bmp");
-	Image->CutCount(1, 2);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue05_1.bmp");
+		Image->CutCount(1, 2);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue07_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue07_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue08_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue08_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue09_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue09_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue10_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue10_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue10_2.bmp");
-	Image->CutCount(1, 2);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue10_2.bmp");
+		Image->CutCount(1, 2);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue11_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue11_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue11_3.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue11_3.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue11_4.bmp");
-	Image->CutCount(1, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue11_4.bmp");
+		Image->CutCount(1, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue12_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue12_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue12_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue12_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue13_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue13_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue13_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue13_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue14_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue14_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue15_1.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue15_1.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue15_2.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue15_2.bmp");
+		Image->CutCount(2, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("epilogue15_3.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("epilogue15_3.bmp");
+		Image->CutCount(2, 1);
+	}
 }
 
 void BindingOfIsaac::GameLoop()

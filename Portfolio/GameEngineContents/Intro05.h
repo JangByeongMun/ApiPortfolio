@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
 
-// Ό³Έν :
 class Intro05 : public GameEngineActor
 {
 public:
@@ -18,6 +18,8 @@ public:
 protected:
 
 private:
+	GameEngineRenderer* MomRenderer;
+	GameEngineRenderer* IsaacRenderer;
 	float ActorTime_;
 	bool Check1;
 	bool Check2;

@@ -30,16 +30,14 @@ void Intro08::Update()
 {
 	ActorTime_ += GameEngineTime::GetDeltaTime();
 
-	if (ActorTime_ >= 2 && false == Check1)
-	{
-		Check1 = true;
-		CreateRenderer("Intro08_2.bmp", RenderPivot::CENTER, { -170, -20 });
-	}
-
-	if (ActorTime_ >= 3 && false == Check2)
-	{
-		Check2 = true;
-		CreateRenderer("Intro08_3.bmp", RenderPivot::CENTER, { 200, -90 });
-	}
+	//if (ActorTime_ >= 2 && false == Check1)
+	//{
+	//	Check1 = true;
+	//}
+	//
+	//if (ActorTime_ >= 3 && false == Check2)
+	//{
+	//	Check2 = true;
+	//}
 }
 
