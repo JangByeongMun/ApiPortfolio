@@ -19,11 +19,11 @@ public:
 	{
 		Name_ = _Name;
 	}
-	inline const std::string GetName()
+	inline std::string GetName()
 	{
 		return Name_;
 	}
-	inline const std::string& GetNameRef()
+	inline std::string& GetNameRef()
 	{
 		return Name_;
 	}

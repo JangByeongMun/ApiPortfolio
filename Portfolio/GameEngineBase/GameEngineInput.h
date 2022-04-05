@@ -37,7 +37,10 @@ private:
 	static GameEngineInput* Inst_;
 
 public:
-	static GameEngineInput* GetInst();
+	static GameEngineInput* GetInst()
+	{
+		return Inst_;
+	}
 	static void Destroy()
 	{
 		if (nullptr != Inst_)
@@ -47,6 +50,7 @@ public:
 		}
 	}
 
+public:
 	void Update(float _DeltaTime = 0.0f);
 	void CreateKey(const std::string& _Name, int _Key);
 

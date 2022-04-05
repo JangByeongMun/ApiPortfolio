@@ -2,7 +2,7 @@
 #include "GameEngineDebug.h"
 #include "GameEngineString.h"
 
-//////////////////////////////////////////////////
+////////////////////////////////////////////////// GameEngineKey
 void GameEngineInput::GameEngineKey::Update(float _DeltaTime)
 {
 	if (true == KeyCheck())
@@ -55,11 +55,6 @@ GameEngineInput::GameEngineInput()
 
 GameEngineInput::~GameEngineInput() 
 {
-}
-
-GameEngineInput* GameEngineInput::GetInst()
-{
-	return Inst_;
 }
 
 void GameEngineInput::Update(float _DeltaTime)
@@ -152,7 +147,13 @@ bool GameEngineInput::IsFree(const std::string& _Name)
 bool GameEngineInput::IsKey(const std::string& _Name)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
-	return AllInputKey_.end() != AllInputKey_.find(UpperName);
+
+	if (AllInputKey_.end() != AllInputKey_.find(UpperName))
+	{
+		return true;
+	}
+
+	return false;
 }
 
 
