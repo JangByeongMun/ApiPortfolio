@@ -89,33 +89,33 @@ bool GameEngineImage::Load(const std::string& _Path)
 
 void GameEngineImage::BitCopy(const GameEngineImage* _Other)
 {
-	BitCopy(_Other, float4{ 0, 0 }, _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, { 0, 0 }, _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopy(const GameEngineImage* _Other, const float4& _CopyPos)
 {
-	BitCopy(_Other, _CopyPos, _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos, _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopyCenter(const GameEngineImage* _Other, const float4& _CopyPos)
 {
-	BitCopy(_Other, _CopyPos - _Other->GetScale().Half(), _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - _Other->GetScale().Half(), _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopyCenterPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot)
 {
-	BitCopy(_Other, _CopyPos - _Other->GetScale().Half() + _CopyPivot, _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - _Other->GetScale().Half() + _CopyPivot, _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopyBot(const GameEngineImage* _Other, const float4& _CopyPos)
 {
 	float4 ImagePivot = _Other->GetScale().Half();
 	ImagePivot.y = _Other->GetScale().y;
 
-	BitCopy(_Other, _CopyPos - ImagePivot, _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - ImagePivot, _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopyBotPivot(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyPivot)
 {
 	float4 ImagePivot = _Other->GetScale().Half();
 	ImagePivot.y = _Other->GetScale().y;
 
-	BitCopy(_Other, _CopyPos - ImagePivot + _CopyPivot, _Other->GetScale(), float4{ 0, 0 });
+	BitCopy(_Other, _CopyPos - ImagePivot + _CopyPivot, _Other->GetScale(), { 0, 0 });
 }
 void GameEngineImage::BitCopy(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot)
 {

@@ -24,6 +24,8 @@ Player::Player()
 	, MapColImage_(nullptr)
 	, MoveAnimationName("Move_")
 	, AttackAnimationName("Attack_")
+	, CurMove_()
+	, CurAttack_()
 {
 }
 
@@ -38,7 +40,7 @@ void Player::Start()
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
-	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 35 });
+	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 30 });
 	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Move_Left", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Right", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Up", 6, 15, 0.1f, true);

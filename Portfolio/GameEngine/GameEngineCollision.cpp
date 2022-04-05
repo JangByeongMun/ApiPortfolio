@@ -27,6 +27,7 @@ public:
 		CollisionCheckArray[static_cast<int>(CollisionType::Rect)][static_cast<int>(CollisionType::Rect)] = RectToRect;
 	}
 };
+
 CollisionInit InitInst = CollisionInit();
 
 GameEngineCollision::GameEngineCollision() 
@@ -59,7 +60,6 @@ bool GameEngineCollision::CollisionCheck(
 		MsgBoxAssert("처리할 수 없는 충돌조합입니다.");
 		return false;
 	}
-
 
 	std::list<GameEngineCollision*>& TargetGroup = FindTargetGroup->second;
 	std::list<GameEngineCollision*>::iterator StartIter = TargetGroup.begin();

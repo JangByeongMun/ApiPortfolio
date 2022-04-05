@@ -45,18 +45,6 @@ GameEngineActor::~GameEngineActor()
 	}
 }
 
-void GameEngineActor::Start()
-{
-}
-
-void GameEngineActor::Update()
-{
-}
-
-void GameEngineActor::Render()
-{
-}
-
 void GameEngineActor::Release()
 {
 	// 렌더가 종료된게 있으면 확인후 삭제
@@ -73,6 +61,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = RenderList_.erase(StartIter);
 		}
 	}
@@ -91,6 +80,7 @@ void GameEngineActor::Release()
 			}
 
 			delete (*StartIter);
+			(*StartIter) = nullptr;
 			StartIter = CollisionList_.erase(StartIter);
 		}
 	}
@@ -133,6 +123,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(int _Order, RenderPivot _Piv
 		NewRenderer->SetOrder(GetOrder());
 	}
 
+	GetLevel()->AddRenderer(NewRenderer);
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
@@ -154,6 +145,7 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, i
 		NewRenderer->SetOrder(GetOrder());
 	}
 
+	GetLevel()->AddRenderer(NewRenderer);
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
@@ -165,8 +157,8 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _I
 	NewRenderer->SetActor(this);
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetScale(_Scale);
-	NewRenderer->SetPivotType(_PivotType);
 	NewRenderer->SetPivot(_PivotPos);
+	NewRenderer->SetPivotType(_PivotType);
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
 		NewRenderer->SetOrder(_Order);
@@ -176,6 +168,7 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _I
 		NewRenderer->SetOrder(GetOrder());
 	}
 
+	GetLevel()->AddRenderer(NewRenderer);
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }

@@ -7,11 +7,13 @@
 class GameEngine;
 class GameEngineActor;
 class GameEngineCollision;
+class GameEngineRenderer;
 class GameEngineLevel : public GameEngineNameObject
 {
 	friend GameEngine;
 	friend GameEngineActor;
 	friend GameEngineCollision;
+	friend GameEngineRenderer;
 
 public:
 	// constrcuter destructer
@@ -71,20 +73,24 @@ protected:
 	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
 	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
 
+	//////////////////// 액터
 private:
-	// 키값 == 업데이트의 우선순위
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 	float4 CameraPos_;
-
-	// 키값 == 액터의 이름
-	//std::map<std::string, std::list<GameEngineActor*>> allActor_;
 
 	void ActorUpdate();
 	void ActorRender();
 	void ActorRelease();
 	void CollisionDebugRender();
 
-	//////////////////// 충돌 체크
+	//////////////////// 렌더러
+private:
+	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+	
+	void AddRenderer(GameEngineRenderer* _Renderer);
+	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
+
+	//////////////////// 콜리젼
 private:
 	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
 

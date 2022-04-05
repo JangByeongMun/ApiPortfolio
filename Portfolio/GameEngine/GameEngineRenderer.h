@@ -6,10 +6,11 @@
 
 // 설명 :
 class GameEngineImage;
+class GameEngineFolderImage;
 class GameEngineRenderer : public GameEngineActorSubObject
 {
 	friend GameEngineActor;
-	friend class FrameAnimation;
+	friend GameEngineLevel;
 public:
 	// constrcuter destructer
 	GameEngineRenderer();
@@ -60,15 +61,23 @@ public:
 		IsCameraEffect_ = true;
 	}
 
+	void SetOrder(int _Order) override;
+
 protected:
 	void Render();
 
 private:
+	friend class FrameAnimation;
+
 	GameEngineImage* Image_;
 	RenderPivot PivotType_;
 	RenderScaleMode ScaleMode_;
+	
+	// 화면에 출력할 좌표와 크기
 	float4 RenderPivot_;
 	float4 RenderScale_;
+
+	// 잘라낼 좌표와 크기
 	float4 RenderImageScale_;
 	float4 RenderImagePivot_;
 
@@ -82,6 +91,8 @@ private:
 	public:
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
+		GameEngineFolderImage* FolderImage_;
+
 		int CurrentFrame_;
 		int StartFrame_;
 		int EndFrame_;
@@ -93,6 +104,7 @@ private:
 		FrameAnimation()
 			: Renderer_(nullptr)
 			, Image_(nullptr)
+			, FolderImage_(nullptr)
 			, CurrentFrame_(-1)
 			, StartFrame_(-1)
 			, EndFrame_(-1)
@@ -117,6 +129,7 @@ private:
 
 public:
 	void CreateAnimation(const std::string& _image, const std::string& _name, int _startIndex, int _endIndex, float _interTime, bool _loop = true);
+	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 	void ChangeAnimation(const std::string& _name);
 
 private:

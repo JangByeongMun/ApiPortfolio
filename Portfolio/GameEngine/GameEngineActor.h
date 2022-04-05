@@ -5,7 +5,6 @@
 #include <list>
 
 #include "GameEngineEnum.h"
-#include "GameEngineImage.h"
 #include "GameEngineLevel.h"
 
 // 설명 :
@@ -58,9 +57,9 @@ public:
 	}
 
 protected:
-	virtual void Start();
-	virtual void Update();
-	virtual void Render();
+	virtual void Start() {};
+	virtual void Update() {};
+	virtual void Render() {};
 
 	void Release();
 	void DebugRectRender();
@@ -80,7 +79,6 @@ public:
 	// 기존 타입, 피벗 사용하기용 함수추가
 	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 }, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType, float4 _PivotPos = { 0, 0 }, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
-
 
 	GameEngineRenderer* CreateRenderer(int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});

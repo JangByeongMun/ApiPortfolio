@@ -1,6 +1,5 @@
 #include "GameEngine.h"
 #include "GameEngineLevel.h"
-#include "GameEngineImage.h"
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -109,11 +108,6 @@ void GameEngine::EngineEnd()
 	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();
 	GameEngineTime::Destroy();
-}
-
-HDC GameEngine::WindowMainDC()
-{
-	return WindowMainImage_->ImageDC();
 }
 
 HDC GameEngine::BackBufferDC()

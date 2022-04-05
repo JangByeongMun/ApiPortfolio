@@ -21,6 +21,7 @@ enum class PlayerAttackDir
 };
 
 // 설명 : 플레이어
+class GameEngineImage;
 class Player : public Shooter
 {
 public:

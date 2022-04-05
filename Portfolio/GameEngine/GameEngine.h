@@ -22,7 +22,6 @@ public:
 	{
 		return BackBufferImage_;
 	}
-	static HDC WindowMainDC();
 	static HDC BackBufferDC();
 
 	virtual void GameInit() = 0;

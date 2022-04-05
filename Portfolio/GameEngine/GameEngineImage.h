@@ -1,7 +1,7 @@
 #pragma once
-#include <Windows.h>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+#include <Windows.h>
 #include <vector>
 
 // Ό³Έν :
@@ -55,6 +55,10 @@ public:
 	{
 		return 0 != CutPivot_.size();
 	}
+	inline size_t GetCutCount()
+	{
+		return CutPivot_.size();
+	}
 	inline float4 GetCutPivot(size_t _Index)
 	{
 		return CutPivot_[_Index];
@@ -62,10 +66,6 @@ public:
 	inline float4 GetCutScale(size_t _Index)
 	{
 		return CutScale_[_Index];
-	}
-	inline size_t GetCutCount()
-	{
-		return CutPivot_.size();
 	}
 	inline int GetImagePixel(const float4& _Pos)
 	{
