@@ -77,9 +77,14 @@ private:
 
 	////////////////// 렌더 기능
 public:
-	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
-	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
-	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, float4 _Scale, RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
+	// 기존 타입, 피벗 사용하기용 함수추가
+	GameEngineRenderer* CreateRenderer(RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 }, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, RenderPivot _PivotType, float4 _PivotPos = { 0, 0 }, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX));
+
+
+	GameEngineRenderer* CreateRenderer(int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
+	GameEngineRenderer* CreateRenderer(const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
+	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, float4 _Scale, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
 	void Rendering();
 
 private:

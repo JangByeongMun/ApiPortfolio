@@ -39,19 +39,19 @@ void Player::Start()
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
 	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 35 });
-	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Left", 16, 25, 0.1f, true);
-	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Right", 16, 25, 0.1f, true);
-	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Up", 6, 15, 0.1f, true);
-	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Down", 6, 15, 0.1f, true);
-	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Idle", 8, 8, 0.1f, false);
+	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Move_Left", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Right", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Up", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Down", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Idle", 8, 8, 0.1f, false);
 	BodyRender_->ChangeAnimation("Move_Idle");
 	
 	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
-	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Left", 2, 3, 0.1f, true);
-	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Right", 2, 3, 0.1f, true);
-	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Up", 4, 5, 0.1f, true);
-	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Down", 0, 1, 0.1f, true);
-	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Idle", 0, 0, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left", 2, 3, 0.1f, true);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right", 2, 3, 0.1f, true);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up", 4, 5, 0.1f, true);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down", 0, 1, 0.1f, true);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Idle", 0, 0, 0.1f, false);
 	HeadRender_->ChangeAnimation("Attack_Idle");
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))

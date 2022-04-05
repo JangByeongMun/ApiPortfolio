@@ -139,8 +139,14 @@ void BindingOfIsaac::ImageCut()
 	Image = GameEngineImageManager::GetInst()->Find("None.bmp");
 	Image->CutCount(1, 1);
 
-	Image = GameEngineImageManager::GetInst()->Find("character_001_isaac.bmp");
-	Image->Cut({ 96, 100 });
+	/////////////////////////////////// Character
+	{
+		Image = GameEngineImageManager::GetInst()->Find("001_isaac.bmp");
+		Image->Cut({ 96, 96 });
+
+		Image = GameEngineImageManager::GetInst()->Find("001_isaac_left.bmp");
+		Image->Cut({ 96, 96 });
+	}
 	
 	Image = GameEngineImageManager::GetInst()->Find("tears.bmp");
 	Image->Cut({ 96, 96 });

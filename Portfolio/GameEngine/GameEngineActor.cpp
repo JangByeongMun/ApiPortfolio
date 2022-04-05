@@ -108,19 +108,36 @@ void GameEngineActor::DebugRectRender()
 	);
 }
 
-GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType, const float4& _PivotPos)
+GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType, const float4& _PivotPos, int _Order)
+{
+	return CreateRenderer(_Order, _PivotType, _PivotPos);
+}
+GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, RenderPivot _PivotType, float4 _PivotPos, int _Order)
+{
+	return CreateRenderer(_Image, _Order, _PivotType, _PivotPos);
+}
+
+GameEngineRenderer* GameEngineActor::CreateRenderer(int _Order, RenderPivot _PivotType, const float4& _PivotPos)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
 	NewRenderer->SetActor(this);
 	NewRenderer->SetPivot(_PivotPos);
 	NewRenderer->SetPivotType(_PivotType);
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->SetOrder(GetOrder());
+	}
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
 
-GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, RenderPivot _PivotType, float4 _PivotPos)
+GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, int _Order, RenderPivot _PivotType, float4 _PivotPos)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
@@ -128,12 +145,20 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, R
 	NewRenderer->SetImage(_Image);
 	NewRenderer->SetPivotType(_PivotType);
 	NewRenderer->SetPivot(_PivotPos);
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->SetOrder(GetOrder());
+	}
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
 }
 
-GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, float4 _Scale, RenderPivot _PivotType, float4 _PivotPos)
+GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _Image, float4 _Scale, int _Order, RenderPivot _PivotType, float4 _PivotPos)
 {
 	GameEngineRenderer* NewRenderer = new GameEngineRenderer();
 
@@ -142,6 +167,14 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _I
 	NewRenderer->SetScale(_Scale);
 	NewRenderer->SetPivotType(_PivotType);
 	NewRenderer->SetPivot(_PivotPos);
+	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
+	{
+		NewRenderer->SetOrder(_Order);
+	}
+	else
+	{
+		NewRenderer->SetOrder(GetOrder());
+	}
 
 	RenderList_.push_back(NewRenderer);
 	return NewRenderer;
