@@ -22,6 +22,8 @@ Player::Player()
 	, HeadRender_(nullptr)
 	, PlayerCollision(nullptr)
 	, MapColImage_(nullptr)
+	, MoveAnimationName("Move_")
+	, AttackAnimationName("Attack_")
 {
 }
 
@@ -36,12 +38,21 @@ void Player::Start()
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
-	BodyRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 35 });
-	BodyRender_->SetIndex(8);
+	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 35 });
+	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Left", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Right", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Up", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Down", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("character_001_isaac.bmp", "Move_Idle", 8, 8, 0.1f, false);
+	BodyRender_->ChangeAnimation("Move_Idle");
 	
-	//HeadRender_ = CreateRenderer("character_001_isaac.bmp", RenderPivot::CENTER, { 0, 0 });
-	//HeadRender_->SetIndex(0);
-
+	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
+	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Left", 2, 3, 0.1f, true);
+	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Right", 2, 3, 0.1f, true);
+	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Up", 4, 5, 0.1f, true);
+	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Down", 0, 1, 0.1f, true);
+	HeadRender_->CreateAnimation("character_001_isaac.bmp", "Attack_Idle", 0, 0, 0.1f, false);
+	HeadRender_->ChangeAnimation("Attack_Idle");
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
@@ -49,34 +60,52 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("MoveRight", 'D');
 		GameEngineInput::GetInst()->CreateKey("MoveUp", 'W');
 		GameEngineInput::GetInst()->CreateKey("MoveDown", 'S');
-		GameEngineInput::GetInst()->CreateKey("AttckLeft", VK_LEFT);
-		GameEngineInput::GetInst()->CreateKey("AttckRight", VK_RIGHT);
-		GameEngineInput::GetInst()->CreateKey("AttckUp", VK_UP);
-		GameEngineInput::GetInst()->CreateKey("AttckDown", VK_DOWN);
+		GameEngineInput::GetInst()->CreateKey("AttackLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("AttackRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("AttackUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("AttackDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Bomb", 'E');
 	}
 }
+
 
 void Player::Update()
 {
 	// 움직임 관리
 	{
 		float4 MoveDir = float4::ZERO;
+		PlayerMoveDir CheckMove = PlayerMoveDir::Idle;
+		std::string ChangeDirText = "Idle";
+		
 		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 		{
-			MoveDir = float4::LEFT;
+			MoveDir += float4::LEFT;
+			CheckMove = PlayerMoveDir::Left;
+			ChangeDirText = "Left";
 		}
 		if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
 		{
-			MoveDir = float4::RIGHT;
+			MoveDir += float4::RIGHT;
+			CheckMove = PlayerMoveDir::Right;
+			ChangeDirText = "Right";
 		}
 		if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 		{
-			MoveDir = float4::UP;
+			MoveDir += float4::UP;
+			CheckMove = PlayerMoveDir::Up;
+			ChangeDirText = "Up";
 		}
 		if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 		{
-			MoveDir = float4::DOWN;
+			MoveDir += float4::DOWN;
+			CheckMove = PlayerMoveDir::Down;
+			ChangeDirText = "Down";
+		}
+
+		if (CheckMove != CurMove_)
+		{
+			BodyRender_->ChangeAnimation(MoveAnimationName + ChangeDirText);
+			CurMove_ = CheckMove;
 		}
 
 		float4 NextPos = GetPosition() + (MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
@@ -92,33 +121,58 @@ void Player::Update()
 
 	// 공격 입력
 	{
-		if (true == GameEngineInput::GetInst()->IsDown("AttckLeft"))
+		PlayerAttackDir CheckAttack = PlayerAttackDir::Idle;
+		std::string ChangeDirText = "Idle";
+
+		if (true == GameEngineInput::GetInst()->IsPress("AttackLeft"))
 		{
 			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 			Ptr->SetPosition(GetPosition());
 			Ptr->SetVector(float4::LEFT);
 			Ptr->SetSpeed(200.0f);
+
+			CheckAttack = PlayerAttackDir::Left;
+			ChangeDirText = "Left";
 		}
-		if (true == GameEngineInput::GetInst()->IsDown("AttckRight"))
+		else if (true == GameEngineInput::GetInst()->IsPress("AttackRight"))
 		{
 			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 			Ptr->SetPosition(GetPosition());
 			Ptr->SetVector(float4::RIGHT);
 			Ptr->SetSpeed(200.0f);
+
+			CheckAttack = PlayerAttackDir::Right;
+			ChangeDirText = "Right";
 		}
-		if (true == GameEngineInput::GetInst()->IsDown("AttckUp"))
+		else if (true == GameEngineInput::GetInst()->IsPress("AttackUp"))
 		{
 			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 			Ptr->SetPosition(GetPosition());
 			Ptr->SetVector(float4::UP);
 			Ptr->SetSpeed(200.0f);
+
+			CheckAttack = PlayerAttackDir::Up;
+			ChangeDirText = "Up";
 		}
-		if (true == GameEngineInput::GetInst()->IsDown("AttckDown"))
+		else if (true == GameEngineInput::GetInst()->IsPress("AttackDown"))
 		{
 			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 			Ptr->SetPosition(GetPosition());
 			Ptr->SetVector(float4::DOWN);
 			Ptr->SetSpeed(200.0f);
+
+			CheckAttack = PlayerAttackDir::Down;
+			ChangeDirText = "Down";
+		}
+		else if (PlayerAttackDir::Idle != CurAttack_) // 이전 프레임에선 공격하고있었으나 지금 멈췄을때
+		{
+
+		}
+
+		if (CheckAttack != CurAttack_)
+		{
+			HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirText);
+			CurAttack_ = CheckAttack;
 		}
 	}
 
