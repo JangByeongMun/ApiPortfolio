@@ -16,8 +16,8 @@
 
 #include "Projectile.h"
 
-Player::Player() 
-	: Speed_(300.0f)
+Player::Player()
+	: Speed_(1)
 	, BodyRender_(nullptr)
 	, HeadRender_(nullptr)
 	, PlayerCollision(nullptr)
@@ -26,6 +26,9 @@ Player::Player()
 	, AttackAnimationName("Attack_")
 	, CurMove_()
 	, CurAttack_()
+	, AttackSpeed_(2.73f)
+	, NextAttackTime_(0.0f)
+	, CurrentAttackTime_(0.0f)
 {
 }
 
@@ -49,10 +52,14 @@ void Player::Start()
 	BodyRender_->ChangeAnimation("Move_Idle");
 	
 	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
-	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left", 2, 3, 0.1f, true);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right", 2, 3, 0.1f, true);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up", 4, 5, 0.1f, true);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down", 0, 1, 0.1f, true);
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left_1", 2, 2, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left_2", 2, 3, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right_1", 2, 2, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right_2", 2, 3, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up_1", 4, 4, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up_2", 4, 5, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down_1", 0, 0, 0.1f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down_2", 0, 1, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Idle", 0, 0, 0.1f, false);
 	HeadRender_->ChangeAnimation("Attack_Idle");
 
@@ -110,72 +117,20 @@ void Player::Update()
 			CurMove_ = CheckMove;
 		}
 
-		float4 NextPos = GetPosition() + (MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
-		float4 CheckPos = NextPos;
+		// Speed는 인게임의 스피드수치, 300은 움직이는걸보고 대충 맞춘 값
+		float4 NextPos = GetPosition() + (MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 300);
 
-		int Color = MapColImage_->GetImagePixel(CheckPos);
+		int Color = MapColImage_->GetImagePixel(NextPos);
 
 		if (RGB(0, 0, 0) != Color)
 		{
-			SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_);
+			SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 300);
 		}
 	}
 
 	// 공격 입력
 	{
-		PlayerAttackDir CheckAttack = PlayerAttackDir::Idle;
-		std::string ChangeDirText = "Idle";
-
-		if (true == GameEngineInput::GetInst()->IsPress("AttackLeft"))
-		{
-			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-			Ptr->SetPosition(GetPosition());
-			Ptr->SetVector(float4::LEFT);
-			Ptr->SetSpeed(200.0f);
-
-			CheckAttack = PlayerAttackDir::Left;
-			ChangeDirText = "Left";
-		}
-		else if (true == GameEngineInput::GetInst()->IsPress("AttackRight"))
-		{
-			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-			Ptr->SetPosition(GetPosition());
-			Ptr->SetVector(float4::RIGHT);
-			Ptr->SetSpeed(200.0f);
-
-			CheckAttack = PlayerAttackDir::Right;
-			ChangeDirText = "Right";
-		}
-		else if (true == GameEngineInput::GetInst()->IsPress("AttackUp"))
-		{
-			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-			Ptr->SetPosition(GetPosition());
-			Ptr->SetVector(float4::UP);
-			Ptr->SetSpeed(200.0f);
-
-			CheckAttack = PlayerAttackDir::Up;
-			ChangeDirText = "Up";
-		}
-		else if (true == GameEngineInput::GetInst()->IsPress("AttackDown"))
-		{
-			Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-			Ptr->SetPosition(GetPosition());
-			Ptr->SetVector(float4::DOWN);
-			Ptr->SetSpeed(200.0f);
-
-			CheckAttack = PlayerAttackDir::Down;
-			ChangeDirText = "Down";
-		}
-		else if (PlayerAttackDir::Idle != CurAttack_) // 이전 프레임에선 공격하고있었으나 지금 멈췄을때
-		{
-
-		}
-
-		if (CheckAttack != CurAttack_)
-		{
-			HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirText);
-			CurAttack_ = CheckAttack;
-		}
+		AttackCheck();
 	}
 
 	// 충돌 체크
@@ -198,5 +153,68 @@ void Player::CollisionCheck()
 		{
 			ColVec[i]->Death();
 		}
+	}
+}
+
+void Player::AttackCheck()
+{
+	CurrentAttackTime_ += GameEngineTime::GetDeltaTime();
+	PlayerAttackDir CheckAttack = PlayerAttackDir::Idle;
+	std::string ChangeDirTextSuccess = "Idle";
+	std::string ChangeDirTextFail = "Idle";
+	float4 MoveDir = float4::ZERO;
+	float TearDelay = 1.0f;
+
+	if (true == GameEngineInput::GetInst()->IsPress("AttackLeft"))
+	{
+		MoveDir = float4::LEFT;
+		CheckAttack = PlayerAttackDir::Left;
+		ChangeDirTextFail = "Left_1";
+		ChangeDirTextSuccess = "Left_2";
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("AttackRight"))
+	{
+		MoveDir = float4::RIGHT;
+		CheckAttack = PlayerAttackDir::Right;
+		ChangeDirTextFail = "Right_1";
+		ChangeDirTextSuccess = "Right_2";
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("AttackUp"))
+	{
+		MoveDir = float4::UP;
+		CheckAttack = PlayerAttackDir::Up;
+		ChangeDirTextFail = "Up_1";
+		ChangeDirTextSuccess = "Up_2";
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("AttackDown"))
+	{
+		MoveDir = float4::DOWN;
+		CheckAttack = PlayerAttackDir::Down;
+		ChangeDirTextFail = "Down_1";
+		ChangeDirTextSuccess = "Down_2";
+	}
+	else if (PlayerAttackDir::Idle != CurAttack_) // 이전 프레임에선 공격하고있었으나 지금 멈췄을때
+	{
+
+	}
+
+	if (NextAttackTime_ <= CurrentAttackTime_ && false == MoveDir.IsZero2D())
+	{
+		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
+		Ptr->SetPosition(GetPosition());
+		Ptr->SetVector(MoveDir);
+		Ptr->SetSpeed(200.0f);
+
+		HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirTextSuccess);
+		CurAttack_ = CheckAttack;
+
+		NextAttackTime_ = CurrentAttackTime_ + TearDelay;
+		return;
+	}
+	
+	if (CurrentAttackTime_ >= NextAttackTime_ - TearDelay + 0.2f)
+	{
+		HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirTextFail);
+		CurAttack_ = CheckAttack;
 	}
 }
