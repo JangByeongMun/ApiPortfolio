@@ -2,8 +2,10 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 HpUI::HpUI()
-	: RendererVector()
-	, StartHP(3)
+	: RendererVector_()
+	, AddHeart_()
+	, MaxHP_(3)
+	, CurrentHP_(3)
 {
 }
 
@@ -15,13 +17,13 @@ void HpUI::Start()
 {
 	int MaxCount = 12;
 	SetPosition({130, 35});
-	RendererVector.reserve(MaxCount);
+	RendererVector_.reserve(MaxCount);
 
 	for (int i = 0; i < MaxCount; i++)
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("ui_hearts_1.bmp");
 
-		if (i < StartHP)
+		if (i < MaxHP_)
 		{
 			TmpRenderer->SetIndex(0);
 		}
@@ -36,3 +38,23 @@ void HpUI::Start()
 	}
 }
 
+void HpUI::AddMaxHP(int _value, int _heal)
+{
+	MaxHP_ += _value;
+	CurrentHP_ += _heal;
+}
+
+void HpUI::SetCurrentHP(int _value)
+{
+	CurrentHP_ = _value;
+}
+
+void HpUI::ChangeCurrentHP(int _value)
+{
+	CurrentHP_ += _value;
+}
+
+void HpUI::AddColorHeart(HeartType _Type)
+{
+	//AddHeart_.push(_Type);
+}

@@ -57,3 +57,12 @@ enum class ProjectileType
 	ENEMY_BONE,
 
 };
+
+enum class HeartType
+{
+	SoulHeart,
+	SoulHeartHalf,
+	BlackHeart,
+	BlackHeartHalf,
+	EternalHeart,
+};
