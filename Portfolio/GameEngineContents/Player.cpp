@@ -22,16 +22,16 @@ Player::Player()
 	, HeadRender_(nullptr)
 	, PlayerCollision(nullptr)
 	, MapColImage_(nullptr)
-	, MoveAnimationName("Move_")
-	, AttackAnimationName("Attack_")
-	, CurMove_()
-	, CurAttack_()
+	, BodyAnimationName("Body_")
+	, HeadAnimationName("Head_")
+	, CurBody_()
+	, CurHead_()
 	, AttackSpeed_(2.73f)
+	, ShotSpeed_(1)
 	, NextAttackTime_(0.0f)
 	, CurrentAttackTime_(0.0f)
 {
 }
-
 Player::~Player() 
 {
 }
@@ -44,24 +44,24 @@ void Player::Start()
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
 	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 30 });
-	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Move_Left", 16, 25, 0.1f, true);
-	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Right", 16, 25, 0.1f, true);
-	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Up", 6, 15, 0.1f, true);
-	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Down", 6, 15, 0.1f, true);
-	BodyRender_->CreateAnimation("001_isaac.bmp", "Move_Idle", 8, 8, 0.1f, false);
-	BodyRender_->ChangeAnimation("Move_Idle");
+	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Body_Left", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Right", 16, 25, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Up", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Down", 6, 15, 0.1f, true);
+	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Idle", 8, 8, 0.1f, false);
+	BodyRender_->ChangeAnimation("Body_Idle");
 	
 	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
-	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left_1", 2, 2, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Attack_Left_2", 2, 3, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right_1", 2, 2, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Right_2", 2, 3, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up_1", 4, 4, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Up_2", 4, 5, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down_1", 0, 0, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Down_2", 0, 1, 0.1f, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Attack_Idle", 0, 0, 0.1f, false);
-	HeadRender_->ChangeAnimation("Attack_Idle");
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_1", 2, 2, 0, false);
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_2", 2, 3, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_1", 2, 2, 0, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_2", 2, 3, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Up_1", 4, 4, 0, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Up_2", 4, 5, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_1", 0, 0, 0, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_2", 0, 1, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Idle", 0, 0, 0, false);
+	HeadRender_->ChangeAnimation("Head_Idle");
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
@@ -75,72 +75,18 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("AttackDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Bomb", 'E');
 	}
-}
 
+	ChangeBodyState(PlayerBodyState::Idle);
+	ChangeHeadState(PlayerHeadState::Idle);
+}
 
 void Player::Update()
 {
-	// 움직임 관리
-	{
-		float4 MoveDir = float4::ZERO;
-		PlayerMoveDir CheckMove = PlayerMoveDir::Idle;
-		std::string ChangeDirText = "Idle";
-		
-		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
-		{
-			MoveDir += float4::LEFT;
-			CheckMove = PlayerMoveDir::Left;
-			ChangeDirText = "Left";
-		}
-		if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
-		{
-			MoveDir += float4::RIGHT;
-			CheckMove = PlayerMoveDir::Right;
-			ChangeDirText = "Right";
-		}
-		if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
-		{
-			MoveDir += float4::UP;
-			CheckMove = PlayerMoveDir::Up;
-			ChangeDirText = "Up";
-		}
-		if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
-		{
-			MoveDir += float4::DOWN;
-			CheckMove = PlayerMoveDir::Down;
-			ChangeDirText = "Down";
-		}
-
-		if (CheckMove != CurMove_)
-		{
-			BodyRender_->ChangeAnimation(MoveAnimationName + ChangeDirText);
-			CurMove_ = CheckMove;
-		}
-
-		// Speed는 인게임의 스피드수치, 300은 움직이는걸보고 대충 맞춘 값
-		float4 NextPos = GetPosition() + (MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 300);
-
-		int Color = MapColImage_->GetImagePixel(NextPos);
-
-		if (RGB(0, 0, 0) != Color)
-		{
-			SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 300);
-		}
-	}
-
-	// 공격 입력
-	{
-		AttackCheck();
-	}
+	// 상태 관리
+	StateUpdate();
 
 	// 충돌 체크
-	{
-		CollisionCheck();
-	}
-}
-
-void Player::Render()
-{
+	CollisionCheck();
 }
 
 void Player::CollisionCheck()
@@ -156,65 +102,91 @@ void Player::CollisionCheck()
 	}
 }
 
-void Player::AttackCheck()
+bool Player::IsMoveKey()
 {
-	CurrentAttackTime_ += GameEngineTime::GetDeltaTime();
-	PlayerAttackDir CheckAttack = PlayerAttackDir::Idle;
-	std::string ChangeDirTextSuccess = "Idle";
-	std::string ChangeDirTextFail = "Idle";
-	float4 MoveDir = float4::ZERO;
-	float TearDelay = 1.0f;
-
-	if (true == GameEngineInput::GetInst()->IsPress("AttackLeft"))
+	if (false == GameEngineInput::GetInst()->IsPress("MoveLeft") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveRight") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveUp") &&
+		false == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		MoveDir = float4::LEFT;
-		CheckAttack = PlayerAttackDir::Left;
-		ChangeDirTextFail = "Left_1";
-		ChangeDirTextSuccess = "Left_2";
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("AttackRight"))
-	{
-		MoveDir = float4::RIGHT;
-		CheckAttack = PlayerAttackDir::Right;
-		ChangeDirTextFail = "Right_1";
-		ChangeDirTextSuccess = "Right_2";
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("AttackUp"))
-	{
-		MoveDir = float4::UP;
-		CheckAttack = PlayerAttackDir::Up;
-		ChangeDirTextFail = "Up_1";
-		ChangeDirTextSuccess = "Up_2";
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("AttackDown"))
-	{
-		MoveDir = float4::DOWN;
-		CheckAttack = PlayerAttackDir::Down;
-		ChangeDirTextFail = "Down_1";
-		ChangeDirTextSuccess = "Down_2";
-	}
-	else if (PlayerAttackDir::Idle != CurAttack_) // 이전 프레임에선 공격하고있었으나 지금 멈췄을때
-	{
-
+		return false;
 	}
 
-	if (NextAttackTime_ <= CurrentAttackTime_ && false == MoveDir.IsZero2D())
+	return true;
+}
+bool Player::IsAttackKey()
+{
+	if (false == GameEngineInput::GetInst()->IsPress("AttackLeft") &&
+		false == GameEngineInput::GetInst()->IsPress("AttackRight") &&
+		false == GameEngineInput::GetInst()->IsPress("AttackUp") &&
+		false == GameEngineInput::GetInst()->IsPress("AttackDown"))
 	{
-		Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-		Ptr->SetPosition(GetPosition());
-		Ptr->SetVector(MoveDir);
-		Ptr->SetSpeed(200.0f);
-
-		HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirTextSuccess);
-		CurAttack_ = CheckAttack;
-
-		NextAttackTime_ = CurrentAttackTime_ + TearDelay;
-		return;
+		return false;
 	}
-	
-	if (CurrentAttackTime_ >= NextAttackTime_ - TearDelay + 0.2f)
+
+	return true;
+}
+void Player::ChangeBodyState(PlayerBodyState _State)
+{
+	if (CurBody_ != _State)
 	{
-		HeadRender_->ChangeAnimation(AttackAnimationName + ChangeDirTextFail);
-		CurAttack_ = CheckAttack;
+		switch (_State)
+		{
+		case PlayerBodyState::Idle:
+			BodyIdleStart();
+			break;
+		case PlayerBodyState::Move:
+			BodyMoveStart();
+			break;
+		default:
+			break;
+		}
+
+		CurBody_ = _State;
+	}
+}
+void Player::ChangeHeadState(PlayerHeadState _State)
+{
+	if (CurHead_ != _State)
+	{
+		switch (_State)
+		{
+		case PlayerHeadState::Idle:
+			HeadIdleStart();
+			break;
+		case PlayerHeadState::Attack:
+			HeadAttackStart();
+			break;
+		default:
+			break;
+		}
+
+		CurHead_ = _State;
+	}
+}
+void Player::StateUpdate()
+{
+	switch (CurHead_)
+	{
+	case PlayerHeadState::Idle:
+		HeadIdleUpdate();
+		break;
+	case PlayerHeadState::Attack:
+		HeadAttackUpdate();
+		break;
+	default:
+		break;
+	}
+
+	switch (CurBody_)
+	{
+	case PlayerBodyState::Idle:
+		BodyIdleUpdate();
+		break;
+	case PlayerBodyState::Move:
+		BodyMoveUpdate();
+		break;
+	default:
+		break;
 	}
 }

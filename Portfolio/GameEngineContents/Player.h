@@ -2,22 +2,16 @@
 #include <GameEngine/GameEngineActor.h>
 #include "Shooter.h"
 
-enum class PlayerMoveDir
+enum class PlayerBodyState
 {
 	Idle,
-	Left,
-	Right,
-	Up,
-	Down,
+	Move
 };
 
-enum class PlayerAttackDir
+enum class PlayerHeadState
 {
 	Idle,
-	Left,
-	Right,
-	Up,
-	Down,
+	Attack
 };
 
 // 설명 : 플레이어
@@ -44,22 +38,42 @@ private:
 	GameEngineCollision* PlayerCollision;
 	GameEngineImage* MapColImage_;
 
-	PlayerMoveDir CurMove_;
-	PlayerAttackDir CurAttack_;
-
-	std::string MoveAnimationName;
-	std::string AttackAnimationName;
-
-	// 공격
-	float AttackSpeed_;
-	float NextAttackTime_;
-	float CurrentAttackTime_;
+	std::string BodyAnimationName;
+	std::string HeadAnimationName;
 
 	void Start() override;
 	void Update() override;
-	void Render() override;
-
 	void CollisionCheck();
-	void AttackCheck();
+
+///////////////////////////////// FSM
+private:
+	PlayerBodyState CurBody_;
+	PlayerHeadState CurHead_;
+
+	bool IsMoveKey();
+	bool IsAttackKey();
+
+public:
+	void ChangeBodyState(PlayerBodyState _State);
+	void ChangeHeadState(PlayerHeadState _State);
+	void StateUpdate();
+
+private: 
+	void BodyIdleStart();
+	void BodyMoveStart();
+	void HeadIdleStart();
+	void HeadAttackStart();
+
+	void BodyIdleUpdate();
+	void BodyMoveUpdate();
+	void HeadIdleUpdate();
+	void HeadAttackUpdate();
+
+///////////////////////////////// 공격속도
+	float AttackSpeed_;
+	float ShotSpeed_;
+
+	float NextAttackTime_;
+	float CurrentAttackTime_;
 };
 

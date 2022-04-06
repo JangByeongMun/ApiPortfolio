@@ -287,6 +287,9 @@
     <ClInclude Include="Intro25.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="PlayBackGround.h">
+      <Filter>Play\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -568,6 +571,12 @@
     </ClCompile>
     <ClCompile Include="Intro25.cpp">
       <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_State.cpp">
+      <Filter>Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayBackGround.cpp">
+      <Filter>Play\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

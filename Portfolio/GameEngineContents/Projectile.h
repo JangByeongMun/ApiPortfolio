@@ -20,17 +20,16 @@ public:
 	{
 		Vec_ = _Value;
 	}
-	inline void	SetSpeed(const float& _Value)
+	inline void SetType(ProjectileType _Type)
 	{
-		Speed_ = _Value;
+		Type_ = _Type;
 	}
 
 protected:
 
 private:
-	ProjectileType _Type;
+	ProjectileType Type_;
 	float4 Vec_;
-	float Speed_;
 
 	void Start() override;
 	void Update() override;

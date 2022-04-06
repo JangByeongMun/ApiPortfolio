@@ -3,8 +3,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 Projectile::Projectile() 
-	: Vec_{0, 0}
-	, Speed_ (0)
+	: Type_(ProjectileType::PLAYER_BASIC)
+	, Vec_({ 0, 0 })
 {
 }
 
@@ -22,6 +22,6 @@ void Projectile::Start()
 
 void Projectile::Update()
 {
-	SetMove(Vec_ * GameEngineTime::GetDeltaTime() * Speed_);
+	SetMove(Vec_ * GameEngineTime::GetDeltaTime());
 }
 

@@ -3,6 +3,7 @@
 #include "Projectile.h"
 #include "HpUI.h"
 #include "TestMap.h"
+#include "PlayBackGround.h"
 
 enum class ORDER
 {
@@ -22,6 +23,7 @@ PlayLevel::~PlayLevel()
 
 void PlayLevel::Loading()
 {
+	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
 	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HpUI>((int)ORDER::UI);

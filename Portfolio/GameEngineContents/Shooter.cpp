@@ -9,10 +9,10 @@ Shooter::~Shooter()
 {
 }
 
-void Shooter::Shoot(ProjectileType _Type, float4 _vector)
+void Shooter::Shoot(float4 _Vector, ProjectileType _Type, float4 _AddPivot)
 {
 	Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
-	Ptr->SetPosition(GetPosition());
-	Ptr->SetVector(float4::LEFT);
-	Ptr->SetSpeed(200.0f);
+	Ptr->SetType(_Type);
+	Ptr->SetPosition(GetPosition() + _AddPivot);
+	Ptr->SetVector(_Vector);
 }
