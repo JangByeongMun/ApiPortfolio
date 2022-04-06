@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
+#include <vector>
 
 // Ό³Έν :
 class HpUI : public GameEngineActor
@@ -18,6 +20,9 @@ public:
 protected:
 
 private:
+	std::vector<GameEngineRenderer*> RendererVector;
+	float StartHP;
 
+	void Start() override;
 };
 

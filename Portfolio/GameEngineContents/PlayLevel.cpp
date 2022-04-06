@@ -4,6 +4,7 @@
 #include "HpUI.h"
 #include "TestMap.h"
 #include "PlayBackGround.h"
+#include "SpacebarUI.h"
 
 enum class ORDER
 {
@@ -27,6 +28,7 @@ void PlayLevel::Loading()
 	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HpUI>((int)ORDER::UI);
+	CreateActor<SpacebarUI>((int)ORDER::UI);
 
 	Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
 }

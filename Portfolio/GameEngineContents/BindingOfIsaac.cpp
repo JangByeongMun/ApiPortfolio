@@ -110,6 +110,20 @@ void BindingOfIsaac::ImageLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("PlayLevel");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("EndingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -131,7 +145,6 @@ void BindingOfIsaac::ImageLoad()
 		}
 	}
 }
-
 void BindingOfIsaac::ImageCut()
 {
 	GameEngineImage* Image = nullptr;
@@ -159,6 +172,19 @@ void BindingOfIsaac::ImageCut()
 
 	Image = GameEngineImageManager::GetInst()->Find("MenuIcon.bmp");
 	Image->CutCount(2, 1);
+
+	/////////////////////////////////// Play UI
+	{
+		Image = GameEngineImageManager::GetInst()->Find("ui_hearts_1.bmp");
+		Image->CutCount(5, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_hearts_2.bmp");
+		Image->CutCount(5, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_1.bmp");
+		Image->CutCount(4, 2);
+	}
+
 
 	/////////////////////////////////// Intro
 	{

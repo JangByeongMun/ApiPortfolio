@@ -1,7 +1,9 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
-class SpacebarUI
+class SpacebarUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +19,8 @@ public:
 protected:
 
 private:
+	GameEngineRenderer* ItemRenderer;
 
+	void Start() override;
 };
 
