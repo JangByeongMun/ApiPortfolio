@@ -66,16 +66,17 @@ void GameEngineLevel::ActorRender()
 		{
 			std::list<GameEngineRenderer*>& TmpGroup = GroupStart->second;
 
-			std::list<GameEngineRenderer*>::iterator StartActor = TmpGroup.begin();
-			std::list<GameEngineRenderer*>::iterator EndActor = TmpGroup.end();
-			for (; StartActor != EndActor; ++StartActor)
+			std::list<GameEngineRenderer*>::iterator StartRenderer = TmpGroup.begin();
+			std::list<GameEngineRenderer*>::iterator EndRenderer = TmpGroup.end();
+			for (; StartRenderer != EndRenderer; ++StartRenderer)
 			{
-				if (false == (*StartActor)->IsUpdate())
+				std::list<GameEngineRenderer*>::iterator Test = StartRenderer;
+				if (false == (*StartRenderer)->IsUpdate())
 				{
 					continue;
 				}
 
-				(*StartActor)->Render();
+				(*StartRenderer)->Render();
 			}
 		}
 	}
@@ -105,6 +106,32 @@ void GameEngineLevel::ActorRender()
 
 void GameEngineLevel::ActorRelease()
 {
+	// 렌더러 삭제
+	{
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupStart = AllRenderer_.begin();
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupEnd = AllRenderer_.end();
+
+		std::list<GameEngineRenderer*>::iterator StartRenderer;
+		std::list<GameEngineRenderer*>::iterator EndRenderer;
+
+
+		for (; GroupStart != GroupEnd; ++GroupStart)
+		{
+			std::list<GameEngineRenderer*>& Group = GroupStart->second;
+			StartRenderer = Group.begin();
+			EndRenderer = Group.end();
+			for (; StartRenderer != EndRenderer; )
+			{
+				if (false == (*StartRenderer)->IsDeath())
+				{
+					++StartRenderer;
+					continue;
+				}
+
+				StartRenderer = Group.erase(StartRenderer);
+			}
+		}
+	}
 
 	// 충돌 삭제
 	{

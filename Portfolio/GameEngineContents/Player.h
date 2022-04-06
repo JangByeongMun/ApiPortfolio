@@ -50,10 +50,16 @@ private:
 	std::string MoveAnimationName;
 	std::string AttackAnimationName;
 
+	// АјАн
+	float AttackSpeed_;
+	float NextAttackTime_;
+	float CurrentAttackTime_;
+
 	void Start() override;
 	void Update() override;
 	void Render() override;
 
 	void CollisionCheck();
+	void AttackCheck();
 };
 
