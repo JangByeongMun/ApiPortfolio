@@ -116,11 +116,11 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(int _Order, RenderPivot _Piv
 	NewRenderer->SetPivotType(_PivotType);
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
-		NewRenderer->SetOrder(_Order);
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
 	}
 	else
 	{
-		NewRenderer->SetOrder(GetOrder());
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
 	}
 
 	GetLevel()->AddRenderer(NewRenderer);
@@ -138,11 +138,11 @@ GameEngineRenderer* GameEngineActor::CreateRenderer(const std::string& _Image, i
 	NewRenderer->SetPivot(_PivotPos);
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
-		NewRenderer->SetOrder(_Order);
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
 	}
 	else
 	{
-		NewRenderer->SetOrder(GetOrder());
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
 	}
 
 	GetLevel()->AddRenderer(NewRenderer);
@@ -161,11 +161,11 @@ GameEngineRenderer* GameEngineActor::CreateRendererToScale(const std::string& _I
 	NewRenderer->SetPivotType(_PivotType);
 	if (_Order != static_cast<int>(EngineMax::RENDERORDERMAX))
 	{
-		NewRenderer->SetOrder(_Order);
+		NewRenderer->GameEngineUpdateObject::SetOrder(_Order);
 	}
 	else
 	{
-		NewRenderer->SetOrder(GetOrder());
+		NewRenderer->GameEngineUpdateObject::SetOrder(GetOrder());
 	}
 
 	GetLevel()->AddRenderer(NewRenderer);

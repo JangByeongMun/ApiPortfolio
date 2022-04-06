@@ -67,7 +67,6 @@ protected:
 	void Render();
 
 private:
-	friend class FrameAnimation;
 
 	GameEngineImage* Image_;
 	RenderPivot PivotType_;
@@ -86,7 +85,8 @@ private:
 
 	/////////////////////////////////////////// 애니메이션
 private:
-	class FrameAnimation
+	friend class FrameAnimation;
+	class FrameAnimation : public GameEngineNameObject
 	{
 	public:
 		GameEngineRenderer* Renderer_;
@@ -99,6 +99,7 @@ private:
 		float CurrentInterTime_;
 		float InterTime_;
 		bool Loop_;
+		bool IsEnd_;
 
 	public:
 		FrameAnimation()
@@ -111,6 +112,7 @@ private:
 			, CurrentInterTime_(0.1f)
 			, InterTime_(0.1f)
 			, Loop_(true)
+			, IsEnd_(false)
 		{
 		}
 		~FrameAnimation()
@@ -122,6 +124,7 @@ private:
 
 		inline void Reset()
 		{
+			IsEnd_ = false;
 			CurrentFrame_ = StartFrame_;
 			CurrentInterTime_ = InterTime_;
 		}
@@ -131,6 +134,9 @@ public:
 	void CreateAnimation(const std::string& _image, const std::string& _name, int _startIndex, int _endIndex, float _interTime, bool _loop = true);
 	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 	void ChangeAnimation(const std::string& _name);
+
+	bool IsEndAnimation();
+	bool IsAnimationName(const std::string& _Name);
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;
