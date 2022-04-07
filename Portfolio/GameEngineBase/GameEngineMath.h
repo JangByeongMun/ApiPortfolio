@@ -115,6 +115,17 @@ public:
 		return;
 	}
 
+	// 보간 필요한것같아서 제작
+	static float4 Lerp(float4 _Start, float4 _Goal, float _Value)
+	{
+		if (1 <= _Value)
+		{
+			_Value = 1;
+		}
+
+		return _Start * (1 - _Value) + _Goal * _Value;
+	}
+
 	float4 operator-(const float4& _Other) const
 	{
 		return { x - _Other.x, y - _Other.y, z - _Other.z, 1.0f };
@@ -127,7 +138,7 @@ public:
 	{
 		return { x + _Other.x, y + _Other.y, z + _Other.z, 1.0f };
 	}
-	float4 operator*(const float& _Value) const
+	float4 operator*(const float _Value) const
 	{
 		return { x * _Value, y * _Value, z * _Value, 1.0f };
 	}

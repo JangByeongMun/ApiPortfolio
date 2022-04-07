@@ -34,7 +34,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Play");
+	ChangeLevel("Menu");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
