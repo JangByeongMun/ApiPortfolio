@@ -26,25 +26,22 @@ void Intro09::Start()
 
 	IsaacRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 20 });
 	IsaacRenderer_->CreateAnimation("Intro09_1.bmp", "Intro09_1", 0, 1, 0.1f, true);
-	//IsaacRenderer_->CreateAnimation("Intro09_2.bmp", "Intro09_2", 0, 1, 0.1f, true);
-	//IsaacRenderer_->CreateAnimation("Intro09_3.bmp", "Intro09_3", 0, 1, 0.1f, true); 
-	//IsaacRenderer_->CreateAnimation("Intro09_4.bmp", "Intro09_4", 0, 1, 0.1f, true);
-	//IsaacRenderer_->CreateAnimation("Intro09_5.bmp", "Intro09_5", 0, 1, 0.1f, true);
+	IsaacRenderer_->CreateAnimation("Intro09_2.bmp", "Intro09_2", 0, 1, 0.1f, true);
+	IsaacRenderer_->CreateAnimation("Intro09_3.bmp", "Intro09_3", 0, 1, 0.1f, true); 
+	IsaacRenderer_->CreateAnimation("Intro09_4.bmp", "Intro09_4", 0, 1, 0.1f, true);
+	IsaacRenderer_->CreateAnimation("Intro09_5.bmp", "Intro09_5", 0, 1, 0.1f, true);
 	IsaacRenderer_->ChangeAnimation("Intro09_1");
-
-	GameEngineRenderer* renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 20 });
-	renderer_->CreateAnimation("intro09_2.bmp", "intro09_2", 0, 1, 0.1f, true);
-	renderer_->ChangeAnimation("intro09_2");
 }
 
 void Intro09::Update()
 {
-	/*ActorTime_ += GameEngineTime::GetDeltaTime();
+	ActorTime_ += GameEngineTime::GetDeltaTime();
 
 	if (ActorTime_ >= 2 && false == Check1)
 	{
 		Check1 = true;
 		IsaacRenderer_->ChangeAnimation("Intro09_2");
+		IsaacRenderer_->SetPivot({ -10, 20 });
 
 		GameEngineRenderer* renderer_ = CreateRenderer(RenderPivot::CENTER, { 150, 0 });
 		renderer_->CreateAnimation("intro09_6.bmp", "intro09_6", 0, 3, 0.1f, false);
@@ -55,6 +52,7 @@ void Intro09::Update()
 	{
 		Check2 = true;
 		IsaacRenderer_->ChangeAnimation("Intro09_3");
+		IsaacRenderer_->SetPivot({ -20, 20 });
 
 		GameEngineRenderer* renderer_ = CreateRenderer(RenderPivot::CENTER, { -150, 0 });
 		renderer_->CreateAnimation("intro09_7.bmp", "intro09_7", 0, 3, 0.1f, false);
@@ -65,12 +63,14 @@ void Intro09::Update()
 	{
 		Check3 = true;
 		IsaacRenderer_->ChangeAnimation("Intro09_4");
+		IsaacRenderer_->SetPivot({ -10, 0 });
 	}
 
 	if (ActorTime_ >= 6 && false == Check4)
 	{
 		Check4 = true;
 		IsaacRenderer_->ChangeAnimation("Intro09_5");
-	}*/
+		IsaacRenderer_->SetPivot({ 0, 30 });
+	}
 }
 

@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h>
 
 // Ό³Έν :
 class GameEngineMath
@@ -42,44 +43,85 @@ public:
 	}
 
 public:
-	int ix() const
+	inline int ix() const
 	{
 		return static_cast<int>(x);
 	}
-	int iy() const
+	inline int iy() const
 	{
 		return static_cast<int>(y);
 	}
-	int iz() const
+	inline int iz() const
 	{
 		return static_cast<int>(z);
 	}
-	int iw() const
+	inline int iw() const
 	{
 		return static_cast<int>(w);
 	}
 
-	int hix() const
+	inline int hix() const
 	{
 		return static_cast<int>(x * 0.5f);
 	}
-	int hiy() const
+	inline int hiy() const
 	{
 		return static_cast<int>(y * 0.5f);
 	}
-	int hiz() const
+	inline int hiz() const
 	{
 		return static_cast<int>(z * 0.5f);
 	}
 
-	float4 Half() const
+	inline float4 Half() const
 	{
 		return { x * 0.5f, y * 0.5f, z * 0.5f, 1.0f };
+	}
+
+	inline float Len2D() const
+	{
+		return sqrtf((x * x) + (y * y));
+	}
+
+	inline void Normal2D()
+	{
+		float Len = Len2D();
+		if (0 == Len)
+		{
+			return;
+		}
+
+		x /= Len;
+		y /= Len;
+		return;
+	}
+
+	inline void Range2D(float _Max)
+	{
+		Normal2D();
+
+		x *= _Max;
+		y *= _Max;
+		return;
+	}
+
+	inline void Limit2D(float _Max)
+	{
+		if (_Max <= Len2D())
+		{
+			Range2D(_Max);
+		}
+		
+		return;
 	}
 
 	float4 operator-(const float4& _Other) const
 	{
 		return { x - _Other.x, y - _Other.y, z - _Other.z, 1.0f };
+	}
+	float4 operator-() const
+	{
+		return { -x, -y, -z, 1.0f };
 	}
 	float4 operator+(const float4& _Other) const
 	{
@@ -102,6 +144,22 @@ public:
 		x -= _Other.x;
 		y -= _Other.y;
 		z -= _Other.z;
+
+		return *this;
+	}
+	float4& operator*=(const float _Other)
+	{
+		x *= _Other;
+		y *= _Other;
+		z *= _Other;
+
+		return *this;
+	}
+	float4& operator*=(const float4& _Other)
+	{
+		x *= _Other.x;
+		y *= _Other.y;
+		z *= _Other.z;
 
 		return *this;
 	}

@@ -44,11 +44,13 @@ private:
 	void Start() override;
 	void Update() override;
 	void CollisionCheck();
+	void PlayerSetMove(float4 _Value);
 
 ///////////////////////////////// FSM
 private:
 	PlayerBodyState CurBody_;
 	PlayerHeadState CurHead_;
+	float4 MoveDir_;
 
 	bool IsMoveKey();
 	bool IsAttackKey();

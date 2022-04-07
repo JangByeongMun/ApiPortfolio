@@ -29,6 +29,18 @@ void Player::BodyIdleUpdate()
 		ChangeBodyState(PlayerBodyState::Move);
 		return;
 	}
+
+	if (false == MoveDir_.IsZero2D())
+	{
+		MoveDir_ += -MoveDir_ * GameEngineTime::GetDeltaTime() * 4;
+
+		if (0.05f >= MoveDir_.Len2D())
+		{
+			MoveDir_ = float4::ZERO;
+		}
+
+		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 250);
+	}
 }
 void Player::BodyMoveUpdate()
 {
@@ -39,37 +51,33 @@ void Player::BodyMoveUpdate()
 	}
 
 	// 동시에 여러 키를 눌렀을때 대각선으로 움직일수있고, 그때 위, 아래 움직이는 애니메이션이므로 else가 아니라 전부 if로 구현
-	float4 MoveDir = float4::ZERO;
 	std::string ChangeDirText = "Idle";
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
-		MoveDir += float4::LEFT;
+		MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 3;
 		ChangeDirText = "Left";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
 	{
-		MoveDir += float4::RIGHT;
+		MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 3;
 		ChangeDirText = "Right";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
-		MoveDir += float4::UP;
+		MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 3;
 		ChangeDirText = "Up";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		MoveDir += float4::DOWN;
+		MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 3;
 		ChangeDirText = "Down";
 	}
+	MoveDir_.Limit2D(1.0f);
+
 	BodyRender_->ChangeAnimation(BodyAnimationName + ChangeDirText);
 
-	// Speed는 인게임의 스피드수치, 300은 움직이는걸보고 대충 맞춘 값
-	float4 NextPos = GetPosition() + (MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 300);
-	int Color = MapColImage_->GetImagePixel(NextPos);
-	if (RGB(0, 0, 0) != Color)
-	{
-		SetMove(MoveDir * GameEngineTime::GetDeltaTime() * Speed_ * 250);
-	}
+	// Speed는 인게임의 스피드수치, 250은 움직이는걸보고 대충 맞춘 값
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 250);
 }
 void Player::HeadIdleUpdate()
 {

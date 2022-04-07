@@ -18,7 +18,9 @@
 
 EndingLevel::EndingLevel()
 	: AllActors_({})
+	, AllTimer_()
 	, LevelTime_(0.0f)
+	, CurrentIndex_(0)
 {
 }
 
@@ -35,7 +37,7 @@ void EndingLevel::Update()
 {
 	LevelTime_ += GameEngineTime::GetDeltaTime();
 	
-	for (int i = 0; i < 15; i++)
+	for (int i = 0; i < AllActors_.size(); i++)
 	{
 		if (i * 2.0f <= LevelTime_ && LevelTime_ < (i + 1) * 2.0f)
 		{

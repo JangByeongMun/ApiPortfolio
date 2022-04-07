@@ -26,6 +26,7 @@ Player::Player()
 	, HeadAnimationName("Head_")
 	, CurBody_()
 	, CurHead_()
+	, MoveDir_({ 0, 0 })
 	, AttackSpeed_(2.73f)
 	, ShotSpeed_(1)
 	, NextAttackTime_(0.0f)
@@ -99,6 +100,17 @@ void Player::CollisionCheck()
 		{
 			ColVec[i]->Death();
 		}
+	}
+}
+
+// 벽이 있는지 확인하고 이동하도록하는 함수
+void Player::PlayerSetMove(float4 _Value)
+{
+	float4 NextPos = GetPosition() + _Value;
+	int Color = MapColImage_->GetImagePixel(NextPos);
+	if (RGB(0, 0, 0) != Color)
+	{
+		SetMove(_Value);
 	}
 }
 

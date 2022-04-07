@@ -50,7 +50,7 @@ void TitleLevel::Loading()
 	//CreateActor<Intro06>(1);
 	//CreateActor<Intro07>(1);
 	//CreateActor<Intro08>(1);
-	//CreateActor<Intro09>(1);
+	CreateActor<Intro09>(1);
 	//CreateActor<Intro10>(1);
 	//CreateActor<Intro11>(1);
 	//CreateActor<Intro12>(1);
@@ -59,7 +59,7 @@ void TitleLevel::Loading()
 	//CreateActor<Intro15>(1);
 	//CreateActor<Intro16>(1);
 	//CreateActor<Intro17>(1);
-	CreateActor<Intro18>(1);
+	//CreateActor<Intro18>(1);
 	//CreateActor<Intro19>(1);
 	//CreateActor<Intro20>(1);
 	//CreateActor<Intro21>(1);
