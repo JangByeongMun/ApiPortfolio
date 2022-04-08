@@ -50,7 +50,7 @@ void IntroManager::Update()
 		GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { 0, 20 });
 		renderer->CreateAnimation("intro01_1.bmp", "intro01_1", 0, 1, 0.1f, true);
 		renderer->ChangeAnimation("intro01_1");
-		renderer->Death(1);
+		renderer->Death(Timer_[1]);
 	}
 
 	if (true == IsStart(1))

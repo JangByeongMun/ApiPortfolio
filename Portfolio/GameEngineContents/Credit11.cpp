@@ -45,4 +45,3 @@ void Credit11::Update()
 		BookRenderer_->ChangeAnimation("epilogue11_3");
 	}
 }
-

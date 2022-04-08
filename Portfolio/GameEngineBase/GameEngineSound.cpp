@@ -168,6 +168,16 @@ void GameEngineSoundPlayer::Stop()
 	ControlHandle_->stop();
 }
 
+void GameEngineSoundPlayer::SetVolume(float _Volume)
+{
+	if (nullptr == ControlHandle_)
+	{
+		MsgBoxAssert("사운드 컨트롤 채널에 치명적인 문제가 있습니다.\n");
+		return;
+	}
+
+	ControlHandle_->setVolume(_Volume);
+}
 
 GameEngineSoundPlayer::GameEngineSoundPlayer() 
 	: Sound_(nullptr)

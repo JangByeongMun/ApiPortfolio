@@ -21,21 +21,17 @@ public:
 protected:
 	bool Load(const std::string& _Path);
 
-
 private:
 	FMOD::Sound* Sound;
 
 	///////////////////////////////////////// 매니지먼트 사운드 기능
 public:
-	// 그냥 사운드 재생1회 절대로 멈추거나 이런건 못합니다.
 	static GameEngineSoundPlayer SoundPlayControl(const std::string& _Name);
 
 	static void SoundPlayOneShot(const std::string& _Name);
 	static void Update();
 
-/// <summary>
-/// ///////////////////////////////////// 리소스 매니지먼트
-/// </summary>
+////////////////////////////////////////// 리소스 매니지먼트
 public:
 	static GameEngineSound* FindRes(const std::string& _Name);
 	static GameEngineSound* LoadRes(const std::string& _Path);
@@ -56,17 +52,15 @@ class GameEngineSoundPlayer
 
 public:
 	void Stop();
+	void SetVolume(float _Volume);
 
+	GameEngineSoundPlayer();
 	GameEngineSoundPlayer(const GameEngineSoundPlayer& _Other);
+	~GameEngineSoundPlayer();
 
 private:
 	GameEngineSound* Sound_;
 	FMOD::Channel* ControlHandle_;
 
-
 	GameEngineSoundPlayer(GameEngineSound* Sound, FMOD::Channel* ControlHandle);
-
-public:
-	GameEngineSoundPlayer();
-	~GameEngineSoundPlayer();
 };

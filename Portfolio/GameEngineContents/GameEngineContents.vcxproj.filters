@@ -293,6 +293,12 @@
     <ClInclude Include="IntroManager.h">
       <Filter>Title</Filter>
     </ClInclude>
+    <ClInclude Include="EndingManager.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingManager2.h">
+      <Filter>Ending</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -583,6 +589,12 @@
     </ClCompile>
     <ClCompile Include="IntroManager.cpp">
       <Filter>Title</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingManager.cpp">
+      <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingManager2.cpp">
+      <Filter>Ending</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

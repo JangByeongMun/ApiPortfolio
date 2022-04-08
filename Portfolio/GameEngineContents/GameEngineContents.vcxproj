@@ -215,6 +215,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EndingManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EndingManager2.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Familiar.h">
       <SubType>
       </SubType>
@@ -482,6 +490,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="EndingLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndingManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndingManager2.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -15,12 +15,17 @@
 #include "Credit13.h"
 #include "Credit14.h"
 #include "Credit15.h"
+#include "EndingManager.h"
+#include "EndingManager2.h"
 
 EndingLevel::EndingLevel()
 	: AllActors_({})
 	, AllTimer_()
 	, LevelTime_(0.0f)
+	, PrevTime_(0.0f)
 	, CurrentIndex_(0)
+	, BgmPlayer_()
+	, EndingPtr_()
 {
 }
 
@@ -31,62 +36,44 @@ EndingLevel::~EndingLevel()
 void EndingLevel::Loading()
 {
 	CreateActor<EndingBackGround>(0);
+	EndingPtr_ = CreateActor<EndingManager>(1);
 }
 
 void EndingLevel::Update()
 {
 	LevelTime_ += GameEngineTime::GetDeltaTime();
-	
-	for (int i = 0; i < AllActors_.size(); i++)
-	{
-		if (i * 2.0f <= LevelTime_ && LevelTime_ < (i + 1) * 2.0f)
-		{
-			ChangeEndingCredit(i);
-		}
-	}
-
-	if (false == AllActors_[CurrentIndex_]->IsUpdate())
-	{
-		for (int i = 0; i < AllActors_.size(); i++)
-		{
-			if (i == CurrentIndex_)
-			{
-				AllActors_[i]->On();
-			}
-			else
-			{
-				AllActors_[i]->Off();
-			}
-		}
-	}
 }
 
 void EndingLevel::LevelChangeStart()
 {
 	LevelTime_ = 0.0f;
-	AllActors_.push_back(CreateActor<Credit01>(1));
-	AllActors_.push_back(CreateActor<Credit02>(1));
-	AllActors_.push_back(CreateActor<Credit03>(1));
-	AllActors_.push_back(CreateActor<Credit04>(1));
-	AllActors_.push_back(CreateActor<Credit05>(1));
-	AllActors_.push_back(CreateActor<Credit06>(1));
-	AllActors_.push_back(CreateActor<Credit07>(1));
-	AllActors_.push_back(CreateActor<Credit08>(1));
-	AllActors_.push_back(CreateActor<Credit09>(1));
-	AllActors_.push_back(CreateActor<Credit10>(1));
-	AllActors_.push_back(CreateActor<Credit11>(1));
-	AllActors_.push_back(CreateActor<Credit12>(1));
-	AllActors_.push_back(CreateActor<Credit13>(1));
-	AllActors_.push_back(CreateActor<Credit14>(1));
-	AllActors_.push_back(CreateActor<Credit15>(1));
 
 	for (int i = 0; i < AllActors_.size(); i++)
 	{
 		AllActors_[i]->Off();
 	}
+
+	BgmPlayer_ = GameEngineSound::SoundPlayControl("Ending.ogg");
+	BgmPlayer_.SetVolume(0.1f);
 }
 
 void EndingLevel::LevelChangeEnd()
 {
 	
+}
+
+float EndingLevel::CurrentTimer(int _Index)
+{
+	if (_Index >= AllTimer_.size())
+	{
+		return -1;
+	}
+
+	float ReturnF = 0.0f;
+	for (int i = 0; i <= _Index; i++)
+	{
+		ReturnF += AllTimer_[i];
+	}
+
+	return ReturnF;
 }

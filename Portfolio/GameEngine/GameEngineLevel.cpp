@@ -34,24 +34,43 @@ GameEngineLevel::~GameEngineLevel()
 
 void GameEngineLevel::ActorUpdate()
 {
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
-	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
-
-	for (; GroupStart != GroupEnd; ++GroupStart)
 	{
-		std::list<GameEngineActor*>& TmpGroup = GroupStart->second;
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
+		std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
 
-		std::list<GameEngineActor*>::iterator StartActor = TmpGroup.begin();
-		std::list<GameEngineActor*>::iterator EndActor = TmpGroup.end();
-		for (; StartActor != EndActor; ++StartActor)
+		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
-			(*StartActor)->ReleaseUpdate();
-			if (false == (*StartActor)->IsUpdate())
-			{
-				continue;
-			}
+			std::list<GameEngineActor*>& TmpGroup = GroupStart->second;
 
-			(*StartActor)->Update();
+			std::list<GameEngineActor*>::iterator StartActor = TmpGroup.begin();
+			std::list<GameEngineActor*>::iterator EndActor = TmpGroup.end();
+			for (; StartActor != EndActor; ++StartActor)
+			{
+				(*StartActor)->ReleaseUpdate();
+				if (false == (*StartActor)->IsUpdate())
+				{
+					continue;
+				}
+
+				(*StartActor)->Update();
+			}
+		}
+	}
+
+	{
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupStart = AllRenderer_.begin();
+		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupEnd = AllRenderer_.end();
+
+		for (; GroupStart != GroupEnd; ++GroupStart)
+		{
+			std::list<GameEngineRenderer*>& TmpGroup = GroupStart->second;
+
+			std::list<GameEngineRenderer*>::iterator StartActor = TmpGroup.begin();
+			std::list<GameEngineRenderer*>::iterator EndActor = TmpGroup.end();
+			for (; StartActor != EndActor; ++StartActor)
+			{
+				(*StartActor)->ReleaseUpdate();
+			}
 		}
 	}
 }
