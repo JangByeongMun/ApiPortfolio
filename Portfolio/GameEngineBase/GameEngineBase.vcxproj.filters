@@ -40,12 +40,6 @@
     <ClInclude Include="GameEngineSound.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\inc\fmod.h">
-      <Filter>ThirdParty\Inc</Filter>
-    </ClInclude>
-    <ClInclude Include="ThirdParty\inc\fmod.hpp">
-      <Filter>ThirdParty\Inc</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -133,5 +127,13 @@
     <CopyFileToFolders Include="ThirdParty\bin\fmodL_vc.lib">
       <Filter>ThirdParty\bin</Filter>
     </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ThirdParty\inc\fmod.hpp">
+      <Filter>ThirdParty\Inc</Filter>
+    </None>
+    <None Include="ThirdParty\inc\fmod.h">
+      <Filter>ThirdParty\Inc</Filter>
+    </None>
   </ItemGroup>
 </Project>
