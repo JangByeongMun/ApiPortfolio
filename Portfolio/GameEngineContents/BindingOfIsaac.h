@@ -25,7 +25,7 @@ protected:
 	void GameEnd() override;
 
 private:
-	void ImageLoad();
+	void ResourcesLoad();
 	void ImageCut();
 };
 

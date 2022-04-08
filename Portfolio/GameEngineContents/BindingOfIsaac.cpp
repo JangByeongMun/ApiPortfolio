@@ -10,6 +10,7 @@
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 #include <conio.h>
 #include <string>
@@ -26,7 +27,7 @@ BindingOfIsaac::~BindingOfIsaac()
 void BindingOfIsaac::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
-	ImageLoad();
+	ResourcesLoad();
 	ImageCut();
 
 	CreateLevel<TitleLevel>("Title");
@@ -47,7 +48,7 @@ void BindingOfIsaac::GameInit()
 	}
 }
 
-void BindingOfIsaac::ImageLoad()
+void BindingOfIsaac::ResourcesLoad()
 {
 	{
 		GameEngineDirectory ResourcesDirectory;
@@ -142,6 +143,19 @@ void BindingOfIsaac::ImageLoad()
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{
 			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	// 사운드 로딩
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Sound");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineSound::LoadRes(AllFileVec[i].GetFullPath());
 		}
 	}
 }

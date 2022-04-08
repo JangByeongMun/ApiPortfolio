@@ -4,6 +4,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
 GameEngineLevel* GameEngine::CurrentLevel_ = nullptr;
@@ -78,6 +79,7 @@ void GameEngine::EngineLoop()
 		MsgBoxAssert("Level is nullptr => GameEngine Loop Error");
 	}
 	
+	GameEngineSound::Update();
 	GameEngineInput::GetInst()->Update(GameEngineTime::GetInst()->GetDeltaTime());
 
 	CurrentLevel_->Update();
@@ -104,6 +106,7 @@ void GameEngine::EngineEnd()
 		delete StartIter->second;
 	}
 
+	GameEngineSound::AllResourcesDestroy();
 	GameEngineImageManager::Destroy();
 	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();
