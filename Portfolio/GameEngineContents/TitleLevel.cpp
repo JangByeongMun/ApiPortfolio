@@ -28,6 +28,7 @@
 #include "Intro23.h"
 #include "Intro24.h"
 #include "Intro25.h"
+#include "IntroManager.h"
 
 TitleLevel::TitleLevel() 
 {
@@ -41,6 +42,7 @@ void TitleLevel::Loading()
 {
 	CreateActor<TitleBackGround>(0);
 	//CreateActor<IntroPage>(1);
+	CreateActor<IntroManager>(1);
 
 	//CreateActor<Intro01>(1);
 	//CreateActor<Intro02>(1);
@@ -50,7 +52,7 @@ void TitleLevel::Loading()
 	//CreateActor<Intro06>(1);
 	//CreateActor<Intro07>(1);
 	//CreateActor<Intro08>(1);
-	CreateActor<Intro09>(1);
+	//CreateActor<Intro09>(1);
 	//CreateActor<Intro10>(1);
 	//CreateActor<Intro11>(1);
 	//CreateActor<Intro12>(1);

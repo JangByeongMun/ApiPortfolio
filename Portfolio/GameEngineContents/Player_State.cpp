@@ -76,7 +76,7 @@ void Player::BodyMoveUpdate()
 
 	BodyRender_->ChangeAnimation(BodyAnimationName + ChangeDirText);
 
-	// Speed는 인게임의 스피드수치, 250은 움직이는걸보고 대충 맞춘 값
+	// Speed는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 450);
 }
 void Player::HeadIdleUpdate()
@@ -123,7 +123,7 @@ void Player::HeadAttackUpdate()
 
 	if (NextAttackTime_ <= CurrentAttackTime_ && false == AttackDir.IsZero2D())
 	{
-		Shoot(AttackDir * ShotSpeed_ * 350, ProjectileType::PLAYER_BASIC, AttackDir * 30);
+		Shoot(AttackDir * ShotSpeed_ * 550, ProjectileType::PLAYER_BASIC, AttackDir * 30);
 
 		HeadRender_->ChangeAnimation(HeadAnimationName + ChangeDirText + "_2");
 

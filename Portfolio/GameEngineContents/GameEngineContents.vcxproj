@@ -267,6 +267,10 @@
     <ClInclude Include="Intro23.h" />
     <ClInclude Include="Intro24.h" />
     <ClInclude Include="Intro25.h" />
+    <ClInclude Include="IntroManager.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="IntroPage.h">
       <SubType>
       </SubType>
@@ -533,6 +537,10 @@
     <ClCompile Include="Intro23.cpp" />
     <ClCompile Include="Intro24.cpp" />
     <ClCompile Include="Intro25.cpp" />
+    <ClCompile Include="IntroManager.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="IntroPage.cpp">
       <SubType>
       </SubType>

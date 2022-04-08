@@ -290,6 +290,9 @@
     <ClInclude Include="PlayBackGround.h">
       <Filter>Play\Base</Filter>
     </ClInclude>
+    <ClInclude Include="IntroManager.h">
+      <Filter>Title</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -577,6 +580,9 @@
     </ClCompile>
     <ClCompile Include="PlayBackGround.cpp">
       <Filter>Play\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="IntroManager.cpp">
+      <Filter>Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
