@@ -31,6 +31,7 @@
 #include "IntroManager.h"
 
 TitleLevel::TitleLevel() 
+	: IntroPtr_()
 {
 }
 
@@ -41,34 +42,8 @@ TitleLevel::~TitleLevel()
 void TitleLevel::Loading()
 {
 	CreateActor<TitleBackGround>(0);
-	//CreateActor<IntroPage>(1);
-	CreateActor<IntroManager>(1);
-
-	//CreateActor<Intro01>(1);
-	//CreateActor<Intro02>(1);
-	//CreateActor<Intro03>(1);
-	//CreateActor<Intro04>(1);
-	//CreateActor<Intro05>(1);
-	//CreateActor<Intro06>(1);
-	//CreateActor<Intro07>(1);
-	//CreateActor<Intro08>(1);
-	//CreateActor<Intro09>(1);
-	//CreateActor<Intro10>(1);
-	//CreateActor<Intro11>(1);
-	//CreateActor<Intro12>(1);
-	//CreateActor<Intro13>(1);
-	//CreateActor<Intro14>(1);
-	//CreateActor<Intro15>(1);
-	//CreateActor<Intro16>(1);
-	//CreateActor<Intro17>(1);
-	//CreateActor<Intro18>(1);
-	//CreateActor<Intro19>(1);
-	//CreateActor<Intro20>(1);
-	//CreateActor<Intro21>(1);
-	//CreateActor<Intro22>(1);
-	//CreateActor<Intro23>(1);
-	//CreateActor<Intro24>(1);
-	//CreateActor<Intro25>(1);
+	CreateActor<IntroPage>(1);
+	IntroPtr_ = CreateActor<IntroManager>(1);
 
 	//CreateActor<TitleForeGround>(10);
 }
@@ -79,6 +54,7 @@ void TitleLevel::Update()
 
 void TitleLevel::LevelChangeStart()
 {
+	IntroPtr_->Play();
 }
 
 void TitleLevel::LevelChangeEnd()

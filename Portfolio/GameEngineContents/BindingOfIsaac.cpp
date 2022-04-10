@@ -35,7 +35,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Ending");
+	ChangeLevel("Title");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -263,6 +263,9 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(4, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("intro09_7.bmp");
+		Image->CutCount(4, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("intro09_8.bmp");
 		Image->CutCount(4, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("intro10_1.bmp");

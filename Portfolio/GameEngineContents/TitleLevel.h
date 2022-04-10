@@ -1,7 +1,8 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
-// Ό³Έν : 
+
+class IntroManager;
 class TitleLevel : public GameEngineLevel
 {
 public:
@@ -23,5 +24,5 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
-	
+	IntroManager* IntroPtr_;
 };

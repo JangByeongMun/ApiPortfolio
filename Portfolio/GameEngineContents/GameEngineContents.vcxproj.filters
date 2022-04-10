@@ -158,51 +158,6 @@
     <ClInclude Include="LoadingBubble.h">
       <Filter>Loading</Filter>
     </ClInclude>
-    <ClInclude Include="Credit08.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit09.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit10.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit01.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit02.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit03.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit04.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit05.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit06.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit07.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit11.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit12.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit13.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit14.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="Credit15.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
     <ClInclude Include="MenuStart.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -294,9 +249,6 @@
       <Filter>Title</Filter>
     </ClInclude>
     <ClInclude Include="EndingManager.h">
-      <Filter>Ending</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingManager2.h">
       <Filter>Ending</Filter>
     </ClInclude>
   </ItemGroup>
@@ -452,51 +404,6 @@
     <ClCompile Include="LoadingBubble.cpp">
       <Filter>Loading</Filter>
     </ClCompile>
-    <ClCompile Include="Credit08.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit09.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit10.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit01.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit02.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit03.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit04.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit05.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit06.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit07.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit11.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit12.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit13.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit14.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="Credit15.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
     <ClCompile Include="MenuStart.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -591,9 +498,6 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="EndingManager.cpp">
-      <Filter>Ending</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingManager2.cpp">
       <Filter>Ending</Filter>
     </ClCompile>
   </ItemGroup>

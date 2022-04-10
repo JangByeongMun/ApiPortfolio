@@ -1,22 +1,6 @@
 #include "EndingLevel.h"
 #include "EndingBackGround.h"
-#include "Credit01.h"
-#include "Credit02.h"
-#include "Credit03.h"
-#include "Credit04.h"
-#include "Credit05.h"
-#include "Credit06.h"
-#include "Credit07.h"
-#include "Credit08.h"
-#include "Credit09.h"
-#include "Credit10.h"
-#include "Credit11.h"
-#include "Credit12.h"
-#include "Credit13.h"
-#include "Credit14.h"
-#include "Credit15.h"
 #include "EndingManager.h"
-#include "EndingManager2.h"
 
 EndingLevel::EndingLevel()
 	: AllActors_({})
@@ -24,7 +8,6 @@ EndingLevel::EndingLevel()
 	, LevelTime_(0.0f)
 	, PrevTime_(0.0f)
 	, CurrentIndex_(0)
-	, BgmPlayer_()
 	, EndingPtr_()
 {
 }
@@ -53,8 +36,7 @@ void EndingLevel::LevelChangeStart()
 		AllActors_[i]->Off();
 	}
 
-	BgmPlayer_ = GameEngineSound::SoundPlayControl("Ending.ogg");
-	BgmPlayer_.SetVolume(0.1f);
+	EndingPtr_->Play();
 }
 
 void EndingLevel::LevelChangeEnd()

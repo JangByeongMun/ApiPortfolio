@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
 class IntroPage : public GameEngineActor
@@ -21,4 +22,8 @@ protected:
 
 private:
 	float ActorTime_;
+	GameEngineRenderer* PageRenderer_;
+	bool Check1;
+	bool Check2;
+
 };

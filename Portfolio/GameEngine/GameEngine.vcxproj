@@ -190,10 +190,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineRendererTileMap.h" />
-    <ClInclude Include="GameEngineSound.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngine.cpp">
@@ -230,10 +226,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineRendererTileMap.cpp" />
-    <ClCompile Include="GameEngineSound.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -5,7 +5,6 @@
 
 // Ό³Έν :
 class EndingManager;
-class EndingManager2;
 class EndingLevel : public GameEngineLevel
 {
 public:
@@ -32,7 +31,6 @@ private:
 	float LevelTime_;
 	float PrevTime_;
 	int CurrentIndex_;
-	GameEngineSoundPlayer BgmPlayer_;
 	EndingManager* EndingPtr_;
 
 	void Loading() override;
