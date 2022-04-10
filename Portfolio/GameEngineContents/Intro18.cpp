@@ -46,42 +46,42 @@ void Intro18::Update()
 {
 	ActorTime_ += GameEngineTime::GetDeltaTime();
 
-	if (ActorTime_ >= 0.5f && false == Check1)
+	if (ActorTime_ >= 0.3f && false == Check1)
 	{
 		Check1 = true;
 		IsaacRenderer_->ChangeAnimation("Intro18_3");
 		IsaacRenderer_->SetPivot({ 130, 240 });
 	}
 	
-	if (ActorTime_ >= 1.0f && false == Check2)
+	if (ActorTime_ >= 0.6f && false == Check2)
 	{
 		Check2 = true;
 		IsaacRenderer_->ChangeAnimation("Intro18_4");
 		IsaacRenderer_->SetPivot({ -20, -40 });
 	}
 
-	if (ActorTime_ >= 1.5f && false == Check3)
+	if (ActorTime_ >= 0.9f && false == Check3)
 	{
 		Check3 = true;
 		IsaacRenderer_->ChangeAnimation("Intro18_5");
 		IsaacRenderer_->SetPivot({ -200, 100 });
 	}
 
-	if (ActorTime_ >= 2.0f && false == Check4)
+	if (ActorTime_ >= 1.2f && false == Check4)
 	{
 		Check4 = true;
 		IsaacRenderer_->ChangeAnimation("Intro18_6");
 		IsaacRenderer_->SetPivot({ -160, 250 });
 	}
 
-	if (ActorTime_ >= 2.5f && false == Check5)
+	if (ActorTime_ >= 1.5f && false == Check5)
 	{
 		Check5 = true;
 		IsaacRenderer_->ChangeAnimation("Intro18_6");
 		IsaacRenderer_->SetPivot({ -160, 250 });
 	}
 
-	if (ActorTime_ >= 3.0f)
+	if (ActorTime_ >= 1.8f)
 	{
 		IsaacRenderer_->ChangeAnimation("Intro18_7");
 

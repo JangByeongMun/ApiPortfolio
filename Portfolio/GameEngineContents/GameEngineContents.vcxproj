@@ -232,34 +232,8 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Intro01.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Intro02.h" />
-    <ClInclude Include="Intro03.h" />
-    <ClInclude Include="Intro04.h" />
-    <ClInclude Include="Intro05.h" />
-    <ClInclude Include="Intro06.h" />
-    <ClInclude Include="Intro07.h" />
-    <ClInclude Include="Intro08.h" />
-    <ClInclude Include="Intro09.h" />
-    <ClInclude Include="Intro10.h" />
-    <ClInclude Include="Intro11.h" />
-    <ClInclude Include="Intro12.h" />
-    <ClInclude Include="Intro13.h" />
-    <ClInclude Include="Intro14.h" />
-    <ClInclude Include="Intro15.h" />
-    <ClInclude Include="Intro16.h" />
     <ClInclude Include="Intro17.h" />
     <ClInclude Include="Intro18.h" />
-    <ClInclude Include="Intro19.h" />
-    <ClInclude Include="Intro20.h" />
-    <ClInclude Include="Intro21.h" />
-    <ClInclude Include="Intro22.h" />
-    <ClInclude Include="Intro23.h" />
-    <ClInclude Include="Intro24.h" />
-    <ClInclude Include="Intro25.h" />
     <ClInclude Include="IntroManager.h">
       <SubType>
       </SubType>
@@ -491,34 +465,8 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="Intro01.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Intro02.cpp" />
-    <ClCompile Include="Intro03.cpp" />
-    <ClCompile Include="Intro04.cpp" />
-    <ClCompile Include="Intro05.cpp" />
-    <ClCompile Include="Intro06.cpp" />
-    <ClCompile Include="Intro07.cpp" />
-    <ClCompile Include="Intro08.cpp" />
-    <ClCompile Include="Intro09.cpp" />
-    <ClCompile Include="Intro10.cpp" />
-    <ClCompile Include="Intro11.cpp" />
-    <ClCompile Include="Intro12.cpp" />
-    <ClCompile Include="Intro13.cpp" />
-    <ClCompile Include="Intro14.cpp" />
-    <ClCompile Include="Intro15.cpp" />
-    <ClCompile Include="Intro16.cpp" />
     <ClCompile Include="Intro17.cpp" />
     <ClCompile Include="Intro18.cpp" />
-    <ClCompile Include="Intro19.cpp" />
-    <ClCompile Include="Intro20.cpp" />
-    <ClCompile Include="Intro21.cpp" />
-    <ClCompile Include="Intro22.cpp" />
-    <ClCompile Include="Intro23.cpp" />
-    <ClCompile Include="Intro24.cpp" />
-    <ClCompile Include="Intro25.cpp" />
     <ClCompile Include="IntroManager.cpp">
       <SubType>
       </SubType>
