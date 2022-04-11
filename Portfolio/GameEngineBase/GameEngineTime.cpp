@@ -25,7 +25,9 @@ GameEngineTime::GameEngineTime()
 	, PrevCount_(0)
 	, DeltaTime_(0)
 	, RealDeltaTime_(0)
+	, TimeScale_()
 {
+	TimeScale_[0] = 1;
 }
 
 GameEngineTime::~GameEngineTime() 

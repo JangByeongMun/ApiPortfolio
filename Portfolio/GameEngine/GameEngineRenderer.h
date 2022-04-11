@@ -93,6 +93,7 @@ private:
 		GameEngineImage* Image_;
 		GameEngineFolderImage* FolderImage_;
 
+		int TimeKey_;
 		int CurrentFrame_;
 		int StartFrame_;
 		int EndFrame_;
@@ -106,6 +107,7 @@ private:
 			: Renderer_(nullptr)
 			, Image_(nullptr)
 			, FolderImage_(nullptr)
+			, TimeKey_(0)
 			, CurrentFrame_(-1)
 			, StartFrame_(-1)
 			, EndFrame_(-1)
@@ -131,9 +133,10 @@ private:
 	};
 
 public:
-	void CreateAnimation(const std::string& _image, const std::string& _name, int _startIndex, int _endIndex, float _interTime, bool _loop = true);
+	void CreateAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
 	void CreateFolderAnimation(const std::string& _Image, const std::string& _Name, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
-	void ChangeAnimation(const std::string& _name);
+	void CreateAnimationTimeKey(const std::string& _image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop = true);
+	void ChangeAnimation(const std::string& _Name);
 
 	bool IsEndAnimation();
 	bool IsAnimationName(const std::string& _Name);

@@ -9,6 +9,7 @@
 std::map<std::string, GameEngineLevel*> GameEngine::AllLevel_;
 GameEngineLevel* GameEngine::CurrentLevel_ = nullptr;
 GameEngineLevel* GameEngine::NextLevel_ = nullptr;
+GameEngineLevel* GameEngine::PrevLevel_ = nullptr;
 GameEngine* GameEngine::UserContents_ = nullptr;
 GameEngineImage* GameEngine::WindowMainImage_ = nullptr;
 GameEngineImage* GameEngine::BackBufferImage_ = nullptr;
@@ -55,6 +56,7 @@ void GameEngine::EngineLoop()
 
 	if (nullptr != NextLevel_)
 	{
+		PrevLevel_ = CurrentLevel_;
 		if (nullptr != CurrentLevel_)
 		{
 			CurrentLevel_->LevelChangeEnd();

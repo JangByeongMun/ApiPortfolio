@@ -122,6 +122,10 @@ public:
 		{
 			_Value = 1;
 		}
+		if (0 >= _Value)
+		{
+			_Value = 0;
+		}
 
 		return _Start * (1 - _Value) + _Goal * _Value;
 	}
@@ -173,6 +177,18 @@ public:
 		z *= _Other.z;
 
 		return *this;
+	}
+
+	bool CompareInt2D(const float4& _Value)
+	{
+		return ix() == _Value.ix() && iy() == _Value.iy();
+	}
+
+	bool CompareInt3D(const float4& _Value)
+	{
+		return ix() == _Value.ix() &&
+			iy() == _Value.iy() &&
+			iz() == _Value.iz();
 	}
 
 public:

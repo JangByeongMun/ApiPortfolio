@@ -1,7 +1,7 @@
 #include "MenuLevel.h"
-#include "MenuUI.h"
 #include "MenuStart.h"
 #include "MenuFileSelect.h"
+#include "GameMenu.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -24,18 +24,23 @@ MenuLevel::~MenuLevel()
 
 void MenuLevel::Loading()
 {
-	CreateActor<MenuStart>(0);
-	CreateActor<MenuFileSelect>(0);
+	Index0_ = CreateActor<MenuStart>(0);
+	Index1_ = CreateActor<MenuFileSelect>(0);
+	Index2_ = CreateActor<GameMenu>(0);
 
 	if (false == GameEngineInput::GetInst()->IsKey("MenuOK"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MenuOK", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("MenuESC", VK_ESCAPE);
+		GameEngineInput::GetInst()->CreateKey("MenuLeft", VK_LEFT);
+		GameEngineInput::GetInst()->CreateKey("MenuRight", VK_RIGHT);
+		GameEngineInput::GetInst()->CreateKey("MenuUp", VK_UP);
+		GameEngineInput::GetInst()->CreateKey("MenuDown", VK_DOWN);
 	}
 
 	AllScreenPos_.push_back({0, 0});
-	AllScreenPos_.push_back({0, 720});
-	AllScreenPos_.push_back({0, 1440});
+	AllScreenPos_.push_back({0, 675});
+	AllScreenPos_.push_back({0, 2000});
 	CurrentIndex_ = 0;
 }
 
@@ -48,10 +53,10 @@ void MenuLevel::Update()
 		switch (CurrentIndex_)
 		{
 		case 0:
-			ChangeStart(1);
+			ChangeIndex(1);
 			break;
 		case 1:
-			ChangeStart(2);
+			ChangeIndex(2);
 			break;
 		case 2:
 			break;
@@ -69,10 +74,44 @@ void MenuLevel::Update()
 			GameEngineWindow::GetInst().Off();
 			break;
 		case 1:
-			ChangeStart(0);
+			ChangeIndex(0);
 			break;
 		case 2:
-			ChangeStart(1);
+			ChangeIndex(1);
+			break;
+		case 3:
+			break;
+		default:
+			break;
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("MenuLeft"))
+	{
+		switch (CurrentIndex_)
+		{
+		case 0:
+			break;
+		case 1:
+			Index1_->ChangeFile(Index1_->GetCurrentIndex() - 1);
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+		default:
+			break;
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("MenuRight"))
+	{
+		switch (CurrentIndex_)
+		{
+		case 0:
+			break;
+		case 1:
+			Index1_->ChangeFile(Index1_->GetCurrentIndex() + 1);
+			break;
+		case 2:
 			break;
 		case 3:
 			break;
@@ -99,7 +138,7 @@ void MenuLevel::LevelChangeEnd()
 {
 }
 
-void MenuLevel::ChangeStart(int _Index)
+void MenuLevel::ChangeIndex(int _Index)
 {
 	IsChanging_ = true;
 	ChangeStartTime_ = CurrentLevelTime_;

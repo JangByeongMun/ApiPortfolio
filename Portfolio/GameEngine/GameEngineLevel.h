@@ -1,8 +1,16 @@
 #pragma once
 #include <list>
 #include <map>
+#include <vector>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
+
+class GameEngineActor;
+struct ChangeOrderItem
+{
+	GameEngineActor* TargetObject;
+	int ChangeOrder;
+};
 
 class GameEngine;
 class GameEngineActor;
@@ -27,14 +35,15 @@ public:
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
 	template<typename ActorType>
-	ActorType* CreateActor(int _order = 0, const std::string& _name = "")
+	ActorType* CreateActor(int _Order = 0, const std::string& _Name = "")
 	{
-		ActorType* newActor = new ActorType();
-		newActor->SetName(_name);
-		newActor->SetLevel(this);
+		ActorType* NewActor = new ActorType();
+		NewActor->GameEngineUpdateObject::SetOrder(_Order);
+		NewActor->SetName(_Name);
+		NewActor->SetLevel(this);
 
 		// 각 액터들마다 start가 다를수 있는데 이를 가상함수로 제작한후 밖에서 호출하지 못하도록 막은후 GameEngineActor에서만 호출가능하도록 구현
-		GameEngineActor* EngineActor = newActor;
+		GameEngineActor* EngineActor = NewActor;
 		EngineActor->Start();
 
 		// ------------------------------------------
@@ -47,10 +56,10 @@ public:
 		// ------------------------------------------
 		// 배열 형식으로 사용하면 insert와 find를 동시에 할수 있다. - 즉 찾아보고 없으면 넣어줄수 있다는것
 		// 위의 스크립트를 하나로 뭉쳐서 만들어준것
-		std::list<GameEngineActor*>& Group = AllActor_[_order];
-		Group.push_back(newActor);
+		std::list<GameEngineActor*>& Group = AllActor_[_Order];
+		Group.push_back(NewActor);
 
-		return newActor;
+		return NewActor;
 	}
 
 	inline float4 GetCameraPos()
@@ -82,10 +91,12 @@ private:
 	void ActorRender();
 	void ActorRelease();
 	void CollisionDebugRender();
+	void ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOrder);
 
 	//////////////////// 렌더러
 private:
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+	std::vector<ChangeOrderItem> ChangeOrderList;
 	
 	void AddRenderer(GameEngineRenderer* _Renderer);
 	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);

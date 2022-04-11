@@ -125,9 +125,6 @@
     <ClInclude Include="RoomData.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="MenuUI.h">
-      <Filter>Menu</Filter>
-    </ClInclude>
     <ClInclude Include="IntroPage.h">
       <Filter>Title</Filter>
     </ClInclude>
@@ -181,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="EndingManager.h">
       <Filter>Ending</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMenu.h">
+      <Filter>Menu</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -308,9 +308,6 @@
     <ClCompile Include="RoomData.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
-    <ClCompile Include="MenuUI.cpp">
-      <Filter>Menu</Filter>
-    </ClCompile>
     <ClCompile Include="IntroPage.cpp">
       <Filter>Title</Filter>
     </ClCompile>
@@ -361,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="EndingManager.cpp">
       <Filter>Ending</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMenu.cpp">
+      <Filter>Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

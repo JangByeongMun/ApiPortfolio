@@ -51,6 +51,11 @@ public:
 	}
 
 	void ChangeLevel(const std::string& _Name);
+	
+	static inline GameEngineLevel* GetPrevLevel()
+	{
+		return PrevLevel_;
+	}
 
 protected:
 	template<typename levelType>
@@ -67,6 +72,7 @@ private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;
 	static GameEngineLevel* NextLevel_;
+	static GameEngineLevel* PrevLevel_;
 	static GameEngine* UserContents_;
 	static GameEngineImage* WindowMainImage_;
 	static GameEngineImage* BackBufferImage_;

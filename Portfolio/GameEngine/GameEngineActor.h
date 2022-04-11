@@ -56,6 +56,8 @@ public:
 		return Scale_;
 	}
 
+	void SetOrder(int _Order) override;
+
 protected:
 	virtual void Start() {};
 	virtual void Update() {};

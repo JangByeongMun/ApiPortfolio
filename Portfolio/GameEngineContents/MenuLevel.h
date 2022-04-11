@@ -18,6 +18,9 @@ enum class MenuStatue
 };
 
 // 설명 :
+class MenuStart;
+class MenuFileSelect;
+class GameMenu;
 class MenuLevel : public GameEngineLevel
 {
 public:
@@ -40,17 +43,13 @@ protected:
 
 private:
 	float CurrentLevelTime_;
+	MenuStart* Index0_;
+	MenuFileSelect* Index1_;
+	GameMenu* Index2_;
 
 	///////////////// 화면 변경
 public:
-	void UpdateScreen();
-	void ChangeScreen();
-
-	void StayStart();
-	void StayUpdate();
-
-	void ChangeStart(int _Index);
-	void ChangeUpdate();
+	void ChangeIndex(int _Index);
 	
 private:
 	std::vector<float4> AllScreenPos_;

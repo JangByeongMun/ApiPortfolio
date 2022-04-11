@@ -153,6 +153,7 @@ void GameEngineRenderer::CreateAnimation(
 
 	FrameAnimation& NewAnimation = Animations_[_Name];
 	NewAnimation.SetName(_Name);
+	NewAnimation.TimeKey_ = 0;
 	NewAnimation.Renderer_ = this;
 	NewAnimation.Image_ = FindImage;
 	NewAnimation.CurrentFrame_ = _StartIndex;
@@ -190,6 +191,34 @@ void GameEngineRenderer::CreateFolderAnimation(const std::string& _Image, const 
 	NewAnimation.Loop_ = _Loop;
 }
 
+void GameEngineRenderer::CreateAnimationTimeKey(const std::string& _Image, const std::string& _Name, int _TimeScaleKey, int _StartIndex, int _EndIndex, float _InterTime, bool _Loop)
+{
+	GameEngineImage* FindImage = GameEngineImageManager::GetInst()->Find(_Image);
+	if (nullptr == FindImage)
+	{
+		MsgBoxAssert("존재하지 않는 이미지로 애니메이션을 만들려고 했습니다.");
+		return;
+	}
+
+	if (Animations_.end() != Animations_.find(_Name))
+	{
+		MsgBoxAssert("이미 존재하는 애니메이션에 추가하려고 했습니다.");
+		return;
+	}
+
+	FrameAnimation& NewAnimation = Animations_[_Name];
+	NewAnimation.SetName(_Name);
+	NewAnimation.TimeKey_ = _TimeScaleKey;
+	NewAnimation.Renderer_ = this;
+	NewAnimation.Image_ = FindImage;
+	NewAnimation.CurrentFrame_ = _StartIndex;
+	NewAnimation.StartFrame_ = _StartIndex;
+	NewAnimation.EndFrame_ = _EndIndex;
+	NewAnimation.CurrentInterTime_ = _InterTime;
+	NewAnimation.InterTime_ = _InterTime;
+	NewAnimation.Loop_ = _Loop;
+}
+
 void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 {
 	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
@@ -216,7 +245,8 @@ bool GameEngineRenderer::IsAnimationName(const std::string& _Name)
 void GameEngineRenderer::FrameAnimation::Update()
 {
 	IsEnd_ = false;
-	CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime();
+	float test = GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
+	CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
 	if (0 >= CurrentInterTime_)
 	{
 		CurrentInterTime_ = InterTime_;
