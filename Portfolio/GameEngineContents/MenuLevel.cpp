@@ -41,6 +41,9 @@ void MenuLevel::Loading()
 	AllScreenPos_.push_back({0, 0});
 	AllScreenPos_.push_back({0, 675});
 	AllScreenPos_.push_back({0, 2000});
+	AllScreenPos_.push_back({1400, 2000});
+	AllScreenPos_.push_back({1400, 1000});
+	AllScreenPos_.push_back({1400, 3000});
 	CurrentIndex_ = 0;
 }
 
@@ -59,8 +62,13 @@ void MenuLevel::Update()
 			ChangeIndex(2);
 			break;
 		case 2:
+			Index2_->SelectMenu();
 			break;
 		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
 			break;
 		default:
 			break;
@@ -80,6 +88,13 @@ void MenuLevel::Update()
 			ChangeIndex(1);
 			break;
 		case 3:
+			ChangeIndex(2);
+			break;
+		case 4:
+			ChangeIndex(2);
+			break;
+		case 5:
+			ChangeIndex(2);
 			break;
 		default:
 			break;
@@ -98,6 +113,10 @@ void MenuLevel::Update()
 			break;
 		case 3:
 			break;
+		case 4:
+			break;
+		case 5:
+			break;
 		default:
 			break;
 		}
@@ -114,6 +133,52 @@ void MenuLevel::Update()
 		case 2:
 			break;
 		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		default:
+			break;
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("MenuUp"))
+	{
+		switch (CurrentIndex_)
+		{
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			Index2_->AddMenuIndex(-1);
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
+			break;
+		default:
+			break;
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("MenuDown"))
+	{
+		switch (CurrentIndex_)
+		{
+		case 0:
+			break;
+		case 1:
+			break;
+		case 2:
+			Index2_->AddMenuIndex(1);
+			break;
+		case 3:
+			break;
+		case 4:
+			break;
+		case 5:
 			break;
 		default:
 			break;
