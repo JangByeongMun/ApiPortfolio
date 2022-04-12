@@ -50,6 +50,7 @@ void GameEngineRenderer::SetImageScale()
 	ScaleMode_ = RenderScaleMode::Image;
 	RenderScale_ = Image_->GetScale();
 	RenderImageScale_ = Image_->GetScale();
+	RenderImagePivot_ = float4::ZERO;
 }
 
 void GameEngineRenderer::SetIndex(const size_t _Index, const float4& _Scale)
@@ -228,7 +229,17 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 		return;
 	}
 
-	CurrentAnimation_ = &FindIter->second;
+	if (nullptr != CurrentAnimation_ && CurrentAnimation_->GetNameConstPtr() == _Name)
+	{
+		return;
+	}
+
+	CurrentAnimation_ = &FindIter->second;	//FrameAnimation은 값형이다.
+
+	if (nullptr != CurrentAnimation_)
+	{
+		CurrentAnimation_->Reset();
+	}
 }
 
 bool GameEngineRenderer::IsEndAnimation()

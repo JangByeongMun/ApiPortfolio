@@ -19,15 +19,15 @@ public:
 	{
 		Name_ = _Name;
 	}
-	inline std::string GetName()
+	inline std::string GetNameCopy()
 	{
 		return Name_;
 	}
-	inline std::string& GetNameRef()
+	inline std::string& GetNameConstRef()
 	{
 		return Name_;
 	}
-	inline const char* GetNamePtr()
+	inline const char* GetNameConstPtr()
 	{
 		return Name_.c_str();
 	}

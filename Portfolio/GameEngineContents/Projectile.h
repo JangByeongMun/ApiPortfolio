@@ -1,6 +1,7 @@
 #pragma once
-#include <GameEngine/GameEngineActor.h>
 #include "ContentsEnum.h"
+#include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // 설명 : 투사체
 class Projectile : public GameEngineActor
@@ -28,6 +29,7 @@ public:
 protected:
 
 private:
+	GameEngineCollision* Collision_;
 	ProjectileType Type_;
 	float4 Vec_;
 

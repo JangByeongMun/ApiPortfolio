@@ -15,6 +15,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 #include "Projectile.h"
+#include "Bomb.h"
 
 Player::Player()
 	: Speed_(1)
@@ -88,6 +89,12 @@ void Player::Update()
 
 	// 충돌 체크
 	CollisionCheck();
+
+	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
+	{
+		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
+		BombActor->SetPosition(GetPosition());
+	}
 }
 
 void Player::CollisionCheck()

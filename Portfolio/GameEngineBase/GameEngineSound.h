@@ -28,7 +28,7 @@ private:
 public:
 	static GameEngineSoundPlayer SoundPlayControl(const std::string& _Name);
 
-	static void SoundPlayOneShot(const std::string& _Name);
+	static void SoundPlayOneShot(const std::string& _Name, int _LoopCount = 0);
 	static void Update();
 
 ////////////////////////////////////////// 리소스 매니지먼트

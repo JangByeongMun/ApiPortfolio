@@ -3,7 +3,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 
 Projectile::Projectile() 
-	: Type_(ProjectileType::PLAYER_BASIC)
+	: Collision_()
+	, Type_(ProjectileType::PLAYER_BASIC)
 	, Vec_({ 0, 0 })
 {
 }
@@ -16,6 +17,8 @@ void Projectile::Start()
 {
 	GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 });
 	Renderer->SetIndex(5);
+	
+	Collision_ = CreateCollision("Projectile", { 96, 96 }, { 0, 0 });
 
 	Death(2.0f);
 }
