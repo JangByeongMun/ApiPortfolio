@@ -249,7 +249,7 @@ bool GameEngineRenderer::IsEndAnimation()
 
 bool GameEngineRenderer::IsAnimationName(const std::string& _Name)
 {
-	return CurrentAnimation_->GetNameRef() == _Name;
+	return CurrentAnimation_->GetNameConstRef() == _Name;
 }
 
 //////////////////////////// 프레임 애니메이션

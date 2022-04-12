@@ -66,3 +66,12 @@ enum class HeartType
 	BlackHeartHalf,
 	EternalHeart,
 };
+
+enum class ItemType
+{
+	None,
+	Bomb,
+	Key,
+	Money,
+	Max,
+};

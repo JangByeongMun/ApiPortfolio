@@ -21,7 +21,7 @@ void Bomb::Update()
 {
 	Timer_ += GameEngineTime::GetDeltaTime();
 
-	if (Collision_->CollisionResult("Projectile", CollisionResult_, CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionResult("Projectile", CollisionResult_, CollisionType::Rect, CollisionType::Rect))
 	{
 		float4 MoveDir = { 0, 0 };
 		for (int i = 0; i < CollisionResult_.size(); i++)

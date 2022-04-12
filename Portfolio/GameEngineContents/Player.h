@@ -72,10 +72,20 @@ private:
 	void HeadAttackUpdate();
 
 ///////////////////////////////// 공격속도
+private:
 	float AttackSpeed_;
 	float ShotSpeed_;
 
 	float NextAttackTime_;
 	float CurrentAttackTime_;
+
+///////////////////////////////// 좌상단 플레이어정보
+private:
+	int MoneyCount_;
+	int KeyCount_;
+	int BombCount_;
+
+public:
+	void AddItem(ItemType _Type, int _Count = 1);
 };
 

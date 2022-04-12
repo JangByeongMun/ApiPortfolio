@@ -209,3 +209,25 @@ void Player::StateUpdate()
 		break;
 	}
 }
+
+void Player::AddItem(ItemType _Type, int _Count)
+{
+	switch (_Type)
+	{
+	case ItemType::None:
+		break;
+	case ItemType::Bomb:
+		BombCount_ += _Count;
+		break;
+	case ItemType::Key:
+		KeyCount_ += _Count;
+		break;
+	case ItemType::Money:
+		MoneyCount_ += _Count;
+		break;
+	case ItemType::Max:
+		break;
+	default:
+		break;
+	}
+}
