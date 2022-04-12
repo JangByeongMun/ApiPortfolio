@@ -26,31 +26,71 @@ public:
 	{
 		PivotType_ = _Type;
 	}
+	inline RenderPivot GetPivotType()
+	{
+		return PivotType_;
+	}
+
 	inline void SetScaleMode(const RenderScaleMode& _Mode)
 	{
 		ScaleMode_ = _Mode;
 	}
+	inline RenderScaleMode GetScaleMode()
+	{
+		return ScaleMode_;
+	}
+
 	inline void SetPivot(const float4& _Pivot)
 	{
 		RenderPivot_ = _Pivot;
 	}
+	inline float4 GetPivot()
+	{
+		return RenderPivot_;
+	}
+
 	inline void SetScale(const float4& _Scale)
 	{
 		ScaleMode_ = RenderScaleMode::User;
 		RenderScale_ = _Scale;
 	}
+	inline float4 GetScale()
+	{
+		return RenderPivot_;
+	}
+
 	inline void SetTransColor(unsigned int _Color)
 	{
 		TransColor_ = _Color;
 	}
-	inline GameEngineImage* GetImage()
+	inline unsigned int GetTransColor()
 	{
-		return Image_;
+		return TransColor_;
+	}
+
+	inline void SetAlpha(unsigned int _Alpha)
+	{
+		Alpha_ = _Alpha;
+
+		if (Alpha_ >= 255)
+		{
+			Alpha_ = 255;
+		}
+	}
+	inline unsigned int GetAlpha()
+	{
+		return Alpha_;
 	}
 
 	void SetImageScale();
 	void SetImage(const std::string& _Name);
 	void SetIndex(const size_t _Index, const float4& _Scale = { -1.0f, -1.0f });
+
+	inline GameEngineImage* GetImage()
+	{
+		return Image_;
+	}
+
 
 	void CameraEffectOff()
 	{
@@ -67,7 +107,6 @@ protected:
 	void Render();
 
 private:
-
 	GameEngineImage* Image_;
 	RenderPivot PivotType_;
 	RenderScaleMode ScaleMode_;
@@ -81,6 +120,7 @@ private:
 	float4 RenderImagePivot_;
 
 	unsigned int TransColor_;
+	unsigned int Alpha_;
 	bool IsCameraEffect_;
 
 	/////////////////////////////////////////// 애니메이션
