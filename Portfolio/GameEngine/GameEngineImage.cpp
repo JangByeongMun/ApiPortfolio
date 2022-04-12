@@ -133,7 +133,7 @@ void GameEngineImage::BitCopy(const GameEngineImage* _Other, const float4& _Copy
 	);
 }
 
-void GameEngineImage::TransCopy(const GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, unsigned int _TransColor)
+void GameEngineImage::TransCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, unsigned int _TransColor)
 {
 	TransparentBlt
 	(
@@ -148,6 +148,29 @@ void GameEngineImage::TransCopy(const GameEngineImage* _Other, const float4& _Co
 		_OtherScale.ix(),
 		_OtherScale.iy(),
 		_TransColor
+	);
+}
+
+void GameEngineImage::AlphaCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, unsigned int _Alpha)
+{
+	BLENDFUNCTION Func;
+	Func.BlendOp = AC_SRC_OVER;
+	Func.BlendFlags = 0;
+	Func.SourceConstantAlpha = _Alpha;
+	Func.AlphaFormat = AC_SRC_ALPHA;
+
+	AlphaBlend(
+		ImageDC_, 
+		_CopyPos.ix(), 
+		_CopyPos.iy(), 
+		_CopyScale.ix(), 
+		_CopyScale.iy(), 
+		_Other->ImageDC_,
+		_OtherPivot.ix(),
+		_OtherPivot.iy(),
+		_OtherScale.ix(),
+		_OtherScale.iy(),
+		Func 
 	);
 }
 

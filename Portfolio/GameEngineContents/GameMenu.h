@@ -19,6 +19,8 @@ public:
 
 	inline void ChangeMenuIndex(int _Index) 
 	{
+		CurrentIndex_ = _Index;
+
 		if (CurrentIndex_ < 0)
 		{
 			CurrentIndex_ = 0;
@@ -28,11 +30,12 @@ public:
 			CurrentIndex_ = 2;
 		}
 
-		CurrentIndex_ = _Index;
 		ArrowRenderer_->SetPivot(ArrowPos_[CurrentIndex_]);
 	}
 	inline void AddMenuIndex(int _Index)
 	{
+		CurrentIndex_ += _Index;
+
 		if (CurrentIndex_ < 0)
 		{
 			CurrentIndex_ = 0;
@@ -42,7 +45,6 @@ public:
 			CurrentIndex_ = 2;
 		}
 
-		CurrentIndex_ += _Index;
 		ArrowRenderer_->SetPivot(ArrowPos_[CurrentIndex_]);
 	}
 

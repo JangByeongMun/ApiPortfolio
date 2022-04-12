@@ -179,7 +179,12 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="CharacterMenu.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="ContentsGlobal.h" />
     <ClInclude Include="DamageableActor.h">
       <SubType>
       </SubType>
@@ -287,6 +292,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="OptionsMenu.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="OptionWindow.h">
       <SubType>
       </SubType>
@@ -367,6 +376,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="StatsMenu.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Stone.h">
       <SubType>
       </SubType>
@@ -414,6 +427,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CardUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="CharacterMenu.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -523,6 +540,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="OptionsMenu.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="OptionWindow.cpp">
       <SubType>
       </SubType>
@@ -600,6 +621,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="SpacebarUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="StatsMenu.cpp">
       <SubType>
       </SubType>
     </ClCompile>

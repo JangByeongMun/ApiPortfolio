@@ -7,9 +7,7 @@
 class BindingOfIsaac : public GameEngine
 {
 public:
-	static CharacterType characterType;
-
-	// constrcuter destructer
+		// constrcuter destructer
 	BindingOfIsaac();
 	~BindingOfIsaac();
 

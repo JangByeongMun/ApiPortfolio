@@ -4,13 +4,10 @@
 enum class CharacterType
 {
 	ISAAC,
-	MAGDALENE,
 	CAIN,
+	MAGDALENE,
 	JUDAS,
-	EVE,
 	BLUEBABY,
-	SAMSON,
-	AZAZEL
 };
 
 // 각 블럭의 데이터값

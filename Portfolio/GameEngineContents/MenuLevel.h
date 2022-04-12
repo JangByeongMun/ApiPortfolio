@@ -21,6 +21,9 @@ enum class MenuStatue
 class MenuStart;
 class MenuFileSelect;
 class GameMenu;
+class CharacterMenu;
+class StatsMenu;
+class OptionsMenu;
 class MenuLevel : public GameEngineLevel
 {
 public:
@@ -46,6 +49,9 @@ private:
 	MenuStart* Index0_;
 	MenuFileSelect* Index1_;
 	GameMenu* Index2_;
+	CharacterMenu* Index3_;
+	StatsMenu* Index4_;
+	OptionsMenu* Index5_;
 
 	///////////////// 화면 변경
 public:

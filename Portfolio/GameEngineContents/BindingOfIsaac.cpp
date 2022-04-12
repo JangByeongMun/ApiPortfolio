@@ -174,18 +174,31 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("001_isaac_left.bmp");
 		Image->Cut({ 96, 96 });
 	}
-	
-	Image = GameEngineImageManager::GetInst()->Find("tears.bmp");
-	Image->Cut({ 96, 96 });
 
-	Image = GameEngineImageManager::GetInst()->Find("LoadingMap.bmp");
-	Image->Cut({ 96, 96 });
+	/////////////////////////////////// Menu
+	{
+		Image = GameEngineImageManager::GetInst()->Find("charactermenu_Characters.bmp");
+		Image->CutCount(4, 2);
 
-	Image = GameEngineImageManager::GetInst()->Find("IntroIcon.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("tears.bmp");
+		Image->Cut({ 96, 96 });
 
-	Image = GameEngineImageManager::GetInst()->Find("MenuIcon.bmp");
-	Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("LoadingMap.bmp");
+		Image->Cut({ 96, 96 });
+
+		Image = GameEngineImageManager::GetInst()->Find("IntroIcon.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("MenuIcon.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("optionsmenu_VolumeLeft.bmp");
+		Image->CutCount(5, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("optionsmenu_VolumeRight.bmp");
+		Image->CutCount(5, 3);
+	}
+
 
 	/////////////////////////////////// Play UI
 	{

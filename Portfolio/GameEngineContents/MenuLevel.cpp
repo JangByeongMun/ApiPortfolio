@@ -2,6 +2,9 @@
 #include "MenuStart.h"
 #include "MenuFileSelect.h"
 #include "GameMenu.h"
+#include "CharacterMenu.h"
+#include "StatsMenu.h"
+#include "OptionsMenu.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -27,6 +30,9 @@ void MenuLevel::Loading()
 	Index0_ = CreateActor<MenuStart>(0);
 	Index1_ = CreateActor<MenuFileSelect>(0);
 	Index2_ = CreateActor<GameMenu>(0);
+	Index3_ = CreateActor<CharacterMenu>(0);
+	Index4_ = CreateActor<StatsMenu>(0);
+	Index5_ = CreateActor<OptionsMenu>(0);
 
 	if (false == GameEngineInput::GetInst()->IsKey("MenuOK"))
 	{
@@ -44,6 +50,7 @@ void MenuLevel::Loading()
 	AllScreenPos_.push_back({1400, 2000});
 	AllScreenPos_.push_back({1400, 1000});
 	AllScreenPos_.push_back({1400, 3000});
+	AllScreenPos_.push_back({0, 3000});
 	CurrentIndex_ = 0;
 }
 
@@ -65,10 +72,13 @@ void MenuLevel::Update()
 			Index2_->SelectMenu();
 			break;
 		case 3:
+			Index3_->SelectIndex();
 			break;
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
 			break;
 		default:
 			break;
@@ -96,6 +106,8 @@ void MenuLevel::Update()
 		case 5:
 			ChangeIndex(2);
 			break;
+		case 6:
+			break;
 		default:
 			break;
 		}
@@ -112,10 +124,13 @@ void MenuLevel::Update()
 		case 2:
 			break;
 		case 3:
+			Index3_->AddIndex(-1);
 			break;
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
 			break;
 		default:
 			break;
@@ -133,10 +148,13 @@ void MenuLevel::Update()
 		case 2:
 			break;
 		case 3:
+			Index3_->AddIndex(1);
 			break;
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
 			break;
 		default:
 			break;
@@ -154,10 +172,13 @@ void MenuLevel::Update()
 			Index2_->AddMenuIndex(-1);
 			break;
 		case 3:
+			Index3_->AddDifficult(-1);
 			break;
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
 			break;
 		default:
 			break;
@@ -175,10 +196,13 @@ void MenuLevel::Update()
 			Index2_->AddMenuIndex(1);
 			break;
 		case 3:
+			Index3_->AddDifficult(1);
 			break;
 		case 4:
 			break;
 		case 5:
+			break;
+		case 6:
 			break;
 		default:
 			break;
