@@ -18,6 +18,7 @@ public:
 	EndingManager& operator=(EndingManager&& _Other) noexcept = delete;
 
 	void Play();
+	void Stop();
 
 protected:
 

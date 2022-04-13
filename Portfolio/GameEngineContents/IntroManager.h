@@ -18,6 +18,7 @@ public:
 	IntroManager& operator=(IntroManager&& _Other) noexcept = delete;
 	
 	void Play();
+	void Stop();
 
 protected:
 

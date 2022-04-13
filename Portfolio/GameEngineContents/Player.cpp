@@ -26,6 +26,8 @@ Player::Player()
 	, MapColImage_(nullptr)
 	, BodyAnimationName("Body_")
 	, HeadAnimationName("Head_")
+	, BlueBodyAnimationName("B_Body_")
+	, BlueHeadAnimationName("B_Head_")
 	, CurBody_()
 	, CurHead_()
 	, MoveDir_({ 0, 0 })
@@ -54,17 +56,36 @@ void Player::Start()
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Idle", 8, 8, 0.1f, false);
 	BodyRender_->ChangeAnimation("Body_Idle");
 	
-	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
+	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, -10 });
 	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_1", 2, 2, 0, false);
-	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_2", 2, 3, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_2", 2, 3, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_1", 2, 2, 0, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_2", 2, 3, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_2", 2, 3, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Up_1", 4, 4, 0, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Up_2", 4, 5, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Up_2", 4, 5, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_1", 0, 0, 0, false);
-	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_2", 0, 1, 0.2f, false);
+	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_2", 0, 1, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Idle", 0, 0, 0, false);
 	HeadRender_->ChangeAnimation("Head_Idle");
+
+	// bluebaby 버전 추가
+	{
+		BodyRender_->CreateAnimation("006_bluebaby_left.bmp", "B_Body_Left", 16, 25, 0.1f, true);
+		BodyRender_->CreateAnimation("006_bluebaby.bmp", "B_Body_Right", 16, 25, 0.1f, true);
+		BodyRender_->CreateAnimation("006_bluebaby.bmp", "B_Body_Up", 6, 15, 0.1f, true);
+		BodyRender_->CreateAnimation("006_bluebaby.bmp", "B_Body_Down", 6, 15, 0.1f, true);
+		BodyRender_->CreateAnimation("006_bluebaby.bmp", "B_Body_Idle", 8, 8, 0.1f, false);
+
+		HeadRender_->CreateAnimation("006_bluebaby_left.bmp", "B_Head_Left_1", 2, 2, 0, false);
+		HeadRender_->CreateAnimation("006_bluebaby_left.bmp", "B_Head_Left_2", 2, 3, 0.1f, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Right_1", 2, 2, 0, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Right_2", 2, 3, 0.1f, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Up_1", 4, 4, 0, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Up_2", 4, 5, 0.1f, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Down_1", 0, 0, 0, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Down_2", 0, 1, 0.1f, false);
+		HeadRender_->CreateAnimation("006_bluebaby.bmp", "B_Head_Idle", 0, 0, 0, false);
+	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("MoveLeft"))
 	{
@@ -178,6 +199,8 @@ void Player::GetPlayerInfo()
 		MoneyCount_ = 3;
 		KeyCount_ = 0;
 		BombCount_ = 0;
+
+		MakeHeadAddRenderer("character_004_judasfez.bmp");
 		break;
 	case CharacterType::BLUEBABY:
 		MaxHp_ = 0;
@@ -194,22 +217,49 @@ void Player::GetPlayerInfo()
 	default:
 		break;
 	}
+
+	ChangeHeadState(PlayerHeadState::Attack);
+	ChangeBodyState(PlayerBodyState::Move);
 }
 
 void Player::MakeHeadAddRenderer(const std::string& _Name)
 {
-	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -5 });
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -8 });
 	chracterRenderer_->CreateAnimation(_Name, "Idle", 0, 0, 0, false);
 	chracterRenderer_->CreateAnimation(_Name, "Left_1", 6, 6, 0, false);
-	chracterRenderer_->CreateAnimation(_Name, "Left_2", 6, 7, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Left_2", 6, 7, 0.1f, false);
 	chracterRenderer_->CreateAnimation(_Name, "Right_1", 2, 2, 0, false);
-	chracterRenderer_->CreateAnimation(_Name, "Right_2", 2, 3, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Right_2", 2, 3, 0.1f, false);
 	chracterRenderer_->CreateAnimation(_Name, "Up_1", 4, 4, 0, false);
-	chracterRenderer_->CreateAnimation(_Name, "Up_2", 4, 5, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Up_2", 4, 5, 0.1f, false);
 	chracterRenderer_->CreateAnimation(_Name, "Down_1", 0, 0, 0, false);
-	chracterRenderer_->CreateAnimation(_Name, "Down_2", 0, 1, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Down_2", 0, 1, 0.1f, false);
 	chracterRenderer_->ChangeAnimation("Idle");
 	HeadAddRender_.push_back(chracterRenderer_);
+}
+
+std::string Player::GetBodyAnimationName()
+{
+	if (SelectedCharacterType == CharacterType::BLUEBABY)
+	{
+		return BlueBodyAnimationName;
+	}
+	else
+	{
+		return BodyAnimationName;
+	}
+}
+
+std::string Player::GetHeadAnimationName()
+{
+	if (SelectedCharacterType == CharacterType::BLUEBABY)
+	{
+		return BlueHeadAnimationName;
+	}
+	else
+	{
+		return HeadAnimationName;
+	}
 }
 
 bool Player::IsMoveKey()

@@ -174,6 +174,12 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("001_isaac_left.bmp");
 		Image->Cut({ 96, 96 });
 
+		Image = GameEngineImageManager::GetInst()->Find("006_bluebaby.bmp");
+		Image->Cut({ 96, 96 });
+
+		Image = GameEngineImageManager::GetInst()->Find("006_bluebaby_left.bmp");
+		Image->Cut({ 96, 96 });
+
 		Image = GameEngineImageManager::GetInst()->Find("character_002_maggiesbeautifulgoldenlocks.bmp");
 		Image->CutCount(8, 1);
 

@@ -31,6 +31,13 @@ void IntroManager::Play()
 	BgmPlayer_.SetVolume(0.1f);
 }
 
+void IntroManager::Stop()
+{
+	Reset();
+	IsPlaying_ = false;
+	BgmPlayer_.Stop();
+}
+
 void IntroManager::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());

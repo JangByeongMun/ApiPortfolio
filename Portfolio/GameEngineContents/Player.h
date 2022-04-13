@@ -33,6 +33,9 @@ public:
 	void GetPlayerInfo();
 	void MakeHeadAddRenderer(const std::string& _Name);
 
+	std::string GetBodyAnimationName();
+	std::string GetHeadAnimationName();
+
 protected:
 	
 private:
@@ -45,6 +48,8 @@ private:
 
 	std::string BodyAnimationName;
 	std::string HeadAnimationName;
+	std::string BlueBodyAnimationName;
+	std::string BlueHeadAnimationName;
 
 	void Start() override;
 	void Update() override;

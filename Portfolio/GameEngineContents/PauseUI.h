@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class PauseUI
+class PauseUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer

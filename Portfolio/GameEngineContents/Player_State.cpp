@@ -7,7 +7,7 @@
 // Start
 void Player::BodyIdleStart()
 {
-	BodyRender_->ChangeAnimation(BodyAnimationName + "Idle");
+	BodyRender_->ChangeAnimation(GetBodyAnimationName() + "Idle");
 }
 void Player::BodyMoveStart()
 {
@@ -15,7 +15,7 @@ void Player::BodyMoveStart()
 }
 void Player::HeadIdleStart()
 {
-	HeadRender_->ChangeAnimation(HeadAnimationName + "Idle");
+	HeadRender_->ChangeAnimation(GetHeadAnimationName() + "Idle");
 	for (int i = 0; i < HeadAddRender_.size(); i++)
 	{
 		HeadAddRender_[i]->ChangeAnimation("Idle");
@@ -79,7 +79,7 @@ void Player::BodyMoveUpdate()
 	}
 	MoveDir_.Limit2D(1.0f);
 
-	BodyRender_->ChangeAnimation(BodyAnimationName + ChangeDirText);
+	BodyRender_->ChangeAnimation(GetBodyAnimationName() + ChangeDirText);
 
 	// Speed는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 450);
@@ -130,7 +130,7 @@ void Player::HeadAttackUpdate()
 	{
 		Shoot(AttackDir * ShotSpeed_ * 550, ProjectileType::PLAYER_BASIC, AttackDir * 30);
 
-		HeadRender_->ChangeAnimation(HeadAnimationName + ChangeDirText + "_2");
+		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 
 		NextAttackTime_ = CurrentAttackTime_ + TearDelay;
 
@@ -145,7 +145,7 @@ void Player::HeadAttackUpdate()
 
 	if (true == HeadRender_->IsEndAnimation())
 	{
-		HeadRender_->ChangeAnimation(HeadAnimationName + ChangeDirText + "_1");
+		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_1");
 		for (int i = 0; i < HeadAddRender_.size(); i++)
 		{
 			HeadAddRender_[i]->ChangeAnimation(ChangeDirText + "_1");

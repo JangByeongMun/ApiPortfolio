@@ -34,4 +34,5 @@ void TitleLevel::LevelChangeStart()
 
 void TitleLevel::LevelChangeEnd()
 {
+	IntroPtr_->Stop();
 }

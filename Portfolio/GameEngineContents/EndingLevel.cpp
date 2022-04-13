@@ -41,7 +41,7 @@ void EndingLevel::LevelChangeStart()
 
 void EndingLevel::LevelChangeEnd()
 {
-	
+	EndingPtr_->Stop();
 }
 
 float EndingLevel::CurrentTimer(int _Index)

@@ -6,6 +6,8 @@
 #include "PlayBackGround.h"
 #include "SpacebarUI.h"
 
+#include <GameEngineBase/GameEngineInput.h>
+
 enum class ORDER
 {
 	BACKGROUND,
@@ -15,6 +17,7 @@ enum class ORDER
 };
 
 PlayLevel::PlayLevel() 
+	: PlayerInst_(nullptr)
 {
 }
 
@@ -31,10 +34,19 @@ void PlayLevel::Loading()
 	CreateActor<SpacebarUI>((int)ORDER::UI);
 
 	Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
+
+	if (false == GameEngineInput::GetInst()->IsKey("PlayESC"))
+	{
+		GameEngineInput::GetInst()->CreateKey("PlayESC", VK_ESCAPE);
+	}
 }
 
 void PlayLevel::Update()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
+	{
+
+	}
 }
 
 void PlayLevel::LevelChangeStart()

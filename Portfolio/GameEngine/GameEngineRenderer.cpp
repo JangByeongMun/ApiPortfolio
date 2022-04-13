@@ -19,6 +19,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, CurrentAnimation_(nullptr)
 	, IsCameraEffect_(true)
 	, Alpha_(255)
+	, Pause_(false)
 {
 }
 

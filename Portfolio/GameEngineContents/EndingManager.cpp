@@ -26,6 +26,13 @@ void EndingManager::Play()
 	BgmPlayer_.SetVolume(0.1f);
 }
 
+void EndingManager::Stop()
+{
+	Reset();
+	IsPlaying_ = false;
+	BgmPlayer_.Stop();
+}
+
 void EndingManager::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
