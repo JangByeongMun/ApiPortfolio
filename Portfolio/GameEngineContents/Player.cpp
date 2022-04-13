@@ -14,6 +14,7 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
+#include "ContentsGlobal.h"
 #include "Projectile.h"
 #include "Bomb.h"
 
@@ -119,6 +120,96 @@ void Player::PlayerSetMove(float4 _Value)
 	{
 		SetMove(_Value);
 	}
+}
+
+void Player::GetPlayerInfo()
+{
+	CharacterType test = SelectedCharacterType;
+	switch (SelectedCharacterType)
+	{
+	case CharacterType::ISAAC:
+		MaxHp_ = 3;
+		Damage_ = 3.5f;
+		AttackSpeed_ = 2.73f;
+		ShotSpeed_ = 1;
+		Range_ = 6.5f;
+		MoveSpeed_ = 1;
+		Luck_ = 0;
+		MoneyCount_ = 0;
+		KeyCount_ = 0;
+		BombCount_ = 1;
+		break;
+	case CharacterType::CAIN:
+		MaxHp_ = 2;
+		Damage_ = 3.5f;
+		AttackSpeed_ = 2.73f;
+		ShotSpeed_ = 1;
+		Range_ = 4.5f;
+		MoveSpeed_ = 1.3f;
+		Luck_ = 0;
+		MoneyCount_ = 0;
+		KeyCount_ = 0;
+		BombCount_ = 1;
+
+		MakeHeadAddRenderer("character_003_cainseyepatch.bmp");
+		break;
+	case CharacterType::MAGDALENE:
+		MaxHp_ = 4;
+		Damage_ = 3.5f;
+		AttackSpeed_ = 2.73f;
+		ShotSpeed_ = 1;
+		Range_ = 6.5f;
+		MoveSpeed_ = 0.85f;
+		Luck_ = 0;
+		MoneyCount_ = 0;
+		KeyCount_ = 0;
+		BombCount_ = 0;
+
+		MakeHeadAddRenderer("character_002_maggiesbeautifulgoldenlocks.bmp");
+		break;
+	case CharacterType::JUDAS:
+		MaxHp_ = 1;
+		Damage_ = 3.5f;
+		AttackSpeed_ = 2.73f;
+		ShotSpeed_ = 1;
+		Range_ = 6.5f;
+		MoveSpeed_ = 1.0f;
+		Luck_ = 0;
+		MoneyCount_ = 3;
+		KeyCount_ = 0;
+		BombCount_ = 0;
+		break;
+	case CharacterType::BLUEBABY:
+		MaxHp_ = 0;
+		Damage_ = 3.5f;
+		AttackSpeed_ = 2.73f;
+		ShotSpeed_ = 1;
+		Range_ = 6.5f;
+		MoveSpeed_ = 1.1f;
+		Luck_ = 0;
+		MoneyCount_ = 0;
+		KeyCount_ = 0;
+		BombCount_ = 0;
+		break;
+	default:
+		break;
+	}
+}
+
+void Player::MakeHeadAddRenderer(const std::string& _Name)
+{
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -5 });
+	chracterRenderer_->CreateAnimation(_Name, "Idle", 0, 0, 0, false);
+	chracterRenderer_->CreateAnimation(_Name, "Left_1", 6, 6, 0, false);
+	chracterRenderer_->CreateAnimation(_Name, "Left_2", 6, 7, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Right_1", 2, 2, 0, false);
+	chracterRenderer_->CreateAnimation(_Name, "Right_2", 2, 3, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Up_1", 4, 4, 0, false);
+	chracterRenderer_->CreateAnimation(_Name, "Up_2", 4, 5, 0.2f, false);
+	chracterRenderer_->CreateAnimation(_Name, "Down_1", 0, 0, 0, false);
+	chracterRenderer_->CreateAnimation(_Name, "Down_2", 0, 1, 0.2f, false);
+	chracterRenderer_->ChangeAnimation("Idle");
+	HeadAddRender_.push_back(chracterRenderer_);
 }
 
 bool Player::IsMoveKey()

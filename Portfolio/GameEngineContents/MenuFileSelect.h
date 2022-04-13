@@ -28,6 +28,7 @@ protected:
 
 private:
 	std::vector<GameEngineRenderer*> AllFiles_;
+	std::vector<GameEngineRenderer*> AllSaveRenderer_;
 	std::vector<float4> AllPos_;
 	int CurrentIndex_;
 	int NextIndex_;

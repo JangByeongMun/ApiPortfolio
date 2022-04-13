@@ -2,6 +2,6 @@
 #include "ContentsEnum.h"
 #include <vector>
 
-extern CharacterType SelectedCharacterType;// = CharacterType::ISAAC;
+extern CharacterType SelectedCharacterType;
 
 extern std::vector<int> AllOptionValues;

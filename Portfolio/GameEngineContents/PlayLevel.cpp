@@ -26,7 +26,7 @@ void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
 	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
-	CreateActor<Player>((int)ORDER::PLAYER);
+	PlayerInst_ = CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HpUI>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
 
@@ -39,6 +39,7 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart()
 {
+	PlayerInst_->GetPlayerInfo();
 }
 
 void PlayLevel::LevelChangeEnd()

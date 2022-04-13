@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 // Start
 void Player::BodyIdleStart()
@@ -15,6 +16,10 @@ void Player::BodyMoveStart()
 void Player::HeadIdleStart()
 {
 	HeadRender_->ChangeAnimation(HeadAnimationName + "Idle");
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->ChangeAnimation("Idle");
+	}
 }
 void Player::HeadAttackStart()
 {
@@ -128,11 +133,22 @@ void Player::HeadAttackUpdate()
 		HeadRender_->ChangeAnimation(HeadAnimationName + ChangeDirText + "_2");
 
 		NextAttackTime_ = CurrentAttackTime_ + TearDelay;
+
+		// 부가적인 악세사리들 애니메이션도 실행
+
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->ChangeAnimation(ChangeDirText + "_2");
+		}
 		return;
 	}
 
 	if (true == HeadRender_->IsEndAnimation())
 	{
 		HeadRender_->ChangeAnimation(HeadAnimationName + ChangeDirText + "_1");
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->ChangeAnimation(ChangeDirText + "_1");
+		}
 	}
 }

@@ -69,14 +69,17 @@ void CharacterMenu::UpdateUI()
 		if (i == 0)
 		{
 			AllCharacters_[TmpIndex]->SetAlpha(255);
+			AllCharacters_[TmpIndex]->SetOrder(3);
 		}
 		else if (i == 1 || i == 4)
 		{
 			AllCharacters_[TmpIndex]->SetAlpha(230);
+			AllCharacters_[TmpIndex]->SetOrder(2);
 		}
 		else if (i == 2 || i == 3)
 		{
 			AllCharacters_[TmpIndex]->SetAlpha(150);
+			AllCharacters_[TmpIndex]->SetOrder(1);
 		}
 	}
 
@@ -160,7 +163,7 @@ void CharacterMenu::SelectIndex()
 		CurrentIndex_ = Random.RandomInt(0, 5);
 	}
 
-	//SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
+	SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
 	GameEngine::GetInst().ChangeLevel("Play");
 }
 
@@ -170,8 +173,6 @@ void CharacterMenu::Start()
 	CreateRenderer("charactermenu.bmp", RenderPivot::CENTER, { 0, 0 });
 	CreateRenderer("charactermenu_Arrow1.bmp", RenderPivot::CENTER, { -170, 100 });
 	CreateRenderer("charactermenu_Arrow2.bmp", RenderPivot::CENTER, { 170, 100 });
-	HardRenderer_ = CreateRenderer("charactermenu_Hard.bmp", RenderPivot::CENTER, { 88, 210 });
-
 
 	// 난이도 창
 	CreateRenderer("difficultywidget.bmp", RenderPivot::CENTER, { 400, 0 });
@@ -315,6 +316,7 @@ void CharacterMenu::Start()
 	// 난이도 화살표 위치 저장
 	DifficultyArrowPos_.push_back({ 315, -25 });
 	DifficultyArrowPos_.push_back({ 310, 20 });
+	HardRenderer_ = CreateRenderer("charactermenu_Hard.bmp", RenderPivot::CENTER, { 88, 210 });
 
 	ChangeIndex(0);
 }

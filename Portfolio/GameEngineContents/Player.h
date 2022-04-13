@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include "Shooter.h"
+#include <vector>
 
 enum class PlayerBodyState
 {
@@ -29,12 +30,16 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
+	void GetPlayerInfo();
+	void MakeHeadAddRenderer(const std::string& _Name);
+
 protected:
 	
 private:
 	float Speed_;
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
+	std::vector<GameEngineRenderer*> HeadAddRender_;
 	GameEngineCollision* PlayerCollision;
 	GameEngineImage* MapColImage_;
 
@@ -71,11 +76,18 @@ private:
 	void HeadIdleUpdate();
 	void HeadAttackUpdate();
 
-///////////////////////////////// 공격속도
+///////////////////////////////// 기본정보
 private:
+	int MaxHp_;
+	float Damage_;
 	float AttackSpeed_;
 	float ShotSpeed_;
+	float Range_;
+	float MoveSpeed_;
+	float Luck_;
 
+///////////////////////////////// 공격속도
+private:
 	float NextAttackTime_;
 	float CurrentAttackTime_;
 

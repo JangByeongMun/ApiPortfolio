@@ -173,6 +173,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("001_isaac_left.bmp");
 		Image->Cut({ 96, 96 });
+
+		Image = GameEngineImageManager::GetInst()->Find("character_002_maggiesbeautifulgoldenlocks.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("character_003_cainseyepatch.bmp");
+		Image->CutCount(8, 1);
 	}
 
 	/////////////////////////////////// Menu
@@ -197,6 +203,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("optionsmenu_VolumeRight.bmp");
 		Image->CutCount(5, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("01_basement.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("02_momkill.bmp");
+		Image->CutCount(2, 1);
 	}
 
 

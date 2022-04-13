@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν :
+class Player;
 class PlayLevel : public GameEngineLevel
 {
 public:
@@ -23,6 +24,6 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
-
+	Player* PlayerInst_;
 };
 
