@@ -197,6 +197,9 @@
     <ClInclude Include="ContentsGlobal.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerUI.h">
+      <Filter>Play\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -391,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="ContentsGlobal.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerUI.cpp">
+      <Filter>Play\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

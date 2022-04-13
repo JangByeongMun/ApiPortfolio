@@ -12,11 +12,13 @@ enum class PlayerBodyState
 enum class PlayerHeadState
 {
 	Idle,
-	Attack
+	Attack,
+	Move,
 };
 
 // 설명 : 플레이어
 class GameEngineImage;
+class PlayerUI;
 class Player : public Shooter
 {
 public:
@@ -75,11 +77,13 @@ private:
 	void BodyMoveStart();
 	void HeadIdleStart();
 	void HeadAttackStart();
+	void HeadMoveStart();
 
 	void BodyIdleUpdate();
 	void BodyMoveUpdate();
 	void HeadIdleUpdate();
 	void HeadAttackUpdate();
+	void HeadMoveUpdate();
 
 ///////////////////////////////// 기본정보
 private:
@@ -104,5 +108,8 @@ private:
 
 public:
 	void AddItem(ItemType _Type, int _Count = 1);
+
+///////////////////////////////// UI 통괄
+	PlayerUI* UI_;
 };
 

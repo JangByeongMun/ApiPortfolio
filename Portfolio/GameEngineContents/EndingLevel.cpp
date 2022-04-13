@@ -1,6 +1,7 @@
 #include "EndingLevel.h"
 #include "EndingBackGround.h"
 #include "EndingManager.h"
+#include "TitleForeGround.h"
 
 EndingLevel::EndingLevel()
 	: AllActors_({})
@@ -20,6 +21,7 @@ void EndingLevel::Loading()
 {
 	CreateActor<EndingBackGround>(0);
 	EndingPtr_ = CreateActor<EndingManager>(1);
+	CreateActor<TitleForeGround>(2);
 }
 
 void EndingLevel::Update()

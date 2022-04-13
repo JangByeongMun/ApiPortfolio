@@ -1,7 +1,9 @@
 #include "TitleForeGround.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngineRenderer.h>
 
-TitleForeGround::TitleForeGround() 
+TitleForeGround::TitleForeGround()
+	: Renderer_(nullptr)
 {
 }
 
@@ -13,7 +15,8 @@ void TitleForeGround::Start()
 {
 	SetPosition(GameEngineWindow::GetInst().GetScale().Half());
 
-	//CreateRenderer("TitleOverlay.bmp", RenderPivot::CENTER, {0, 0});
-	CreateRenderer("Titleshadow.bmp", RenderPivot::CENTER, { -260, 135 });
+	Renderer_ = CreateRenderer("Titleshadow.bmp", RenderPivot::CENTER, { -260, 135 }, 10);
+	Renderer_->SetAlpha(20);
+	Renderer_->CameraEffectOff();
 }
 

@@ -20,7 +20,7 @@ void TitleLevel::Loading()
 	CreateActor<IntroPage>(1);
 	IntroPtr_ = CreateActor<IntroManager>(1);
 
-	//CreateActor<TitleForeGround>(10);
+	CreateActor<TitleForeGround>(1);
 }
 
 void TitleLevel::Update()

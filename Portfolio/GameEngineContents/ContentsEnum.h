@@ -1,5 +1,13 @@
 #pragma once
 
+// 렌더러 순서
+enum class ORDER
+{
+	BACKGROUND,
+	PLAYER,
+	UI,
+};
+
 // 선택한 캐릭터 타입
 enum class CharacterType
 {

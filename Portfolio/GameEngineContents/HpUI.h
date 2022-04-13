@@ -18,9 +18,12 @@ public:
 	HpUI& operator=(const HpUI& _Other) = delete;
 	HpUI& operator=(HpUI&& _Other) noexcept = delete;
 
-	void AddMaxHP(int _value, int _heal = 0);
-	void SetCurrentHP(int _value);
-	void ChangeCurrentHP(int _value);
+	void Setting();
+
+	void SetMaxHP(int _Value);
+	void AddMaxHP(int _Value, int _Heal = 0);
+	void SetCurrentHP(int _Value);
+	void AddCurrentHP(int _Value);
 	void AddColorHeart(HeartType _Type);
 
 protected:

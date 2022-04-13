@@ -13,9 +13,9 @@ HpUI::~HpUI()
 {
 }
 
+int MaxCount = 12;
 void HpUI::Start()
 {
-	int MaxCount = 12;
 	SetPosition({130, 35});
 	RendererVector_.reserve(MaxCount);
 
@@ -38,23 +38,54 @@ void HpUI::Start()
 	}
 }
 
-void HpUI::AddMaxHP(int _value, int _heal)
+void HpUI::Setting()
 {
-	MaxHP_ += _value;
-	CurrentHP_ += _heal;
+	for (int i = 0; i < MaxCount; i++)
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer("ui_hearts_1.bmp");
+
+		if (i < MaxHP_)
+		{
+			TmpRenderer->SetIndex(0);
+		}
+		else
+		{
+			TmpRenderer->SetIndex(9);
+		}
+
+		float x = static_cast<float>((i % (MaxCount / 2)) * 36);
+		float y = static_cast<float>((i / (MaxCount / 2)) * 36);
+		TmpRenderer->SetPivot({ x, y });
+	}
 }
 
-void HpUI::SetCurrentHP(int _value)
+void HpUI::SetMaxHP(int _Value)
 {
-	CurrentHP_ = _value;
+	MaxHP_ = _Value;
+	Setting();
 }
 
-void HpUI::ChangeCurrentHP(int _value)
+void HpUI::AddMaxHP(int _Value, int _Heal)
 {
-	CurrentHP_ += _value;
+	MaxHP_ += _Value;
+	CurrentHP_ += _Heal;
+	Setting();
+}
+
+void HpUI::SetCurrentHP(int _Value)
+{
+	CurrentHP_ = _Value;
+	Setting();
+}
+
+void HpUI::AddCurrentHP(int _Value)
+{
+	CurrentHP_ += _Value;
+	Setting();
 }
 
 void HpUI::AddColorHeart(HeartType _Type)
 {
 	//AddHeart_.push(_Type);
+	Setting();
 }

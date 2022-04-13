@@ -13,6 +13,7 @@ void Player::BodyMoveStart()
 {
 
 }
+
 void Player::HeadIdleStart()
 {
 	HeadRender_->ChangeAnimation(GetHeadAnimationName() + "Idle");
@@ -25,6 +26,11 @@ void Player::HeadAttackStart()
 {
 
 }
+void Player::HeadMoveStart()
+{
+
+}
+
 
 // Update
 void Player::BodyIdleUpdate()
@@ -84,11 +90,17 @@ void Player::BodyMoveUpdate()
 	// Speed는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 450);
 }
+
 void Player::HeadIdleUpdate()
 {
 	if (true == IsAttackKey())
 	{
 		ChangeHeadState(PlayerHeadState::Attack);
+		return;
+	}
+	if (true == IsMoveKey())
+	{
+		ChangeHeadState(PlayerHeadState::Move);
 		return;
 	}
 }
@@ -150,5 +162,38 @@ void Player::HeadAttackUpdate()
 		{
 			HeadAddRender_[i]->ChangeAnimation(ChangeDirText + "_1");
 		}
+	}
+}
+void Player::HeadMoveUpdate()
+{
+	if (true == IsAttackKey())
+	{
+		ChangeHeadState(PlayerHeadState::Attack);
+		return;
+	}
+
+	// 
+	std::string ChangeDirText = "Idle";
+	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+	{
+		ChangeDirText = "Left_1";
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+	{
+		ChangeDirText = "Right_1";
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
+	{
+		ChangeDirText = "Up_1";
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+	{
+		ChangeDirText = "Down_1";
+	}
+
+	HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText);
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->ChangeAnimation(ChangeDirText);
 	}
 }

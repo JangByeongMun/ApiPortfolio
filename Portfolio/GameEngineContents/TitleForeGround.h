@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
 class TitleForeGround : public GameEngineActor
@@ -19,6 +20,6 @@ protected:
 	void Start() override;
 
 private:
-
+	GameEngineRenderer* Renderer_;
 };
 

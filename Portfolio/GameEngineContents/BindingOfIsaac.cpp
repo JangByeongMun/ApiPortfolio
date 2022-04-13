@@ -185,6 +185,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("character_003_cainseyepatch.bmp");
 		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("character_004_judasfez.bmp");
+		Image->CutCount(8, 1);
 	}
 
 	/////////////////////////////////// Menu

@@ -17,6 +17,7 @@
 #include "ContentsGlobal.h"
 #include "Projectile.h"
 #include "Bomb.h"
+#include "PlayerUI.h"
 
 Player::Player()
 	: Speed_(1)
@@ -44,6 +45,7 @@ Player::~Player()
 void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+	UI_ = GetLevel()->CreateActor<PlayerUI>();
 	PlayerCollision = CreateCollision("PlayerHitBox", { 100, 100 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
@@ -317,6 +319,8 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 		case PlayerHeadState::Attack:
 			HeadAttackStart();
 			break;
+		case PlayerHeadState::Move:
+			HeadMoveStart();
 		default:
 			break;
 		}
@@ -333,6 +337,9 @@ void Player::StateUpdate()
 		break;
 	case PlayerHeadState::Attack:
 		HeadAttackUpdate();
+		break;
+	case PlayerHeadState::Move:
+		HeadMoveUpdate();
 		break;
 	default:
 		break;

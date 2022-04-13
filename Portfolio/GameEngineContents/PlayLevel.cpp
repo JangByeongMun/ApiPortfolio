@@ -8,14 +8,6 @@
 
 #include <GameEngineBase/GameEngineInput.h>
 
-enum class ORDER
-{
-	BACKGROUND,
-	PLAYER,
-	MONSTER,
-	UI
-};
-
 PlayLevel::PlayLevel() 
 	: PlayerInst_(nullptr)
 {

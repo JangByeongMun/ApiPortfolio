@@ -5,6 +5,7 @@
 #include "CharacterMenu.h"
 #include "StatsMenu.h"
 #include "OptionsMenu.h"
+#include "TitleForeGround.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -33,6 +34,8 @@ void MenuLevel::Loading()
 	Index3_ = CreateActor<CharacterMenu>(0);
 	Index4_ = CreateActor<StatsMenu>(0);
 	Index5_ = CreateActor<OptionsMenu>(0);
+
+	CreateActor<TitleForeGround>(1);
 
 	if (false == GameEngineInput::GetInst()->IsKey("MenuOK"))
 	{

@@ -617,9 +617,9 @@ void IntroManager::Update()
 		CreateRenderer("Intro25_2.bmp", RenderPivot::CENTER, { -20, 100 })->Death(Timer_[27]);
 
 		{
-			GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -20, 50 });
-			renderer->CreateAnimation("Intro25_1.bmp", "Intro25_1", 0, 1, 0.1f, true);
-			renderer->ChangeAnimation("Intro25_1");
+			AnimationRenderer2_ = CreateRenderer(RenderPivot::CENTER, { -20, 50 });
+			AnimationRenderer2_->CreateAnimation("Intro25_1.bmp", "Intro25_1", 0, 1, 0.1f, true);
+			AnimationRenderer2_->ChangeAnimation("Intro25_1");
 		}
 
 		AnimationStartTime_ = CurrentTime_;
