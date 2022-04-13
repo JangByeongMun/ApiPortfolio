@@ -17,37 +17,7 @@ public:
 	GameMenu& operator=(const GameMenu& _Other) = delete;
 	GameMenu& operator=(GameMenu&& _Other) noexcept = delete;
 
-	inline void ChangeMenuIndex(int _Index) 
-	{
-		CurrentIndex_ = _Index;
-
-		if (CurrentIndex_ < 0)
-		{
-			CurrentIndex_ = 0;
-		}
-		if (CurrentIndex_ > 2)
-		{
-			CurrentIndex_ = 2;
-		}
-
-		ArrowRenderer_->SetPivot(ArrowPos_[CurrentIndex_]);
-	}
-	inline void AddMenuIndex(int _Index)
-	{
-		CurrentIndex_ += _Index;
-
-		if (CurrentIndex_ < 0)
-		{
-			CurrentIndex_ = 0;
-		}
-		if (CurrentIndex_ > 2)
-		{
-			CurrentIndex_ = 2;
-		}
-
-		ArrowRenderer_->SetPivot(ArrowPos_[CurrentIndex_]);
-	}
-
+	void AddMenuIndex(int _Index);
 	void SelectMenu();
 
 protected:

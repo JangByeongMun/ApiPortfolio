@@ -10,10 +10,34 @@ GameMenu::~GameMenu()
 {
 }
 
+void GameMenu::AddMenuIndex(int _Index)
+{
+	CurrentIndex_ += _Index;
+
+	if (CurrentIndex_ < 0)
+	{
+		CurrentIndex_ = 1;
+	}
+	if (CurrentIndex_ > 1)
+	{
+		CurrentIndex_ = 0;
+	}
+
+	ArrowRenderer_->SetPivot(ArrowPos_[CurrentIndex_]);
+}
+
 void GameMenu::SelectMenu()
 {
 	MenuLevel* Level = static_cast<MenuLevel*>(GetLevel());
-	Level->ChangeIndex(CurrentIndex_ + 3);
+	if (0 == CurrentIndex_)
+	{
+		Level->ChangeIndex(3);
+	}
+
+	if (1 == CurrentIndex_)
+	{
+		Level->ChangeIndex(5);
+	}
 }
 
 void GameMenu::Start()
@@ -30,7 +54,6 @@ void GameMenu::Start()
 	CreateRenderer("GameMenu_Menu5.bmp", RenderPivot::CENTER, { 20, 160 });
 
 	ArrowPos_.push_back({-180, -140});
-	ArrowPos_.push_back({-150, 100});
 	ArrowPos_.push_back({-140, 180});
 	ArrowRenderer_ = CreateRenderer("GameMenu_Arrow.bmp", RenderPivot::CENTER, ArrowPos_[0]);
 }

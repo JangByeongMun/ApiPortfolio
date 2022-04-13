@@ -1,4 +1,7 @@
 #pragma once
 #include "ContentsEnum.h"
+#include <vector>
 
-CharacterType SelectedCharacterType = CharacterType::ISAAC;
+extern CharacterType SelectedCharacterType;// = CharacterType::ISAAC;
+
+extern std::vector<int> AllOptionValues;

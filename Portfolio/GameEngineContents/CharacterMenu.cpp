@@ -160,7 +160,7 @@ void CharacterMenu::SelectIndex()
 		CurrentIndex_ = Random.RandomInt(0, 5);
 	}
 
-	SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
+	//SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
 	GameEngine::GetInst().ChangeLevel("Play");
 }
 

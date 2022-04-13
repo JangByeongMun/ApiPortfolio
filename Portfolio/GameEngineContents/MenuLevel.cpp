@@ -129,6 +129,7 @@ void MenuLevel::Update()
 		case 4:
 			break;
 		case 5:
+			Index5_->AddValue(-1);
 			break;
 		case 6:
 			break;
@@ -153,6 +154,7 @@ void MenuLevel::Update()
 		case 4:
 			break;
 		case 5:
+			Index5_->AddValue(1);
 			break;
 		case 6:
 			break;
@@ -177,6 +179,7 @@ void MenuLevel::Update()
 		case 4:
 			break;
 		case 5:
+			Index5_->AddIndex(-1);
 			break;
 		case 6:
 			break;
@@ -201,6 +204,7 @@ void MenuLevel::Update()
 		case 4:
 			break;
 		case 5:
+			Index5_->AddIndex(1);
 			break;
 		case 6:
 			break;

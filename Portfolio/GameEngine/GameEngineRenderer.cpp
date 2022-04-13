@@ -264,24 +264,27 @@ bool GameEngineRenderer::IsAnimationName(const std::string& _Name)
 void GameEngineRenderer::FrameAnimation::Update()
 {
 	IsEnd_ = false;
-	float test = GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
-	CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
-	if (0 >= CurrentInterTime_)
+	if (false == Renderer_->Pause_)
 	{
-		CurrentInterTime_ = InterTime_;
-		++CurrentFrame_;
-
-		if (EndFrame_ < CurrentFrame_)
+		float test = GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
+		CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
+		if (0 >= CurrentInterTime_)
 		{
-			if (true == Loop_)
+			CurrentInterTime_ = InterTime_;
+			++CurrentFrame_;
+
+			if (EndFrame_ < CurrentFrame_)
 			{
-				IsEnd_ = true;
-				CurrentFrame_ = StartFrame_;
-			}
-			else
-			{
-				IsEnd_ = true;
-				CurrentFrame_ = EndFrame_;
+				if (true == Loop_)
+				{
+					IsEnd_ = true;
+					CurrentFrame_ = StartFrame_;
+				}
+				else
+				{
+					IsEnd_ = true;
+					CurrentFrame_ = EndFrame_;
+				}
 			}
 		}
 	}
@@ -296,4 +299,16 @@ void GameEngineRenderer::FrameAnimation::Update()
 		Renderer_->Image_ = FolderImage_->GetImage(CurrentFrame_);
 		Renderer_->SetImageScale();
 	}
+}
+
+const GameEngineRenderer::FrameAnimation* GameEngineRenderer::FindAnimation(const std::string& _Name)
+{
+	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
+
+	if (Animations_.end() == FindIter)
+	{
+		return nullptr;
+	}
+
+	return &FindIter->second;
 }

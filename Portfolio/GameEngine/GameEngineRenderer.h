@@ -92,6 +92,23 @@ public:
 	}
 
 
+	inline void SetPause(bool _Value)
+	{
+		Pause_ = _Value;
+	}
+	inline void PauseOn()
+	{
+		Pause_ = true;
+	}
+	inline void PauseOff()
+	{
+		Pause_ = false;
+	}
+	inline void PauseSwitch()
+	{
+		Pause_ = !Pause_;
+	}
+
 	void CameraEffectOff()
 	{
 		IsCameraEffect_ = false;
@@ -121,14 +138,18 @@ private:
 
 	unsigned int TransColor_;
 	unsigned int Alpha_;
+
 	bool IsCameraEffect_;
+	bool Pause_;
 
 	/////////////////////////////////////////// 애니메이션
 private:
 	friend class FrameAnimation;
 	class FrameAnimation : public GameEngineNameObject
 	{
-	public:
+	private:
+		friend GameEngineRenderer;
+
 		GameEngineRenderer* Renderer_;
 		GameEngineImage* Image_;
 		GameEngineFolderImage* FolderImage_;
@@ -141,6 +162,24 @@ private:
 		float InterTime_;
 		bool Loop_;
 		bool IsEnd_;
+
+	public:
+		inline int WorldCurrentFrame() const
+		{
+			return CurrentFrame_;
+		}
+		inline int WorldStartFrame() const
+		{
+			return StartFrame_;
+		}
+		inline int WorldEndFrame() const
+		{
+			return EndFrame_;
+		}
+		inline int LocalCurrentFrame() const
+		{
+			return StartFrame_ - CurrentFrame_;
+		}
 
 	public:
 		FrameAnimation()
@@ -180,6 +219,12 @@ public:
 
 	bool IsEndAnimation();
 	bool IsAnimationName(const std::string& _Name);
+
+	const FrameAnimation* FindAnimation(const std::string& _Name);
+	inline const FrameAnimation* CurrentAnimation()
+	{
+		return CurrentAnimation_;
+	}
 
 private:
 	std::map<std::string, FrameAnimation> Animations_;

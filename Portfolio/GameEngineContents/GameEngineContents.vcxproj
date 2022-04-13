@@ -434,6 +434,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ContentsGlobal.cpp" />
     <ClCompile Include="DamageableActor.cpp">
       <SubType>
       </SubType>

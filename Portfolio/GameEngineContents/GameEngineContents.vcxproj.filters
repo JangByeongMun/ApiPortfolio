@@ -389,6 +389,9 @@
     <ClCompile Include="OptionsMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
+    <ClCompile Include="ContentsGlobal.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
