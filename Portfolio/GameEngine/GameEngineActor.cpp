@@ -4,6 +4,7 @@
 #include "GameEngineCollision.h"
 
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineDebug.h>
 
 GameEngineActor::GameEngineActor() 
 	: Level_(nullptr)
@@ -111,6 +112,17 @@ void GameEngineActor::DebugRectRender()
 		DebugRect.CenterRight(),
 		DebugRect.CenterBot()
 	);
+}
+
+void GameEngineActor::LevelRegist(std::string _RegistName)
+{
+	if (_RegistName == "")
+	{
+		GetLevel()->RegistActor(GetNameConstPtr(), this);
+		return;
+	}
+
+	GetLevel()->RegistActor(_RegistName, this);
 }
 
 GameEngineRenderer* GameEngineActor::CreateRenderer(RenderPivot _PivotType, const float4& _PivotPos, int _Order)

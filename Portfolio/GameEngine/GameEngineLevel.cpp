@@ -2,6 +2,7 @@
 #include "GameEngineActor.h"
 #include "GameEngineCollision.h"
 #include "GameEngineRenderer.h"
+#include <GameEngineBase/GameEngineDebug.h>
 
 GameEngineLevel::GameEngineLevel() 
 	: CameraPos_(float4::ZERO)
@@ -31,6 +32,29 @@ GameEngineLevel::~GameEngineLevel()
 		}
 	}
 }
+
+GameEngineActor* GameEngineLevel::FindActor(const std::string& _Name)
+{
+	std::map<std::string, GameEngineActor*>::iterator FindIter = RegistActor_.find(_Name);
+
+	if (RegistActor_.end() == FindIter)
+	{
+		return nullptr;
+	}
+
+	return FindIter->second;
+}
+
+void GameEngineLevel::RegistActor(const std::string& _Name, GameEngineActor* _Actor)
+{
+	if (RegistActor_.end() != RegistActor_.find(_Name))
+	{
+		MsgBoxAssert("이미 존재하는 이름으로 또 등록하려고 했습니다.");
+	}
+
+	RegistActor_.insert(std::map<std::string, GameEngineActor*>::value_type(_Name, _Actor));
+}
+
 
 void GameEngineLevel::ActorUpdate()
 {
@@ -67,6 +91,7 @@ void GameEngineLevel::ActorUpdate()
 
 	ChangeOrderList.clear();
 
+	// 렌더러의 릴리즈업데이트가 안되서 추가
 	{
 		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupStart = AllRenderer_.begin();
 		std::map<int, std::list<GameEngineRenderer*>>::iterator GroupEnd = AllRenderer_.end();
@@ -262,4 +287,48 @@ void GameEngineLevel::ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewO
 void GameEngineLevel::AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision)
 {
 	AllCollision_[_GroupName].push_back(_Collision);
+}
+
+void GameEngineLevel::ActorLevelChangeStart()
+{
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
+
+	for (; GroupStart != GroupEnd; ++GroupStart)
+	{
+		std::list<GameEngineActor*>& Group = GroupStart->second;
+		std::list<GameEngineActor*>::iterator StartActor = Group.begin();
+		std::list<GameEngineActor*>::iterator EndActor = Group.end();
+		for (; StartActor != EndActor; ++StartActor)
+		{
+			if (false == (*StartActor)->IsUpdate())
+			{
+				continue;
+			}
+
+			(*StartActor)->LevelChangeStart();
+		}
+	}
+}
+
+void GameEngineLevel::ActorLevelChangeEnd()
+{
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupStart = AllActor_.begin();
+	std::map<int, std::list<GameEngineActor*>>::iterator GroupEnd = AllActor_.end();
+
+	for (; GroupStart != GroupEnd; ++GroupStart)
+	{
+		std::list<GameEngineActor*>& Group = GroupStart->second;
+		std::list<GameEngineActor*>::iterator StartActor = Group.begin();
+		std::list<GameEngineActor*>::iterator EndActor = Group.end();
+		for (; StartActor != EndActor; ++StartActor)
+		{
+			if (false == (*StartActor)->IsUpdate())
+			{
+				continue;
+			}
+
+			(*StartActor)->LevelChangeEnd();
+		}
+	}
 }

@@ -75,6 +75,15 @@ public:
 		CameraPos_ = _Value;
 	}
 
+	template<typename ConvertType>
+	ConvertType* FindActor(const std::string& _Name)
+	{
+		return dynamic_cast<ConvertType*>(FindActor(_Name));
+	}
+	GameEngineActor* FindActor(const std::string& _Name);
+
+	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
+
 protected:
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
@@ -82,9 +91,13 @@ protected:
 	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
 	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
 
+	void ActorLevelChangeStart(); // 이 씬으로 바뀌었을때 액터들 함수 실행
+	void ActorLevelChangeEnd(); // 이 씬이 바뀌었을때 액터들 함수 실행
+
 	//////////////////// 액터
 private:
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+	std::map<std::string, GameEngineActor*> RegistActor_;
 	float4 CameraPos_;
 
 	void ActorUpdate();

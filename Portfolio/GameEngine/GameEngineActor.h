@@ -63,8 +63,12 @@ protected:
 	virtual void Update() {};
 	virtual void Render() {};
 
+	virtual void LevelChangeStart() {};
+	virtual void LevelChangeEnd() {};
+
 	void Release();
 	void DebugRectRender();
+	void LevelRegist(std::string _RegistName = "");
 
 private:
 	GameEngineLevel* Level_;
