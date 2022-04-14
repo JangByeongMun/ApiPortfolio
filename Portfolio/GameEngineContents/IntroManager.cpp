@@ -176,33 +176,37 @@ void IntroManager::Update()
 
 		{
 			GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -20, 20 });
-			renderer->CreateAnimation("Intro06_1.bmp", "Intro06_1", 0, 1, 0.4f, true);
+			renderer->CreateAnimation("Intro06_1.bmp", "Intro06_1", 0, 1, 0.1f, true);
 			renderer->ChangeAnimation("Intro06_1");
-			renderer->Death(Timer_[8]);
-		}
-
-		{
-			GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
-			renderer->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
-			renderer->ChangeAnimation("Intro06_2");
 			renderer->Death(Timer_[8]);
 		}
 
 		AnimationStartTime_ = CurrentTime_;
 		AnimationRenderer1_ = CreateRenderer(RenderPivot::CENTER, { 30, -40 });
-		AnimationRenderer1_->CreateAnimation("Intro06_3.bmp", "Intro06_3_1", 0, 0, 0.2f, false);
-		AnimationRenderer1_->CreateAnimation("Intro06_3.bmp", "Intro06_3_2", 0, 1, 0.2f, true);
-		AnimationRenderer1_->ChangeAnimation("Intro06_3_1");
+		AnimationRenderer1_->CreateAnimation("Intro06_3.bmp", "Intro06_3", 0, 1, 0.2f, true);
+		AnimationRenderer1_->CreateAnimation("Intro06_3.bmp", "Intro06_3_None", 0, 0, 0, false);
+		AnimationRenderer1_->ChangeAnimation("Intro06_3_None");
+
+		AnimationRenderer2_ = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2_None", 1, 1, 0, false);
+		AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
+		AnimationRenderer2_->Death(Timer_[8]);
 	}
 	else if (true == IsUpdate(7))
 	{
 		if (CurrentTime_ - AnimationStartTime_ >= 10)
 		{
-			AnimationRenderer1_->ChangeAnimation("Intro06_3_1");
+			AnimationRenderer1_->ChangeAnimation("Intro06_3_None");
 		}
 		else if (CurrentTime_ - AnimationStartTime_ >= 7)
 		{
-			AnimationRenderer1_->ChangeAnimation("Intro06_3_2");
+			AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
+			AnimationRenderer1_->ChangeAnimation("Intro06_3");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 1.5f)
+		{
+			AnimationRenderer2_->ChangeAnimation("Intro06_2");
 		}
 	}
 
@@ -210,6 +214,7 @@ void IntroManager::Update()
 	{
 		CurrentCheck_[8] = true;
 		AnimationRenderer1_->Death();
+		AnimationRenderer2_->Death();
 
 		CreateRenderer("intro05_1.bmp", RenderPivot::CENTER, { 0, 0 })->Death(Timer_[9]);
 		CreateRenderer("intro05_4.bmp", RenderPivot::CENTER, { 160, 280 })->Death(Timer_[9]);
@@ -320,28 +325,31 @@ void IntroManager::Update()
 			renderer->Death(Timer_[13]);
 		}
 
-		{
-			GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
-			renderer->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
-			renderer->ChangeAnimation("Intro06_2");
-			renderer->Death(Timer_[13]);
-		}
-
 		AnimationStartTime_ = CurrentTime_;
 		AnimationRenderer1_ = CreateRenderer(RenderPivot::CENTER, { 30, -40 });
-		AnimationRenderer1_->CreateAnimation("intro06_3.bmp", "Intro06_3_1", 0, 0, 0.2f, false);
-		AnimationRenderer1_->CreateAnimation("intro06_3.bmp", "Intro06_3_2", 0, 1, 0.2f, true);
-		AnimationRenderer1_->ChangeAnimation("Intro06_3_1");
+		AnimationRenderer1_->CreateAnimation("intro06_3.bmp", "Intro06_3", 0, 1, 0.2f, true);
+		AnimationRenderer1_->CreateAnimation("intro06_3.bmp", "Intro06_3_None", 0, 0, 0, false);
+		AnimationRenderer1_->ChangeAnimation("Intro06_3_None");
+
+		AnimationRenderer2_ = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2_None", 1, 1, 0, false);
+		AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
 	}
 	else if (true == IsUpdate(12))
 	{
 		if (CurrentTime_ - AnimationStartTime_ >= 14.5f)
 		{
-			AnimationRenderer1_->ChangeAnimation("Intro06_3_1");
+			AnimationRenderer1_->ChangeAnimation("Intro06_3_None");
 		}
 		else if (CurrentTime_ - AnimationStartTime_ >= 10.5f)
 		{
-			AnimationRenderer1_->ChangeAnimation("Intro06_3_2");
+			AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
+			AnimationRenderer1_->ChangeAnimation("Intro06_3");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 1.5f)
+		{
+			AnimationRenderer2_->ChangeAnimation("Intro06_2");
 		}
 	}
 
@@ -349,6 +357,7 @@ void IntroManager::Update()
 	{
 		CurrentCheck_[13] = true;
 		AnimationRenderer1_->Death();
+		AnimationRenderer2_->Death();
 
 		AnimationStartTime_ = CurrentTime_;
 		AnimationRenderer1_ = CreateRenderer(RenderPivot::CENTER, { -30, -30 });
@@ -381,24 +390,32 @@ void IntroManager::Update()
 			renderer->Death(Timer_[15]);
 		}
 
-		{
-			GameEngineRenderer* renderer = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
-			renderer->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
-			renderer->ChangeAnimation("Intro06_2");
-			renderer->Death(Timer_[15]);
-		}
-
 		AnimationStartTime_ = CurrentTime_;
 		AnimationRenderer1_ = CreateRenderer(RenderPivot::CENTER, { 30, -40 });
-		AnimationRenderer1_->CreateAnimation("Intro13_1.bmp", "Intro13_1_1", 1, 1, 0.2f, false);
-		AnimationRenderer1_->CreateAnimation("Intro13_1.bmp", "Intro13_1_2", 0, 1, 0.4f, true);
-		AnimationRenderer1_->ChangeAnimation("Intro13_1_1");
+		AnimationRenderer1_->CreateAnimation("Intro13_1.bmp", "Intro13_1", 0, 1, 0.4f, true);
+		AnimationRenderer1_->CreateAnimation("Intro13_1.bmp", "Intro13_1_None", 1, 1, 0, false);
+		AnimationRenderer1_->ChangeAnimation("Intro13_1_None");
+
+		AnimationRenderer2_ = CreateRenderer(RenderPivot::CENTER, { -30, -230 });
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2", 0, 1, 0.2f, true);
+		AnimationRenderer2_->CreateAnimation("Intro06_2.bmp", "Intro06_2_None", 1, 1, 0, false);
+		AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
 	}
 	else if (true == IsUpdate(14))
 	{
-		if (CurrentTime_ - AnimationStartTime_ >= 16.5f)
+		if (CurrentTime_ - AnimationStartTime_ >= 19.5f)
 		{
-			AnimationRenderer1_->ChangeAnimation("Intro13_1_2");
+			AnimationRenderer1_->ChangeAnimation("Intro13_1_None");
+			AnimationRenderer2_->ChangeAnimation("Intro06_2");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 16.5f)
+		{
+			AnimationRenderer1_->ChangeAnimation("Intro13_1");
+			AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 7.0f)
+		{
+			AnimationRenderer2_->ChangeAnimation("Intro06_2");
 		}
 	}
 
@@ -406,6 +423,7 @@ void IntroManager::Update()
 	{
 		CurrentCheck_[15] = true;
 		AnimationRenderer1_->Death();
+		AnimationRenderer2_->Death();
 
 		AnimationStartTime_ = CurrentTime_;
 		AnimationRenderer1_ = CreateRenderer(RenderPivot::CENTER, { 0, 20 });
