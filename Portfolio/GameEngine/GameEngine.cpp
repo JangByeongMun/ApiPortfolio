@@ -13,6 +13,7 @@ GameEngineLevel* GameEngine::PrevLevel_ = nullptr;
 GameEngine* GameEngine::UserContents_ = nullptr;
 GameEngineImage* GameEngine::WindowMainImage_ = nullptr;
 GameEngineImage* GameEngine::BackBufferImage_ = nullptr;
+bool GameEngine::IsDebugRender = false;
 
 GameEngine::GameEngine() 
 {
@@ -87,7 +88,11 @@ void GameEngine::EngineLoop()
 	CurrentLevel_->Update();
 	CurrentLevel_->ActorUpdate();
 	CurrentLevel_->ActorRender();
-	//CurrentLevel_->CollisionDebugRender();
+
+	if (IsDebugRender)
+	{
+		CurrentLevel_->CollisionDebugRender();
+	}
 	WindowMainImage_->BitCopy(BackBufferImage_);
 
 	CurrentLevel_->ActorRelease();
@@ -113,6 +118,11 @@ void GameEngine::EngineEnd()
 	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();
 	GameEngineTime::Destroy();
+}
+
+void GameEngine::ChangeDebugRender()
+{
+	IsDebugRender = !IsDebugRender;
 }
 
 HDC GameEngine::BackBufferDC()

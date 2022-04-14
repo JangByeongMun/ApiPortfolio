@@ -7,6 +7,7 @@
 #include "SpacebarUI.h"
 
 #include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
 
 PlayLevel::PlayLevel() 
 	: PlayerInst_(nullptr)
@@ -25,11 +26,13 @@ void PlayLevel::Loading()
 	CreateActor<HpUI>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
 
-	Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
+	//Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
 
 	if (false == GameEngineInput::GetInst()->IsKey("PlayESC"))
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayESC", VK_ESCAPE);
+		GameEngineInput::GetInst()->CreateKey("PlayP", 'P');
+
 	}
 }
 
@@ -38,6 +41,11 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
 	{
 
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
+	{
+		GameEngine::ChangeDebugRender();
 	}
 }
 

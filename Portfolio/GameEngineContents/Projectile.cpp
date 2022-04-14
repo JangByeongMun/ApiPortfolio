@@ -18,7 +18,7 @@ void Projectile::Start()
 	GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 });
 	Renderer->SetIndex(5);
 	
-	Collision_ = CreateCollision("Projectile", { 96, 96 }, { 0, 0 });
+	Collision_ = CreateCollision("Projectile", { 50, 50 }, { 0, 0 });
 
 	Death(2.0f);
 }
