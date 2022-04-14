@@ -138,10 +138,22 @@ void Player::CollisionCheck()
 void Player::PlayerSetMove(float4 _Value)
 {
 	float4 NextPos = GetPosition() + _Value;
+	float4 NextPos_x = GetPosition() + float4(_Value.x, 0);
+	float4 NextPos_y = GetPosition() + float4(0, _Value.y);
 	int Color = MapColImage_->GetImagePixel(NextPos);
+	int Color_x = MapColImage_->GetImagePixel(NextPos_x);
+	int Color_y = MapColImage_->GetImagePixel(NextPos_y);
 	if (RGB(0, 0, 0) != Color)
 	{
 		SetMove(_Value);
+	}
+	else if (RGB(0, 0, 0) != Color_x)
+	{
+		SetMove(float4(_Value.x, 0));
+	}
+	else if (RGB(0, 0, 0) != Color_y)
+	{
+		SetMove(float4(0, _Value.y));
 	}
 }
 
