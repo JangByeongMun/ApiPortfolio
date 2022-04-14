@@ -51,7 +51,8 @@ public:
 	}
 
 	void ChangeLevel(const std::string& _Name);
-	
+	const GameEngineLevel* FindLevel(const std::string& _Name);
+
 	static inline GameEngineLevel* GetPrevLevel()
 	{
 		return PrevLevel_;

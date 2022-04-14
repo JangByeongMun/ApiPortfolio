@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class HavingItemUI
+class HavingItemUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer

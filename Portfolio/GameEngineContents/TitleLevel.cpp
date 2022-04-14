@@ -4,6 +4,7 @@
 #include "IntroPage.h"
 #include "TitleForeGround.h"
 #include "IntroManager.h"
+#include <GameEngineBase/GameEngineInput.h>
 
 TitleLevel::TitleLevel() 
 	: IntroPtr_()
@@ -21,10 +22,21 @@ void TitleLevel::Loading()
 	IntroPtr_ = CreateActor<IntroManager>(1);
 
 	CreateActor<TitleForeGround>(1);
+
+
+	if (false == GameEngineInput::GetInst()->IsKey("TitleESC"))
+	{
+		GameEngineInput::GetInst()->CreateKey("TitleESC", VK_ESCAPE);
+	}
 }
 
 void TitleLevel::Update()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("TitleESC"))
+	{
+		IntroPtr_->Stop();
+		GameEngine::GetInst().ChangeLevel("Menu");
+	}
 }
 
 void TitleLevel::LevelChangeStart()

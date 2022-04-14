@@ -50,7 +50,7 @@ void Player::BodyIdleUpdate()
 			MoveDir_ = float4::ZERO;
 		}
 
-		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 450);
+		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 200);
 	}
 }
 void Player::BodyMoveUpdate()
@@ -65,30 +65,30 @@ void Player::BodyMoveUpdate()
 	std::string ChangeDirText = "Idle";
 	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
 	{
-		MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 5;
+		MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 10;
 		ChangeDirText = "Left";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
 	{
-		MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 5;
+		MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 10;
 		ChangeDirText = "Right";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
 	{
-		MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 5;
+		MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 10;
 		ChangeDirText = "Up";
 	}
 	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
 	{
-		MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 5;
+		MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 10;
 		ChangeDirText = "Down";
 	}
 	MoveDir_.Limit2D(1.0f);
 
 	BodyRender_->ChangeAnimation(GetBodyAnimationName() + ChangeDirText);
 
-	// Speed는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
-	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * Speed_ * 450);
+	// MoveSpeed_는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
 }
 
 void Player::HeadIdleUpdate()

@@ -4,29 +4,30 @@
 
 // 설명 : 플레이어가 관련한 ui들 전체 관리용 클래스
 class Player;
-class HpUI;
+class HPUI;
 class CardUI;
 class HavingItemUI;
+class ItemUI;
 class PlayerUI : public GameEngineActor
 {
 	friend GameEngineLevel;
 	friend Player;
 private:
-	// constrcuter destructer
 	PlayerUI();
+	~PlayerUI();
 
-	// delete Function
 	PlayerUI(const PlayerUI& _Other) = delete;
 	PlayerUI(PlayerUI&& _Other) noexcept = delete;
 	PlayerUI& operator=(const PlayerUI& _Other) = delete;
 	PlayerUI& operator=(PlayerUI&& _Other) noexcept = delete;
 
 private:
-	HpUI* HpUI_;
+	HPUI* HpUI_;
 	CardUI* CardUI_;
 	HavingItemUI* HavingItemUI_;
+	ItemUI* ItemUI_;
 
-public:
-	~PlayerUI();
+	void Start() override;
+	void Setting();
 };
 

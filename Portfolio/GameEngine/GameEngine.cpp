@@ -36,6 +36,19 @@ void GameEngine::ChangeLevel(const std::string& _Name)
 	NextLevel_ = FindIter->second;
 }
 
+const GameEngineLevel* GameEngine::FindLevel(const std::string& _Name)
+{
+	std::map<std::string, GameEngineLevel*>::iterator FindIter = AllLevel_.find(_Name);
+
+	if (AllLevel_.end() == FindIter)
+	{
+		MsgBoxAssert("Level Find Error");
+		return nullptr;
+	}
+
+	return FindIter->second;
+}
+
 void GameEngine::WindowCreate()
 {
 	GameEngineWindow::GetInst().CreateGameWindow(nullptr, "Binding of Isaac: Rebirth");

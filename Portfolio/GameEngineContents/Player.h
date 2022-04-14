@@ -21,7 +21,10 @@ class GameEngineImage;
 class PlayerUI;
 class Player : public Shooter
 {
+	friend PlayerUI;
 public:
+	static Player* MainPlayer;
+	
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -41,7 +44,6 @@ public:
 protected:
 	
 private:
-	float Speed_;
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
 	std::vector<GameEngineRenderer*> HeadAddRender_;
@@ -55,6 +57,8 @@ private:
 
 	void Start() override;
 	void Update() override;
+	void LevelChangeStart() override;
+
 	void CollisionCheck();
 	void PlayerSetMove(float4 _Value);
 
@@ -110,6 +114,6 @@ public:
 	void AddItem(ItemType _Type, int _Count = 1);
 
 ///////////////////////////////// UI Ελ°ύ
-	PlayerUI* UI_;
+	PlayerUI* PlayerUI_;
 };
 

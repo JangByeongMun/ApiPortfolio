@@ -1,7 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 
-
 class IntroManager;
 class TitleLevel : public GameEngineLevel
 {

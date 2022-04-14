@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class CardUI
+class CardUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer

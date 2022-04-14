@@ -4,6 +4,7 @@
 #include "LoadingLevel.h"
 #include "EndingLevel.h"
 #include "MenuLevel.h"
+#include "MenuLoadingLevel.h"
 
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -32,10 +33,11 @@ void BindingOfIsaac::GameInit()
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<MenuLevel>("Menu");
+	CreateLevel<MenuLoadingLevel>("MenuLoading");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Menu");
+	ChangeLevel("Title");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -45,6 +47,7 @@ void BindingOfIsaac::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelLoading", 'C');
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelPlay", 'V');
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelEnding", 'B');
+		GameEngineInput::GetInst()->CreateKey("ChangeLevelMenuLoading", 'N');
 	}
 }
 
@@ -70,6 +73,20 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("TitleLevel");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("MenuLoadingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{
@@ -231,6 +248,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_1.bmp");
 		Image->CutCount(4, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("hudpickups.bmp");
+		Image->CutCount(3, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("whitecounter.bmp");
+		Image->CutCount(3, 4);
 	}
 
 
@@ -475,6 +498,10 @@ void BindingOfIsaac::GameLoop()
 	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelEnding"))
 	{
 		ChangeLevel("Ending");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelMenuLoading"))
+	{
+		ChangeLevel("MenuLoading");
 	}
 }
 

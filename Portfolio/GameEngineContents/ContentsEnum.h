@@ -66,10 +66,7 @@ enum class ProjectileType
 enum class HeartType
 {
 	SoulHeart,
-	SoulHeartHalf,
 	BlackHeart,
-	BlackHeartHalf,
-	EternalHeart,
 };
 
 enum class ItemType

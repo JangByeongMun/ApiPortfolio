@@ -74,6 +74,26 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _Name
 	return GameEngineSoundPlayer(FindSound, PlayControl);
 }
 
+GameEngineSoundPlayer GameEngineSound::SoundPlayControlOneShot(const std::string& _Name)
+{
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+
+	GameEngineSound* FindSound = FindRes(UpperName);
+
+	if (nullptr == FindSound)
+	{
+		MsgBoxAssertString("존재하지 않는 사운드를 재생하려고 했습니다.\n 이름 : " + UpperName);
+		return GameEngineSoundPlayer();
+	}
+
+	FMOD::Channel* PlayControl = nullptr;
+
+	SoundSystem_->playSound(FindSound->Sound, nullptr, false, &PlayControl);
+	PlayControl->setLoopCount(0);
+
+	return GameEngineSoundPlayer(FindSound, PlayControl);
+}
+
 void GameEngineSound::SoundPlayOneShot(const std::string& _Name, int _LoopCount)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);

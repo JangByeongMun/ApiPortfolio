@@ -27,6 +27,7 @@ private:
 	///////////////////////////////////////// 매니지먼트 사운드 기능
 public:
 	static GameEngineSoundPlayer SoundPlayControl(const std::string& _Name);
+	static GameEngineSoundPlayer SoundPlayControlOneShot(const std::string& _Name); // 한번만 실행하면서 관리하는 플레이어 제작
 
 	static void SoundPlayOneShot(const std::string& _Name, int _LoopCount = 0);
 	static void Update();

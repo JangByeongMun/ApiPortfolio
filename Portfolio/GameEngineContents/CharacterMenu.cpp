@@ -8,6 +8,8 @@
 CharacterMenu::CharacterMenu() 
 	: CurrentIndex_(0)
 	, CurrentDifficulty_(0)
+	, DifficultyArrow_(nullptr)
+	, HardRenderer_(nullptr)
 {
 }
 
@@ -164,7 +166,7 @@ void CharacterMenu::SelectIndex()
 	}
 
 	SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
-	GameEngine::GetInst().ChangeLevel("Play");
+	GameEngine::GetInst().ChangeLevel("MenuLoading");
 }
 
 void CharacterMenu::Start()

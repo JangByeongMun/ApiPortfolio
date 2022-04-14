@@ -23,7 +23,7 @@ void PlayLevel::Loading()
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
 	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	PlayerInst_ = CreateActor<Player>((int)ORDER::PLAYER);
-	CreateActor<HpUI>((int)ORDER::UI);
+	CreateActor<HPUI>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
 
 	//Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
@@ -32,7 +32,6 @@ void PlayLevel::Loading()
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayESC", VK_ESCAPE);
 		GameEngineInput::GetInst()->CreateKey("PlayP", 'P');
-
 	}
 }
 
@@ -52,8 +51,11 @@ void PlayLevel::Update()
 void PlayLevel::LevelChangeStart()
 {
 	PlayerInst_->GetPlayerInfo();
+	BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
+	BgmPlayer_.SetVolume(0.05f);
 }
 
 void PlayLevel::LevelChangeEnd()
 {
+	BgmPlayer_.Stop();
 }

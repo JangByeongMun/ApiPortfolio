@@ -2,38 +2,37 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <vector>
-#include <stack>
 #include "ContentsEnum.h"
 
-class HpUI : public GameEngineActor
+class HPUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	HpUI();
-	~HpUI();
+	HPUI();
+	~HPUI();
 
 	// delete Function
-	HpUI(const HpUI& _Other) = delete;
-	HpUI(HpUI&& _Other) noexcept = delete;
-	HpUI& operator=(const HpUI& _Other) = delete;
-	HpUI& operator=(HpUI&& _Other) noexcept = delete;
+	HPUI(const HPUI& _Other) = delete;
+	HPUI(HPUI&& _Other) noexcept = delete;
+	HPUI& operator=(const HPUI& _Other) = delete;
+	HPUI& operator=(HPUI&& _Other) noexcept = delete;
 
-	void Setting();
-
-	void SetMaxHP(int _Value);
-	void AddMaxHP(int _Value, int _Heal = 0);
-	void SetCurrentHP(int _Value);
-	void AddCurrentHP(int _Value);
-	void AddColorHeart(HeartType _Type);
+	void UpdateUI();
+	void AddMaxHp(int _Value, int _Heal);
+	void AddRedHp(int _Value);
+	void AddHearts(int _Value, HeartType _Type);
 
 protected:
 
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
-	std::stack<int> AddHeart_;
+	std::vector<HeartType> AddHeartVector_;
 
-	int MaxHP_;
-	int CurrentHP_;
+	const int MaxCount = 12;
+
+	int MaxRedHP_;
+	int CurrentRedHP_;
+	int CurrentAddHP_;
 
 	void Start() override;
 };

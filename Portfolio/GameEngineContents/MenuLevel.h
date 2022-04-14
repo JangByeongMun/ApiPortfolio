@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
 #include <vector>
+#include <GameEngineBase/GameEngineSound.h>
 
 enum class MenuScreen
 {
@@ -56,6 +57,7 @@ private:
 	///////////////// 화면 변경
 public:
 	void ChangeIndex(int _Index);
+	void ChangeIndexImmediate(int _Index);
 	
 private:
 	std::vector<float4> AllScreenPos_;
@@ -64,5 +66,7 @@ private:
 	bool IsChanging_;
 	int ChangeIndex_;
 	int CurrentIndex_;
+
+	GameEngineSoundPlayer BgmPlayer_;
 };
 

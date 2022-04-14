@@ -1,29 +1,28 @@
-#include "HpUI.h"
+#include "HPUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 
-HpUI::HpUI()
+HPUI::HPUI()
 	: RendererVector_()
-	, AddHeart_()
-	, MaxHP_(3)
-	, CurrentHP_(3)
+	, MaxRedHP_(0)
+	, CurrentRedHP_(0)
+	, CurrentAddHP_(0)
 {
 }
 
-HpUI::~HpUI() 
+HPUI::~HPUI() 
 {
 }
 
-int MaxCount = 12;
-void HpUI::Start()
+void HPUI::Start()
 {
 	SetPosition({130, 35});
+
 	RendererVector_.reserve(MaxCount);
-
 	for (int i = 0; i < MaxCount; i++)
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("ui_hearts_1.bmp");
 
-		if (i < MaxHP_)
+		if (i < MaxRedHP_)
 		{
 			TmpRenderer->SetIndex(0);
 		}
@@ -35,57 +34,83 @@ void HpUI::Start()
 		float x = static_cast<float>((i % (MaxCount / 2)) * 36);
 		float y = static_cast<float>((i / (MaxCount / 2)) * 36);
 		TmpRenderer->SetPivot({ x, y });
+		RendererVector_.push_back(TmpRenderer);
 	}
 }
 
-void HpUI::Setting()
+void HPUI::UpdateUI()
 {
-	for (int i = 0; i < MaxCount; i++)
+	for (int i = 0; i < MaxCount * 2; i += 2)
 	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer("ui_hearts_1.bmp");
-
-		if (i < MaxHP_)
+		if (i <= CurrentRedHP_)
 		{
-			TmpRenderer->SetIndex(0);
+			if ((CurrentRedHP_ - i) % 2 == 0)
+			{
+				RendererVector_[i / 2]->SetIndex(0);
+			}
+			else
+			{
+				RendererVector_[i / 2]->SetIndex(1);
+			}
+		}
+		else if (i <= MaxRedHP_)
+		{
+			RendererVector_[i / 2]->SetIndex(2);
+		}
+		else if (i - MaxRedHP_ <= CurrentAddHP_)
+		{
+			int AddInt = -1;
+			if (AddHeartVector_[(i - MaxRedHP_) / 2] == HeartType::SoulHeart)
+			{
+				AddInt = 5;
+			}
+			if (AddHeartVector_[(i - MaxRedHP_) / 2] == HeartType::BlackHeart)
+			{
+				AddInt = 7;
+			}
+
+
+			if ((CurrentRedHP_ - i) % 2 == 0)
+			{
+				RendererVector_[i / 2]->SetIndex(AddInt + 0);
+			}
+			else
+			{
+				RendererVector_[i / 2]->SetIndex(AddInt + 1);
+			}
 		}
 		else
 		{
-			TmpRenderer->SetIndex(9);
+			RendererVector_[i / 2]->SetIndex(9);
 		}
-
-		float x = static_cast<float>((i % (MaxCount / 2)) * 36);
-		float y = static_cast<float>((i / (MaxCount / 2)) * 36);
-		TmpRenderer->SetPivot({ x, y });
 	}
 }
 
-void HpUI::SetMaxHP(int _Value)
+void HPUI::AddMaxHp(int _Value, int _Heal)
 {
-	MaxHP_ = _Value;
-	Setting();
+	MaxRedHP_ = _Value;
+	CurrentRedHP_ = _Heal;
+	UpdateUI();
 }
 
-void HpUI::AddMaxHP(int _Value, int _Heal)
+void HPUI::AddRedHp(int _Value)
 {
-	MaxHP_ += _Value;
-	CurrentHP_ += _Heal;
-	Setting();
+	CurrentRedHP_ += _Value;
+	UpdateUI();
 }
 
-void HpUI::SetCurrentHP(int _Value)
+void HPUI::AddHearts(int _Value, HeartType _Type)
 {
-	CurrentHP_ = _Value;
-	Setting();
-}
+	CurrentAddHP_ += _Value;
 
-void HpUI::AddCurrentHP(int _Value)
-{
-	CurrentHP_ += _Value;
-	Setting();
-}
-
-void HpUI::AddColorHeart(HeartType _Type)
-{
-	//AddHeart_.push(_Type);
-	Setting();
+	if (CurrentAddHP_ > AddHeartVector_.size())
+	{
+		AddHeartVector_.push_back(_Type);
+	}
+	else if (AddHeartVector_.size() >= CurrentAddHP_ + 1)
+	{
+		AddHeartVector_.pop_back();
+	}
+	AddHeartVector_.push_back(_Type);
+	UpdateUI();
 }

@@ -29,7 +29,7 @@
     <ClInclude Include="PauseUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
-    <ClInclude Include="HpUI.h">
+    <ClInclude Include="HPUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="ItemUI.h">
@@ -200,6 +200,12 @@
     <ClInclude Include="PlayerUI.h">
       <Filter>Play\Player</Filter>
     </ClInclude>
+    <ClInclude Include="MenuLoadingLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomMenuLoading.h">
+      <Filter>MenuLoading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -230,7 +236,7 @@
     <ClCompile Include="PauseUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
-    <ClCompile Include="HpUI.cpp">
+    <ClCompile Include="HPUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="ItemUI.cpp">
@@ -398,6 +404,12 @@
     <ClCompile Include="PlayerUI.cpp">
       <Filter>Play\Player</Filter>
     </ClCompile>
+    <ClCompile Include="MenuLoadingLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomMenuLoading.cpp">
+      <Filter>MenuLoading</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -447,6 +459,9 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{9bf2df0f-c5ca-4f98-8f35-0579ace57b98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuLoading">
+      <UniqueIdentifier>{382e38ba-2db4-4e71-9385-be2a6d520a6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

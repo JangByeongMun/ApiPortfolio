@@ -10,6 +10,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngine/GameEngine.h>
 
 MenuLevel::MenuLevel()
 	: CurrentLevelTime_(0)
@@ -228,10 +229,18 @@ void MenuLevel::Update()
 
 void MenuLevel::LevelChangeStart()
 {
+	if (GameEngine::GetPrevLevel() == GameEngine::GetInst().FindLevel("Play"))
+	{
+		ChangeIndexImmediate(2);
+	}
+
+	BgmPlayer_ = GameEngineSound::SoundPlayControl("MenuLevel.ogg");
+	BgmPlayer_.SetVolume(0.03f);
 }
 
 void MenuLevel::LevelChangeEnd()
 {
+	BgmPlayer_.Stop();
 }
 
 void MenuLevel::ChangeIndex(int _Index)
@@ -241,4 +250,12 @@ void MenuLevel::ChangeIndex(int _Index)
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	CurrentPos_ = GetCameraPos();
+}
+
+
+void MenuLevel::ChangeIndexImmediate(int _Index)
+{
+	ChangeIndex_ = _Index;
+	CurrentIndex_ = ChangeIndex_;
+	SetCameraPos(AllScreenPos_[ChangeIndex_]);
 }

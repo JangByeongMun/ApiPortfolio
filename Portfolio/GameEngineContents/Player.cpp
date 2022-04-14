@@ -18,10 +18,12 @@
 #include "Projectile.h"
 #include "Bomb.h"
 #include "PlayerUI.h"
+#include "HPUI.h"
+
+Player* Player::MainPlayer = nullptr;
 
 Player::Player()
-	: Speed_(1)
-	, BodyRender_(nullptr)
+	: BodyRender_(nullptr)
 	, HeadRender_(nullptr)
 	, PlayerCollision(nullptr)
 	, MapColImage_(nullptr)
@@ -32,10 +34,19 @@ Player::Player()
 	, CurBody_()
 	, CurHead_()
 	, MoveDir_({ 0, 0 })
+	, MaxHp_(3)
+	, Damage_(3.5f)
 	, AttackSpeed_(2.73f)
-	, ShotSpeed_(1)
+	, ShotSpeed_(1.0f)
+	, Range_(6.5f)
+	, MoveSpeed_(1.0f)
+	, Luck_(0)
 	, NextAttackTime_(0.0f)
 	, CurrentAttackTime_(0.0f)
+	, MoneyCount_(0)
+	, KeyCount_(0)
+	, BombCount_(0)
+	, PlayerUI_(nullptr)
 {
 }
 Player::~Player() 
@@ -45,7 +56,7 @@ Player::~Player()
 void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	UI_ = GetLevel()->CreateActor<PlayerUI>();
+	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
 	PlayerCollision = CreateCollision("PlayerHitBox", { 100, 100 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
@@ -121,6 +132,11 @@ void Player::Update()
 	}
 }
 
+void Player::LevelChangeStart()
+{
+	MainPlayer = this;
+}
+
 void Player::CollisionCheck()
 {
 	std::vector<GameEngineCollision*> ColVec;
@@ -183,8 +199,8 @@ void Player::GetPlayerInfo()
 		MoveSpeed_ = 1.3f;
 		Luck_ = 0;
 		MoneyCount_ = 0;
-		KeyCount_ = 0;
-		BombCount_ = 1;
+		KeyCount_ = 1;
+		BombCount_ = 0;
 
 		MakeHeadAddRenderer("character_003_cainseyepatch.bmp");
 		break;
@@ -231,6 +247,8 @@ void Player::GetPlayerInfo()
 	default:
 		break;
 	}
+
+	PlayerUI_->Setting();
 
 	ChangeHeadState(PlayerHeadState::Attack);
 	ChangeBodyState(PlayerBodyState::Move);
@@ -342,6 +360,12 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 }
 void Player::StateUpdate()
 {
+	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
+	{
+		PlayerUI_->HpUI_->AddHearts(2, HeartType::SoulHeart);
+		PlayerUI_->HpUI_->AddHearts(2, HeartType::BlackHeart);
+	}
+
 	switch (CurHead_)
 	{
 	case PlayerHeadState::Idle:

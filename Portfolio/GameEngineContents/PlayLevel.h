@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineLevel.h>
+#include <GameEngineBase/GameEngineSound.h>
 
 // Ό³Έν :
 class Player;
@@ -24,6 +25,7 @@ protected:
 	void LevelChangeEnd() override;
 
 private:
+	GameEngineSoundPlayer BgmPlayer_;
 	Player* PlayerInst_;
 };
 
