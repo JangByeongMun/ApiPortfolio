@@ -20,9 +20,6 @@
     <ClInclude Include="CardUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
-    <ClInclude Include="HavingItemUI.h">
-      <Filter>Play\UI</Filter>
-    </ClInclude>
     <ClInclude Include="SpacebarUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
@@ -65,9 +62,6 @@
     <ClInclude Include="PoopRed.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="OptionUI.h">
-      <Filter>Play\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
@@ -87,9 +81,6 @@
       <Filter>Play\Item</Filter>
     </ClInclude>
     <ClInclude Include="MoneyItem.h">
-      <Filter>Play\Item</Filter>
-    </ClInclude>
-    <ClInclude Include="MoneyBlack.h">
       <Filter>Play\Item</Filter>
     </ClInclude>
     <ClInclude Include="Thorn.h">
@@ -206,6 +197,9 @@
     <ClInclude Include="RandomMenuLoading.h">
       <Filter>MenuLoading</Filter>
     </ClInclude>
+    <ClInclude Include="AccessoryUI.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -225,9 +219,6 @@
       <Filter>Title</Filter>
     </ClCompile>
     <ClCompile Include="CardUI.cpp">
-      <Filter>Play\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="HavingItemUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="SpacebarUI.cpp">
@@ -272,9 +263,6 @@
     <ClCompile Include="PoopRed.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
-    <ClCompile Include="OptionUI.cpp">
-      <Filter>Play\UI</Filter>
-    </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
@@ -294,9 +282,6 @@
       <Filter>Play\Item</Filter>
     </ClCompile>
     <ClCompile Include="MoneyItem.cpp">
-      <Filter>Play\Item</Filter>
-    </ClCompile>
-    <ClCompile Include="MoneyBlack.cpp">
       <Filter>Play\Item</Filter>
     </ClCompile>
     <ClCompile Include="Thorn.cpp">
@@ -409,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="RandomMenuLoading.cpp">
       <Filter>MenuLoading</Filter>
+    </ClCompile>
+    <ClCompile Include="AccessoryUI.cpp">
+      <Filter>Play\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

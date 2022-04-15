@@ -1,7 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 
-// 설명 :
+// 설명 : 우하단 알약, 카드 UI
 class CardUI : public GameEngineActor
 {
 public:
@@ -18,6 +18,7 @@ public:
 protected:
 
 private:
+	
 
 };
 

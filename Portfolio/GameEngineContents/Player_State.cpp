@@ -31,7 +31,6 @@ void Player::HeadMoveStart()
 
 }
 
-
 // Update
 void Player::BodyIdleUpdate()
 {
@@ -112,7 +111,6 @@ void Player::HeadAttackUpdate()
 		return;
 	}
 
-	CurrentAttackTime_ += GameEngineTime::GetDeltaTime();
 	std::string ChangeDirText = "Idle";
 	float4 AttackDir = float4::ZERO;
 	float TearDelay = 1 / AttackSpeed_;
@@ -140,7 +138,7 @@ void Player::HeadAttackUpdate()
 
 	if (NextAttackTime_ <= CurrentAttackTime_ && false == AttackDir.IsZero2D())
 	{
-		Shoot(AttackDir * ShotSpeed_ * 550, ProjectileType::PLAYER_BASIC, AttackDir * 30);
+		Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30);
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 

@@ -5,9 +5,12 @@
 #include "TestMap.h"
 #include "PlayBackGround.h"
 #include "SpacebarUI.h"
+#include "Accessory.h"
+#include "ContentsEnum.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
+#include <GameEngineBase/GameEngineWindow.h>
 
 PlayLevel::PlayLevel() 
 	: PlayerInst_(nullptr)
@@ -39,7 +42,9 @@ void PlayLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
 	{
-
+		Accessory* TEST = CreateActor<Accessory>();
+		TEST->SetPosition(GameEngineWindow::GetScale().Half());
+		TEST->SetType(AccessoryType::brokenmagnet);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))

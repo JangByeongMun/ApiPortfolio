@@ -1,19 +1,33 @@
-#include "Accessory.h"
-#include <GameEngine/GameEngineCollision.h>
-#include "Player.h"
+#include "AccessoryUI.h"
 
-Accessory::Accessory() 
-	: Collision_(nullptr)
-	, Type_(AccessoryType::None)
+AccessoryUI::AccessoryUI() 
 {
 }
 
-Accessory::~Accessory() 
+AccessoryUI::~AccessoryUI() 
 {
 }
 
-void Accessory::Start()
+void AccessoryUI::SetAccessory(AccessoryType _Type)
 {
+	int SelectInt = static_cast<int>(_Type);
+	for (int i = 0; i < RendererVector_.size(); i++)
+	{
+		if (SelectInt == i)
+		{
+			RendererVector_[i]->On();
+		}
+		else
+		{
+			RendererVector_[i]->Off();
+		}
+	}
+}
+
+void AccessoryUI::Start()
+{
+	SetPosition({ 80, 650 });
+
 	RendererVector_.push_back(CreateRenderer("trinket_001_swallowedpenny.bmp"));
 	RendererVector_.push_back(CreateRenderer("trinket_002_petrifiedpoop.bmp"));
 	RendererVector_.push_back(CreateRenderer("trinket_003_aaabattery.bmp"));
@@ -27,21 +41,9 @@ void Accessory::Start()
 	{
 		RendererVector_[i]->Off();
 	}
-
-	Collision_ = CreateCollision("Accessory", { 50, 50 }, {0, 0});
 }
 
-void Accessory::Update()
+void AccessoryUI::Update()
 {
-	if (AccessoryType::None == Type_)
-	{
-		return;
-	}
 
-	if (true == Collision_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
-	{
-		Player::MainPlayer->SetAccessory(Type_);
-		Death();
-	}
 }
-

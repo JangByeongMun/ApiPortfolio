@@ -37,7 +37,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Title");
+	ChangeLevel("Play");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -142,6 +142,21 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("PlayLevel");
+		ResourcesDirectory.Move("Accessory");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("EndingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -189,7 +204,7 @@ void BindingOfIsaac::ImageCut()
 		Image->Cut({ 96, 96 });
 
 		Image = GameEngineImageManager::GetInst()->Find("001_isaac_left.bmp");
-		Image->Cut({ 96, 96 });
+		Image->Cut({ 96, 96 });		
 
 		Image = GameEngineImageManager::GetInst()->Find("006_bluebaby.bmp");
 		Image->Cut({ 96, 96 });
@@ -205,6 +220,21 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("character_004_judasfez.bmp");
 		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("001_isaac_Anim.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("002_magdalene_Anim.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("003_cain_Anim.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("004_judas_Anim.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("006_bluebaby_Anim.bmp");
+		Image->CutCount(4, 3);
 	}
 
 	/////////////////////////////////// Menu
@@ -241,9 +271,6 @@ void BindingOfIsaac::ImageCut()
 	/////////////////////////////////// Play UI
 	{
 		Image = GameEngineImageManager::GetInst()->Find("ui_hearts_1.bmp");
-		Image->CutCount(5, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("ui_hearts_2.bmp");
 		Image->CutCount(5, 2);
 
 		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_1.bmp");

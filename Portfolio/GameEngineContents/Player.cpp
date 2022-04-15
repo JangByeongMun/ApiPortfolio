@@ -46,7 +46,9 @@ Player::Player()
 	, MoneyCount_(0)
 	, KeyCount_(0)
 	, BombCount_(0)
+	, IsMasterKey_(false)
 	, PlayerUI_(nullptr)
+	, HavingAccessory_(AccessoryType::None)
 {
 }
 Player::~Player() 
@@ -57,7 +59,7 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
-	PlayerCollision = CreateCollision("PlayerHitBox", { 100, 100 });
+	PlayerCollision = CreateCollision("Player", { 100, 100 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -365,17 +367,13 @@ void Player::StateUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
 	{
-		PlayerUI_->HpUI_->AddHearts(1, HeartType::SoulHeart);
-		PlayerUI_->HpUI_->AddHearts(1, HeartType::BlackHeart);
+		PlayerUI_->HpUI_->AddMaxHp(2, 1);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
-		int a = 0;
-		PlayerUI_->HpUI_->AddHearts(1, HeartType::SoulHeart, true);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 	{
-		PlayerUI_->HpUI_->AddHearts(1, HeartType::BlackHeart, true);
 	}
 
 	switch (CurHead_)
@@ -404,26 +402,49 @@ void Player::StateUpdate()
 	default:
 		break;
 	}
+
+	CurrentAttackTime_ += GameEngineTime::GetDeltaTime();
 }
 
-void Player::AddItem(ItemType _Type, int _Count)
+void Player::AddItem(ItemType _Type)
 {
 	switch (_Type)
 	{
 	case ItemType::None:
 		break;
 	case ItemType::Bomb:
-		BombCount_ += _Count;
+		BombCount_ += 1;
+		break;
+	case ItemType::BombTwo:
+		BombCount_ += 2;
 		break;
 	case ItemType::Key:
-		KeyCount_ += _Count;
+		KeyCount_ += 1;
+		break;
+	case ItemType::KeyTwo:
+		KeyCount_ += 2;
+		break;
+	case ItemType::keyMaster:
+		IsMasterKey_ = true;
 		break;
 	case ItemType::Money:
-		MoneyCount_ += _Count;
+		MoneyCount_ += 1;
+		break;
+	case ItemType::MoneyFive:
+		MoneyCount_ += 5;
+		break;
+	case ItemType::MoneyTen:
+		MoneyCount_ += 10;
 		break;
 	case ItemType::Max:
 		break;
 	default:
 		break;
 	}
+}
+
+void Player::SetAccessory(AccessoryType _Type)
+{
+	HavingAccessory_ = _Type;
+	PlayerUI_->SetAccessoryUI();
 }

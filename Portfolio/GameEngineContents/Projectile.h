@@ -25,6 +25,12 @@ public:
 	{
 		Type_ = _Type;
 	}
+	inline void SetLifeTime_(float _Value)
+	{
+		Lifetime_ = _Value;
+		CurrentTimer_ = 0.0f;
+		Death(Lifetime_);
+	}
 
 protected:
 
@@ -32,6 +38,8 @@ private:
 	GameEngineCollision* Collision_;
 	ProjectileType Type_;
 	float4 Vec_;
+	float Lifetime_;
+	float CurrentTimer_;
 
 	void Start() override;
 	void Update() override;

@@ -8,3 +8,11 @@ MiniMap::~MiniMap()
 {
 }
 
+void MiniMap::Start()
+{
+}
+
+void MiniMap::Update()
+{
+}
+

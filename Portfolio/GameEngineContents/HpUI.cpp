@@ -65,18 +65,20 @@ void HPUI::UpdateUI()
 		}
 		else if (i - MaxRedHP_ < CurrentAddHP_ - 1)
 		{
-			if (AddHeartVector_[i - MaxRedHP_] == HeartType::SoulHeart)
+			int TmpValue = i - MaxRedHP_;
+			if (AddHeartVector_[TmpValue] == HeartType::SoulHeart)
 			{
 				RendererVector_[i]->SetIndex(5);
 			}
-			if (AddHeartVector_[i - MaxRedHP_] == HeartType::BlackHeart)
+			if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
 			{
 				RendererVector_[i]->SetIndex(7);
 			}
 		}
 		else if (i - MaxRedHP_ < CurrentAddHP_)
 		{
-			if (AddHeartVector_[i - MaxRedHP_] == HeartType::SoulHeart)
+			int TmpValue = i - MaxRedHP_;
+			if (AddHeartVector_[TmpValue] == HeartType::SoulHeart)
 			{
 				if (true == IsHalfAdd_)
 				{
@@ -87,7 +89,7 @@ void HPUI::UpdateUI()
 					RendererVector_[i]->SetIndex(5);
 				}
 			}
-			else if (AddHeartVector_[i - MaxRedHP_] == HeartType::BlackHeart)
+			else if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
 			{
 				if (true == IsHalfAdd_)
 				{
@@ -110,8 +112,8 @@ void HPUI::AddMaxHp(int _Value, int _Heal)
 		_Heal = _Value;
 	}
 
-	MaxRedHP_ = _Value;
-	CurrentRedHP_ = _Heal;
+	MaxRedHP_ += _Value;
+	CurrentRedHP_ += _Heal;
 	UpdateUI();
 }
 

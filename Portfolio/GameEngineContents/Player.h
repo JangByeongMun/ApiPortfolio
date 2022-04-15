@@ -5,12 +5,14 @@
 
 enum class PlayerBodyState
 {
+	None,
 	Idle,
 	Move
 };
 
 enum class PlayerHeadState
 {
+	None,
 	Idle,
 	Attack,
 	Move,
@@ -109,11 +111,21 @@ private:
 	int MoneyCount_;
 	int KeyCount_;
 	int BombCount_;
+	bool IsMasterKey_;
 
 public:
-	void AddItem(ItemType _Type, int _Count = 1);
+	void AddItem(ItemType _Type);
 
 ///////////////////////////////// UI Åë°ý
+private:
 	PlayerUI* PlayerUI_;
+
+
+///////////////////////////////// ¾Ç¼¼»ç¸®
+private:
+	AccessoryType HavingAccessory_;
+
+public:
+	void SetAccessory(AccessoryType _Type);
 };
 

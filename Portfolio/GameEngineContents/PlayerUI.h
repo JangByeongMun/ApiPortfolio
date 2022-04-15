@@ -6,8 +6,8 @@
 class Player;
 class HPUI;
 class CardUI;
-class HavingItemUI;
 class ItemUI;
+class AccessoryUI;
 class PlayerUI : public GameEngineActor
 {
 	friend GameEngineLevel;
@@ -24,10 +24,15 @@ private:
 private:
 	HPUI* HpUI_;
 	CardUI* CardUI_;
-	HavingItemUI* HavingItemUI_;
 	ItemUI* ItemUI_;
+	AccessoryUI* AccessoryUI_;
 
 	void Start() override;
 	void Setting();
+
+	void SetHpUI();
+	void SetCardUI();
+	void SetItemUI();
+	void SetAccessoryUI();
 };
 

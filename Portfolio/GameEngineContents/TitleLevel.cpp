@@ -27,12 +27,18 @@ void TitleLevel::Loading()
 	if (false == GameEngineInput::GetInst()->IsKey("TitleESC"))
 	{
 		GameEngineInput::GetInst()->CreateKey("TitleESC", VK_ESCAPE);
+		GameEngineInput::GetInst()->CreateKey("TitleSpace", VK_SPACE);
 	}
 }
 
 void TitleLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("TitleESC"))
+	{
+		IntroPtr_->Stop();
+		GameEngine::GetInst().ChangeLevel("Menu");
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("TitleSpace"))
 	{
 		IntroPtr_->Stop();
 		GameEngine::GetInst().ChangeLevel("Menu");

@@ -16,7 +16,7 @@ public:
 	Shooter& operator=(const Shooter& _Other) = delete;
 	Shooter& operator=(Shooter&& _Other) noexcept = delete;
 
-	void Shoot(float4 _Vector, ProjectileType _Type = ProjectileType::PLAYER_BASIC, float4 _AddPivot = { 0, 0 });
+	void Shoot(float4 _Vector, ProjectileType _Type = ProjectileType::PLAYER_BASIC, float4 _AddPivot = { 0, 0 }, float _LifeTime = 1.0f);
 
 protected:
 

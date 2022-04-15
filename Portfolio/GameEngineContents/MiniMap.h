@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // Ό³Έν :
-class MiniMap
+class MiniMap : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +18,8 @@ public:
 protected:
 
 private:
-
+	
+	void Start() override;
+	void Update() override;
 };
 

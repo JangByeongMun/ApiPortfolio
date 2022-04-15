@@ -73,7 +73,42 @@ enum class ItemType
 {
 	None,
 	Bomb,
+	BombTwo,
 	Key,
+	KeyTwo,
+	keyMaster,
 	Money,
+	MoneyFive,
+	MoneyTen,
 	Max,
 };
+
+enum class CardType
+{
+	None, 
+
+
+
+	Max,
+};
+
+enum class AccessoryType
+{
+	None = -1,
+	swallowedpenny,
+	petrifiedpoop,
+	aaabattery,
+	brokenremote,
+	purpleheart,
+	brokenmagnet,
+	cartridge,
+	pulseworm,
+	Max,
+};
+
+
+
+
+
+
+
