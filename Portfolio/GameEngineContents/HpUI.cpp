@@ -6,6 +6,8 @@ HPUI::HPUI()
 	, MaxRedHP_(0)
 	, CurrentRedHP_(0)
 	, CurrentAddHP_(0)
+	, IsHalfRed_(false)
+	, IsHalfAdd_(false)
 {
 }
 
@@ -40,54 +42,75 @@ void HPUI::Start()
 
 void HPUI::UpdateUI()
 {
-	for (int i = 0; i < MaxCount * 2; i += 2)
+	for (int i = 0; i < MaxCount; i++)
 	{
-		if (i <= CurrentRedHP_)
+		if (i < CurrentRedHP_ - 1)
 		{
-			if ((CurrentRedHP_ - i) % 2 == 0)
+			RendererVector_[i]->SetIndex(0);
+		}
+		if (i < CurrentRedHP_)
+		{
+			if (true == IsHalfRed_)
 			{
-				RendererVector_[i / 2]->SetIndex(0);
+				RendererVector_[i]->SetIndex(1);
 			}
 			else
 			{
-				RendererVector_[i / 2]->SetIndex(1);
+				RendererVector_[i]->SetIndex(0);
 			}
 		}
-		else if (i <= MaxRedHP_)
+		else if (i < MaxRedHP_)
 		{
-			RendererVector_[i / 2]->SetIndex(2);
+			RendererVector_[i]->SetIndex(2);
 		}
-		else if (i - MaxRedHP_ <= CurrentAddHP_)
+		else if (i - MaxRedHP_ < CurrentAddHP_ - 1)
 		{
-			int AddInt = -1;
-			if (AddHeartVector_[(i - MaxRedHP_) / 2] == HeartType::SoulHeart)
+			if (AddHeartVector_[i - MaxRedHP_] == HeartType::SoulHeart)
 			{
-				AddInt = 5;
+				RendererVector_[i]->SetIndex(5);
 			}
-			if (AddHeartVector_[(i - MaxRedHP_) / 2] == HeartType::BlackHeart)
+			if (AddHeartVector_[i - MaxRedHP_] == HeartType::BlackHeart)
 			{
-				AddInt = 7;
-			}
-
-
-			if ((CurrentRedHP_ - i) % 2 == 0)
-			{
-				RendererVector_[i / 2]->SetIndex(AddInt + 0);
-			}
-			else
-			{
-				RendererVector_[i / 2]->SetIndex(AddInt + 1);
+				RendererVector_[i]->SetIndex(7);
 			}
 		}
-		else
+		else if (i - MaxRedHP_ < CurrentAddHP_)
 		{
-			RendererVector_[i / 2]->SetIndex(9);
+			if (AddHeartVector_[i - MaxRedHP_] == HeartType::SoulHeart)
+			{
+				if (true == IsHalfAdd_)
+				{
+					RendererVector_[i]->SetIndex(6);
+				}
+				else
+				{
+					RendererVector_[i]->SetIndex(5);
+				}
+			}
+			else if (AddHeartVector_[i - MaxRedHP_] == HeartType::BlackHeart)
+			{
+				if (true == IsHalfAdd_)
+				{
+					RendererVector_[i]->SetIndex(8);
+				}
+				else
+				{
+					RendererVector_[i]->SetIndex(7);
+				}
+			}
 		}
 	}
+
+	int a = 0;
 }
 
 void HPUI::AddMaxHp(int _Value, int _Heal)
 {
+	if (_Heal == -1)
+	{
+		_Heal = _Value;
+	}
+
 	MaxRedHP_ = _Value;
 	CurrentRedHP_ = _Heal;
 	UpdateUI();
@@ -99,18 +122,55 @@ void HPUI::AddRedHp(int _Value)
 	UpdateUI();
 }
 
-void HPUI::AddHearts(int _Value, HeartType _Type)
+void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 {
-	CurrentAddHP_ += _Value;
+	if (_Value > 0) // 하트 추가일떄
+	{
+		if (true == _IsHalf) // 추가가 절반짜리일때
+		{
+			IsHalfAdd_ = !IsHalfAdd_;
 
-	if (CurrentAddHP_ > AddHeartVector_.size())
-	{
-		AddHeartVector_.push_back(_Type);
+			if (false == IsHalfAdd_) // 현재상태가 절반이 아니였을떄
+			{
+				CurrentAddHP_ += _Value;
+				AddHeartVector_.push_back(_Type);
+			}
+		}
+		else if(false == _IsHalf) // 추가가 정수일때
+		{
+			CurrentAddHP_ += _Value;
+			AddHeartVector_.push_back(_Type);
+		}
 	}
-	else if (AddHeartVector_.size() >= CurrentAddHP_ + 1)
+	else if (_Value < 0) // 하트 감소일때
 	{
-		AddHeartVector_.pop_back();
+		if (true == _IsHalf) // 감소가 절반짜리일때
+		{
+			if (true == IsHalfAdd_)
+			{
+				IsHalfAdd_ = false;
+			}
+			else if (false == IsHalfAdd_)
+			{
+				CurrentAddHP_ -= _Value;
+			}
+			
+			AddHeartVector_.pop_back();
+		}
+		else if (false == _IsHalf) // 감소가 정수일때
+		{
+			AddHeartVector_.pop_back();
+		}
 	}
-	AddHeartVector_.push_back(_Type);
+
+	if (true == _IsHalf)
+	{
+		IsHalfAdd_ = !IsHalfAdd_;
+		
+		if (_Value < 0)
+		{
+			AddHeartVector_.pop_back();
+		}
+	}
 	UpdateUI();
 }

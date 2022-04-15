@@ -27,6 +27,8 @@ void PlayerUI::Start()
 
 void PlayerUI::Setting()
 {
+	HpUI_->AddMaxHp(Player::MainPlayer->MaxHp_);
+
 	ItemUI_->Reset();
 	ItemUI_->SetMoney(Player::MainPlayer->MoneyCount_);
 	ItemUI_->SetBomb(Player::MainPlayer->BombCount_);

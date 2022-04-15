@@ -362,8 +362,8 @@ void Player::StateUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
 	{
-		PlayerUI_->HpUI_->AddHearts(2, HeartType::SoulHeart);
-		PlayerUI_->HpUI_->AddHearts(2, HeartType::BlackHeart);
+		PlayerUI_->HpUI_->AddHearts(1, HeartType::SoulHeart);
+		PlayerUI_->HpUI_->AddHearts(1, HeartType::BlackHeart);
 	}
 
 	switch (CurHead_)

@@ -18,9 +18,9 @@ public:
 	HPUI& operator=(HPUI&& _Other) noexcept = delete;
 
 	void UpdateUI();
-	void AddMaxHp(int _Value, int _Heal);
+	void AddMaxHp(int _Value, int _Heal = -1);
 	void AddRedHp(int _Value);
-	void AddHearts(int _Value, HeartType _Type);
+	void AddHearts(int _Value, HeartType _Type, bool _IsHalf = false);
 
 protected:
 
@@ -33,6 +33,8 @@ private:
 	int MaxRedHP_;
 	int CurrentRedHP_;
 	int CurrentAddHP_;
+	bool IsHalfRed_;
+	bool IsHalfAdd_;
 
 	void Start() override;
 };
