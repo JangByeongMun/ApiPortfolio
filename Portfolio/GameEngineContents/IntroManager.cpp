@@ -403,10 +403,22 @@ void IntroManager::Update()
 	}
 	else if (true == IsUpdate(14))
 	{
-		if (CurrentTime_ - AnimationStartTime_ >= 19.5f)
+		if (CurrentTime_ - AnimationStartTime_ >= 39.0f)
 		{
 			AnimationRenderer1_->ChangeAnimation("Intro13_1_None");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 38.0f)
+		{
+			AnimationRenderer1_->ChangeAnimation("Intro13_1");
+			AnimationRenderer2_->ChangeAnimation("Intro06_2_None");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 20.5f)
+		{
 			AnimationRenderer2_->ChangeAnimation("Intro06_2");
+		}
+		else if (CurrentTime_ - AnimationStartTime_ >= 19.0f)
+		{
+			AnimationRenderer1_->ChangeAnimation("Intro13_1_None");
 		}
 		else if (CurrentTime_ - AnimationStartTime_ >= 16.5f)
 		{
