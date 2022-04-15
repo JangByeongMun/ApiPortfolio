@@ -111,6 +111,8 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("AttackUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("AttackDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Bomb", 'E');
+		GameEngineInput::GetInst()->CreateKey("Test1", 'R');
+		GameEngineInput::GetInst()->CreateKey("Test2", 'T');
 	}
 
 	ChangeBodyState(PlayerBodyState::Idle);
@@ -351,6 +353,7 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 			break;
 		case PlayerHeadState::Move:
 			HeadMoveStart();
+			break;
 		default:
 			break;
 		}
@@ -364,6 +367,15 @@ void Player::StateUpdate()
 	{
 		PlayerUI_->HpUI_->AddHearts(1, HeartType::SoulHeart);
 		PlayerUI_->HpUI_->AddHearts(1, HeartType::BlackHeart);
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
+	{
+		int a = 0;
+		PlayerUI_->HpUI_->AddHearts(1, HeartType::SoulHeart, true);
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
+	{
+		PlayerUI_->HpUI_->AddHearts(1, HeartType::BlackHeart, true);
 	}
 
 	switch (CurHead_)

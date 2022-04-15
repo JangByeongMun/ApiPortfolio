@@ -100,7 +100,6 @@ void HPUI::UpdateUI()
 			}
 		}
 	}
-
 	int a = 0;
 }
 
@@ -128,13 +127,13 @@ void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 	{
 		if (true == _IsHalf) // 추가가 절반짜리일때
 		{
-			IsHalfAdd_ = !IsHalfAdd_;
-
 			if (false == IsHalfAdd_) // 현재상태가 절반이 아니였을떄
 			{
 				CurrentAddHP_ += _Value;
 				AddHeartVector_.push_back(_Type);
 			}
+			
+			IsHalfAdd_ = !IsHalfAdd_;
 		}
 		else if(false == _IsHalf) // 추가가 정수일때
 		{
@@ -142,35 +141,26 @@ void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 			AddHeartVector_.push_back(_Type);
 		}
 	}
+
+
 	else if (_Value < 0) // 하트 감소일때
 	{
 		if (true == _IsHalf) // 감소가 절반짜리일때
 		{
-			if (true == IsHalfAdd_)
-			{
-				IsHalfAdd_ = false;
-			}
-			else if (false == IsHalfAdd_)
+			if (false == IsHalfAdd_)// 현재상태가 절반이 아니였을떄
 			{
 				CurrentAddHP_ -= _Value;
+				AddHeartVector_.pop_back();
 			}
-			
-			AddHeartVector_.pop_back();
+
+			IsHalfAdd_ = !IsHalfAdd_;
 		}
 		else if (false == _IsHalf) // 감소가 정수일때
 		{
+			CurrentAddHP_ -= _Value;
 			AddHeartVector_.pop_back();
 		}
 	}
 
-	if (true == _IsHalf)
-	{
-		IsHalfAdd_ = !IsHalfAdd_;
-		
-		if (_Value < 0)
-		{
-			AddHeartVector_.pop_back();
-		}
-	}
 	UpdateUI();
 }
