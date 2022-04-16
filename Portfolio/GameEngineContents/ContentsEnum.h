@@ -78,17 +78,9 @@ enum class ItemType
 	KeyTwo,
 	keyMaster,
 	Money,
-	MoneyFive,
-	MoneyTen,
-	Max,
-};
-
-enum class CardType
-{
-	None, 
-
-
-
+	MoneyBlack,
+	MoneySilver,
+	Battery,
 	Max,
 };
 
@@ -106,9 +98,23 @@ enum class AccessoryType
 	Max,
 };
 
-
-
-
-
-
-
+enum class CardType
+{
+	None = 0,
+	TheFool,
+	TheMagician,
+	TheHighPriestess,
+	TheEmpress,
+	TheEmperor,
+	TheHierophant,
+	TheLovers,
+	TheChariot,
+	Justice,
+	TheHermit,
+	WheelofFortune,
+	Strength,
+	Death,
+	TheDevil,
+	TheSun,
+	Max,
+};

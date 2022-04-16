@@ -4,6 +4,14 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
 
+float AcheiveTimer_;
+
+void Player::SetAcheiveRenderer(const std::string& _Name)
+{
+	AcheiveRender_ = CreateRenderer(_Name);
+	AcheiveRender_->SetPivot({0, -30});
+}
+
 // Start
 void Player::BodyIdleStart()
 {
@@ -12,6 +20,10 @@ void Player::BodyIdleStart()
 void Player::BodyMoveStart()
 {
 
+}
+void Player::BodyAcheiveStart()
+{
+	BodyRender_->ChangeAnimation("None");
 }
 
 void Player::HeadIdleStart()
@@ -29,6 +41,28 @@ void Player::HeadAttackStart()
 void Player::HeadMoveStart()
 {
 
+}
+void Player::HeadAcheiveStart()
+{
+	HeadRender_->ChangeAnimation("None");
+	int CharacterIndex = static_cast<int>(CharacterType_);
+	for (int i = 0; i < AnimRender_.size(); i++)
+	{
+		if (i == CharacterIndex)
+		{
+			AnimRender_[i]->On();
+			AnimRender_[i]->SetIndex(5);
+		}
+		else
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->Off();
+	}
+	AcheiveTimer_ = 1.0f;
 }
 
 // Update
@@ -88,6 +122,9 @@ void Player::BodyMoveUpdate()
 
 	// MoveSpeed_는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+}
+void Player::BodyAcheiveUpdate()
+{
 }
 
 void Player::HeadIdleUpdate()
@@ -194,4 +231,50 @@ void Player::HeadMoveUpdate()
 	{
 		HeadAddRender_[i]->ChangeAnimation(ChangeDirText);
 	}
+}
+void Player::HeadAcheiveUpdate()
+{
+	AcheiveTimer_ -= GameEngineTime::GetDeltaTime();
+
+	if (AcheiveTimer_ <= 0)
+	{
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->Off();
+		}
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->On();
+		}
+		AcheiveRender_->Death();
+		ChangeBodyState(PlayerBodyState::Idle);
+		ChangeHeadState(PlayerHeadState::Idle);
+	}
+
+
+	// 애니메이션은 바뀌어있어도 이동은 계속하므로 이동 스크립트
+	if (false == IsMoveKey())
+	{
+		MoveDir_ = float4::ZERO;
+		return;
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+	{
+		MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 10;
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+	{
+		MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 10;
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
+	{
+		MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 10;
+	}
+	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+	{
+		MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 10;
+	}
+	MoveDir_.Limit2D(1.0f);
+
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
 }

@@ -41,9 +41,22 @@ void ItemUI::SetBomb(int _Value)
 	UpdateUI();
 }
 
-void ItemUI::SetKey(int _Value)
+void ItemUI::SetKey(int _Value, bool _IsMaster)
 {
 	Key_ = _Value;
+
+	if (IsMasterKey_ != _IsMaster)
+	{
+		IsMasterKey_ = _IsMaster;
+		if (true == IsMasterKey_)
+		{
+			KeyRenderer_->SetIndex(4);
+		}
+		else
+		{
+			KeyRenderer_->SetIndex(1);
+		}
+	}
 	UpdateUI();
 }
 

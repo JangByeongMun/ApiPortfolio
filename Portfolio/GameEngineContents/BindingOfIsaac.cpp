@@ -157,6 +157,21 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("PlayLevel");
+		ResourcesDirectory.Move("PickupItem");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("EndingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -281,6 +296,60 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("whitecounter.bmp");
 		Image->CutCount(3, 4);
+	}
+
+	/////////////////////////////////// Play Item
+	{
+		Image = GameEngineImageManager::GetInst()->Find("pickup_001_heart.bmp");
+		Image->CutCount(3, 3);
+		
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coin_1.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coin_1_Shadow.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coin_2.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coin_2_Shadow.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coin_3.bmp");
+		Image->CutCount(9, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinblack_1.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinblack_1_Shadow.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinblack_2.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinblack_2_Shadow.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinblack_3.bmp");
+		Image->CutCount(7, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinsilver_1.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinsilver_1_Shadow.bmp");
+		Image->CutCount(6, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinsilver_2.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinsilver_2_Shadow.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_002_coinsilver_3.bmp");
+		Image->CutCount(7, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_003_key.bmp");
+		Image->CutCount(4, 1);
 	}
 
 

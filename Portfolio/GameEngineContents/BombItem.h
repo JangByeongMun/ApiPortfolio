@@ -1,7 +1,17 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
+
+enum class BombType
+{
+	None,
+	Normal,
+	Two,
+};
 
 // Ό³Έν :
-class BombItem
+class BombItem : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -14,9 +24,15 @@ public:
 	BombItem& operator=(const BombItem& _Other) = delete;
 	BombItem& operator=(BombItem&& _Other) noexcept = delete;
 
+	void SetType(BombType _Type);
+
 protected:
 
 private:
+	BombType Type_;
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
 
+	void Update() override;
 };
 

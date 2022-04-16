@@ -5,17 +5,17 @@
 
 enum class PlayerBodyState
 {
-	None,
 	Idle,
-	Move
+	Move,
+	Acheive,
 };
 
 enum class PlayerHeadState
 {
-	None,
 	Idle,
 	Attack,
 	Move,
+	Acheive,
 };
 
 // 설명 : 플레이어
@@ -46,6 +46,9 @@ public:
 protected:
 	
 private:
+	std::vector<GameEngineRenderer*> AnimRender_;
+	GameEngineRenderer* AcheiveRender_;
+
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
 	std::vector<GameEngineRenderer*> HeadAddRender_;
@@ -77,22 +80,29 @@ public:
 	void ChangeBodyState(PlayerBodyState _State);
 	void ChangeHeadState(PlayerHeadState _State);
 	void StateUpdate();
+	void SetAcheiveRenderer(const std::string& _Name);
 
 private: 
 	void BodyIdleStart();
 	void BodyMoveStart();
+	void BodyAcheiveStart();
 	void HeadIdleStart();
 	void HeadAttackStart();
 	void HeadMoveStart();
+	void HeadAcheiveStart();
 
 	void BodyIdleUpdate();
 	void BodyMoveUpdate();
+	void BodyAcheiveUpdate();
 	void HeadIdleUpdate();
 	void HeadAttackUpdate();
 	void HeadMoveUpdate();
+	void HeadAcheiveUpdate();
+
 
 ///////////////////////////////// 기본정보
 private:
+	CharacterType CharacterType_;
 	int MaxHp_;
 	float Damage_;
 	float AttackSpeed_;
@@ -127,5 +137,18 @@ private:
 
 public:
 	void SetAccessory(AccessoryType _Type);
+
+///////////////////////////////// 액티브 아이템
+private:
+	bool HaveActive_;
+	int MaxGaze_;
+	int CurrentGaze_;
+
+public:
+	inline bool IsActiveOn()
+	{
+		return MaxGaze_ <= CurrentGaze_;
+	}
+	void SetActive();
 };
 

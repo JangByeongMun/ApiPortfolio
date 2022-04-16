@@ -21,7 +21,7 @@ public:
 
 	void SetMoney(int _Value);
 	void SetBomb(int _Value);
-	void SetKey(int _Value);
+	void SetKey(int _Value, bool _IsMaster = false);
 
 	void Reset();
 
@@ -39,6 +39,7 @@ private:
 	int Money_;
 	int Bomb_;
 	int Key_;
+	bool IsMasterKey_;
 
 	void Start() override;
 };

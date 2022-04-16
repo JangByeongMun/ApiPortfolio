@@ -45,7 +45,7 @@ void PlayerUI::SetItemUI()
 	ItemUI_->Reset();
 	ItemUI_->SetMoney(Player::MainPlayer->MoneyCount_);
 	ItemUI_->SetBomb(Player::MainPlayer->BombCount_);
-	ItemUI_->SetKey(Player::MainPlayer->KeyCount_);
+	ItemUI_->SetKey(Player::MainPlayer->KeyCount_, Player::MainPlayer->IsMasterKey_);
 }
 
 void PlayerUI::SetAccessoryUI()

@@ -18,7 +18,9 @@
 #include "Projectile.h"
 #include "Bomb.h"
 #include "PlayerUI.h"
-#include "HPUI.h"
+
+#include "KeyItem.h"
+#include "BatteryItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -49,6 +51,9 @@ Player::Player()
 	, IsMasterKey_(false)
 	, PlayerUI_(nullptr)
 	, HavingAccessory_(AccessoryType::None)
+	, HaveActive_(false)
+	, MaxGaze_(0)
+	, CurrentGaze_(0)
 {
 }
 Player::~Player() 
@@ -63,12 +68,26 @@ void Player::Start()
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
+	{
+		AnimRender_.push_back(CreateRenderer("001_isaac_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+		AnimRender_.push_back(CreateRenderer("003_cain_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+		AnimRender_.push_back(CreateRenderer("002_magdalene_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+		AnimRender_.push_back(CreateRenderer("004_judas_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+		AnimRender_.push_back(CreateRenderer("006_bluebaby_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+
 	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 30 });
 	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Body_Left", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Right", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Up", 6, 15, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Down", 6, 15, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Idle", 8, 8, 0.1f, false);
+	BodyRender_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
 	BodyRender_->ChangeAnimation("Body_Idle");
 	
 	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, -10 });
@@ -81,6 +100,7 @@ void Player::Start()
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_1", 0, 0, 0, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Down_2", 0, 1, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Idle", 0, 0, 0, false);
+	HeadRender_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
 	HeadRender_->ChangeAnimation("Head_Idle");
 
 	// bluebaby 버전 추가
@@ -179,7 +199,7 @@ void Player::PlayerSetMove(float4 _Value)
 
 void Player::GetPlayerInfo()
 {
-	CharacterType test = SelectedCharacterType;
+	CharacterType_ = SelectedCharacterType;
 	switch (SelectedCharacterType)
 	{
 	case CharacterType::ISAAC:
@@ -334,6 +354,9 @@ void Player::ChangeBodyState(PlayerBodyState _State)
 		case PlayerBodyState::Move:
 			BodyMoveStart();
 			break;
+		case PlayerBodyState::Acheive:
+			BodyAcheiveStart();
+			break;
 		default:
 			break;
 		}
@@ -356,6 +379,9 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 		case PlayerHeadState::Move:
 			HeadMoveStart();
 			break;
+		case PlayerHeadState::Acheive:
+			HeadAcheiveStart();
+			break;
 		default:
 			break;
 		}
@@ -367,13 +393,20 @@ void Player::StateUpdate()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
 	{
-		PlayerUI_->HpUI_->AddMaxHp(2, 1);
+		KeyItem* Test = GetLevel()->CreateActor<KeyItem>();
+		Test->SetType(KeyType::Master);
+		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
+		KeyItem* Test = GetLevel()->CreateActor<KeyItem>();
+		Test->SetType(KeyType::Normal);
+		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 	{
+		BatteryItem* Test = GetLevel()->CreateActor<BatteryItem>();
+		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
 	}
 
 	switch (CurHead_)
@@ -387,6 +420,9 @@ void Player::StateUpdate()
 	case PlayerHeadState::Move:
 		HeadMoveUpdate();
 		break;
+	case PlayerHeadState::Acheive:
+		HeadAcheiveUpdate();
+		break;
 	default:
 		break;
 	}
@@ -398,6 +434,9 @@ void Player::StateUpdate()
 		break;
 	case PlayerBodyState::Move:
 		BodyMoveUpdate();
+		break;
+	case PlayerBodyState::Acheive:
+		BodyAcheiveUpdate();
 		break;
 	default:
 		break;
@@ -430,17 +469,22 @@ void Player::AddItem(ItemType _Type)
 	case ItemType::Money:
 		MoneyCount_ += 1;
 		break;
-	case ItemType::MoneyFive:
+	case ItemType::MoneyBlack:
 		MoneyCount_ += 5;
 		break;
-	case ItemType::MoneyTen:
+	case ItemType::MoneySilver:
 		MoneyCount_ += 10;
+		break;
+	case ItemType::Battery:
+		CurrentGaze_ = MaxGaze_;
 		break;
 	case ItemType::Max:
 		break;
 	default:
 		break;
 	}
+
+	PlayerUI_->SetItemUI();
 }
 
 void Player::SetAccessory(AccessoryType _Type)

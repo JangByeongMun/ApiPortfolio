@@ -86,9 +86,6 @@
     <ClInclude Include="Thorn.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="PickableObject.h">
-      <Filter>Play\Item</Filter>
-    </ClInclude>
     <ClInclude Include="PassiveItem.h">
       <Filter>Play\Passive</Filter>
     </ClInclude>
@@ -173,9 +170,6 @@
     <ClInclude Include="GameMenu.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Play\Item</Filter>
-    </ClInclude>
     <ClInclude Include="CharacterMenu.h">
       <Filter>Menu</Filter>
     </ClInclude>
@@ -199,6 +193,9 @@
     </ClInclude>
     <ClInclude Include="AccessoryUI.h">
       <Filter>Play\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="BatteryItem.h">
+      <Filter>Play\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -287,9 +284,6 @@
     <ClCompile Include="Thorn.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
-    <ClCompile Include="PickableObject.cpp">
-      <Filter>Play\Item</Filter>
-    </ClCompile>
     <ClCompile Include="PassiveItem.cpp">
       <Filter>Play\Passive</Filter>
     </ClCompile>
@@ -371,9 +365,6 @@
     <ClCompile Include="GameMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
-      <Filter>Play\Item</Filter>
-    </ClCompile>
     <ClCompile Include="CharacterMenu.cpp">
       <Filter>Menu</Filter>
     </ClCompile>
@@ -397,6 +388,9 @@
     </ClCompile>
     <ClCompile Include="AccessoryUI.cpp">
       <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="BatteryItem.cpp">
+      <Filter>Play\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -44,6 +44,7 @@ protected:
 
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
+	std::vector<std::string> NameVector_;
 	GameEngineCollision* Collision_;
 	AccessoryType Type_;
 
