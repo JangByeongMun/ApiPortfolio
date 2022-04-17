@@ -289,7 +289,7 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("optionsmenu_VolumeRight.bmp");
 		Image->CutCount(5, 3);
 
-		Image = GameEngineImageManager::GetInst()->Find("02_momkill_Save.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("01_basement_Save.bmp");
 		Image->CutCount(2, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("02_momkill_Save.bmp");
