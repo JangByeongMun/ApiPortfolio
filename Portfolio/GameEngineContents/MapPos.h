@@ -3,11 +3,11 @@
 union MapPos
 {
 public:
-	//struct
-	//{
-	//	int x;
-	//	int y;
-	//};
+	struct
+	{
+		int x;
+		int y;
+	};
 	__int64 n;
 
 public:
@@ -27,10 +27,4 @@ public:
 	{
 		return n < _Other.n;
 	}
-
-	//MapPos(int _x, int _y)
-	//	: x(_x)
-	//	, y(_y)
-	//{
-	//}
 };

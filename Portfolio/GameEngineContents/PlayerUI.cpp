@@ -9,6 +9,7 @@ PlayerUI::PlayerUI()
 	: HpUI_(nullptr)
 	, CardUI_(nullptr)
 	, ItemUI_(nullptr)
+	, AccessoryUI_(nullptr)
 {
 }
 

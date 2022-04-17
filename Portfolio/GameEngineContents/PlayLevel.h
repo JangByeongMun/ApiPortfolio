@@ -26,6 +26,5 @@ protected:
 
 private:
 	GameEngineSoundPlayer BgmPlayer_;
-	Player* PlayerInst_;
 };
 

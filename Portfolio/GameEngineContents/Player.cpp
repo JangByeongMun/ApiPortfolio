@@ -197,7 +197,7 @@ void Player::PlayerSetMove(float4 _Value)
 	}
 }
 
-void Player::GetPlayerInfo()
+void Player::SetPlayerInfo()
 {
 	CharacterType_ = SelectedCharacterType;
 	switch (SelectedCharacterType)

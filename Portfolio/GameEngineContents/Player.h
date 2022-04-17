@@ -37,7 +37,7 @@ public:
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
 
-	void GetPlayerInfo();
+	void SetPlayerInfo();
 	void MakeHeadAddRenderer(const std::string& _Name);
 
 	std::string GetBodyAnimationName();

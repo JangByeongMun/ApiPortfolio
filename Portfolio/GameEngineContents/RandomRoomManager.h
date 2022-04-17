@@ -1,14 +1,14 @@
 #pragma once
 #include <map>
 #include <vector>
-#include <GameEngineBase/GameEngineMath.h>
 #include "MapPos.h"
-
-using namespace std;
+#include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν :
+union MapPos;
 class RoomData;
-	class RandomRoomManager
+class RandomRoomManager : public GameEngineActor
 {
 private:
 	static RandomRoomManager* Inst_;
@@ -16,6 +16,10 @@ public:
 	inline static RandomRoomManager* GetInst()
 	{
 		return Inst_;
+	}
+	inline static void SetInst(RandomRoomManager* _Value)
+	{
+		Inst_ = _Value;
 	}
 	inline static void Destroy()
 	{
@@ -29,14 +33,19 @@ public:
 	}
 
 	bool ChangeFloor(const int& _floor);
+	float4 RandomPos();
+	void Start() override;
 
 protected:
 
 private:
-	map<int, vector<RoomData*>> AllMaps_;
-	map<MapPos, RoomData*> CurrentMaps_;
-	int currentFloor_;
-	int currentMapCount_;
+	friend GameEngineLevel;
+
+	std::map<int, std::vector<RoomData*>> AllMaps_;
+	std::map<MapPos, RoomData*> CurrentMaps_;
+	MapPos CurrentMapPos_;
+	int CurrentFloor_;
+	int CurrentMapCount_;
 
 	// constrcuter destructer
 	RandomRoomManager();

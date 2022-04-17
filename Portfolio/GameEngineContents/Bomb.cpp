@@ -26,6 +26,11 @@ void Bomb::Update()
 		float4 MoveDir = { 0, 0 };
 		for (int i = 0; i < CollisionResult_.size(); i++)
 		{
+			if (CollisionResult_[i] == nullptr)
+			{
+				continue;
+			}
+
 			MoveDir += GetPosition() - CollisionResult_[i]->GetCollisionPos();
 		}
 

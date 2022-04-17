@@ -7,13 +7,13 @@
 #include "SpacebarUI.h"
 #include "Accessory.h"
 #include "ContentsEnum.h"
+#include "RandomRoomManager.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
 PlayLevel::PlayLevel() 
-	: PlayerInst_(nullptr)
 {
 }
 
@@ -24,12 +24,12 @@ PlayLevel::~PlayLevel()
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
-	GameEngineActor* Actor = CreateActor<TestMap>((int)ORDER::BACKGROUND);
-	PlayerInst_ = CreateActor<Player>((int)ORDER::PLAYER);
+	CreateActor<TestMap>((int)ORDER::BACKGROUND);
+	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HPUI>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
-
-	//Actor->CreateCollision("Wall", {100, 100}, { 300, 200 });
+	
+	RandomRoomManager::SetInst(CreateActor<RandomRoomManager>((int)ORDER::BACKGROUND));
 
 	if (false == GameEngineInput::GetInst()->IsKey("PlayESC"))
 	{
@@ -55,9 +55,11 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart()
 {
-	PlayerInst_->GetPlayerInfo();
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
 	BgmPlayer_.SetVolume(0.05f);
+
+	Player::MainPlayer->SetPlayerInfo();
+	RandomRoomManager::GetInst()->ChangeFloor(1);
 }
 
 void PlayLevel::LevelChangeEnd()

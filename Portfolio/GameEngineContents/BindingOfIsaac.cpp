@@ -5,6 +5,7 @@
 #include "EndingLevel.h"
 #include "MenuLevel.h"
 #include "MenuLoadingLevel.h"
+#include "RandomRoomManager.h"
 
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
@@ -53,6 +54,19 @@ void BindingOfIsaac::GameInit()
 
 void BindingOfIsaac::ResourcesLoad()
 {
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Map");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
 	{
 		GameEngineDirectory ResourcesDirectory;
 		ResourcesDirectory.MoveParent("Portfolio");
@@ -275,10 +289,10 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("optionsmenu_VolumeRight.bmp");
 		Image->CutCount(5, 3);
 
-		Image = GameEngineImageManager::GetInst()->Find("01_basement.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("02_momkill_Save.bmp");
 		Image->CutCount(2, 1);
 
-		Image = GameEngineImageManager::GetInst()->Find("02_momkill.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("02_momkill_Save.bmp");
 		Image->CutCount(2, 1);
 	}
 

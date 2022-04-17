@@ -12,6 +12,6 @@ TestMap::~TestMap()
 void TestMap::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-	CreateRenderer("basementTest.bmp");
+	CreateRenderer("01_basement.bmp");
 }
 

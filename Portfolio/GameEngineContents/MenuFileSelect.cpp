@@ -62,10 +62,10 @@ void MenuFileSelect::Start()
 	for (int i = 0; i < AllFiles_.size(); i++)
 	{
 		GameEngineRenderer* Renderer = CreateRenderer(RenderPivot::CENTER, AllPos_[i] + float4{0, -50});
-		Renderer->CreateAnimation("01_basement.bmp", "01_basement_Stop", 0, 0, 0.1f, false);
-		Renderer->CreateAnimation("01_basement.bmp", "01_basement", 0, 1, 0.2f, true);
-		Renderer->CreateAnimation("02_momkill.bmp", "02_momkill_Stop", 0, 0, 0.1f, false);
-		Renderer->CreateAnimation("02_momkill.bmp", "02_momkill", 0, 1, 0.2f, true);
+		Renderer->CreateAnimation("01_basement_Save.bmp", "01_basement_Stop", 0, 0, 0.1f, false);
+		Renderer->CreateAnimation("01_basement_Save.bmp", "01_basement", 0, 1, 0.2f, true);
+		Renderer->CreateAnimation("02_momkill_Save.bmp", "02_momkill_Stop", 0, 0, 0.1f, false);
+		Renderer->CreateAnimation("02_momkill_Save.bmp", "02_momkill", 0, 1, 0.2f, true);
 		Renderer->ChangeAnimation("01_basement_Stop");
 		AllSaveRenderer_.push_back(Renderer);
 	}
