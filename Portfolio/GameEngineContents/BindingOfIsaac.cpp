@@ -655,7 +655,11 @@ void BindingOfIsaac::GameLoop()
 		ChangeLevel("MenuLoading");
 	}
 }
-
 void BindingOfIsaac::GameEnd()
 {
+	if (nullptr != GameEngineRandom::MainRandom)
+	{
+		delete GameEngineRandom::MainRandom;
+		GameEngineRandom::MainRandom = nullptr;
+	}
 }
