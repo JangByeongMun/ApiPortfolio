@@ -18,6 +18,10 @@
 #include "Projectile.h"
 #include "Bomb.h"
 #include "PlayerUI.h"
+#include "RandomRoomManager.h"
+#include "RoomActor.h"
+#include "Door.h"
+#include "PlayLevel.h"
 
 #include "KeyItem.h"
 #include "BatteryItem.h"
@@ -54,6 +58,10 @@ Player::Player()
 	, HaveActive_(false)
 	, MaxGaze_(0)
 	, CurrentGaze_(0)
+	, AcheiveRender_(nullptr)
+	, CharacterType_(CharacterType::ISAAC)
+	, RoomPos_({0, 0})
+	, IsChangeRoom_(false)
 {
 }
 Player::~Player() 
@@ -153,6 +161,11 @@ void Player::Update()
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 		BombActor->SetPosition(GetPosition());
+	}
+
+	if (true == IsChangeRoom_)
+	{
+
 	}
 }
 
@@ -491,4 +504,37 @@ void Player::SetAccessory(AccessoryType _Type)
 {
 	HavingAccessory_ = _Type;
 	PlayerUI_->SetAccessoryUI();
+}
+
+void Player::ChangeRoom(DoorDir _Dir)
+{
+	float4 GoDir;
+	DoorDir otherSide = DoorDir::Down;
+	switch (_Dir)
+	{
+	case DoorDir::Up:
+		GoDir = {0, -1};
+		otherSide = DoorDir::Down;
+		break;
+	case DoorDir::Down:
+		GoDir = {0, 1};
+		otherSide = DoorDir::Up;
+		break;
+	case DoorDir::Left:
+		GoDir = {-1, 0};
+		otherSide = DoorDir::Right;
+		break;
+	case DoorDir::Right:
+		GoDir = {1, 0};
+		otherSide = DoorDir::Left;
+		break;
+	default:
+		break;
+	}
+	RoomPos_ += GoDir;
+
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
+	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 100);
+
+	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 }

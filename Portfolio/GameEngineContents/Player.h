@@ -150,5 +150,14 @@ public:
 		return MaxGaze_ <= CurrentGaze_;
 	}
 	void SetActive();
+
+
+///////////////////////////////// ¹æ
+private:
+	float4 RoomPos_;
+	bool IsChangeRoom_;
+
+public:	
+	void ChangeRoom(DoorDir _Value);
 };
 

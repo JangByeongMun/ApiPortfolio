@@ -38,6 +38,7 @@ public:
 	}
 
 	void Setting();
+	Door* FindDoor(DoorDir _Dir);
 
 protected:
 

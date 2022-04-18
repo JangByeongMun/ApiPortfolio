@@ -37,6 +37,7 @@ public:
 	float4 RandomPos();
 	RoomData RandomData();
 	bool ExistPos(float4 _Pos);
+	RoomActor* FindRoom(float4 _Pos);
 
 protected:
 
@@ -44,7 +45,7 @@ private:
 	friend GameEngineLevel;
 
 	std::map<int, std::vector<RoomData>> AllMaps_;
-	std::vector<RoomActor*> CurrentMaps_;
+	std::vector<RoomActor*> CurrentRooms_;
 	MapPos CurrentMapPos_;
 	int CurrentFloor_;
 	int CurrentMapCount_;

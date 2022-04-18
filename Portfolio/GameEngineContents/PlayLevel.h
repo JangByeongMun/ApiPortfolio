@@ -17,6 +17,8 @@ public:
 	PlayLevel& operator=(const PlayLevel& _Other) = delete;
 	PlayLevel& operator=(PlayLevel&& _Other) noexcept = delete;
 
+	void CameraLerp(float4 _Start, float4 _Goal);
+
 protected:
 	void Loading() override;
 	void Update() override;
@@ -26,5 +28,11 @@ protected:
 
 private:
 	GameEngineSoundPlayer BgmPlayer_;
+
+	// 카메라 보간이동
+	bool IsLerp_;
+	float LerpTimer_;
+	float4 Start_;
+	float4 Goal_;
 };
 

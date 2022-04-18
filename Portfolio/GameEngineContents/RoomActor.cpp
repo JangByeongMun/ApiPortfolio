@@ -41,6 +41,18 @@ void RoomActor::Setting()
 	DoorSetting();
 }
 
+Door* RoomActor::FindDoor(DoorDir _Dir)
+{
+	for (int i = 0; i < DoorVector_.size(); i++)
+	{
+		if (_Dir == DoorVector_[i]->GetDir())
+		{
+			return DoorVector_[i];
+		}
+	}
+	return nullptr;
+}
+
 void RoomActor::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());

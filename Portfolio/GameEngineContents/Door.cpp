@@ -1,9 +1,11 @@
 #include "Door.h"
 #include <string>
 #include <GameEngine/GameEngineRenderer.h>
+#include "Player.h"
 
 Door::Door() 
-	: Type_()
+	: Collision_(nullptr)
+	, Type_()
 	, Dir_()
 {
 }
@@ -56,5 +58,14 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 	}
 
 	CreateRenderer(Name)->SetIndex(0);
+	Collision_ = CreateCollision("Door", {65, 65});
+}
+
+void Door::Update()
+{
+	if (true == Collision_->CollisionCheck("Player"))
+	{
+		Player::MainPlayer->ChangeRoom(Dir_);
+	}
 }
 

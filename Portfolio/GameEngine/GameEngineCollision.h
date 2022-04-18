@@ -38,14 +38,14 @@ public:
 
 	bool CollisionCheck(
 		const std::string& _TargetGroup,
-		CollisionType _This = CollisionType::Circle,
-		CollisionType _Target = CollisionType::Circle
+		CollisionType _This = CollisionType::Rect,
+		CollisionType _Target = CollisionType::Rect
 	);
 	bool CollisionResult(
 		const std::string& _TargetGroup,
 		std::vector<GameEngineCollision*>& _ColResult,
-		CollisionType _This = CollisionType::Circle,
-		CollisionType _Target = CollisionType::Circle
+		CollisionType _This = CollisionType::Rect,
+		CollisionType _Target = CollisionType::Rect
 	);
 
 	void DebugRender();

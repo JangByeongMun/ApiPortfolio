@@ -32,12 +32,12 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 		TmpActor->SetData(RandomData());
 		TmpActor->SetPos(RandomPos());
 
-		CurrentMaps_.push_back(TmpActor);
+		CurrentRooms_.push_back(TmpActor);
 	}
 	
-	for (int i = 0; i < CurrentMaps_.size(); i++)
+	for (int i = 0; i < CurrentRooms_.size(); i++)
 	{
-		CurrentMaps_[i]->Setting();
+		CurrentRooms_[i]->Setting();
 	}
 
 	return true;
@@ -48,19 +48,19 @@ float4 RandomRoomManager::RandomPos()
 {
 	float4 ReturnPos;
 
-	if (CurrentMaps_.size() == 0)
+	if (CurrentRooms_.size() == 0)
 	{
 		ReturnPos.x = 0;
 		ReturnPos.y = 0;
 		return ReturnPos;
 	}
 
-	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(CurrentMaps_.size() - 1));
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(CurrentRooms_.size() - 1));
 	
 	int RandomDir = GameEngineRandom::MainRandom->RandomInt(0, 3);
 	for (int i = 0; i < 4; i++)
 	{
-		float4 TmpPos = CurrentMaps_[RandomInt]->GetPos();
+		float4 TmpPos = CurrentRooms_[RandomInt]->GetPos();
 
 		if (RandomDir == 0)
 		{
@@ -157,13 +157,26 @@ void RandomRoomManager::Start()
 
 bool RandomRoomManager::ExistPos(float4 _Pos)
 {
-	for (int i = 0; i < CurrentMaps_.size(); i++)
+	for (int i = 0; i < CurrentRooms_.size(); i++)
 	{
-		if (true == CurrentMaps_[i]->GetPos().CompareInt2D(_Pos))
+		if (true == CurrentRooms_[i]->GetPos().CompareInt2D(_Pos))
 		{
 			return true;
 		}
 	}
 
 	return false;
+}
+
+RoomActor* RandomRoomManager::FindRoom(float4 _Pos)
+{
+	for (int i = 0; i < CurrentRooms_.size(); i++)
+	{
+		if (true == CurrentRooms_[i]->GetPos().CompareInt2D(_Pos))
+		{
+			return CurrentRooms_[i];
+		}
+	}
+
+	return nullptr;
 }

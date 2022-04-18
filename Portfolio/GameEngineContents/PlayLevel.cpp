@@ -21,6 +21,14 @@ PlayLevel::~PlayLevel()
 {
 }
 
+void PlayLevel::CameraLerp(float4 _Start, float4 _Goal)
+{
+	LerpTimer_ = 0.0f;
+	IsLerp_ = true;
+	Start_ = _Start;
+	Goal_ = _Goal;
+}
+
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
@@ -50,6 +58,17 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
 	{
 		GameEngine::ChangeDebugRender();
+	}
+
+	if (true == IsLerp_)
+	{
+		LerpTimer_ += GameEngineTime::GetDeltaTime();
+		SetCameraPos(float4::Lerp(Start_, Goal_, LerpTimer_ * 4));
+
+		if (LerpTimer_ >= 0.25f)
+		{
+			IsLerp_ = false;
+		}
 	}
 }
 
