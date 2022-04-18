@@ -118,10 +118,3 @@ enum class CardType
 	TheSun,
 	Max,
 };
-
-enum class TileType
-{
-	None,
-	Stone,
-	Max,
-};

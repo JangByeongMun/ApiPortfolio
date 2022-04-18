@@ -8,7 +8,3 @@ RoomActor::~RoomActor()
 {
 }
 
-void RoomActor::Start()
-{
-}
-

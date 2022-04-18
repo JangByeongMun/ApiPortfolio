@@ -36,6 +36,7 @@ void HPUI::Start()
 		float x = static_cast<float>((i % (MaxCount / 2)) * 36);
 		float y = static_cast<float>((i / (MaxCount / 2)) * 36);
 		TmpRenderer->SetPivot({ x, y });
+		TmpRenderer->CameraEffectOff();
 		RendererVector_.push_back(TmpRenderer);
 	}
 }

@@ -1,5 +1,7 @@
 #include "Bomb.h"
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 Bomb::Bomb() 
 	: Timer_ (0)
@@ -40,7 +42,9 @@ void Bomb::Update()
 	if (Timer_ >= BombTime_)
 	{
 		// 폭발자국 남기기
-		//CreateRenderer();
+		GameEngineRenderer* Renderer = CreateRenderer("effect_017_bombradius.bmp");
+		Renderer->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 7));
+		Renderer->SetAlpha(100);
 
 		// 주변에 대미지 주기
 		//

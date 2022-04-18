@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineWindow.h>
 
 float AcheiveTimer_;
 
@@ -122,6 +123,7 @@ void Player::BodyMoveUpdate()
 
 	// MoveSpeed_는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+	GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetScale().Half());
 }
 void Player::BodyAcheiveUpdate()
 {

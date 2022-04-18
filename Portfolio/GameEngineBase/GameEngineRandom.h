@@ -6,6 +6,9 @@ class GameEngineRandom
 	std::mt19937_64 mt_;
 
 public:
+	static GameEngineRandom* MainRandom;
+
+public:
 	int RandomInt(int _Min, int _Max)
 	{
 		std::uniform_int_distribution<int> Uniform(_Min, _Max);

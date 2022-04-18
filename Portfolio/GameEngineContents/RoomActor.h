@@ -1,5 +1,8 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
+#include <vector>
 
 // Ό³Έν :
 class RoomActor : public GameEngineActor

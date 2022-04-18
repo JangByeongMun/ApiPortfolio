@@ -21,6 +21,7 @@ void AccessoryUI::SetAccessory(AccessoryType _Type)
 		{
 			RendererVector_[i]->Off();
 		}
+		RendererVector_[i]->CameraEffectOff();
 	}
 }
 

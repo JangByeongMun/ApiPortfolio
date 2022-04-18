@@ -197,6 +197,9 @@
     <ClInclude Include="BatteryItem.h">
       <Filter>Play\Item</Filter>
     </ClInclude>
+    <ClInclude Include="RoomActor.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -391,6 +394,9 @@
     </ClCompile>
     <ClCompile Include="BatteryItem.cpp">
       <Filter>Play\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomActor.cpp">
+      <Filter>Play\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

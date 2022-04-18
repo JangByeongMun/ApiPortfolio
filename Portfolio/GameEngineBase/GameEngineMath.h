@@ -5,6 +5,11 @@
 class GameEngineMath
 {
 public:
+	static const float PIE;
+	static const float DEG;
+	static const float DegreeToRadian;
+
+public:
 	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();

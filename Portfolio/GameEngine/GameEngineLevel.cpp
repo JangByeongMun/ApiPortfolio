@@ -4,6 +4,8 @@
 #include "GameEngineRenderer.h"
 #include <GameEngineBase/GameEngineDebug.h>
 
+bool GameEngineLevel::IsDebug = true;
+
 GameEngineLevel::GameEngineLevel() 
 	: CameraPos_(float4::ZERO)
 {
@@ -71,6 +73,7 @@ void GameEngineLevel::ActorUpdate()
 			for (; StartActor != EndActor; ++StartActor)
 			{
 				(*StartActor)->ReleaseUpdate();
+				(*StartActor)->AddAccTime(GameEngineTime::GetDeltaTime());
 				if (false == (*StartActor)->IsUpdate())
 				{
 					continue;
@@ -238,6 +241,11 @@ void GameEngineLevel::ActorRelease()
 
 void GameEngineLevel::CollisionDebugRender()
 {
+	if (false == IsDebug)
+	{
+		return;
+	}
+
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupStart = AllCollision_.begin();
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator GroupEnd = AllCollision_.end();
 

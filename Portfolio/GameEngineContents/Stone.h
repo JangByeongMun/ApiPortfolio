@@ -1,7 +1,10 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // Ό³Έν :
-class Stone
+class Stone : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -14,9 +17,14 @@ public:
 	Stone& operator=(const Stone& _Other) = delete;
 	Stone& operator=(Stone&& _Other) noexcept = delete;
 
+	void BombStone();
+
 protected:
 
 private:
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
 
+	void Start() override;
 };
 

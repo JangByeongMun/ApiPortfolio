@@ -33,16 +33,15 @@ public:
 	}
 
 	bool ChangeFloor(const int& _floor);
-	float4 RandomPos();
-	void Start() override;
+	MapPos RandomPos();
 
 protected:
 
 private:
 	friend GameEngineLevel;
 
-	std::map<int, std::vector<RoomData*>> AllMaps_;
-	std::map<MapPos, RoomData*> CurrentMaps_;
+	std::map<int, std::vector<RoomData>> AllMaps_;
+	std::map<MapPos, RoomData> CurrentMaps_;
 	MapPos CurrentMapPos_;
 	int CurrentFloor_;
 	int CurrentMapCount_;
@@ -56,4 +55,7 @@ private:
 	RandomRoomManager(RandomRoomManager&& _Other) noexcept = delete;
 	RandomRoomManager& operator=(const RandomRoomManager& _Other) = delete;
 	RandomRoomManager& operator=(RandomRoomManager&& _Other) noexcept = delete;
+
+	void Start() override;
+	void RenderCurrentMaps();
 };

@@ -24,7 +24,7 @@ PlayLevel::~PlayLevel()
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
-	CreateActor<TestMap>((int)ORDER::BACKGROUND);
+	//CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<HPUI>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);

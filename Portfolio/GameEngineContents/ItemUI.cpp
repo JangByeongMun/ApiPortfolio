@@ -73,18 +73,22 @@ void ItemUI::Start()
 
 	MoneyRenderer_ = CreateRenderer("hudpickups.bmp", RenderPivot::CENTER, { 0, 0 });
 	MoneyRenderer_->SetIndex(0);
+	MoneyRenderer_->CameraEffectOff();
 
 	BombRenderer_ = CreateRenderer("hudpickups.bmp", RenderPivot::CENTER, { 0, 35 });
 	BombRenderer_->SetIndex(3);
-	
+	BombRenderer_->CameraEffectOff();
+
 	KeyRenderer_ = CreateRenderer("hudpickups.bmp", RenderPivot::CENTER, { 0, 70 });
 	KeyRenderer_->SetIndex(1);
+	KeyRenderer_->CameraEffectOff();
 
 
 	for (int i = 0; i < 2; i++)
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("whitecounter.bmp", RenderPivot::CENTER, { 15 + 18.0f * (i+1), 0 });
 		TmpRenderer->SetIndex(0);
+		TmpRenderer->CameraEffectOff();
 		MoneyCount_.push_back(TmpRenderer);
 	}
 
@@ -92,6 +96,7 @@ void ItemUI::Start()
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("whitecounter.bmp", RenderPivot::CENTER, { 15 + 18.0f * (i + 1), 35 });
 		TmpRenderer->SetIndex(0);
+		TmpRenderer->CameraEffectOff();
 		BombCount_.push_back(TmpRenderer);
 	}
 
@@ -99,6 +104,7 @@ void ItemUI::Start()
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("whitecounter.bmp", RenderPivot::CENTER, { 15 + 18.0f * (i + 1), 70 });
 		TmpRenderer->SetIndex(0);
+		TmpRenderer->CameraEffectOff();
 		KeyCount_.push_back(TmpRenderer);
 	}
 }

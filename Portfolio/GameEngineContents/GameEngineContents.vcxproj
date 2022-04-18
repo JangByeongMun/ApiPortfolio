@@ -323,6 +323,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RoomActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="RoomData.h">
       <SubType>
       </SubType>
@@ -569,6 +573,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="RandomMenuLoading.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="RoomActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

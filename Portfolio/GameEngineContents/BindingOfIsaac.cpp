@@ -13,6 +13,7 @@
 #include <GameEngineBase/GameEngineFile.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 #include <conio.h>
 #include <string>
@@ -28,6 +29,7 @@ BindingOfIsaac::~BindingOfIsaac()
 
 void BindingOfIsaac::GameInit()
 {
+	GameEngineRandom::MainRandom = new GameEngineRandom();
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
 	ResourcesLoad();
 	ImageCut();
@@ -60,6 +62,19 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Map");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Effect");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{
@@ -296,6 +311,17 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(2, 1);
 	}
 
+	/////////////////////////////////// Effect
+	{
+		Image = GameEngineImageManager::GetInst()->Find("effect_017_bombradius.bmp");
+		Image->CutCount(3, 3);
+	}
+
+	/////////////////////////////////// Map
+	{
+		Image = GameEngineImageManager::GetInst()->Find("rocks_basement.bmp");
+		Image->CutCount(4, 8);
+	}
 
 	/////////////////////////////////// Play UI
 	{

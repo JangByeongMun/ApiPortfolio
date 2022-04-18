@@ -67,13 +67,32 @@ public:
 		Order_ = _Order;
 	}
 
+
+	void AddAccTime(float _DeltaTime)
+	{
+		AccTime_ += _DeltaTime;
+	}
+
+	float GetAccTime()
+	{
+		return AccTime_;
+	}
+
+
+	void ReSetAccTime()
+	{
+		AccTime_ = 0.0f;
+	}
+
+
 protected:
 
 private:
 	int Order_;
 	bool IsReleaseUpdate_;
 	bool IsUpdate_;
-	
+	float AccTime_;
+
 	float DeathTime_;
 	bool IsDeath_;
 };
