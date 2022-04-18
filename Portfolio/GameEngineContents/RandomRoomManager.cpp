@@ -42,8 +42,6 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 
 	return true;
 }
-
-
 float4 RandomRoomManager::RandomPos()
 {
 	float4 ReturnPos;
@@ -127,6 +125,7 @@ RandomRoomManager::~RandomRoomManager()
 	//	}
 	//}
 }
+
 void RandomRoomManager::Start()
 {
 	// 0Ãþ
@@ -135,9 +134,9 @@ void RandomRoomManager::Start()
 
 		{
 			RoomData TmpData = RoomData();
-			for (int y = 0; y < 7; y++)
+			for (int y = 1; y < 3; y++)
 			{
-				for (int x = 0; x < 13; x++)
+				for (int x = 4; x < 9; x++)
 				{
 					TmpData.AddBlock(x, y, BlockData::STONE);
 				}
@@ -154,7 +153,6 @@ void RandomRoomManager::Start()
 		AllMaps_.insert(make_pair(0, TmpVector));
 	}
 }
-
 bool RandomRoomManager::ExistPos(float4 _Pos)
 {
 	for (int i = 0; i < CurrentRooms_.size(); i++)
@@ -167,7 +165,6 @@ bool RandomRoomManager::ExistPos(float4 _Pos)
 
 	return false;
 }
-
 RoomActor* RandomRoomManager::FindRoom(float4 _Pos)
 {
 	for (int i = 0; i < CurrentRooms_.size(); i++)

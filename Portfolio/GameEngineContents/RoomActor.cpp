@@ -23,6 +23,13 @@ void RoomActor::Setting()
 
 	CreateRenderer("bgblack.bmp", RenderPivot::CENTER, float4::ZERO, -1);
 	CreateRenderer("01_basement.bmp", RenderPivot::CENTER, float4::ZERO);
+	DoorSetting();
+
+	if (Pos_.CompareInt2D({0, 0}))
+	{
+		CreateRenderer("StartGuide.bmp");
+		return;
+	}
 
 	std::vector<RoomData::Tile> TmpTileVector = Data_.AllBlock_;
 	for (int j = 0; j < TmpTileVector.size(); j++)
@@ -38,7 +45,6 @@ void RoomActor::Setting()
 			break;
 		}
 	}
-	DoorSetting();
 }
 
 Door* RoomActor::FindDoor(DoorDir _Dir)

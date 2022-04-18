@@ -190,12 +190,17 @@ void Player::CollisionCheck()
 // 벽이 있는지 확인하고 이동하도록하는 함수
 void Player::PlayerSetMove(float4 _Value)
 {
+	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
+	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
+
+	// x축이나 y축으로 더이상 갈수없을경우 x나 y중 한군데를 제외하고 이동
 	float4 NextPos = GetPosition() + _Value;
 	float4 NextPos_x = GetPosition() + float4(_Value.x, 0);
 	float4 NextPos_y = GetPosition() + float4(0, _Value.y);
-	int Color = MapColImage_->GetImagePixel(NextPos);
-	int Color_x = MapColImage_->GetImagePixel(NextPos_x);
-	int Color_y = MapColImage_->GetImagePixel(NextPos_y);
+	int Color = MapColImage_->GetImagePixel(NextPos - AddPivot);
+	int Color_x = MapColImage_->GetImagePixel(NextPos_x - AddPivot);
+	int Color_y = MapColImage_->GetImagePixel(NextPos_y - AddPivot);
 	if (RGB(0, 0, 0) != Color)
 	{
 		SetMove(_Value);
@@ -535,6 +540,5 @@ void Player::ChangeRoom(DoorDir _Dir)
 
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
 	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 100);
-
 	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 }

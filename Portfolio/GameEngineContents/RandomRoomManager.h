@@ -33,6 +33,11 @@ public:
 		Inst_ = nullptr;
 	}
 
+	inline int GetCurrentFloor()
+	{
+		return CurrentFloor_;
+	}
+
 	bool ChangeFloor(const int& _floor);
 	float4 RandomPos();
 	RoomData RandomData();
