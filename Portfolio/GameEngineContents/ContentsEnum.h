@@ -118,3 +118,19 @@ enum class CardType
 	TheSun,
 	Max,
 };
+
+enum class DoorType
+{
+	Default,
+	Treasure,
+	Boss,
+	Max,
+};
+
+enum class DoorDir
+{
+	Up,
+	Down,
+	Left,
+	Right
+};

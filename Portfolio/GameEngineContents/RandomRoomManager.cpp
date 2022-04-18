@@ -3,12 +3,9 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include "RoomData.h"
 #include "Stone.h"
+#include "RoomActor.h"
 
 RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
-int StartX = 220;
-int StartY = 135;
-int ScaleX = 70;
-int ScaleY = 75;
 
 bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
@@ -31,19 +28,25 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	// ÇöÀç ÃþÀÇ ¸Ê¼ö¸¸Å­ ¹Ýº¹
 	for (int i = 0; i < CurrentMapCount_; i++)
 	{
-		int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllMaps_[CurrentFloor_ - 1].size() - 1));
-		RoomData TmpTileVector = (AllMaps_[CurrentFloor_ - 1][RandomInt]);
-		CurrentMaps_.insert({ RandomPos(), TmpTileVector });
+		RoomActor* TmpActor = GetLevel()->CreateActor<RoomActor>();
+		TmpActor->SetData(RandomData());
+		TmpActor->SetPos(RandomPos());
+
+		CurrentMaps_.push_back(TmpActor);
+	}
+	
+	for (int i = 0; i < CurrentMaps_.size(); i++)
+	{
+		CurrentMaps_[i]->Setting();
 	}
 
-	RenderCurrentMaps();
 	return true;
 }
 
 
-MapPos RandomRoomManager::RandomPos()
+float4 RandomRoomManager::RandomPos()
 {
-	MapPos ReturnPos = MapPos();
+	float4 ReturnPos;
 
 	if (CurrentMaps_.size() == 0)
 	{
@@ -53,43 +56,47 @@ MapPos RandomRoomManager::RandomPos()
 	}
 
 	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(CurrentMaps_.size() - 1));
-	std::map<MapPos, RoomData>::iterator findIter = CurrentMaps_.begin();
-	for (int i = 0; i < RandomInt; i++)
-	{
-		findIter++;
-	}
 	
-	MapPos FindPos = findIter->first;
 	int RandomDir = GameEngineRandom::MainRandom->RandomInt(0, 3);
 	for (int i = 0; i < 4; i++)
 	{
-		MapPos TmpPos = FindPos;
+		float4 TmpPos = CurrentMaps_[RandomInt]->GetPos();
 
 		if (RandomDir == 0)
 		{
-			TmpPos = MapPos(float4(static_cast<float>(FindPos.x), static_cast<float>(FindPos.y + 1)));
+			TmpPos += {0, 1};
 		}
 		else if (RandomDir == 1)
 		{
-			TmpPos = MapPos(float4(static_cast<float>(FindPos.x), static_cast<float>(FindPos.y - 1)));
+			TmpPos += {0, -1};
 		}
 		else if (RandomDir == 2)
 		{
-			TmpPos = MapPos(float4(static_cast<float>(FindPos.x + 1), static_cast<float>(FindPos.y)));
+			TmpPos += {1, 0};
 		}
 		else if (RandomDir == 3)
 		{
-			TmpPos = MapPos(float4(static_cast<float>(FindPos.x - 1), static_cast<float>(FindPos.y)));
+			TmpPos += {-1, 0};
 		}
 
-		if (CurrentMaps_.end() == CurrentMaps_.find(TmpPos))
+		
+		if (true == ExistPos(TmpPos))
+		{
+			RandomDir = (RandomDir + 1) % 4;
+		}
+		else
 		{
 			return TmpPos;
 		}
-		RandomDir = (RandomDir + 1) % 4;
 	}
 
 	return ReturnPos;
+}
+RoomData RandomRoomManager::RandomData()
+{
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllMaps_[CurrentFloor_ - 1].size() - 1));
+	RoomData RandomData = AllMaps_[CurrentFloor_ - 1][RandomInt];
+	return RandomData;
 }
 
 RandomRoomManager::RandomRoomManager()
@@ -98,7 +105,6 @@ RandomRoomManager::RandomRoomManager()
 	, CurrentMapCount_(0)
 {
 }
-
 RandomRoomManager::~RandomRoomManager()
 {
 	//std::map<int, std::vector<RoomData>>::iterator BeginIter = AllMaps_.begin();
@@ -121,7 +127,6 @@ RandomRoomManager::~RandomRoomManager()
 	//	}
 	//}
 }
-
 void RandomRoomManager::Start()
 {
 	// 0Ãþ
@@ -150,30 +155,15 @@ void RandomRoomManager::Start()
 	}
 }
 
-void RandomRoomManager::RenderCurrentMaps()
+bool RandomRoomManager::ExistPos(float4 _Pos)
 {
-	std::map<MapPos, RoomData>::iterator BeginIter = CurrentMaps_.begin();
-	std::map<MapPos, RoomData>::iterator EndIter = CurrentMaps_.end();
-
-	for (; BeginIter != EndIter; ++BeginIter)
+	for (int i = 0; i < CurrentMaps_.size(); i++)
 	{
-		float4 CurrentMapPos = { static_cast<float>(BeginIter->first.x * 1280) , static_cast<float>(BeginIter->first.y * 720) };
-		CreateRenderer("01_basement.bmp", RenderPivot::CENTER, CurrentMapPos + GameEngineWindow::GetScale().Half());
-
-		// ÇöÀç ¸Ê³»ºÎ ¹Ýº¹
-		std::vector<RoomData::Tile> TmpTileVector = BeginIter->second.AllBlock_;
-		for (int j = 0; j < TmpTileVector.size(); j++)
+		if (true == CurrentMaps_[i]->GetPos().CompareInt2D(_Pos))
 		{
-		 	float4 TmpPos = float4(static_cast<float>(StartX + ScaleX * TmpTileVector[j].X_), static_cast<float>(StartY + ScaleY * TmpTileVector[j].Y_));
-			
-			switch (TmpTileVector[j].Type_)
-			{
-			case BlockData::STONE:
-				GetLevel()->CreateActor<Stone>()->SetPosition(CurrentMapPos + TmpPos);
-				break;
-			default:
-				break;
-			}
+			return true;
 		}
 	}
+
+	return false;
 }

@@ -6,9 +6,11 @@
 // 설명 : 각 방의 정보를 저장하는 데이터
 union MapPos;
 class RandomRoomManager;
+class RoomActor;
 class RoomData
 {
 	friend RandomRoomManager;
+	friend RoomActor;
 public:
 	class Tile
 	{
@@ -37,12 +39,10 @@ public:
 
 public:
 	RoomData();
-	RoomData(const RoomData& _other);
+	RoomData(const RoomData& _Other);
 	~RoomData();
 
-	// delete Function
-	RoomData& operator=(const RoomData& _Other) = delete;
-	RoomData& operator=(RoomData&& _Other) noexcept = delete;
+	RoomData& operator=(RoomData& _Other);
 
 	bool operator()(const MapPos& _Left, const MapPos& _Right);
 	void AddBlock(int _X, int _Y, BlockData _Type);

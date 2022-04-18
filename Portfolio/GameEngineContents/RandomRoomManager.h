@@ -8,6 +8,7 @@
 // Ό³Έν :
 union MapPos;
 class RoomData;
+class RoomActor;
 class RandomRoomManager : public GameEngineActor
 {
 private:
@@ -33,7 +34,9 @@ public:
 	}
 
 	bool ChangeFloor(const int& _floor);
-	MapPos RandomPos();
+	float4 RandomPos();
+	RoomData RandomData();
+	bool ExistPos(float4 _Pos);
 
 protected:
 
@@ -41,7 +44,7 @@ private:
 	friend GameEngineLevel;
 
 	std::map<int, std::vector<RoomData>> AllMaps_;
-	std::map<MapPos, RoomData> CurrentMaps_;
+	std::vector<RoomActor*> CurrentMaps_;
 	MapPos CurrentMapPos_;
 	int CurrentFloor_;
 	int CurrentMapCount_;
@@ -57,5 +60,4 @@ private:
 	RandomRoomManager& operator=(RandomRoomManager&& _Other) noexcept = delete;
 
 	void Start() override;
-	void RenderCurrentMaps();
 };

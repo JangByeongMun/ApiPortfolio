@@ -1,7 +1,9 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
+#include "ContentsEnum.h"
 
 // Ό³Έν :
-class Door
+class Door : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -14,9 +16,13 @@ public:
 	Door& operator=(const Door& _Other) = delete;
 	Door& operator=(Door&& _Other) noexcept = delete;
 
+	void Setting(DoorType _Type, DoorDir _Dir);
+
 protected:
 
 private:
+	DoorType Type_;
+	DoorDir Dir_;
 
 };
 

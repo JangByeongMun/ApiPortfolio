@@ -1,10 +1,11 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
-#include <GameEngine/GameEngineRenderer.h>
-#include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineBase/GameEngineWindow.h>
 #include <vector>
+#include "RoomData.h"
 
-// Ό³Έν :
+class Door;
 class RoomActor : public GameEngineActor
 {
 public:
@@ -18,10 +19,33 @@ public:
 	RoomActor& operator=(const RoomActor& _Other) = delete;
 	RoomActor& operator=(RoomActor&& _Other) noexcept = delete;
 
+	inline void SetData(RoomData _Data)
+	{
+		Data_ = _Data;
+	}
+	inline void SetPos(float4 _Pos)
+	{
+		Pos_ = _Pos;
+	}
+
+	inline RoomData& GetData()
+	{
+		return Data_;
+	}
+	inline float4& GetPos()
+	{
+		return Pos_;
+	}
+
+	void Setting();
+
 protected:
 
 private:
+	std::vector<Door*> DoorVector_;
+	RoomData Data_;
+	float4 Pos_;
 
 	void Start() override;
+	void DoorSetting();
 };
-

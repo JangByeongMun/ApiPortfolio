@@ -131,7 +131,7 @@ GameEngineWindow::GameEngineWindow()
     , hWnd_(nullptr)
     , WindowOn_(true)
     , hDC_(nullptr)
-    , Scale_({})
+    , Scale_()
 {
 }
 

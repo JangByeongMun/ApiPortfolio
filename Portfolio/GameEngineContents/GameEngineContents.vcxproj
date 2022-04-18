@@ -290,6 +290,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RoomActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="MapPos.h" />
     <ClInclude Include="MenuFileSelect.h">
       <SubType>
@@ -320,10 +324,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="RandomMenuLoading.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="RoomActor.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -544,6 +544,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="RoomActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="MenuFileSelect.cpp">
       <SubType>
       </SubType>
@@ -573,10 +577,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="RandomMenuLoading.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="RoomActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -29,8 +29,8 @@ BindingOfIsaac::~BindingOfIsaac()
 
 void BindingOfIsaac::GameInit()
 {
-	GameEngineRandom::MainRandom = new GameEngineRandom();
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
+	GameEngineRandom::MainRandom = new GameEngineRandom();
 	ResourcesLoad();
 	ImageCut();
 
@@ -321,6 +321,21 @@ void BindingOfIsaac::ImageCut()
 	{
 		Image = GameEngineImageManager::GetInst()->Find("rocks_basement.bmp");
 		Image->CutCount(4, 8);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Up.bmp");
+		Image->CutCount(2, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Down.bmp");
+		Image->CutCount(2, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Left.bmp");
+		Image->CutCount(2, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Right.bmp");
+		Image->CutCount(2, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor.bmp");
+		Image->CutCount(2, 3);
 	}
 
 	/////////////////////////////////// Play UI

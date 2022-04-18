@@ -183,6 +183,7 @@ public:
 
 		return *this;
 	}
+	
 
 	bool CompareInt2D(const float4& _Value)
 	{
