@@ -19,12 +19,14 @@ public:
 
 	void CameraLerp(float4 _Start, float4 _Goal);
 
+	GameEngineActor* GlobalActor;
+
 protected:
 	void Loading() override;
 	void Update() override;
 
-	void LevelChangeStart() override;
-	void LevelChangeEnd() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	GameEngineSoundPlayer BgmPlayer_;

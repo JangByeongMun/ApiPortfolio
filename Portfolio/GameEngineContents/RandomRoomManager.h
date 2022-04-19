@@ -6,7 +6,6 @@
 #include <GameEngine/GameEngineLevel.h>
 
 // Ό³Έν :
-union MapPos;
 class RoomData;
 class RoomActor;
 class RandomRoomManager : public GameEngineActor
@@ -41,8 +40,15 @@ public:
 	bool ChangeFloor(const int& _floor);
 	float4 RandomPos();
 	RoomData RandomData();
+
 	bool ExistPos(float4 _Pos);
 	RoomActor* FindRoom(float4 _Pos);
+	RoomActor* GetCurrentRoom();
+
+	inline std::vector<RoomActor*> GetCurrentRooms()
+	{
+		return CurrentRooms_;
+	}
 
 protected:
 
@@ -51,7 +57,6 @@ private:
 
 	std::map<int, std::vector<RoomData>> AllMaps_;
 	std::vector<RoomActor*> CurrentRooms_;
-	MapPos CurrentMapPos_;
 	int CurrentFloor_;
 	int CurrentMapCount_;
 

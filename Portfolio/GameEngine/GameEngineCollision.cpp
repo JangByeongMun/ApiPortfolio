@@ -51,7 +51,6 @@ bool GameEngineCollision::CollisionCheck(
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{
-		//MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
 		return false;
 	}
 
@@ -83,8 +82,6 @@ bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{
-		// MsgBoxAssert("존재하지 않는 충돌 그룹과 충돌하려고 했습니다.");
-
 		return false;
 	}
 

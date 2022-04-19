@@ -109,16 +109,21 @@ public:
 		Pause_ = !Pause_;
 	}
 
-	void CameraEffectOff()
+	inline void CameraEffectOff()
 	{
 		IsCameraEffect_ = false;
 	}
-	void CameraEffectOn()
+	inline void CameraEffectOn()
 	{
 		IsCameraEffect_ = true;
 	}
 
 	void SetOrder(int _Order) override;
+
+	inline void SetDeleteEndFrame_(bool _On)
+	{
+		IsDeleteEndFrame_ = _On;
+	}
 
 protected:
 	void Render();
@@ -141,6 +146,9 @@ private:
 
 	bool IsCameraEffect_;
 	bool Pause_;
+
+	// 애니메이션 마지막프레임에 삭제할지 안할지
+	bool IsDeleteEndFrame_;
 
 	/////////////////////////////////////////// 애니메이션
 private:

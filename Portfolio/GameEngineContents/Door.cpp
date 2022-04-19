@@ -63,7 +63,7 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 
 void Door::Update()
 {
-	if (true == Collision_->CollisionCheck("Player"))
+	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->ChangeRoom(Dir_);
 	}

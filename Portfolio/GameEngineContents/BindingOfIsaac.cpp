@@ -74,6 +74,19 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.MoveParent("Portfolio");
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Monster");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Effect");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -315,6 +328,15 @@ void BindingOfIsaac::ImageCut()
 	{
 		Image = GameEngineImageManager::GetInst()->Find("effect_017_bombradius.bmp");
 		Image->CutCount(3, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_015_tearpoofa.bmp");
+		Image->CutCount(4, 4);
+	}
+
+	/////////////////////////////////// Monster
+	{
+		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter.bmp");
+		Image->CutCount(4, 4);
 	}
 
 	/////////////////////////////////// Map

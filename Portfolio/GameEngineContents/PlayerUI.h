@@ -8,6 +8,7 @@ class HPUI;
 class CardUI;
 class ItemUI;
 class AccessoryUI;
+class MiniMap;
 class PlayerUI : public GameEngineActor
 {
 	friend GameEngineLevel;
@@ -26,6 +27,7 @@ private:
 	CardUI* CardUI_;
 	ItemUI* ItemUI_;
 	AccessoryUI* AccessoryUI_;
+	MiniMap* MiniMap_;
 
 	void Start() override;
 	void Setting();
@@ -34,5 +36,6 @@ private:
 	void SetCardUI();
 	void SetItemUI();
 	void SetAccessoryUI();
+	void SetMiniMap();
 };
 

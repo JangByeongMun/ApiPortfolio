@@ -227,7 +227,7 @@ void MenuLevel::Update()
 	}
 }
 
-void MenuLevel::LevelChangeStart()
+void MenuLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	if (GameEngine::GetPrevLevel() == GameEngine::GetInst().FindLevel("Play"))
 	{
@@ -238,7 +238,7 @@ void MenuLevel::LevelChangeStart()
 	BgmPlayer_.SetVolume(0.03f);
 }
 
-void MenuLevel::LevelChangeEnd()
+void MenuLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	BgmPlayer_.Stop();
 }

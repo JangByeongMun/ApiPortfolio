@@ -72,7 +72,7 @@ void MoneyItem::SetType(MoneyType _Type)
 void MoneyItem::Update()
 {
 	/////// Ãæµ¹
-	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
 		switch (Type_)
 		{

@@ -4,6 +4,7 @@
 #include "CardUI.h"
 #include "ItemUI.h"
 #include "AccessoryUI.h"
+#include "MiniMap.h"
 
 PlayerUI::PlayerUI() 
 	: HpUI_(nullptr)
@@ -23,6 +24,7 @@ void PlayerUI::Start()
 	CardUI_ = GetLevel()->CreateActor<CardUI>(static_cast<int>(ORDER::UI));
 	ItemUI_ = GetLevel()->CreateActor<ItemUI>(static_cast<int>(ORDER::UI));
 	AccessoryUI_ = GetLevel()->CreateActor<AccessoryUI>(static_cast<int>(ORDER::UI));
+	MiniMap_ = GetLevel()->CreateActor<MiniMap>(static_cast<int>(ORDER::UI));
 }
 
 void PlayerUI::Setting()
@@ -30,6 +32,7 @@ void PlayerUI::Setting()
 	SetHpUI();
 	SetItemUI();
 	SetAccessoryUI();
+	SetMiniMap();
 }
 
 void PlayerUI::SetHpUI()
@@ -52,5 +55,9 @@ void PlayerUI::SetItemUI()
 void PlayerUI::SetAccessoryUI()
 {
 	AccessoryUI_->SetAccessory(Player::MainPlayer->HavingAccessory_);
+}
+
+void PlayerUI::SetMiniMap()
+{
 }
 

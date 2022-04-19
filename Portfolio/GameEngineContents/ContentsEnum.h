@@ -19,15 +19,12 @@ enum class CharacterType
 };
 
 // 각 블럭의 데이터값
-enum class BlockData
+enum class BlockType
 {
 	NORMAL = 0,
 	FIRE,
-	FIREBLUE,
-	FIRERED,
 	HOLE,
 	POOP,
-	POOPRED,
 	STONE,
 	STONEBLACK,
 	THORN,
@@ -133,4 +130,12 @@ enum class DoorDir
 	Down,
 	Left,
 	Right
+};
+
+enum class MonsterType
+{
+	Default,
+	Pooter,
+
+	Max,
 };

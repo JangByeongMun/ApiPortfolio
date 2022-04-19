@@ -29,8 +29,8 @@ public:
 	{
 		Lifetime_ = _Value;
 		CurrentTimer_ = 0.0f;
-		Death(Lifetime_);
 	}
+	void DestroyTear();
 
 protected:
 
@@ -43,5 +43,6 @@ private:
 
 	void Start() override;
 	void Update() override;
+
 };
 

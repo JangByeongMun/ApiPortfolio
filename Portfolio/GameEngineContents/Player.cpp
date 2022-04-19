@@ -70,6 +70,8 @@ Player::~Player()
 
 void Player::Start()
 {
+	MainPlayer = this;
+
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
 	PlayerCollision = CreateCollision("Player", { 100, 100 });
@@ -169,7 +171,7 @@ void Player::Update()
 	}
 }
 
-void Player::LevelChangeStart()
+void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	MainPlayer = this;
 }

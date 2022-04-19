@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <vector>
 
 // Ό³Έν :
 class MiniMap : public GameEngineActor
@@ -14,7 +15,7 @@ public:
 	MiniMap(MiniMap&& _Other) noexcept = delete;
 	MiniMap& operator=(const MiniMap& _Other) = delete;
 	MiniMap& operator=(MiniMap&& _Other) noexcept = delete;
-
+	
 protected:
 
 private:

@@ -51,7 +51,7 @@ void Accessory::Update()
 		return;
 	}
 
-	if (true == Collision_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->SetAccessory(Type_);
 

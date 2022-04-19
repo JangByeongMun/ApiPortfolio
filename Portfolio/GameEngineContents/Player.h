@@ -62,7 +62,7 @@ private:
 
 	void Start() override;
 	void Update() override;
-	void LevelChangeStart() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 	void CollisionCheck();
 	void PlayerSetMove(float4 _Value);
@@ -159,5 +159,9 @@ private:
 
 public:	
 	void ChangeRoom(DoorDir _Value);
+	inline float4 GetCurrentRoomPos()
+	{
+		return RoomPos_;
+	}
 };
 

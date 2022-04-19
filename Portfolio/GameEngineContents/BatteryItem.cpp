@@ -22,7 +22,7 @@ void BatteryItem::Update()
 		return;
 	}
 
-	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheck("Player", CollisionType::Rect, CollisionType::Rect))
+	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->AddItem(ItemType::Battery);
 		Death();

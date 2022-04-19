@@ -1,7 +1,12 @@
 #pragma once
+#include "Shooter.h"
+#include <GameEngine/GameEngineRenderer.h>
+#include <GameEngine/GameEngineCollision.h>
 
 // 설명 : 몬스터들 기본
-class Monster
+class Player;
+class RoomActor;
+class Monster : public Shooter
 {
 public:
 	// constrcuter destructer
@@ -13,10 +18,49 @@ public:
 	Monster(Monster&& _Other) noexcept = delete;
 	Monster& operator=(const Monster& _Other) = delete;
 	Monster& operator=(Monster&& _Other) noexcept = delete;
+	
+	inline void SetRoom(RoomActor& _Room)
+	{
+		Room_ = &_Room;
+	}
 
 protected:
+	RoomActor* Room_;
+	GameEngineRenderer* Renderer_;
+	GameEngineCollision* Collision_;
 
-private:
+	void Start() override;
+	void Update() override;
+	virtual void MonsterUpdate() {};
+	inline void MonsterSetting(float _AttackDelay, float _MoveSpeed)
+	{
+		AttackDelay_ = _AttackDelay;
+		MoveSpeed_ = _MoveSpeed;
+	}
 
+///////////////////////////////// 공격
+protected:
+	float AttackTimer_;
+	float AttackDelay_;
+
+public:
+	float4 AttackNormalDir();
+
+///////////////////////////////// 이동
+protected:
+	float MoveSpeed_;
+
+public:
+	void MonsterSetMove(float4 _Value);
+
+///////////////////////////////// 피격
+protected:
+	float HP_;
+
+public:
+	inline void Hit(float _Damage)
+	{
+		HP_ -= _Damage;
+	}
 };
 

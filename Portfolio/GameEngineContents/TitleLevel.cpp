@@ -45,12 +45,12 @@ void TitleLevel::Update()
 	}
 }
 
-void TitleLevel::LevelChangeStart()
+void TitleLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	IntroPtr_->Play();
 }
 
-void TitleLevel::LevelChangeEnd()
+void TitleLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	IntroPtr_->Stop();
 }

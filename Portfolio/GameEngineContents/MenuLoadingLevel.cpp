@@ -28,12 +28,12 @@ void MenuLoadingLevel::Update()
 	}
 }
 
-void MenuLoadingLevel::LevelChangeStart()
+void MenuLoadingLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	Loading_->RandomLoading();
 	LoadingTimer_ = 4.0f;
 }
 
-void MenuLoadingLevel::LevelChangeEnd()
+void MenuLoadingLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 }

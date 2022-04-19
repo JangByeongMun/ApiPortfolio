@@ -7,34 +7,46 @@
 union MapPos;
 class RandomRoomManager;
 class RoomActor;
+class Monster;
 class RoomData
 {
 	friend RandomRoomManager;
 	friend RoomActor;
 public:
-	class Tile
+	class BlockData
 	{
 	public:
-		Tile()
-			: X_()
-			, Y_()
-			, Type_()
-		{
-		}
-		Tile(int _X, int _Y, BlockData _Type)
+		BlockData(int _X, int _Y, BlockType _Type)
 			: X_(_X)
 			, Y_(_Y)
 			, Type_(_Type)
 		{
 		}
-		~Tile()
+		~BlockData()
 		{
 
 		}
 
 		int X_;
 		int Y_;
-		BlockData Type_;
+		BlockType Type_;
+	};
+	class MonsterData
+	{
+	public:
+		MonsterData(int _X, int _Y, MonsterType _Type)
+			: X_(_X)
+			, Y_(_Y)
+			, Type_(_Type)
+		{
+		}
+		~MonsterData()
+		{
+		}
+
+		int X_;
+		int Y_;
+		MonsterType Type_;
 	};
 
 public:
@@ -44,11 +56,12 @@ public:
 
 	RoomData& operator=(RoomData& _Other);
 
-	bool operator()(const MapPos& _Left, const MapPos& _Right);
-	void AddBlock(int _X, int _Y, BlockData _Type);
+	void AddBlock(int _X, int _Y, BlockType _Type);
+	void AddMonster(int _X, int _Y, MonsterType _Type);
 	
 protected:
 
 private:
-	std::vector<Tile> AllBlock_; // {13, 7}
+	std::vector<BlockData> AllBlock_; // {13, 7}
+	std::vector<MonsterData> AllMonster_;
 };

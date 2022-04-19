@@ -6,6 +6,7 @@
 #include "RoomData.h"
 
 class Door;
+class Monster;
 class RoomActor : public GameEngineActor
 {
 public:
@@ -39,11 +40,13 @@ public:
 
 	void Setting();
 	Door* FindDoor(DoorDir _Dir);
+	bool IsCurrentRoom();
 
 protected:
 
 private:
 	std::vector<Door*> DoorVector_;
+	std::vector<Monster*> MonsterVector_;
 	RoomData Data_;
 	float4 Pos_;
 

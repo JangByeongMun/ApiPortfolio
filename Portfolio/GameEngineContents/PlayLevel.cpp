@@ -14,6 +14,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 PlayLevel::PlayLevel() 
+	: GlobalActor(nullptr)
 {
 }
 
@@ -44,6 +45,8 @@ void PlayLevel::Loading()
 		GameEngineInput::GetInst()->CreateKey("PlayESC", VK_ESCAPE);
 		GameEngineInput::GetInst()->CreateKey("PlayP", 'P');
 	}
+
+	GlobalActor = CreateActor<GameEngineActor>();
 }
 
 void PlayLevel::Update()
@@ -72,7 +75,7 @@ void PlayLevel::Update()
 	}
 }
 
-void PlayLevel::LevelChangeStart()
+void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
 	BgmPlayer_.SetVolume(0.05f);
@@ -81,7 +84,7 @@ void PlayLevel::LevelChangeStart()
 	RandomRoomManager::GetInst()->ChangeFloor(1);
 }
 
-void PlayLevel::LevelChangeEnd()
+void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	BgmPlayer_.Stop();
 }

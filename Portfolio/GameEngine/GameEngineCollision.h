@@ -7,6 +7,7 @@
 class GameEngineCollision : public GameEngineActorSubObject
 {
 	friend GameEngineActor;
+	friend GameEngineLevel;
 
 public:
 	// constrcuter destructer
@@ -36,16 +37,20 @@ public:
 		return GameEngineRect(GetActor()->GetPosition() + Pivot_, Scale_);
 	}
 
+	inline bool CollisionCheckRect(const std::string& _TargetGroup)
+	{
+		return CollisionCheck(_TargetGroup, CollisionType::Rect, CollisionType::Rect);
+	}
 	bool CollisionCheck(
 		const std::string& _TargetGroup,
-		CollisionType _This = CollisionType::Rect,
-		CollisionType _Target = CollisionType::Rect
+		CollisionType _This = CollisionType::Circle,
+		CollisionType _Target = CollisionType::Circle
 	);
 	bool CollisionResult(
 		const std::string& _TargetGroup,
 		std::vector<GameEngineCollision*>& _ColResult,
-		CollisionType _This = CollisionType::Rect,
-		CollisionType _Target = CollisionType::Rect
+		CollisionType _This = CollisionType::Circle,
+		CollisionType _Target = CollisionType::Circle
 	);
 
 	void DebugRender();
@@ -55,5 +60,7 @@ protected:
 private:
 	float4 Pivot_;
 	float4 Scale_;
+
+	std::string CollisionName_;
 };
 

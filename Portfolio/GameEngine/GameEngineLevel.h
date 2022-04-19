@@ -101,11 +101,13 @@ protected:
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
 
-	virtual void LevelChangeStart() = 0; // 이 씬으로 바뀌었을때 실행되는 함수
-	virtual void LevelChangeEnd() = 0; // 이 씬이 바뀌었을때 실행되는 함수
+	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}; // 이 씬으로 바뀌었을때 실행되는 함수
+	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}; // 이 씬이 바뀌었을때 실행되는 함수
 
-	void ActorLevelChangeStart(); // 이 씬으로 바뀌었을때 액터들 함수 실행
-	void ActorLevelChangeEnd(); // 이 씬이 바뀌었을때 액터들 함수 실행
+	void ActorLevelChangeStart(GameEngineLevel* _PrevLevel); // 이 씬으로 바뀌었을때 액터들 함수 실행
+	void ActorLevelChangeEnd(GameEngineLevel* _NextLevel); // 이 씬이 바뀌었을때 액터들 함수 실행
+
+	void ObjectLevelMoveCheck(GameEngineLevel* _NextLevel);
 
 	//////////////////// 액터
 private:

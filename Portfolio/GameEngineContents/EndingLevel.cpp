@@ -29,7 +29,7 @@ void EndingLevel::Update()
 	LevelTime_ += GameEngineTime::GetDeltaTime();
 }
 
-void EndingLevel::LevelChangeStart()
+void EndingLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	LevelTime_ = 0.0f;
 
@@ -41,7 +41,7 @@ void EndingLevel::LevelChangeStart()
 	EndingPtr_->Play();
 }
 
-void EndingLevel::LevelChangeEnd()
+void EndingLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
 	EndingPtr_->Stop();
 }

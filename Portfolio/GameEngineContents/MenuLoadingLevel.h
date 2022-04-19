@@ -24,8 +24,8 @@ private:
 	void Loading() override;
 	void Update() override;
 
-	void LevelChangeStart() override;
-	void LevelChangeEnd() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 };
 

@@ -286,6 +286,11 @@ void GameEngineRenderer::FrameAnimation::Update()
 					IsEnd_ = true;
 					CurrentFrame_ = EndFrame_;
 				}
+
+				if (true == Renderer_->IsDeleteEndFrame_)
+				{
+					Renderer_->Death();
+				}
 			}
 		}
 	}

@@ -4,6 +4,7 @@
 #include "RoomData.h"
 #include "Stone.h"
 #include "RoomActor.h"
+#include "Player.h"
 
 RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
 
@@ -98,8 +99,7 @@ RoomData RandomRoomManager::RandomData()
 }
 
 RandomRoomManager::RandomRoomManager()
-	: CurrentMapPos_()
-	, CurrentFloor_(0)
+	: CurrentFloor_(0)
 	, CurrentMapCount_(0)
 {
 }
@@ -138,15 +138,38 @@ void RandomRoomManager::Start()
 			{
 				for (int x = 4; x < 9; x++)
 				{
-					TmpData.AddBlock(x, y, BlockData::STONE);
+					TmpData.AddBlock(x, y, BlockType::STONE);
 				}
 			}
+			TmpData.AddMonster(0, 0, MonsterType::Pooter);
+
 			TmpVector.push_back(TmpData);
 		}
 
 		{
 			RoomData TmpData = RoomData();
-			TmpData.AddBlock(0, 0, BlockData::STONE);
+			TmpData.AddBlock(0, 0, BlockType::STONE);
+			TmpData.AddMonster(0, 0, MonsterType::Pooter);
+
+			TmpVector.push_back(TmpData);
+		}
+
+		{
+			RoomData TmpData = RoomData();
+			TmpData.AddBlock(12, 6, BlockType::STONEBLACK);
+			TmpData.AddMonster(12, 5, MonsterType::Pooter);
+
+			TmpVector.push_back(TmpData);
+		}
+
+		{
+			RoomData TmpData = RoomData();
+			TmpData.AddBlock(0, 1, BlockType::STONEBLACK);
+			TmpData.AddBlock(0, 5, BlockType::STONE);
+			TmpData.AddBlock(12, 1, BlockType::STONE);
+			TmpData.AddBlock(12, 5, BlockType::STONE);
+			TmpData.AddMonster(3, 3, MonsterType::Pooter);
+
 			TmpVector.push_back(TmpData);
 		}
 
@@ -176,4 +199,8 @@ RoomActor* RandomRoomManager::FindRoom(float4 _Pos)
 	}
 
 	return nullptr;
+}
+RoomActor* RandomRoomManager::GetCurrentRoom()
+{
+	return FindRoom(Player::MainPlayer->GetCurrentRoomPos());
 }

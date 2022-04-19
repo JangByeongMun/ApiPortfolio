@@ -16,6 +16,12 @@ RoomData::RoomData(const RoomData& _Other)
 	{
 		AllBlock_.push_back(_Other.AllBlock_[i]);
 	}
+
+	AllMonster_.clear();
+	for (int i = 0; i < _Other.AllMonster_.size(); i++)
+	{
+		AllMonster_.push_back(_Other.AllMonster_[i]);
+	}
 }
 
 RoomData::~RoomData() 
@@ -30,15 +36,21 @@ RoomData& RoomData::operator=(RoomData& _Other)
 		AllBlock_.push_back(_Other.AllBlock_[i]);
 	}
 
+	AllMonster_.clear();
+	for (int i = 0; i < _Other.AllMonster_.size(); i++)
+	{
+		AllMonster_.push_back(_Other.AllMonster_[i]);
+	}
+
 	return *this;
 }
 
-bool RoomData::operator()(const MapPos& _Left, const MapPos& _Right)
+void RoomData::AddBlock(int _X, int _Y, BlockType _Type)
 {
-	return _Left.n < _Right.n;
+	AllBlock_.push_back(BlockData(_X, _Y, _Type));
 }
 
-void RoomData::AddBlock(int _X, int _Y, BlockData _Type)
+void RoomData::AddMonster(int _X, int _Y, MonsterType _Type)
 {
-	AllBlock_.push_back(Tile(_X, _Y, _Type));
+	AllMonster_.push_back(MonsterData(_X, _Y, _Type));
 }
