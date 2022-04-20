@@ -32,14 +32,15 @@ private:
 	void Start() override;
 	void Setting();
 
+public:
 	void SetPlayerHP();
 	void SetCardUI();
 	void SetItemUI();
 	void SetAccessoryUI();
 	void SetMiniMap();
 
+	void UpdateMiniMap(float4 _Dir);
 
-public: 
 	inline PlayerHP* GetPlayerHP()
 	{
 		return PlayerHP_;

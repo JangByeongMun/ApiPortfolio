@@ -63,6 +63,10 @@ public:
 	{
 		RoomType_ = _Type;
 	}
+	inline RoomType GetRoomType()
+	{
+		return RoomType_;
+	}
 	inline bool IsDefaultType()
 	{
 		return RoomType_ == RoomType::Default;

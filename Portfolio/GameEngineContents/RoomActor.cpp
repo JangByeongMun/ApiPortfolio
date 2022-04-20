@@ -149,9 +149,6 @@ void RoomActor::DoorSetting()
 
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(0, 1))->Data_.RoomType_)
 		{
-		case RoomType::Default:
-			TmpDoor->Setting(DoorType::Default, DoorDir::Down);
-			break;
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Down);
 			break;
@@ -159,7 +156,7 @@ void RoomActor::DoorSetting()
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Down);
 			break;
 		default:
-			TmpDoor->Setting(DoorType::Default, DoorDir::Down);
+			TmpDoor->Setting(DefaultDoorType, DoorDir::Down);
 			break;
 		}
 		DoorVector_.push_back(TmpDoor);
@@ -171,9 +168,6 @@ void RoomActor::DoorSetting()
 
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(0, -1))->Data_.RoomType_)
 		{
-		case RoomType::Default:
-			TmpDoor->Setting(DoorType::Default, DoorDir::Up);
-			break;
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Up);
 			break;
@@ -193,9 +187,6 @@ void RoomActor::DoorSetting()
 		
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(1, 0))->Data_.RoomType_)
 		{
-		case RoomType::Default:
-			TmpDoor->Setting(DoorType::Default, DoorDir::Right);
-			break;
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Right);
 			break;
@@ -215,9 +206,6 @@ void RoomActor::DoorSetting()
 		
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(-1, 0))->Data_.RoomType_)
 		{
-		case RoomType::Default:
-			TmpDoor->Setting(DoorType::Default, DoorDir::Left);
-			break;
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Left);
 			break;

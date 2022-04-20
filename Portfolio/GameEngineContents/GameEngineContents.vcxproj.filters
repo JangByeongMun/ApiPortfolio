@@ -38,9 +38,6 @@
     <ClInclude Include="Fire.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="FireBlue.h">
-      <Filter>Play\Map</Filter>
-    </ClInclude>
     <ClInclude Include="FireRed.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
@@ -246,9 +243,6 @@
       <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Fire.cpp">
-      <Filter>Play\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="FireBlue.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="FireRed.cpp">

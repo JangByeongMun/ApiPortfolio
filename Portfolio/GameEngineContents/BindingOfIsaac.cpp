@@ -387,6 +387,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("whitecounter.bmp");
 		Image->CutCount(3, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("minimap1.bmp");
+		Image->CutCount(5, 8);
 	}
 
 	/////////////////////////////////// Play Item

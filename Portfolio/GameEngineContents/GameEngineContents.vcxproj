@@ -232,10 +232,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="FireBlue.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="FireRed.h">
       <SubType>
       </SubType>
@@ -495,10 +491,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Fire.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="FireBlue.cpp">
       <SubType>
       </SubType>
     </ClCompile>

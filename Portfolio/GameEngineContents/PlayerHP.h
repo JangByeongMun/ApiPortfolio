@@ -18,6 +18,7 @@ public:
 	PlayerHP& operator=(PlayerHP&& _Other) noexcept = delete;
 
 	void UpdateUI();
+	void SetMaxHp(int _Value);
 	void AddMaxHp(int _Value, int _Heal = -1);
 	void AddRedHp(int _Value, bool _IsHalf = "false");
 	void AddHearts(int _Value, HeartType _Type, bool _IsHalf = false);

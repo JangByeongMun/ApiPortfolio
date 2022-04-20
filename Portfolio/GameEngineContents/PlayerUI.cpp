@@ -38,7 +38,7 @@ void PlayerUI::Setting()
 
 void PlayerUI::SetPlayerHP()
 {
-	PlayerHP_->AddMaxHp(Player::MainPlayer->MaxHp_);
+	PlayerHP_->SetMaxHp(Player::MainPlayer->MaxHp_);
 }
 
 void PlayerUI::SetCardUI()
@@ -60,5 +60,12 @@ void PlayerUI::SetAccessoryUI()
 
 void PlayerUI::SetMiniMap()
 {
+	MiniMap_->MakeNode();
+	MiniMap_->ChangeMap({0, 0});
+}
+
+void PlayerUI::UpdateMiniMap(float4 _Dir)
+{
+	MiniMap_->ChangeMap(_Dir);
 }
 

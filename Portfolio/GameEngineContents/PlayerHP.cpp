@@ -106,6 +106,13 @@ void PlayerHP::UpdateUI()
 	int a = 0;
 }
 
+void PlayerHP::SetMaxHp(int _Value)
+{
+	MaxRedHP_ = _Value;
+	CurrentRedHP_ = _Value;
+	UpdateUI();
+}
+
 void PlayerHP::AddMaxHp(int _Value, int _Heal)
 {
 	if (_Heal == -1)

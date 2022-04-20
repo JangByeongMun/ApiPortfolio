@@ -6,6 +6,7 @@
 #include "Stone.h"
 #include "RoomActor.h"
 #include "Player.h"
+#include "PlayerUI.h"
 
 RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
 
@@ -57,7 +58,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	{
 		CurrentRooms_[i]->Setting();
 	}
-
+	Player::MainPlayer->GetPlayerUI()->SetMiniMap();
 	return true;
 }
 
