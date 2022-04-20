@@ -84,7 +84,7 @@ void Player::BodyIdleUpdate()
 			MoveDir_ = float4::ZERO;
 		}
 
-		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 200);
+		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
 	}
 }
 void Player::BodyMoveUpdate()

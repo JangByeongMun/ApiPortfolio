@@ -1,4 +1,8 @@
 #include "PlayLevel.h"
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngine/GameEngine.h>
+#include <GameEngineBase/GameEngineWindow.h>
+
 #include "Player.h"
 #include "Projectile.h"
 #include "PlayerHP.h"
@@ -8,10 +12,7 @@
 #include "Accessory.h"
 #include "ContentsEnum.h"
 #include "RandomRoomManager.h"
-
-#include <GameEngineBase/GameEngineInput.h>
-#include <GameEngine/GameEngine.h>
-#include <GameEngineBase/GameEngineWindow.h>
+#include "PlayerUI.h"
 
 PlayLevel::PlayLevel() 
 	: GlobalActor(nullptr)
@@ -64,7 +65,8 @@ void PlayLevel::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
 	{
-		GameEngine::ChangeDebugRender();
+		IsDebugModeSwitch();
+		Player::MainPlayer->GetPlayerUI()->DebugMiniMap();
 	}
 
 	if (true == IsLerp_)

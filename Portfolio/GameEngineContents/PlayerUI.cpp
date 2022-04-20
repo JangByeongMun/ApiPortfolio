@@ -69,3 +69,8 @@ void PlayerUI::UpdateMiniMap(float4 _Dir)
 	MiniMap_->ChangeMap(_Dir);
 }
 
+void PlayerUI::DebugMiniMap()
+{
+	MiniMap_->SeeAllMap();
+}
+

@@ -103,7 +103,7 @@ void Bomb::Update()
 				Player* TmpActor = dynamic_cast<Player*>(ResultVector[i]->GetActor());
 				if (nullptr != TmpActor)
 				{
-					TmpActor->GetPlayerUI()->GetPlayerHP()->AddRedHp(-1, true);
+					TmpActor->GetPlayerUI()->GetPlayerHP()->AddRedHp(-1, false);
 				}
 			}
 		}

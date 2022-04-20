@@ -82,12 +82,5 @@ private:
 	static void EngineInit();
 	static void EngineLoop();
 	static void EngineEnd();
-
-///////////////////// µð¹ö±× On, Off
-public:
-	static void ChangeDebugRender();
-
-private:
-	static bool IsDebugRender;
 };
 

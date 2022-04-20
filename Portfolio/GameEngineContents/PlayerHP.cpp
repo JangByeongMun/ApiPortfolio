@@ -103,7 +103,6 @@ void PlayerHP::UpdateUI()
 			}
 		}
 	}
-	int a = 0;
 }
 
 void PlayerHP::SetMaxHp(int _Value)
@@ -162,7 +161,7 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 		}
 	}
 
-	if (CurrentRedHP_ >= MaxRedHP_)
+	if (CurrentRedHP_ > MaxRedHP_)
 	{
 		CurrentRedHP_ = MaxRedHP_;
 		IsHalfRed_ = false;
@@ -211,5 +210,10 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 		}
 	}
 
+	if (CurrentAddHP_ + MaxRedHP_ > MaxCount)
+	{
+		CurrentAddHP_ = MaxCount - MaxRedHP_;
+		IsHalfRed_ = false;
+	}
 	UpdateUI();
 }

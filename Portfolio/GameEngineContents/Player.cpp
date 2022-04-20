@@ -192,6 +192,10 @@ void Player::CollisionCheck()
 // 벽이 있는지 확인하고 이동하도록하는 함수
 void Player::PlayerSetMove(float4 _Value)
 {
+	if (true ==GetLevel()->GetDebugMode())
+	{
+		_Value *= 2.0f;
+	}
 	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
 	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();

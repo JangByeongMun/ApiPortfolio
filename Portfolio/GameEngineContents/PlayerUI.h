@@ -40,6 +40,7 @@ public:
 	void SetMiniMap();
 
 	void UpdateMiniMap(float4 _Dir);
+	void DebugMiniMap();
 
 	inline PlayerHP* GetPlayerHP()
 	{
