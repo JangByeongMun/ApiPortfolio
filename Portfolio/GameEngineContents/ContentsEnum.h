@@ -27,6 +27,7 @@ enum class BlockType
 	POOP,
 	STONE,
 	STONEBLACK,
+	STONEURN,
 	THORN,
 
 	END,
@@ -137,5 +138,13 @@ enum class MonsterType
 	Default,
 	Pooter,
 
+	Max,
+};
+
+enum class RoomType
+{
+	Default,
+	Treasure,
+	Boss,
 	Max,
 };

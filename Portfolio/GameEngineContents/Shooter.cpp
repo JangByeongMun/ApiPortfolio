@@ -9,11 +9,12 @@ Shooter::~Shooter()
 {
 }
 
-void Shooter::Shoot(float4 _Vector, ProjectileType _Type, float4 _AddPivot, float _LifeTime)
+void Shooter::Shoot(float4 _Vector, ProjectileType _Type, float4 _AddPivot, float _LifeTime, float _Damage)
 {
 	Projectile* Ptr = GetLevel()->CreateActor<Projectile>();
 	Ptr->SetType(_Type);
 	Ptr->SetPosition(GetPosition() + _AddPivot);
 	Ptr->SetVector(_Vector);
-	Ptr->SetLifeTime_(1.0f);
+	Ptr->SetLifeTime_(_LifeTime);
+	Ptr->SetDamage(_Damage);
 }

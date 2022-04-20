@@ -17,6 +17,7 @@ public:
 protected:
 
 private:
+	bool IsAttackAnim;
 
 	void Start() override;
 	void MonsterUpdate() override;

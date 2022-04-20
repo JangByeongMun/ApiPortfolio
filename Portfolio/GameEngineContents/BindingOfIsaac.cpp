@@ -335,7 +335,9 @@ void BindingOfIsaac::ImageCut()
 
 	/////////////////////////////////// Monster
 	{
-		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter_Left.bmp");
+		Image->CutCount(4, 4);
+		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter_Right.bmp");
 		Image->CutCount(4, 4);
 	}
 
@@ -346,17 +348,29 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Up.bmp");
 		Image->CutCount(2, 3);
-
 		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Down.bmp");
 		Image->CutCount(2, 3);
-
 		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Left.bmp");
 		Image->CutCount(2, 3);
-
 		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Right.bmp");
 		Image->CutCount(2, 3);
 
-		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor_Up.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor_Down.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor_Left.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_02_treasureroomdoor_Right.bmp");
+		Image->CutCount(2, 3);
+	
+		Image = GameEngineImageManager::GetInst()->Find("door_10_bossroomdoor_Up.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_10_bossroomdoor_Down.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_10_bossroomdoor_Left.bmp");
+		Image->CutCount(2, 3);
+		Image = GameEngineImageManager::GetInst()->Find("door_10_bossroomdoor_Right.bmp");
 		Image->CutCount(2, 3);
 	}
 
@@ -427,6 +441,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("pickup_003_key.bmp");
 		Image->CutCount(4, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_016_bomb_One.bmp");
+		Image->CutCount(3, 1);
 	}
 
 

@@ -4,7 +4,7 @@
 
 // 설명 : 플레이어가 관련한 ui들 전체 관리용 클래스
 class Player;
-class HPUI;
+class PlayerHP;
 class CardUI;
 class ItemUI;
 class AccessoryUI;
@@ -23,7 +23,7 @@ private:
 	PlayerUI& operator=(PlayerUI&& _Other) noexcept = delete;
 
 private:
-	HPUI* HpUI_;
+	PlayerHP* PlayerHP_;
 	CardUI* CardUI_;
 	ItemUI* ItemUI_;
 	AccessoryUI* AccessoryUI_;
@@ -32,10 +32,17 @@ private:
 	void Start() override;
 	void Setting();
 
-	void SetHpUI();
+	void SetPlayerHP();
 	void SetCardUI();
 	void SetItemUI();
 	void SetAccessoryUI();
 	void SetMiniMap();
+
+
+public: 
+	inline PlayerHP* GetPlayerHP()
+	{
+		return PlayerHP_;
+	}
 };
 

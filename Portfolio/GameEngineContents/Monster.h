@@ -28,6 +28,7 @@ protected:
 	RoomActor* Room_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
+	bool IsLeft_;
 
 	void Start() override;
 	void Update() override;
@@ -52,15 +53,29 @@ protected:
 
 public:
 	void MonsterSetMove(float4 _Value);
+	inline void SetMoveSpeed(float _Speed) 
+	{
+		MoveSpeed_ = _Speed;
+	}
 
 ///////////////////////////////// ÇÇ°Ý
 protected:
 	float HP_;
 
 public:
-	inline void Hit(float _Damage)
+	inline void SetHP(float _HP)
+	{
+		HP_ = _HP;
+	}
+	inline void Damaged(float _Damage)
 	{
 		HP_ -= _Damage;
+
+		if (HP_ <= 0)
+		{
+			MonsterDeath();
+		}
 	}
+	virtual void MonsterDeath();
 };
 

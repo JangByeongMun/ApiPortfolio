@@ -1,5 +1,6 @@
 #pragma once
 #include <math.h>
+#include <Windows.h>
 
 // Ό³Έν :
 class GameEngineMath
@@ -28,6 +29,29 @@ private:
 
 class float4
 {
+	static float4 DegreeToDirectionFloat4(float _Degree)
+	{
+		return RadianToDirectionFloat4(_Degree * GameEngineMath::DegreeToRadian);
+	}
+
+	static float4 RadianToDirectionFloat4(float _Radian)
+	{
+		return { cosf(_Radian), sinf(_Radian) };
+	}
+
+	static float4 VectorRotationToDegreeZ(const float4& _Value, float _Degree)
+	{
+		return VectorRotationToRadianZ(_Value, _Degree * GameEngineMath::DegreeToRadian);
+	}
+
+	static float4 VectorRotationToRadianZ(const float4& _Value, float _Radian)
+	{
+		float4 Rot;
+		Rot.x = _Value.x * cosf(_Radian) - _Value.y * sinf(_Radian);
+		Rot.y = _Value.x * sinf(_Radian) + _Value.y * cosf(_Radian);
+		return Rot;
+	}
+
 public:
 	static float4 LEFT;
 	static float4 RIGHT;
@@ -185,16 +209,35 @@ public:
 	}
 	
 
-	bool CompareInt2D(const float4& _Value)
+	bool CompareInt2D(const float4& _Value) const
 	{
 		return ix() == _Value.ix() && iy() == _Value.iy();
 	}
 
-	bool CompareInt3D(const float4& _Value)
+	bool CompareInt3D(const float4& _Value) const
 	{
 		return ix() == _Value.ix() &&
 			iy() == _Value.iy() &&
 			iz() == _Value.iz();
+	}
+
+	float4 RotationToDegreeZ(float _Degree)
+	{
+		return RotationToRadianZ(_Degree * GameEngineMath::DegreeToRadian);
+	}
+
+	float4 RotationToRadianZ(float _Radian)
+	{
+		*this = VectorRotationToRadianZ(*this, _Radian);
+		return *this;
+	}
+
+	POINT ToWinAPIPOINT() const
+	{
+		POINT NewPoint;
+		NewPoint.x = ix();
+		NewPoint.y = iy();
+		return NewPoint;
 	}
 
 public:
@@ -233,6 +276,27 @@ class GameEngineRect
 public:
 	float4 Pos;
 	float4 Scale;
+
+public:
+	float4 CenterLeftTopPoint() const
+	{
+		return { static_cast<float>(CenterLeft()), static_cast<float>(CenterTop()) };
+	}
+
+	float4 CenterLeftBotPoint() const
+	{
+		return { static_cast<float>(CenterLeft()), static_cast<float>(CenterBot()) };
+	}
+
+	float4 CenterRightTopPoint() const
+	{
+		return { static_cast<float>(CenterRight()), static_cast<float>(CenterTop()) };
+	}
+
+	float4 CenterRightBotPoint() const
+	{
+		return { static_cast<float>(CenterRight()), static_cast<float>(CenterBot()) };
+	}
 
 public:
 	inline int CenterLeft() const

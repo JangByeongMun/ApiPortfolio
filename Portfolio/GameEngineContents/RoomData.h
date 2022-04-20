@@ -59,9 +59,19 @@ public:
 	void AddBlock(int _X, int _Y, BlockType _Type);
 	void AddMonster(int _X, int _Y, MonsterType _Type);
 	
+	inline void SetRoomType(RoomType _Type)
+	{
+		RoomType_ = _Type;
+	}
+	inline bool IsDefaultType()
+	{
+		return RoomType_ == RoomType::Default;
+	}
+
 protected:
 
 private:
+	RoomType RoomType_;
 	std::vector<BlockData> AllBlock_; // {13, 7}
 	std::vector<MonsterData> AllMonster_;
 };

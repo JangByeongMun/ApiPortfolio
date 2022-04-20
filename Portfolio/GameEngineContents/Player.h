@@ -21,6 +21,7 @@ enum class PlayerHeadState
 // 설명 : 플레이어
 class GameEngineImage;
 class PlayerUI;
+class PlayerHP;
 class Player : public Shooter
 {
 	friend PlayerUI;
@@ -42,6 +43,11 @@ public:
 
 	std::string GetBodyAnimationName();
 	std::string GetHeadAnimationName();
+
+	inline GameEngineImage* GetMapColImage()
+	{
+		return MapColImage_;
+	}
 
 protected:
 	
@@ -130,6 +136,11 @@ public:
 private:
 	PlayerUI* PlayerUI_;
 
+public:
+	inline PlayerUI* GetPlayerUI()
+	{
+		return PlayerUI_;
+	}
 
 ///////////////////////////////// 악세사리
 private:

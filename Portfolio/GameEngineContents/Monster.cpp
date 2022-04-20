@@ -9,6 +9,7 @@
 Monster::Monster()
 	: Renderer_(nullptr)
 	, Collision_(nullptr)
+	, IsLeft_(true)
 	, AttackTimer_(0.0f)
 	, AttackDelay_(5.0f)
 	, MoveSpeed_(100.0f)
@@ -32,6 +33,7 @@ void Monster::Update()
 		return;
 	}
 
+	IsLeft_ = AttackNormalDir().x <= 0;
 	MonsterUpdate();
 }
 
@@ -71,4 +73,9 @@ void Monster::MonsterSetMove(float4 _Value)
 	{
 		SetMove(float4(0, _Value.y));
 	}
+}
+
+void Monster::MonsterDeath()
+{
+	Death();
 }

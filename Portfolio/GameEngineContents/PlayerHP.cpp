@@ -1,7 +1,7 @@
-#include "HPUI.h"
+#include "PlayerHP.h"
 #include <GameEngineBase/GameEngineWindow.h>
 
-HPUI::HPUI()
+PlayerHP::PlayerHP()
 	: RendererVector_()
 	, MaxRedHP_(0)
 	, CurrentRedHP_(0)
@@ -11,11 +11,11 @@ HPUI::HPUI()
 {
 }
 
-HPUI::~HPUI() 
+PlayerHP::~PlayerHP() 
 {
 }
 
-void HPUI::Start()
+void PlayerHP::Start()
 {
 	SetPosition({130, 35});
 
@@ -41,7 +41,7 @@ void HPUI::Start()
 	}
 }
 
-void HPUI::UpdateUI()
+void PlayerHP::UpdateUI()
 {
 	for (int i = 0; i < MaxCount; i++)
 	{
@@ -49,7 +49,7 @@ void HPUI::UpdateUI()
 		{
 			RendererVector_[i]->SetIndex(0);
 		}
-		if (i < CurrentRedHP_)
+		else if (i < CurrentRedHP_)
 		{
 			if (true == IsHalfRed_)
 			{
@@ -106,7 +106,7 @@ void HPUI::UpdateUI()
 	int a = 0;
 }
 
-void HPUI::AddMaxHp(int _Value, int _Heal)
+void PlayerHP::AddMaxHp(int _Value, int _Heal)
 {
 	if (_Heal == -1)
 	{
@@ -118,13 +118,52 @@ void HPUI::AddMaxHp(int _Value, int _Heal)
 	UpdateUI();
 }
 
-void HPUI::AddRedHp(int _Value)
+void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 {
-	CurrentRedHP_ += _Value;
+	if (_Value > 0) // 하트 추가일떄
+	{
+		if (true == _IsHalf) // 추가가 절반짜리일때
+		{
+			if (false == IsHalfRed_) // 현재상태가 절반이 아니였을떄
+			{
+				CurrentRedHP_ += _Value;
+			}
+
+			IsHalfRed_ = !IsHalfRed_;
+		}
+		else if (false == _IsHalf) // 추가가 정수일때
+		{
+			CurrentRedHP_ += _Value;
+		}
+	}
+
+
+	else if (_Value < 0) // 하트 감소일때
+	{
+		if (true == _IsHalf) // 감소가 절반짜리일때
+		{
+			if (true == IsHalfRed_)// 현재상태가 절반이 였을때
+			{
+				CurrentRedHP_ += _Value;
+			}
+
+			IsHalfRed_ = !IsHalfRed_;
+		}
+		else if (false == _IsHalf) // 감소가 정수일때
+		{
+			CurrentRedHP_ += _Value;
+		}
+	}
+
+	if (CurrentRedHP_ >= MaxRedHP_)
+	{
+		CurrentRedHP_ = MaxRedHP_;
+		IsHalfRed_ = false;
+	}
 	UpdateUI();
 }
 
-void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
+void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 {
 	if (_Value > 0) // 하트 추가일떄
 	{
@@ -150,9 +189,9 @@ void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 	{
 		if (true == _IsHalf) // 감소가 절반짜리일때
 		{
-			if (false == IsHalfAdd_)// 현재상태가 절반이 아니였을떄
+			if (true == IsHalfAdd_)// 현재상태가 절반이 였을때
 			{
-				CurrentAddHP_ -= _Value;
+				CurrentAddHP_ += _Value;
 				AddHeartVector_.pop_back();
 			}
 
@@ -160,7 +199,7 @@ void HPUI::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 		}
 		else if (false == _IsHalf) // 감소가 정수일때
 		{
-			CurrentAddHP_ -= _Value;
+			CurrentAddHP_ += _Value;
 			AddHeartVector_.pop_back();
 		}
 	}

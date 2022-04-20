@@ -4,22 +4,22 @@
 #include <vector>
 #include "ContentsEnum.h"
 
-class HPUI : public GameEngineActor
+class PlayerHP : public GameEngineActor
 {
 public:
 	// constrcuter destructer
-	HPUI();
-	~HPUI();
+	PlayerHP();
+	~PlayerHP();
 
 	// delete Function
-	HPUI(const HPUI& _Other) = delete;
-	HPUI(HPUI&& _Other) noexcept = delete;
-	HPUI& operator=(const HPUI& _Other) = delete;
-	HPUI& operator=(HPUI&& _Other) noexcept = delete;
+	PlayerHP(const PlayerHP& _Other) = delete;
+	PlayerHP(PlayerHP&& _Other) noexcept = delete;
+	PlayerHP& operator=(const PlayerHP& _Other) = delete;
+	PlayerHP& operator=(PlayerHP&& _Other) noexcept = delete;
 
 	void UpdateUI();
 	void AddMaxHp(int _Value, int _Heal = -1);
-	void AddRedHp(int _Value);
+	void AddRedHp(int _Value, bool _IsHalf = "false");
 	void AddHearts(int _Value, HeartType _Type, bool _IsHalf = false);
 
 protected:

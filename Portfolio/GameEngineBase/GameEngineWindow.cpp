@@ -2,22 +2,32 @@
 #include "GameEngineDebug.h"
 #include <assert.h>
 #include <Windows.h>
+#include "GameEngineInput.h"
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT CALLBACK GameEngineWindow::MessageProcess(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
     case WM_DESTROY:
+    {
         GameEngineWindow::GetInst().Off();
         break;
-    case WM_CLOSE:
-        GameEngineWindow::GetInst().Off();
-        break;
+    }
     case WM_PAINT:
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
         EndPaint(hWnd, &ps);
+        break;
+    }
+    case WM_CLOSE:
+    {
+        GameEngineWindow::GetInst().Off();
+        break;
+    }
+    case WM_MOUSEWHEEL:
+    {
+        GameEngineInput::GetInst()->WheelValue = (SHORT)HIWORD(wParam);
         break;
     }
     default:
@@ -35,7 +45,7 @@ void GameEngineWindow::RegClass(HINSTANCE _hInst)
     WNDCLASSEXA wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc = WndProc;
+    wcex.lpfnWndProc = MessageProcess;
     wcex.cbClsExtra = 0;
     wcex.cbWndExtra = 0;
     wcex.hInstance = _hInst;

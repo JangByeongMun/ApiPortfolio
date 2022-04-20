@@ -5,12 +5,19 @@
 #include "RoomActor.h"
 
 RoomData::RoomData() 
-	:AllBlock_{}
+	: RoomType_(RoomType::Default)
+	, AllBlock_{}
+	, AllMonster_{}
 {
 }
 
 RoomData::RoomData(const RoomData& _Other)
+	: RoomType_(RoomType::Default)
+	, AllBlock_{}
+	, AllMonster_{}
 {
+	RoomType_ = _Other.RoomType_;
+
 	AllBlock_.clear();
 	for (int i = 0; i < _Other.AllBlock_.size(); i++)
 	{
@@ -30,6 +37,8 @@ RoomData::~RoomData()
 
 RoomData& RoomData::operator=(RoomData& _Other)
 {
+	RoomType_ = _Other.RoomType_;
+
 	AllBlock_.clear();
 	for (int i = 0; i < _Other.AllBlock_.size(); i++)
 	{

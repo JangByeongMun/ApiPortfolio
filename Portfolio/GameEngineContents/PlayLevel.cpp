@@ -1,7 +1,7 @@
 #include "PlayLevel.h"
 #include "Player.h"
 #include "Projectile.h"
-#include "HpUI.h"
+#include "PlayerHP.h"
 #include "TestMap.h"
 #include "PlayBackGround.h"
 #include "SpacebarUI.h"
@@ -15,6 +15,10 @@
 
 PlayLevel::PlayLevel() 
 	: GlobalActor(nullptr)
+	, IsLerp_(false)
+	, LerpTimer_(0.0f)
+	, Start_()
+	, Goal_()
 {
 }
 
@@ -35,7 +39,7 @@ void PlayLevel::Loading()
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
 	//CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
-	CreateActor<HPUI>((int)ORDER::UI);
+	CreateActor<PlayerHP>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
 	
 	RandomRoomManager::SetInst(CreateActor<RandomRoomManager>((int)ORDER::BACKGROUND));

@@ -252,7 +252,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="HPUI.h">
+    <ClInclude Include="PlayerHP.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -518,7 +518,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="HPUI.cpp">
+    <ClCompile Include="PlayerHP.cpp">
       <SubType>
       </SubType>
     </ClCompile>

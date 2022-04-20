@@ -18,14 +18,14 @@ public:
 	Stone& operator=(Stone&& _Other) noexcept = delete;
 
 	void BombStone();
-	void Create(bool _IsBlack);
+	void Create(int _StonType);
 
 protected:
 
 private:
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
-	bool IsBlack_;
+	int StoneType_;
 
 	void Update() override;
 };

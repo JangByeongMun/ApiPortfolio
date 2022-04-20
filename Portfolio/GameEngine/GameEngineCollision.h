@@ -46,6 +46,11 @@ public:
 		CollisionType _This = CollisionType::Circle,
 		CollisionType _Target = CollisionType::Circle
 	);
+
+	inline bool CollisionResultRect(const std::string& _TargetGroup, std::vector<GameEngineCollision*>& _ColResult)
+	{
+		return CollisionResult(_TargetGroup, _ColResult, CollisionType::Rect, CollisionType::Rect);
+	}
 	bool CollisionResult(
 		const std::string& _TargetGroup,
 		std::vector<GameEngineCollision*>& _ColResult,

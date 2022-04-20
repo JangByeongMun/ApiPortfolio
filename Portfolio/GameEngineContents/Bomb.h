@@ -1,7 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineCollision.h>
-#include <vector>
 
 // Ό³Έν :
 class Bomb : public GameEngineActor
@@ -20,12 +19,14 @@ public:
 protected:
 
 private:
-	std::vector<GameEngineCollision*> CollisionResult_;
 	GameEngineCollision* Collision_;
+	GameEngineRenderer* Renderer_;
+
 	float Timer_;
 	float BombTime_;
 
 	void Start() override;
 	void Update() override;
+	void BompAnimation();
 };
 

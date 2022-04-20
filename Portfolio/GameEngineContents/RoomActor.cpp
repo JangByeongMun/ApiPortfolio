@@ -26,8 +26,12 @@ void RoomActor::Setting()
 
 	CreateRenderer("bgblack.bmp", RenderPivot::CENTER, float4::ZERO, -1);
 	CreateRenderer("01_basement.bmp", RenderPivot::CENTER, float4::ZERO);
+
+	// 문 세팅
 	DoorSetting();
 
+	// 시작방에선 오브젝트 안만들고 가이드 UI 생성
+	// 생각해보니 생성할때 0, 0엔 빈방을 만들고 나머지를 랜덤으로 채우는게 좋았을듯
 	if (Pos_.CompareInt2D({0, 0}))
 	{
 		CreateRenderer("StartGuide.bmp");
@@ -51,14 +55,21 @@ void RoomActor::Setting()
 		{
 			Stone* TmpStone = GetLevel()->CreateActor<Stone>();
 			TmpStone->SetPosition(GetPosition() + TmpTilePos);
-			TmpStone->Create(false);
+			TmpStone->Create(0);
 			break;
 		}
 		case BlockType::STONEBLACK:
 		{
 			Stone* TmpStone = GetLevel()->CreateActor<Stone>();
 			TmpStone->SetPosition(GetPosition() + TmpTilePos);
-			TmpStone->Create(true);
+			TmpStone->Create(1);
+			break;
+		}
+		case BlockType::STONEURN:
+		{
+			Stone* TmpStone = GetLevel()->CreateActor<Stone>();
+			TmpStone->SetPosition(GetPosition() + TmpTilePos);
+			TmpStone->Create(2);
 			break;
 		}
 		case BlockType::THORN:
@@ -72,7 +83,7 @@ void RoomActor::Setting()
 	std::vector<RoomData::MonsterData> TmpMonsterVector = Data_.AllMonster_;
 	for (int i = 0; i < TmpMonsterVector.size(); i++)
 	{
-		float4 TmpTilePos = { StartX + ScaleX * TmpTileVector[i].X_, StartY + ScaleY * TmpTileVector[i].Y_ };
+		float4 TmpTilePos = { StartX + ScaleX * TmpMonsterVector[i].X_, StartY + ScaleY * TmpMonsterVector[i].Y_ };
 		switch (TmpMonsterVector[i].Type_)
 		{
 		case MonsterType::Default:
@@ -83,6 +94,7 @@ void RoomActor::Setting()
 			Pooter* TmpMonster = GetLevel()->CreateActor<Pooter>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
+			TmpMonster->SetMoveSpeed(10.0f);
 			break;
 		}
 
@@ -119,32 +131,103 @@ void RoomActor::Start()
 
 void RoomActor::DoorSetting()
 {
+	DoorType DefaultDoorType = DoorType::Default;
+	// 자기방이 황금방이면 황금문
+	if (RoomType::Treasure == Data_.RoomType_)
+	{
+		DefaultDoorType = DoorType::Treasure;
+	}
+	else if (RoomType::Boss == Data_.RoomType_)
+	{
+		DefaultDoorType = DoorType::Boss;
+	}
+
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, 1)))
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4( 0, 300 ));
-		TmpDoor->Setting(DoorType::Default, DoorDir::Down);
+
+		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(0, 1))->Data_.RoomType_)
+		{
+		case RoomType::Default:
+			TmpDoor->Setting(DoorType::Default, DoorDir::Down);
+			break;
+		case RoomType::Treasure:
+			TmpDoor->Setting(DoorType::Treasure, DoorDir::Down);
+			break;
+		case RoomType::Boss:
+			TmpDoor->Setting(DoorType::Boss, DoorDir::Down);
+			break;
+		default:
+			TmpDoor->Setting(DoorType::Default, DoorDir::Down);
+			break;
+		}
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, -1)))
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4(0, -300));
-		TmpDoor->Setting(DoorType::Default, DoorDir::Up);
+
+		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(0, -1))->Data_.RoomType_)
+		{
+		case RoomType::Default:
+			TmpDoor->Setting(DoorType::Default, DoorDir::Up);
+			break;
+		case RoomType::Treasure:
+			TmpDoor->Setting(DoorType::Treasure, DoorDir::Up);
+			break;
+		case RoomType::Boss:
+			TmpDoor->Setting(DoorType::Boss, DoorDir::Up);
+			break;
+		default:
+			TmpDoor->Setting(DefaultDoorType, DoorDir::Up);
+			break;
+		}
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(1, 0)))
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4(500, 0));
-		TmpDoor->Setting(DoorType::Default, DoorDir::Right);
+		
+		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(1, 0))->Data_.RoomType_)
+		{
+		case RoomType::Default:
+			TmpDoor->Setting(DoorType::Default, DoorDir::Right);
+			break;
+		case RoomType::Treasure:
+			TmpDoor->Setting(DoorType::Treasure, DoorDir::Right);
+			break;
+		case RoomType::Boss:
+			TmpDoor->Setting(DoorType::Boss, DoorDir::Right);
+			break;
+		default:
+			TmpDoor->Setting(DefaultDoorType, DoorDir::Right);
+			break;
+		}
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(-1, 0)))
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4(-500, 0));
-		TmpDoor->Setting(DoorType::Default, DoorDir::Left);
+		
+		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(-1, 0))->Data_.RoomType_)
+		{
+		case RoomType::Default:
+			TmpDoor->Setting(DoorType::Default, DoorDir::Left);
+			break;
+		case RoomType::Treasure:
+			TmpDoor->Setting(DoorType::Treasure, DoorDir::Left);
+			break;
+		case RoomType::Boss:
+			TmpDoor->Setting(DoorType::Boss, DoorDir::Left);
+			break;
+		default:
+			TmpDoor->Setting(DefaultDoorType, DoorDir::Left);
+			break;
+		}
 		DoorVector_.push_back(TmpDoor);
 	}
 }

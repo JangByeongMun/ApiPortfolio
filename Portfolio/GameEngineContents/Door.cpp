@@ -27,13 +27,12 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		break;
 	case DoorType::Treasure:
 		//Name += "02_treasureroomdoor";
-		Name += "01_normaldoor";
+		Name += "02_treasureroomdoor";
 		break;
 	case DoorType::Boss:
-		Name += "01_normaldoor";
+		Name += "10_bossroomdoor";
 		break;
 	case DoorType::Max:
-		Name += "01_normaldoor";
 		break;
 	default:
 		break;

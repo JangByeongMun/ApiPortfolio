@@ -4,10 +4,17 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include "PlayLevel.h"
 #include "Projectile.h"
+#include "Stone.h"
+#include "Monster.h"
+#include "Player.h"
+#include "PlayerUI.h"
+#include "PlayerHP.h"
 
 Bomb::Bomb() 
-	: Timer_ (0)
-	, BombTime_(3)
+	: Collision_(nullptr)
+	, Renderer_(nullptr)
+	, Timer_ (0.0f)
+	, BombTime_(2.0f)
 {
 }
 
@@ -17,14 +24,18 @@ Bomb::~Bomb()
 
 void Bomb::Start()
 {
-	CreateRenderer("collectibles_045_yumheart.bmp", RenderPivot::CENTER, GetPosition());
 	Collision_ = CreateCollision("Bomb", { 80, 80 }, { 0, 0 });
+	Renderer_ = CreateRenderer(RenderPivot::CENTER, GetPosition());
+	Renderer_->CreateAnimation("pickup_016_bomb_One.bmp", "pickup_016_bomb_One", 0, 2, 0.2f, true);
+	Renderer_->ChangeAnimation("pickup_016_bomb_One");
 }
 
 void Bomb::Update()
 {
 	Timer_ += GameEngineTime::GetDeltaTime();
-
+	BompAnimation();
+	
+	std::vector<GameEngineCollision*> CollisionResult_;
 	if (true == Collision_->CollisionResult("Projectile", CollisionResult_, CollisionType::Rect, CollisionType::Rect))
 	{
 		float4 MoveDir = { 0, 0 };
@@ -36,7 +47,7 @@ void Bomb::Update()
 			}
 
 			Projectile* TmpProjectile = static_cast<Projectile*>(CollisionResult_[i]->GetActor());
-			TmpProjectile->DestroyTear();
+			TmpProjectile->DestroyProjectile();
 
 			MoveDir += (GetPosition() - CollisionResult_[i]->GetCollisionPos()) * 10.0f;
 		}
@@ -48,15 +59,110 @@ void Bomb::Update()
 	if (Timer_ >= BombTime_)
 	{
 		// 폭발자국 남기기
-		PlayLevel* TmpLevel = static_cast<PlayLevel*>(GetLevel());
+		PlayLevel* TmpLevel = dynamic_cast<PlayLevel*>(GetLevel());
 		GameEngineRenderer* Renderer = TmpLevel->GlobalActor->CreateRenderer("effect_017_bombradius.bmp", (int)ORDER::BACKGROUND);
 		Renderer->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 7));
 		Renderer->SetPivot(GetPosition());
 		Renderer->SetAlpha(150);
 
 		// 주변에 대미지 주기
+		GameEngineCollision* Collision = TmpLevel->GlobalActor->CreateCollision("BombEffect", {288, 192}, GetPosition());
+		Collision->Death(0.1f);
 
+		std::vector<GameEngineCollision*> ResultVector;
+		if (true == Collision->CollisionResultRect("Stone", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Stone* TmpActor = dynamic_cast<Stone*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->BombStone();
+				}
+			}
+		}
+		
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("Monster", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Monster* TmpActor = dynamic_cast<Monster*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->Damaged(60);
+				}
+			}
+		}
+
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("Player", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Player* TmpActor = dynamic_cast<Player*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->GetPlayerUI()->GetPlayerHP()->AddRedHp(-1, true);
+				}
+			}
+		}
 
 		Death();
+	}
+}
+
+
+void Bomb::BompAnimation()
+{
+	if (Timer_ <= 0.25f)
+	{
+		Renderer_->SetScale({ 76, 116 });
+	}
+	else if (Timer_ <= 0.5f)
+	{
+		Renderer_->SetScale({ 116, 76 });
+	}
+	else if (Timer_ <= 0.75f)
+	{
+		Renderer_->SetScale({ 76, 116 });
+	}
+	else if (Timer_ <= 1.0f)
+	{
+		Renderer_->SetScale({ 116, 76 });
+	}
+
+	else if (Timer_ <= 1.125f)
+	{
+		Renderer_->SetScale({ 66, 126 });
+	}
+	else if (Timer_ <= 1.25f)
+	{
+		Renderer_->SetScale({ 126, 66 });
+	}
+	else if (Timer_ <= 1.375f)
+	{
+		Renderer_->SetScale({ 66, 126 });
+	}
+	else if (Timer_ <= 1.5f)
+	{
+		Renderer_->SetScale({ 126, 66 });
+	}
+
+	else if (Timer_ <= 1.625f)
+	{
+		Renderer_->SetScale({ 66, 126 });
+	}
+	else if (Timer_ <= 1.75f)
+	{
+		Renderer_->SetScale({ 126, 66 });
+	}
+	else if (Timer_ <= 1.875f)
+	{
+		Renderer_->SetScale({ 66, 126 });
+	}
+	else if (Timer_ <= 2.0f)
+	{
+		Renderer_->SetScale({ 126, 66 });
 	}
 }

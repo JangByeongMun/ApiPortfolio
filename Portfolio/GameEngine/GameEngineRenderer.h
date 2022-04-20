@@ -147,10 +147,23 @@ private:
 	bool IsCameraEffect_;
 	bool Pause_;
 
-	// 애니메이션 마지막프레임에 삭제할지 안할지
+	// 애니메이션 마지막프레임에 삭제할지 안할지 기본적으론 false이고 세팅해서 애니메이션 끝나고 삭제할수있음
 	bool IsDeleteEndFrame_;
 
-	/////////////////////////////////////////// 애니메이션
+/////////////////////////////////////////// 회전
+private:
+	float RotZ_;
+	GameEngineImage* RotationFilterImage_;
+
+public:
+	void SetRotationFilter(const std::string& _ImageName);
+	void SetRotationZ(float _RotZ)
+	{
+		RotZ_ = _RotZ;
+		Alpha_ = 255;
+	}
+
+/////////////////////////////////////////// 애니메이션
 private:
 	friend class FrameAnimation;
 	class FrameAnimation : public GameEngineNameObject

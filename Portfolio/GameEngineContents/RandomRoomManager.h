@@ -38,10 +38,17 @@ public:
 	}
 
 	bool ChangeFloor(const int& _floor);
+	
 	float4 RandomPos();
+	float4 RandomCornerPos();
+
 	RoomData RandomData();
+	RoomData RandomTreasureRoomData();
+	RoomData RandomBossRoomData();
 
 	bool ExistPos(float4 _Pos);
+	bool CornerPos(float4 _Pos);
+	int ConnectedRoomCount(float4 _Pos);
 	RoomActor* FindRoom(float4 _Pos);
 	RoomActor* GetCurrentRoom();
 
@@ -55,7 +62,10 @@ protected:
 private:
 	friend GameEngineLevel;
 
-	std::map<int, std::vector<RoomData>> AllMaps_;
+	std::map<int, std::vector<RoomData>> AllRooms_;
+	std::map<int, std::vector<RoomData>> AllTreasureRooms_;
+	std::map<int, std::vector<RoomData>> AllBossRooms_;
+
 	std::vector<RoomActor*> CurrentRooms_;
 	int CurrentFloor_;
 	int CurrentMapCount_;

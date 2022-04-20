@@ -179,7 +179,7 @@ void Player::HeadAttackUpdate()
 
 	if (NextAttackTime_ <= CurrentAttackTime_ && false == AttackDir.IsZero2D())
 	{
-		Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30);
+		Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_);
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 

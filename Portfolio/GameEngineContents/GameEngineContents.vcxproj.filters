@@ -26,9 +26,6 @@
     <ClInclude Include="PauseUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
-    <ClInclude Include="HPUI.h">
-      <Filter>Play\UI</Filter>
-    </ClInclude>
     <ClInclude Include="ItemUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
@@ -209,6 +206,9 @@
     <ClInclude Include="Sucker.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerHP.h">
+      <Filter>Play\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -234,9 +234,6 @@
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="PauseUI.cpp">
-      <Filter>Play\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="HPUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="ItemUI.cpp">
@@ -415,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="Sucker.cpp">
       <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerHP.cpp">
+      <Filter>Play\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

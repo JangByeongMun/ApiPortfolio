@@ -1,16 +1,17 @@
 #include "PlayerUI.h"
 #include "Player.h"
-#include "HPUI.h"
+#include "PlayerHP.h"
 #include "CardUI.h"
 #include "ItemUI.h"
 #include "AccessoryUI.h"
 #include "MiniMap.h"
 
 PlayerUI::PlayerUI() 
-	: HpUI_(nullptr)
+	: PlayerHP_(nullptr)
 	, CardUI_(nullptr)
 	, ItemUI_(nullptr)
 	, AccessoryUI_(nullptr)
+	, MiniMap_(nullptr)
 {
 }
 
@@ -20,7 +21,7 @@ PlayerUI::~PlayerUI()
 
 void PlayerUI::Start()
 {
-	HpUI_ = GetLevel()->CreateActor<HPUI>(static_cast<int>(ORDER::UI));
+	PlayerHP_ = GetLevel()->CreateActor<PlayerHP>(static_cast<int>(ORDER::UI));
 	CardUI_ = GetLevel()->CreateActor<CardUI>(static_cast<int>(ORDER::UI));
 	ItemUI_ = GetLevel()->CreateActor<ItemUI>(static_cast<int>(ORDER::UI));
 	AccessoryUI_ = GetLevel()->CreateActor<AccessoryUI>(static_cast<int>(ORDER::UI));
@@ -29,15 +30,15 @@ void PlayerUI::Start()
 
 void PlayerUI::Setting()
 {
-	SetHpUI();
+	SetPlayerHP();
 	SetItemUI();
 	SetAccessoryUI();
 	SetMiniMap();
 }
 
-void PlayerUI::SetHpUI()
+void PlayerUI::SetPlayerHP()
 {
-	HpUI_->AddMaxHp(Player::MainPlayer->MaxHp_);
+	PlayerHP_->AddMaxHp(Player::MainPlayer->MaxHp_);
 }
 
 void PlayerUI::SetCardUI()

@@ -2,7 +2,12 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineImageManager.h>
+#include <GameEngine/GameEngineRenderer.h>
 #include "PlayLevel.h"
+#include "Player.h"
+#include "RoomActor.h"
+#include "RandomRoomManager.h"
+#include "Monster.h"
 
 Projectile::Projectile() 
 	: Collision_()
@@ -10,6 +15,7 @@ Projectile::Projectile()
 	, Vec_({ 0, 0 })
 	, Lifetime_(0)
 	, CurrentTimer_(0)
+	, Damage_(0)
 {
 }
 
@@ -19,9 +25,6 @@ Projectile::~Projectile()
 
 void Projectile::Start()
 {
-	GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 });
-	Renderer->SetIndex(5);
-	
 	Collision_ = CreateCollision("Projectile", { 30, 30 }, { 0, 0 });
 }
 
@@ -37,20 +40,53 @@ void Projectile::Update()
 	// 설정한 시간이 지나면 삭제
 	if (Lifetime_ - CurrentTimer_ <= 0.0f)
 	{
-		DestroyTear();
+		DestroyProjectile();
 	}
 
+	// 돌과 충돌했을때
+	if (true == Collision_->CollisionCheckRect("Stone"))
+	{
+		DestroyProjectile();
+	}
+
+	// 플레이어의 눈물이면
+	if (static_cast<int>(Type_) < static_cast<int>(ProjectileType::ENEMY_BASIC))
+	{
+		std::vector<GameEngineCollision*> CollisionResult;
+		if (true == Collision_->CollisionResultRect("Monster", CollisionResult))
+		{
+			for (int i = 0; i < CollisionResult.size(); i++)
+			{
+				Monster* TmpMonster = dynamic_cast<Monster*>(CollisionResult[i]->GetActor());
+				if (nullptr != TmpMonster)
+				{
+					TmpMonster->Damaged(Damage_);
+					DestroyProjectile();
+				}
+			}
+		}
+	}
+
+	// 적의 눈물이면
+	if (static_cast<int>(Type_) >= static_cast<int>(ProjectileType::ENEMY_BASIC))
+	{
+
+	}
+	
+
 	// 벽을 못넘어가도록 넘어가려고하면 삭제
-	int Color = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp")->GetImagePixel(GetPosition());
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->GetCurrentRoom();
+	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
+	int Color = Player::MainPlayer->GetMapColImage()->GetImagePixel(GetPosition() - AddPivot);
 	if (RGB(0, 0, 0) == Color)
 	{
-		DestroyTear();
+		DestroyProjectile();
 	}
 
 	SetMove(Vec_ * GameEngineTime::GetDeltaTime());
 }
 
-void Projectile::DestroyTear()
+void Projectile::DestroyProjectile()
 {
 	PlayLevel* TmpLevel = static_cast<PlayLevel*>(GetLevel());
 	GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp");

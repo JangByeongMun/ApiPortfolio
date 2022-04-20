@@ -6,7 +6,7 @@
 
 GameEngineImage::GameEngineImage() 
 	: ImageDC_(nullptr)
-	, Bitmap_(nullptr)
+	, BitMap_(nullptr)
 	, OldBitmap_(nullptr)
 	, Info_()
 {
@@ -14,10 +14,10 @@ GameEngineImage::GameEngineImage()
 
 GameEngineImage::~GameEngineImage() 
 {
-	if (nullptr != Bitmap_)
+	if (nullptr != BitMap_)
 	{
-		DeleteObject(Bitmap_);
-		Bitmap_ = nullptr;
+		DeleteObject(BitMap_);
+		BitMap_ = nullptr;
 	}
 
 	if (nullptr != OldBitmap_)
@@ -48,8 +48,8 @@ bool GameEngineImage::Create(float4 _Scale)
 		return false;
 	}
 
-	Bitmap_ = CreateCompatibleBitmap(GameEngineWindow::GetHDC(), _Scale.ix(), _Scale.iy());
-	if (nullptr == Bitmap_)
+	BitMap_ = CreateCompatibleBitmap(GameEngineWindow::GetHDC(), _Scale.ix(), _Scale.iy());
+	if (nullptr == BitMap_)
 	{
 		MsgBoxAssert("bitmap_ 생성에 실패 했습니다.");
 	}
@@ -59,7 +59,7 @@ bool GameEngineImage::Create(float4 _Scale)
 	{
 		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
 	}
-	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, Bitmap_);
+	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, BitMap_);
 
 	ImageScaleCheck();
 
@@ -68,8 +68,8 @@ bool GameEngineImage::Create(float4 _Scale)
 
 bool GameEngineImage::Load(const std::string& _Path)
 {
-	Bitmap_ = static_cast<HBITMAP>(LoadImageA(nullptr, _Path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
-	if (nullptr	== Bitmap_)
+	BitMap_ = static_cast<HBITMAP>(LoadImageA(nullptr, _Path.c_str(), IMAGE_BITMAP, 0, 0, LR_LOADFROMFILE));
+	if (nullptr	== BitMap_)
 	{
 		MsgBoxAssertString(_Path + "이미지 로드에 실패 했습니다.");
 		return false;
@@ -81,7 +81,7 @@ bool GameEngineImage::Load(const std::string& _Path)
 		MsgBoxAssert("imageDC_ 생성에 실패 했습니다.");
 		return false;
 	}
-	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, Bitmap_);
+	OldBitmap_ = (HBITMAP)SelectObject(ImageDC_, BitMap_);
 
 	ImageScaleCheck();
 	return true;
@@ -174,6 +174,36 @@ void GameEngineImage::AlphaCopy(GameEngineImage* _Other, const float4& _CopyPos,
 	);
 }
 
+void GameEngineImage::PlgCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, float _Angle, GameEngineImage* _Filter)
+{
+	POINT RotPoint[3];
+
+	GameEngineRect Rect = GameEngineRect(float4::ZERO, _CopyScale);
+
+	float4 LeftTop = Rect.CenterLeftTopPoint();
+	float4 RightTop = Rect.CenterRightTopPoint();
+	float4 LeftBot = Rect.CenterLeftBotPoint();
+	float4 Center = _CopyPos + _CopyScale.Half();
+
+
+	RotPoint[0] = (Rect.CenterLeftTopPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+	RotPoint[1] = (Rect.CenterRightTopPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+	RotPoint[2] = (Rect.CenterLeftBotPoint().RotationToDegreeZ(_Angle) + Center).ToWinAPIPOINT();
+
+	PlgBlt(
+		ImageDC_,
+		RotPoint,
+		_Other->ImageDC_,
+		_OtherPivot.ix(), // 윈도우 이미지의 위치 x에서부터 y
+		_OtherPivot.iy(), // 윈도우 이미지의 위치 x에서부터 y
+		_OtherScale.ix(), // 내 이미지의 이 크기만큼 x
+		_OtherScale.iy(), // 내 이미지의 이 크기만큼 y
+		_Filter->BitMap_, // 복사하려는 대상은(거기에 그려지는 이미지가 뭔데?커비)
+		_OtherPivot.ix(), // 복사하려는 대상의 시작점X 위치
+		_OtherPivot.iy()  // 복사하려는 대상의 시작점Y
+	);
+}
+
 void GameEngineImage::Cut(const float4& _CutSize)
 {
 	//if (0 != GetScale().ix() % _CutSize.ix())
@@ -211,5 +241,5 @@ int GameEngineImage::GetImagePixel(int _x, int _y)
 void GameEngineImage::ImageScaleCheck()
 {
 	HBITMAP CurrentBitMap = (HBITMAP)GetCurrentObject(ImageDC_, OBJ_BITMAP);
-	GetObject(Bitmap_, sizeof(BITMAP), &Info_);
+	GetObject(BitMap_, sizeof(BITMAP), &Info_);
 }
