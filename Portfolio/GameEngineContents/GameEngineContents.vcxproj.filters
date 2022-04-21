@@ -140,9 +140,6 @@
     <ClInclude Include="MenuFileSelect.h">
       <Filter>Menu</Filter>
     </ClInclude>
-    <ClInclude Include="TestMap.h">
-      <Filter>Play\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Intro17.h">
       <Filter>Title</Filter>
     </ClInclude>
@@ -343,9 +340,6 @@
     </ClCompile>
     <ClCompile Include="MenuFileSelect.cpp">
       <Filter>Menu</Filter>
-    </ClCompile>
-    <ClCompile Include="TestMap.cpp">
-      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Intro17.cpp">
       <Filter>Title</Filter>

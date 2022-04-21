@@ -5,7 +5,6 @@
 #include "Pooter.h"
 #include "ContentsEnum.h"
 
-
 float StartX = -420.0f;
 float StartY = -225.0f;
 float ScaleX = 70.0f;
@@ -81,6 +80,7 @@ void RoomActor::Setting()
 
 	// 몬스터 세팅
 	std::vector<RoomData::MonsterData> TmpMonsterVector = Data_.AllMonster_;
+	MonsterCount_ = TmpMonsterVector.size();
 	for (int i = 0; i < TmpMonsterVector.size(); i++)
 	{
 		float4 TmpTilePos = { StartX + ScaleX * TmpMonsterVector[i].X_, StartY + ScaleY * TmpMonsterVector[i].Y_ };

@@ -10,7 +10,8 @@
 #include "RandomBlood.h"
 
 Monster::Monster()
-	: Renderer_(nullptr)
+	: Room_(nullptr)
+	, Renderer_(nullptr)
 	, Collision_(nullptr)
 	, IsLeft_(true)
 	, AttackTimer_(0.0f)
@@ -75,6 +76,17 @@ void Monster::MonsterSetMove(float4 _Value)
 	else if (RGB(0, 0, 0) != Color_y)
 	{
 		SetMove(float4(0, _Value.y));
+	}
+}
+
+void Monster::Damaged(float _Damage)
+{
+	HP_ -= _Damage;
+
+	if (HP_ <= 0)
+	{
+		Room_->MinusMonsterCount();
+		MonsterDeath();
 	}
 }
 

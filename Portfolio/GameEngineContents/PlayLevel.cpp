@@ -2,11 +2,11 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngine/GameEngine.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 #include "Player.h"
 #include "Projectile.h"
 #include "PlayerHP.h"
-#include "TestMap.h"
 #include "PlayBackGround.h"
 #include "SpacebarUI.h"
 #include "Accessory.h"
@@ -38,7 +38,6 @@ void PlayLevel::CameraLerp(float4 _Start, float4 _Goal)
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
-	//CreateActor<TestMap>((int)ORDER::BACKGROUND);
 	CreateActor<Player>((int)ORDER::PLAYER);
 	CreateActor<PlayerHP>((int)ORDER::UI);
 	CreateActor<SpacebarUI>((int)ORDER::UI);
@@ -58,11 +57,8 @@ void PlayLevel::Update()
 {
 	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
 	{
-		Accessory* TEST = CreateActor<Accessory>();
-		TEST->SetPosition(GameEngineWindow::GetScale().Half());
-		TEST->SetType(AccessoryType::brokenmagnet);
+		GameEngineTime::Pause();
 	}
-
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
 	{
 		IsDebugModeSwitch();

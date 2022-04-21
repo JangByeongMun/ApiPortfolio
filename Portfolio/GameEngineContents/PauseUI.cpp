@@ -8,3 +8,8 @@ PauseUI::~PauseUI()
 {
 }
 
+void PauseUI::Start()
+{
+	CreateRenderer("");
+}
+

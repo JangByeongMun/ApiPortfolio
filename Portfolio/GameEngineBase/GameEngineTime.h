@@ -22,11 +22,20 @@ public:
 	}
 	static inline float GetDeltaTime()
 	{
+		if (true == IsPause_)
+		{
+			return 0.0f;
+		}
+
 		return Inst_->DeltaTime_;
 	}
-
 	static inline float GetDeltaTime(int _Key)
 	{
+		if (true == IsPause_)
+		{
+			return 0.0f;
+		}
+
 		return Inst_->DeltaTime_ * Inst_->GetTimeScale(_Key);
 	}
 
@@ -39,7 +48,6 @@ public:
 
 		TimeScale_[_Key] = _TimeScale;
 	}
-
 	float GetTimeScale(int _Key)
 	{
 		if (TimeScale_.end() == TimeScale_.find(_Key))
@@ -53,6 +61,14 @@ public:
 	void Reset();
 	void Update();
 
+	static inline void Pause()
+	{
+		IsPause_ = !IsPause_;
+	}
+	static inline bool IsPause()
+	{
+		return IsPause_;
+	}
 protected:
 
 private:
@@ -62,6 +78,7 @@ private:
 	float DeltaTime_;
 	double RealDeltaTime_;
 	std::map<int, float> TimeScale_;
+	static bool IsPause_;
 
 	GameEngineTime();
 	~GameEngineTime();

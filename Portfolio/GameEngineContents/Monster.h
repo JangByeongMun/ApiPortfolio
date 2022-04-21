@@ -68,15 +68,7 @@ public:
 	{
 		HP_ = _HP;
 	}
-	inline void Damaged(float _Damage)
-	{
-		HP_ -= _Damage;
-
-		if (HP_ <= 0)
-		{
-			MonsterDeath();
-		}
-	}
+	void Damaged(float _Damage);
 	void MakeRandomBlood(int _Min, int _Max);
 	virtual void MonsterDeath();
 };

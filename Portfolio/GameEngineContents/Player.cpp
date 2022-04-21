@@ -153,6 +153,12 @@ void Player::Start()
 
 void Player::Update()
 {
+	// 시간멈췄을때 작동중지
+	if (true == GameEngineTime::IsPause())
+	{
+		return;
+	}
+
 	// 상태 관리
 	StateUpdate();
 
@@ -163,8 +169,6 @@ void Player::Update()
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 		BombActor->SetPosition(GetPosition());
-
-		GetPlayerHP()->AddRedHp(-1, true);
 	}
 
 	if (InvincibilityTimer_ > 0.0f)

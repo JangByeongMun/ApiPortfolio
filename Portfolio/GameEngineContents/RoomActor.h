@@ -38,6 +38,15 @@ public:
 		return Pos_;
 	}
 
+	inline void MinusMonsterCount()
+	{
+		MonsterCount_ -= 1;
+	}
+	inline float GetMonsterCount()
+	{
+		return MonsterCount_;
+	}
+
 	void Setting();
 	Door* FindDoor(DoorDir _Dir);
 	bool IsCurrentRoom();
@@ -49,6 +58,7 @@ private:
 	std::vector<Monster*> MonsterVector_;
 	RoomData Data_;
 	float4 Pos_;
+	float MonsterCount_;
 
 	void Start() override;
 	void DoorSetting();

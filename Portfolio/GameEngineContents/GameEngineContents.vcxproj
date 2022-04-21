@@ -411,10 +411,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TestMap.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Thorn.h">
       <SubType>
       </SubType>
@@ -673,10 +669,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Sucker.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="TestMap.cpp">
       <SubType>
       </SubType>
     </ClCompile>

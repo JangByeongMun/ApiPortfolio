@@ -2,6 +2,7 @@
 #include <Windows.h>
 
 GameEngineTime* GameEngineTime::Inst_ = new GameEngineTime();
+bool GameEngineTime::IsPause_ = false;
 
 void GameEngineTime::Reset()
 {

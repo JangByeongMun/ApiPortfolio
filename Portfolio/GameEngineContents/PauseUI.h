@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include <GameEngine/GameEngineRenderer.h>
 
 // Ό³Έν :
 class PauseUI : public GameEngineActor
@@ -18,6 +19,6 @@ public:
 protected:
 
 private:
-
+	void Start() override;
 };
 
