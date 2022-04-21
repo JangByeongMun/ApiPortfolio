@@ -85,6 +85,7 @@ public:
 	void SetImageScale();
 	void SetImage(const std::string& _Name);
 	void SetIndex(const size_t _Index, const float4& _Scale = { -1.0f, -1.0f });
+	void SetImageAnimationReset(const std::string& _Name);
 
 	inline GameEngineImage* GetImage()
 	{
