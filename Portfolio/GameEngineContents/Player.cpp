@@ -511,6 +511,11 @@ void Player::AddItem(ItemType _Type)
 	PlayerUI_->SetItemUI();
 }
 
+PlayerHP* Player::GetPlayerHP()
+{
+	return PlayerUI_->PlayerHP_;
+}
+
 void Player::SetAccessory(AccessoryType _Type)
 {
 	HavingAccessory_ = _Type;

@@ -8,6 +8,7 @@
 #include "RoomActor.h"
 #include "RandomRoomManager.h"
 #include "Monster.h"
+#include "PlayerHP.h"
 
 Projectile::Projectile() 
 	: Collision_()
@@ -50,7 +51,7 @@ void Projectile::Update()
 	}
 
 	// 플레이어의 눈물이면
-	if (static_cast<int>(Type_) < static_cast<int>(ProjectileType::ENEMY_BASIC))
+	if (true == IsPlayerProjectile())
 	{
 		std::vector<GameEngineCollision*> CollisionResult;
 		if (true == Collision_->CollisionResultRect("Monster", CollisionResult))
@@ -68,9 +69,14 @@ void Projectile::Update()
 	}
 
 	// 적의 눈물이면
-	if (static_cast<int>(Type_) >= static_cast<int>(ProjectileType::ENEMY_BASIC))
+	if (false == IsPlayerProjectile())
 	{
-
+		std::vector<GameEngineCollision*> CollisionResult;
+		if (true == Collision_->CollisionCheckRect("Player"))
+		{
+			Player::MainPlayer->GetPlayerHP()->AddRedHp(-1, true);
+			DestroyProjectile();
+		}
 	}
 	
 

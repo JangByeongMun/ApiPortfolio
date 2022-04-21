@@ -141,6 +141,7 @@ public:
 	{
 		return PlayerUI_;
 	}
+	PlayerHP* GetPlayerHP();
 
 ///////////////////////////////// ¾Ç¼¼»ç¸®
 private:
