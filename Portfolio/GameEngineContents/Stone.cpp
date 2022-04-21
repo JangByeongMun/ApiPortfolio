@@ -54,13 +54,10 @@ void Stone::Create(int _StonType)
 	default:
 		break;
 	}
-	Collision_ = CreateCollision("Stone", { 65, 65 });
+	Collision_ = CreateCollision("Stone", { 60, 65 });
 }
 
 void Stone::Update()
 {
-	if (true == Collision_->IsUpdate() && Collision_->CollisionCheckRect("Player"))
-	{
 
-	}
 }

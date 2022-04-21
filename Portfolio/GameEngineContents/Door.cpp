@@ -16,6 +16,8 @@ Door::~Door()
 
 void Door::Setting(DoorType _Type, DoorDir _Dir)
 {
+	Collision_ = CreateCollision("Door", { 30, 30 });
+
 	std::string Name = "door_";
 	Type_ = _Type;
 	Dir_ = _Dir;
@@ -41,15 +43,19 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 	switch (Dir_)
 	{
 	case DoorDir::Up:
+		Collision_->SetPivot({0, -40});
 		Name += "_Up.bmp";
 		break;
 	case DoorDir::Down:
+		Collision_->SetPivot({ 0, 10 });
 		Name += "_Down.bmp";
 		break;
 	case DoorDir::Left:
+		Collision_->SetPivot({ -20, 0 });
 		Name += "_Left.bmp";
 		break;
 	case DoorDir::Right:
+		Collision_->SetPivot({ 20, 0 });
 		Name += "_Right.bmp";
 		break;
 	default:
@@ -57,7 +63,6 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 	}
 
 	CreateRenderer(Name)->SetIndex(0);
-	Collision_ = CreateCollision("Door", {65, 65});
 }
 
 void Door::Update()

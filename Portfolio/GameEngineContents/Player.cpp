@@ -550,7 +550,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 	RoomPos_ += GoDir;
 
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
-	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 100);
+	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 60);
 	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 
 	PlayerUI_->UpdateMiniMap(GoDir);
