@@ -1,5 +1,6 @@
 #include "PlayerHP.h"
 #include <GameEngineBase/GameEngineWindow.h>
+#include "Player.h"
 
 PlayerHP::PlayerHP()
 	: RendererVector_()
@@ -38,6 +39,20 @@ void PlayerHP::Start()
 		TmpRenderer->SetPivot({ x, y });
 		TmpRenderer->CameraEffectOff();
 		RendererVector_.push_back(TmpRenderer);
+	}
+}
+
+void PlayerHP::PlayerDeadCheck()
+{
+	if (CurrentRedHP_ <= 0 && CurrentAddHP_ <= 0)
+	{
+		Player::MainPlayer->ChangeBodyState(PlayerBodyState::Dead);
+		Player::MainPlayer->ChangeHeadState(PlayerHeadState::Dead);
+	}
+	else
+	{
+		Player::MainPlayer->ChangeBodyState(PlayerBodyState::Hitted);
+		Player::MainPlayer->ChangeHeadState(PlayerHeadState::Hitted);
 	}
 }
 
@@ -146,6 +161,11 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 
 	else if (_Value < 0) // 하트 감소일때
 	{
+		if (true == Player::MainPlayer->IsInvincibillity()) // 무적시간 이면 스킵
+		{
+			return;
+		}
+
 		if (true == _IsHalf) // 감소가 절반짜리일때
 		{
 			if (true == IsHalfRed_)// 현재상태가 절반이 였을때
@@ -166,6 +186,7 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 		CurrentRedHP_ = MaxRedHP_;
 		IsHalfRed_ = false;
 	}
+	PlayerDeadCheck();
 	UpdateUI();
 }
 
@@ -208,6 +229,7 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 			CurrentAddHP_ += _Value;
 			AddHeartVector_.pop_back();
 		}
+
 	}
 
 	if (CurrentAddHP_ + MaxRedHP_ > MaxCount)
@@ -215,5 +237,6 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 		CurrentAddHP_ = MaxCount - MaxRedHP_;
 		IsHalfRed_ = false;
 	}
+	PlayerDeadCheck();
 	UpdateUI();
 }

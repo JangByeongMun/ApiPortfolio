@@ -304,7 +304,6 @@ void GameEngineRenderer::FrameAnimation::Update()
 	IsEnd_ = false;
 	if (false == Renderer_->Pause_)
 	{
-		float test = GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
 		CurrentInterTime_ -= GameEngineTime::GetInst()->GetDeltaTime(TimeKey_);
 		if (0 >= CurrentInterTime_)
 		{

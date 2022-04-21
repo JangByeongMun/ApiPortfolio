@@ -22,6 +22,7 @@
 #include "RoomActor.h"
 #include "Door.h"
 #include "PlayLevel.h"
+#include "PlayerHP.h"
 
 #include "KeyItem.h"
 #include "BatteryItem.h"
@@ -58,10 +59,9 @@ Player::Player()
 	, HaveActive_(false)
 	, MaxGaze_(0)
 	, CurrentGaze_(0)
-	, AcheiveRender_(nullptr)
+	, AcheiveItemRender_(nullptr)
 	, CharacterType_(CharacterType::ISAAC)
 	, RoomPos_({0, 0})
-	, IsChangeRoom_(false)
 {
 }
 Player::~Player() 
@@ -74,7 +74,7 @@ void Player::Start()
 
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
-	PlayerCollision_ = CreateCollision("Player", { 100, 100 });
+	PlayerCollision_ = CreateCollision("Player", { 80, 80 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -163,11 +163,34 @@ void Player::Update()
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 		BombActor->SetPosition(GetPosition());
+
+		GetPlayerHP()->AddRedHp(-1, true);
 	}
 
-	if (true == IsChangeRoom_)
+	if (InvincibilityTimer_ > 0.0f)
 	{
+		InvincibilityTimer_ -= GameEngineTime::GetDeltaTime();
+		InvisibleTimer_ += GameEngineTime::GetDeltaTime();
 
+		if (InvisibleTimer_ >= 0.2f)
+		{
+			InvisibleTimer_ = 0.0f;
+			BodyRender_->SetAlpha(255);
+			HeadRender_->SetAlpha(255);
+		}
+		else if (InvisibleTimer_ >= 0.1f)
+		{
+			BodyRender_->SetAlpha(0);
+			HeadRender_->SetAlpha(0);
+		}
+
+		if (InvincibilityTimer_ <= 0.0f)
+		{
+			InvincibilityTimer_ = 0.0f;
+			InvisibleTimer_ = 0.0f;
+			BodyRender_->SetAlpha(255);
+			HeadRender_->SetAlpha(255);
+		}
 	}
 }
 
@@ -381,10 +404,15 @@ void Player::ChangeBodyState(PlayerBodyState _State)
 		case PlayerBodyState::Acheive:
 			BodyAcheiveStart();
 			break;
+		case PlayerBodyState::Hitted:
+			BodyHittedStart();
+			break;
+		case PlayerBodyState::Dead:
+			BodyDeadStart();
+			break;
 		default:
 			break;
 		}
-
 		CurBody_ = _State;
 	}
 }
@@ -405,6 +433,12 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 			break;
 		case PlayerHeadState::Acheive:
 			HeadAcheiveStart();
+			break;
+		case PlayerHeadState::Hitted:
+			HeadHittedStart();
+			break;
+		case PlayerHeadState::Dead:
+			HeadDeadStart();
 			break;
 		default:
 			break;
@@ -433,6 +467,27 @@ void Player::StateUpdate()
 		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
 	}
 
+	switch (CurBody_)
+	{
+	case PlayerBodyState::Idle:
+		BodyIdleUpdate();
+		break;
+	case PlayerBodyState::Move:
+		BodyMoveUpdate();
+		break;
+	case PlayerBodyState::Acheive:
+		BodyAcheiveUpdate();
+		break;
+	case PlayerBodyState::Hitted:
+		BodyHittedUpdate();
+		break;
+	case PlayerBodyState::Dead:
+		BodyDeadUpdate();
+		break;
+	default:
+		break;
+	}
+
 	switch (CurHead_)
 	{
 	case PlayerHeadState::Idle:
@@ -447,20 +502,11 @@ void Player::StateUpdate()
 	case PlayerHeadState::Acheive:
 		HeadAcheiveUpdate();
 		break;
-	default:
+	case PlayerHeadState::Hitted:
+		HeadHittedUpdate();
 		break;
-	}
-
-	switch (CurBody_)
-	{
-	case PlayerBodyState::Idle:
-		BodyIdleUpdate();
-		break;
-	case PlayerBodyState::Move:
-		BodyMoveUpdate();
-		break;
-	case PlayerBodyState::Acheive:
-		BodyAcheiveUpdate();
+	case PlayerHeadState::Dead:
+		HeadDeadUpdate();
 		break;
 	default:
 		break;

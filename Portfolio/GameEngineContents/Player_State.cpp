@@ -5,12 +5,12 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
 
-float AcheiveTimer_;
+float AnimTimer_;
 
 void Player::SetAcheiveRenderer(const std::string& _Name)
 {
-	AcheiveRender_ = CreateRenderer(_Name);
-	AcheiveRender_->SetPivot({0, -30});
+	AcheiveItemRender_ = CreateRenderer(_Name);
+	AcheiveItemRender_->SetPivot({0, -30});
 }
 
 // Start
@@ -20,9 +20,16 @@ void Player::BodyIdleStart()
 }
 void Player::BodyMoveStart()
 {
-
 }
 void Player::BodyAcheiveStart()
+{
+	BodyRender_->ChangeAnimation("None");
+}
+void Player::BodyHittedStart()
+{
+	BodyRender_->ChangeAnimation("None");
+}
+void Player::BodyDeadStart()
 {
 	BodyRender_->ChangeAnimation("None");
 }
@@ -37,11 +44,9 @@ void Player::HeadIdleStart()
 }
 void Player::HeadAttackStart()
 {
-
 }
 void Player::HeadMoveStart()
 {
-
 }
 void Player::HeadAcheiveStart()
 {
@@ -63,7 +68,52 @@ void Player::HeadAcheiveStart()
 	{
 		HeadAddRender_[i]->Off();
 	}
-	AcheiveTimer_ = 1.0f;
+	AnimTimer_ = 1.0f;
+}
+void Player::HeadHittedStart()
+{
+	HeadRender_->ChangeAnimation("None");
+	int CharacterIndex = static_cast<int>(CharacterType_);
+	for (int i = 0; i < AnimRender_.size(); i++)
+	{
+		if (i == CharacterIndex)
+		{
+			AnimRender_[i]->On();
+			AnimRender_[i]->SetIndex(6);
+		}
+		else
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->Off();
+	}
+	AnimTimer_ = 0.2f;
+	InvincibilityTimer_ = 1.0f;
+}
+void Player::HeadDeadStart()
+{
+	HeadRender_->ChangeAnimation("None");
+	int CharacterIndex = static_cast<int>(CharacterType_);
+	for (int i = 0; i < AnimRender_.size(); i++)
+	{
+		if (i == CharacterIndex)
+		{
+			AnimRender_[i]->On();
+			AnimRender_[i]->SetIndex(6);
+		}
+		else
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->Off();
+	}
+	AnimTimer_ = 1.0f;
 }
 
 // Update
@@ -120,7 +170,6 @@ void Player::BodyMoveUpdate()
 	MoveDir_.Limit2D(1.0f);
 
 	BodyRender_->ChangeAnimation(GetBodyAnimationName() + ChangeDirText);
-
 	// MoveSpeed_는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
 	
@@ -128,6 +177,12 @@ void Player::BodyMoveUpdate()
 	//GetLevel()->SetCameraPos(GetPosition() - GameEngineWindow::GetScale().Half());
 }
 void Player::BodyAcheiveUpdate()
+{
+}
+void Player::BodyHittedUpdate()
+{
+}
+void Player::BodyDeadUpdate()
 {
 }
 
@@ -238,9 +293,9 @@ void Player::HeadMoveUpdate()
 }
 void Player::HeadAcheiveUpdate()
 {
-	AcheiveTimer_ -= GameEngineTime::GetDeltaTime();
+	AnimTimer_ -= GameEngineTime::GetDeltaTime();
 
-	if (AcheiveTimer_ <= 0)
+	if (AnimTimer_ <= 0)
 	{
 		for (int i = 0; i < AnimRender_.size(); i++)
 		{
@@ -250,7 +305,7 @@ void Player::HeadAcheiveUpdate()
 		{
 			HeadAddRender_[i]->On();
 		}
-		AcheiveRender_->Death();
+		AcheiveItemRender_->Death();
 		ChangeBodyState(PlayerBodyState::Idle);
 		ChangeHeadState(PlayerHeadState::Idle);
 	}
@@ -259,26 +314,91 @@ void Player::HeadAcheiveUpdate()
 	// 애니메이션은 바뀌어있어도 이동은 계속하므로 이동 스크립트
 	if (false == IsMoveKey())
 	{
-		MoveDir_ = float4::ZERO;
-		return;
+		MoveDir_ += -MoveDir_ * GameEngineTime::GetDeltaTime() * 10;
 	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+	else
 	{
-		MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 10;
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
-	{
-		MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 10;
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
-	{
-		MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 10;
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
-	{
-		MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 10;
+		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+		{
+			MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+		{
+			MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
+		{
+			MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+		{
+			MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 10;
+		}
 	}
 	MoveDir_.Limit2D(1.0f);
 
 	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+}
+void Player::HeadHittedUpdate()
+{
+	AnimTimer_ -= GameEngineTime::GetDeltaTime();
+
+	if (AnimTimer_ <= 0)
+	{
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->Off();
+		}
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->On();
+		}
+
+		ChangeBodyState(PlayerBodyState::Idle);
+		ChangeHeadState(PlayerHeadState::Idle);
+	}
+
+	// 애니메이션은 바뀌어있어도 이동은 계속하므로 이동 스크립트
+	if (false == IsMoveKey())
+	{
+		MoveDir_ += -MoveDir_ * GameEngineTime::GetDeltaTime() * 10;
+	}
+	else
+	{
+		if (true == GameEngineInput::GetInst()->IsPress("MoveLeft"))
+		{
+			MoveDir_ += float4::LEFT * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveRight"))
+		{
+			MoveDir_ += float4::RIGHT * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveUp"))
+		{
+			MoveDir_ += float4::UP * GameEngineTime::GetDeltaTime() * 10;
+		}
+		if (true == GameEngineInput::GetInst()->IsPress("MoveDown"))
+		{
+			MoveDir_ += float4::DOWN * GameEngineTime::GetDeltaTime() * 10;
+		}
+	}
+	MoveDir_.Limit2D(1.0f);
+
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+}
+void Player::HeadDeadUpdate()
+{
+	AnimTimer_ -= GameEngineTime::GetDeltaTime();
+
+	if (AnimTimer_ <= 0)
+	{
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->Off();
+		}
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->On();
+		}
+	}
 }

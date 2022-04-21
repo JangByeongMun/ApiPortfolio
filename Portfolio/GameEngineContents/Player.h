@@ -8,14 +8,17 @@ enum class PlayerBodyState
 	Idle,
 	Move,
 	Acheive,
+	Hitted,
+	Dead,
 };
-
 enum class PlayerHeadState
 {
 	Idle,
 	Attack,
 	Move,
 	Acheive,
+	Hitted,
+	Dead,
 };
 
 // 설명 : 플레이어
@@ -53,7 +56,7 @@ protected:
 	
 private:
 	std::vector<GameEngineRenderer*> AnimRender_;
-	GameEngineRenderer* AcheiveRender_;
+	GameEngineRenderer* AcheiveItemRender_; // 먹은 아이템 보여주는 렌더러
 
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
@@ -90,21 +93,35 @@ public:
 	void SetAcheiveRenderer(const std::string& _Name);
 
 private: 
+	// Body Start
 	void BodyIdleStart();
 	void BodyMoveStart();
 	void BodyAcheiveStart();
+	void BodyHittedStart();
+	void BodyDeadStart();
+
+	// Head Start
 	void HeadIdleStart();
 	void HeadAttackStart();
 	void HeadMoveStart();
-	void HeadAcheiveStart();
+	void HeadAcheiveStart(); 
+	void HeadHittedStart();
+	void HeadDeadStart();
 
+	// Body Update
 	void BodyIdleUpdate();
 	void BodyMoveUpdate();
 	void BodyAcheiveUpdate();
+	void BodyHittedUpdate();
+	void BodyDeadUpdate();
+
+	// Head Update
 	void HeadIdleUpdate();
 	void HeadAttackUpdate();
 	void HeadMoveUpdate();
 	void HeadAcheiveUpdate();
+	void HeadHittedUpdate();
+	void HeadDeadUpdate();
 
 
 ///////////////////////////////// 기본정보
@@ -168,7 +185,6 @@ public:
 ///////////////////////////////// 방
 private:
 	float4 RoomPos_;
-	bool IsChangeRoom_;
 
 public:	
 	void ChangeRoom(DoorDir _Value);
@@ -176,5 +192,17 @@ public:
 	{
 		return RoomPos_;
 	}
+
+///////////////////////////////// 무적시간
+private:
+	float InvincibilityTimer_;
+	float InvisibleTimer_;
+
+public:
+	bool IsInvincibillity()
+	{
+		return InvincibilityTimer_ > 0.0f;
+	}
+
 };
 

@@ -38,5 +38,6 @@ private:
 	bool IsHalfAdd_;
 
 	void Start() override;
+	void PlayerDeadCheck();
 };
 
