@@ -16,7 +16,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	switch (CurrentFloor_)
 	{
 	case 1:
-		CurrentMapCount_ = 9;
+		CurrentMapCount_ = 20;
 		break;
 	case 2:
 		CurrentMapCount_ = 12;

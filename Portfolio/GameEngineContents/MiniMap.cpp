@@ -8,7 +8,6 @@
 MiniMap::MiniMap() 
 {
 }
-
 MiniMap::~MiniMap() 
 {
 	for (int i = 0; i < NodeVecter_.size(); i++)
@@ -29,19 +28,19 @@ void MiniMap::Start()
 	GameEngineRenderer* Renderer = CreateRenderer("minimap_BG.bmp");
 	Renderer->CameraEffectOff();
 	Renderer->SetAlpha(100);
-
-	if (false == GameEngineInput::GetInst()->IsKey("Test"))
-	{
-		GameEngineInput::GetInst()->CreateKey("Test", 'Y');
-	}
 }
 
-void MiniMap::Update()
+bool MiniMap::IsInsideNode(float4 _Pivot)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("Test"))
+	if (
+		2 * 25.0f >= _Pivot.ix() && _Pivot.ix() >= -2 * 25.0f &&
+		2 * 25.0f >= _Pivot.iy() && _Pivot.iy() >= -2 * 25.0f
+		)
 	{
-		SeeAllMap();
+		return true;
 	}
+	
+	return false;
 }
 
 void MiniMap::MakeNode()
@@ -137,10 +136,28 @@ void MiniMap::ChangeMap(float4 _Dir)
 		default:
 			break;
 		}
+
 		NodeVecter_[i]->Renderer_->SetPivot(NodeVecter_[i]->Renderer_->GetPivot() - _Dir * 25.0f);
 		if (nullptr != NodeVecter_[i]->IconRenderer_)
 		{
 			NodeVecter_[i]->IconRenderer_->SetPivot(NodeVecter_[i]->IconRenderer_->GetPivot() - _Dir * 25.0f);
+		}
+
+		if (true == IsInsideNode(NodeVecter_[i]->Renderer_->GetPivot()) && NodeState::Unknown != NodeVecter_[i]->State_)
+		{
+			NodeVecter_[i]->Renderer_->On();
+			if (nullptr != NodeVecter_[i]->IconRenderer_)
+			{
+				NodeVecter_[i]->IconRenderer_->On();
+			}
+		}
+		else
+		{
+			NodeVecter_[i]->Renderer_->Off();
+			if (nullptr != NodeVecter_[i]->IconRenderer_)
+			{
+				NodeVecter_[i]->IconRenderer_->Off();
+			}
 		}
 	}
 }

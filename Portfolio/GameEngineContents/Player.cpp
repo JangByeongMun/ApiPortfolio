@@ -74,7 +74,7 @@ void Player::Start()
 
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
-	PlayerCollision_ = CreateCollision("Player", { 80, 80 });
+	PlayerCollision_ = CreateCollision("Player", { 85, 85 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -596,7 +596,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 	RoomPos_ += GoDir;
 
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
-	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 60);
+	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
 	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 
 	PlayerUI_->UpdateMiniMap(GoDir);

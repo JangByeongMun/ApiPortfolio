@@ -42,6 +42,7 @@ protected:
 private:
 	std::vector<MapNode*> NodeVecter_;
 	void Start() override;
-	void Update() override;
+
+	bool IsInsideNode(float4 _Pivot);
 };
 
