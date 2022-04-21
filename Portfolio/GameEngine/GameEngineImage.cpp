@@ -176,6 +176,12 @@ void GameEngineImage::AlphaCopy(GameEngineImage* _Other, const float4& _CopyPos,
 
 void GameEngineImage::PlgCopy(GameEngineImage* _Other, const float4& _CopyPos, const float4& _CopyScale, const float4& _OtherPivot, const float4& _OtherScale, float _Angle, GameEngineImage* _Filter)
 {
+	// 180도일때 버그가 생겨서 180도일때 조금 틀어서 버그 막도록 구현
+	if (_Angle == 180.0f)
+	{
+		_Angle = 180.00001f;
+	}
+
 	POINT RotPoint[3];
 
 	GameEngineRect Rect = GameEngineRect(float4::ZERO, _CopyScale);
