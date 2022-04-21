@@ -31,7 +31,7 @@ Player* Player::MainPlayer = nullptr;
 Player::Player()
 	: BodyRender_(nullptr)
 	, HeadRender_(nullptr)
-	, PlayerCollision(nullptr)
+	, PlayerCollision_(nullptr)
 	, MapColImage_(nullptr)
 	, BodyAnimationName("Body_")
 	, HeadAnimationName("Head_")
@@ -74,7 +74,7 @@ void Player::Start()
 
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
-	PlayerCollision = CreateCollision("Player", { 100, 100 });
+	PlayerCollision_ = CreateCollision("Player", { 100, 100 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -180,7 +180,7 @@ void Player::CollisionCheck()
 {
 	std::vector<GameEngineCollision*> ColVec;
 
-	if (true == PlayerCollision->CollisionResult("Wall", ColVec, CollisionType::Rect, CollisionType::Rect))
+	if (true == PlayerCollision_->CollisionResult("Wall", ColVec, CollisionType::Rect, CollisionType::Rect))
 	{
 		for (int i = 0; i < ColVec.size(); i++)
 		{
@@ -190,35 +190,35 @@ void Player::CollisionCheck()
 }
 
 // 벽이 있는지 확인하고 이동하도록하는 함수
-void Player::PlayerSetMove(float4 _Value)
+void Player::PlayerSetMove(const float4& _Value)
 {
-	if (true ==GetLevel()->GetDebugMode())
-	{
-		_Value *= 2.0f;
-	}
-	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
-	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
-	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
-
-	// x축이나 y축으로 더이상 갈수없을경우 x나 y중 한군데를 제외하고 이동
-	float4 NextPos = GetPosition() + _Value;
-	float4 NextPos_x = GetPosition() + float4(_Value.x, 0);
-	float4 NextPos_y = GetPosition() + float4(0, _Value.y);
-	int Color = MapColImage_->GetImagePixel(NextPos - AddPivot);
-	int Color_x = MapColImage_->GetImagePixel(NextPos_x - AddPivot);
-	int Color_y = MapColImage_->GetImagePixel(NextPos_y - AddPivot);
-	if (RGB(0, 0, 0) != Color)
+	if (true == CanMove(_Value))
 	{
 		SetMove(_Value);
 	}
-	else if (RGB(0, 0, 0) != Color_x)
+	else if (true == CanMove(float4(_Value.x, 0)))
 	{
 		SetMove(float4(_Value.x, 0));
 	}
-	else if (RGB(0, 0, 0) != Color_y)
+	else if (true == CanMove(float4(0, _Value.y)))
 	{
 		SetMove(float4(0, _Value.y));
 	}
+}
+
+bool Player::CanMove(const float4& _Value)
+{
+	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
+	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
+	int Color = MapColImage_->GetImagePixel(GetPosition() + _Value - AddPivot);
+
+	if (RGB(0, 0, 0) != Color && false == PlayerCollision_->NextPosCollisionCheckRect("Stone", _Value))
+	{
+		return true;
+	}
+
+	return false;
 }
 
 void Player::SetPlayerInfo()

@@ -57,11 +57,11 @@ public:
 		CollisionType _Target = CollisionType::Circle
 	);
 
-	inline bool NextPostCollisionCheckRect(const std::string& _TargetGroup, float4 _NextPos)
+	inline bool NextPosCollisionCheckRect(const std::string& _TargetGroup, float4 _NextPos)
 	{
-		return NextPostCollisionCheck(_TargetGroup, _NextPos, CollisionType::Rect, CollisionType::Rect);
+		return NextPosCollisionCheck(_TargetGroup, _NextPos, CollisionType::Rect, CollisionType::Rect);
 	}
-	bool NextPostCollisionCheck(
+	bool NextPosCollisionCheck(
 		const std::string& _TargetGroup,
 		float4 _NextPos,
 		CollisionType _This = CollisionType::Circle,

@@ -75,7 +75,7 @@ bool GameEngineCollision::CollisionCheck(
 	return false;
 }
 
-bool GameEngineCollision::NextPostCollisionCheck(const std::string& _TargetGroup, float4 _NextPos, CollisionType _This, CollisionType _Target)
+bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup, float4 _NextPos, CollisionType _This, CollisionType _Target)
 {
 	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
 

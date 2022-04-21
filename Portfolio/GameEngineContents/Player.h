@@ -58,7 +58,7 @@ private:
 	GameEngineRenderer* BodyRender_;
 	GameEngineRenderer* HeadRender_;
 	std::vector<GameEngineRenderer*> HeadAddRender_;
-	GameEngineCollision* PlayerCollision;
+	GameEngineCollision* PlayerCollision_;
 	GameEngineImage* MapColImage_;
 
 	std::string BodyAnimationName;
@@ -71,7 +71,8 @@ private:
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
 	void CollisionCheck();
-	void PlayerSetMove(float4 _Value);
+	void PlayerSetMove(const float4& _Value);
+	bool CanMove(const float4& _Value);
 
 ///////////////////////////////// FSM
 private:
