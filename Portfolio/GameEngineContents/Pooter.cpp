@@ -77,3 +77,9 @@ void Pooter::Attack()
 {
 	Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC, { 0, 10 }, 1.0f);
 }
+
+void Pooter::MonsterDeath()
+{
+	MakeRandomBlood(2, 4);
+	Death();
+}

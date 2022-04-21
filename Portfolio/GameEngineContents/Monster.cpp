@@ -1,10 +1,13 @@
 #include "Monster.h"
-#include "Player.h"
-#include "RoomActor.h"
-#include "RandomRoomManager.h"
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineRandom.h>
+#include "Player.h"
+#include "RoomActor.h"
+#include "RandomRoomManager.h"
+#include "PlayLevel.h"
+#include "RandomBlood.h"
 
 Monster::Monster()
 	: Renderer_(nullptr)
@@ -72,6 +75,15 @@ void Monster::MonsterSetMove(float4 _Value)
 	else if (RGB(0, 0, 0) != Color_y)
 	{
 		SetMove(float4(0, _Value.y));
+	}
+}
+
+void Monster::MakeRandomBlood(int _Min, int _Max)
+{
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(_Min, _Max);
+	for (int i = 0; i < RandomInt; i++)
+	{
+		GetLevel()->CreateActor<RandomBlood>()->SetPosition(GetPosition());
 	}
 }
 

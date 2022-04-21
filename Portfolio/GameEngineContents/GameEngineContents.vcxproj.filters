@@ -206,6 +206,9 @@
     <ClInclude Include="PlayerHP.h">
       <Filter>Play\Player</Filter>
     </ClInclude>
+    <ClInclude Include="RandomBlood.h">
+      <Filter>Play\Monster\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -409,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="PlayerHP.cpp">
       <Filter>Play\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomBlood.cpp">
+      <Filter>Play\Monster\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

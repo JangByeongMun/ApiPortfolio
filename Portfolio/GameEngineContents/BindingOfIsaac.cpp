@@ -331,6 +331,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("effect_015_tearpoofa.bmp");
 		Image->CutCount(4, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_030_bloodgibs.bmp");
+		Image->CutCount(4, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_032_bloodstains.bmp");
+		Image->CutCount(5, 4);
 	}
 
 	/////////////////////////////////// Monster

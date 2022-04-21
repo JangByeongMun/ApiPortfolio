@@ -2,6 +2,7 @@
 #include "Shooter.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <vector>
 
 // 설명 : 몬스터들 기본
 class Player;
@@ -76,6 +77,7 @@ public:
 			MonsterDeath();
 		}
 	}
+	void MakeRandomBlood(int _Min, int _Max);
 	virtual void MonsterDeath();
 };
 
