@@ -87,6 +87,19 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.MoveParent("Portfolio");
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Items");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Effect");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -228,6 +241,20 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Player");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Player");
+		ResourcesDirectory.Move("AddItems");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{

@@ -609,5 +609,10 @@ void Player::ChangeRoom(DoorDir _Dir)
 	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
 	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 
+	if (0 != FindRoom->GetMonsterCount())
+	{
+		FindRoom->CloseAllDoor();
+	}
+
 	PlayerUI_->UpdateMiniMap(GoDir);
 }

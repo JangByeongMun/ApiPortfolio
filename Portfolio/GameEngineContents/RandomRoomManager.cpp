@@ -299,7 +299,7 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(8, 3, BlockType::FIRE);
 				TmpData.AddBlock(9, 3, BlockType::STONEURN);
 
-				TmpData.AddMonster(3, 3, MonsterType::Pooter);
+				TmpData.AddPassive(6, 4, PassiveType::Item1);
 
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);

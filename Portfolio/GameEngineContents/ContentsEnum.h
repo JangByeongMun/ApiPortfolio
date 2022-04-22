@@ -148,3 +148,11 @@ enum class RoomType
 	Boss,
 	Max,
 };
+
+enum class PassiveType
+{
+	Default,
+	Item1,
+
+	Max,
+};

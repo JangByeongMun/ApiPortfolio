@@ -29,6 +29,12 @@ RoomData::RoomData(const RoomData& _Other)
 	{
 		AllMonster_.push_back(_Other.AllMonster_[i]);
 	}
+
+	AllPassives_.clear();
+	for (int i = 0; i < _Other.AllPassives_.size(); i++)
+	{
+		AllPassives_.push_back(_Other.AllPassives_[i]);
+	}
 }
 
 RoomData::~RoomData() 
@@ -51,6 +57,12 @@ RoomData& RoomData::operator=(RoomData& _Other)
 		AllMonster_.push_back(_Other.AllMonster_[i]);
 	}
 
+	AllPassives_.clear();
+	for (int i = 0; i < _Other.AllPassives_.size(); i++)
+	{
+		AllPassives_.push_back(_Other.AllPassives_[i]);
+	}
+
 	return *this;
 }
 
@@ -62,4 +74,9 @@ void RoomData::AddBlock(int _X, int _Y, BlockType _Type)
 void RoomData::AddMonster(int _X, int _Y, MonsterType _Type)
 {
 	AllMonster_.push_back(MonsterData(_X, _Y, _Type));
+}
+
+void RoomData::AddPassive(int _X, int _Y, PassiveType _Type)
+{
+	AllPassives_.push_back(PassiveData(_X, _Y, _Type));
 }

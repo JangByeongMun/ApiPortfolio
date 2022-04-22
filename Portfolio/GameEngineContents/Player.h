@@ -181,6 +181,15 @@ public:
 	}
 	void SetActive();
 
+///////////////////////////////// 액티브 아이템
+private:
+	std::vector<PassiveType> PassiveVector_;
+
+public:
+	inline void AddPassive(PassiveType _Type)
+	{
+		PassiveVector_.push_back(_Type);
+	}
 
 ///////////////////////////////// 방
 private:

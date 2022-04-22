@@ -5,6 +5,7 @@
 #include "Pooter.h"
 #include "ContentsEnum.h"
 #include "Fire.h"
+#include "PassiveItem.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -12,11 +13,27 @@ float ScaleX = 70.0f;
 float ScaleY = 75.0f;
 
 RoomActor::RoomActor()
+	: MonsterCount_(0)
 {
 }
 
 RoomActor::~RoomActor()
 {
+}
+
+void RoomActor::MinusMonsterCount()
+{
+	MonsterCount_ -= 1;
+
+	if (MonsterCount_ <= 0)
+	{
+		MonsterCount_ = 0;
+
+		for (int i = 0; i < DoorVector_.size(); i++)
+		{
+			DoorVector_[i]->DoorOpen();
+		}
+	}
 }
 
 void RoomActor::Setting()
@@ -86,7 +103,7 @@ void RoomActor::Setting()
 
 	// 몬스터 세팅
 	std::vector<RoomData::MonsterData> TmpMonsterVector = Data_.AllMonster_;
-	MonsterCount_ = TmpMonsterVector.size();
+	MonsterCount_ = static_cast<int>(TmpMonsterVector.size());
 	for (int i = 0; i < TmpMonsterVector.size(); i++)
 	{
 		float4 TmpTilePos = { StartX + ScaleX * TmpMonsterVector[i].X_, StartY + ScaleY * TmpMonsterVector[i].Y_ };
@@ -111,6 +128,16 @@ void RoomActor::Setting()
 			break;
 		}
 	}
+
+	// 패시브 아이템 세팅
+	std::vector<RoomData::PassiveData> TmpPassiveVector = Data_.AllPassives_;
+	for (int i = 0; i < TmpPassiveVector.size(); i++)
+	{
+		float4 TmpTilePos = { StartX + ScaleX * TmpPassiveVector[i].X_, StartY + ScaleY * TmpPassiveVector[i].Y_ };
+		PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
+		TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
+		TmpPassiveItem->Setting(TmpPassiveVector[i].Type_);
+	}
 }
 
 Door* RoomActor::FindDoor(DoorDir _Dir)
@@ -128,6 +155,22 @@ Door* RoomActor::FindDoor(DoorDir _Dir)
 bool RoomActor::IsCurrentRoom()
 {
 	return RandomRoomManager::GetInst()->GetCurrentRoom() == this;
+}
+
+void RoomActor::OpenAllDoor()
+{
+	for (int i = 0; i < DoorVector_.size(); i++)
+	{
+		DoorVector_[i]->DoorOpen();
+	}
+}
+
+void RoomActor::CloseAllDoor()
+{
+	for (int i = 0; i < DoorVector_.size(); i++)
+	{
+		DoorVector_[i]->DoorClose();
+	}
 }
 
 void RoomActor::Start()
@@ -165,6 +208,7 @@ void RoomActor::DoorSetting()
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Down);
 			break;
 		}
+
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, -1)))
@@ -190,7 +234,7 @@ void RoomActor::DoorSetting()
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4(500, 0));
-		
+
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(1, 0))->Data_.RoomType_)
 		{
 		case RoomType::Treasure:
@@ -224,4 +268,6 @@ void RoomActor::DoorSetting()
 		}
 		DoorVector_.push_back(TmpDoor);
 	}
+
+	OpenAllDoor();
 }

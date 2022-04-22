@@ -73,6 +73,10 @@ bool GameEngineCollision::CollisionCheck(
 	std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (false == (*StartIter)->IsUpdate())
+		{
+			return false;
+		}
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
 			return true;
@@ -114,6 +118,10 @@ bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup,
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (false == (*StartIter)->IsUpdate())
+		{
+			return false;
+		}
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
 			return true;

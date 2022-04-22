@@ -7,6 +7,8 @@ Door::Door()
 	: Collision_(nullptr)
 	, Type_()
 	, Dir_()
+	, IsOpen_(false)
+	, AnimTimer_(0.0f)
 {
 }
 
@@ -62,7 +64,68 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		break;
 	}
 
+
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
+		TmpRenderer->SetIndex(1);
+		RendererVector_.push_back(TmpRenderer);
+	}
+
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
+		TmpRenderer->SetIndex(2);
+		RendererVector_.push_back(TmpRenderer);
+	}
+
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
+		TmpRenderer->SetIndex(3);
+		RendererVector_.push_back(TmpRenderer);
+	}
+
+	switch (Dir_)
+	{
+	case DoorDir::Up:
+		RendererVector_[0]->SetPivot({0, 10});
+		RendererVector_[1]->SetPivot({-18, 0});
+		RendererVector_[2]->SetPivot({18, 0});
+		break;
+	case DoorDir::Down:
+		RendererVector_[0]->SetPivot({ 0, -10 });
+		RendererVector_[1]->SetPivot({ 18, 0 });
+		RendererVector_[2]->SetPivot({ -18, 0 });
+		break;
+	case DoorDir::Left:
+		RendererVector_[0]->SetPivot({ 10, 0 });
+		RendererVector_[1]->SetPivot({ 0, 18 });
+		RendererVector_[2]->SetPivot({ 0, -18 });
+		break;
+	case DoorDir::Right:
+		RendererVector_[0]->SetPivot({ -10, 0 });
+		RendererVector_[1]->SetPivot({ 0, -18 });
+		RendererVector_[2]->SetPivot({ 0, 18 });
+		break;
+	default:
+		break;
+	}
+
 	CreateRenderer(Name)->SetIndex(0);
+}
+
+void Door::DoorOpen()
+{
+	IsOpen_ = true;
+	RendererVector_[1]->Off();
+	RendererVector_[2]->Off();
+	Collision_->On();
+}
+
+void Door::DoorClose()
+{
+	IsOpen_ = false;
+	RendererVector_[1]->On();
+	RendererVector_[2]->On();
+	Collision_->Off();
 }
 
 void Door::Update()

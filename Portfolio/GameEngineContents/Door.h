@@ -27,14 +27,18 @@ public:
 	}
 
 	void Setting(DoorType _Type, DoorDir _Dir);
+	void DoorOpen();
+	void DoorClose();
 
 protected:
 
 private:
+	std::vector<GameEngineRenderer*> RendererVector_;
 	GameEngineCollision* Collision_;
 	DoorType Type_;
 	DoorDir Dir_;
-
+	bool IsOpen_;
+	float AnimTimer_;
 
 	void Update() override;
 };

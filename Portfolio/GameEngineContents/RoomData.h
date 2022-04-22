@@ -48,6 +48,23 @@ public:
 		int Y_;
 		MonsterType Type_;
 	};
+	class PassiveData
+	{
+	public:
+		PassiveData(int _X, int _Y, PassiveType _Type)
+			: X_(_X)
+			, Y_(_Y)
+			, Type_(_Type)
+		{
+		}
+		~PassiveData()
+		{
+		}
+
+		int X_;
+		int Y_;
+		PassiveType Type_;
+	};
 
 public:
 	RoomData();
@@ -58,6 +75,7 @@ public:
 
 	void AddBlock(int _X, int _Y, BlockType _Type);
 	void AddMonster(int _X, int _Y, MonsterType _Type);
+	void AddPassive(int _X, int _Y, PassiveType _Type);
 	
 	inline void SetRoomType(RoomType _Type)
 	{
@@ -78,4 +96,5 @@ private:
 	RoomType RoomType_;
 	std::vector<BlockData> AllBlock_; // {13, 7}
 	std::vector<MonsterData> AllMonster_;
+	std::vector<PassiveData> AllPassives_;
 };
