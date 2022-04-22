@@ -62,6 +62,8 @@ Player::Player()
 	, AcheiveItemRender_(nullptr)
 	, CharacterType_(CharacterType::ISAAC)
 	, RoomPos_({0, 0})
+	, InvincibilityTimer_(0)
+	, InvisibleTimer_(0)
 {
 }
 Player::~Player() 
@@ -169,6 +171,10 @@ void Player::Update()
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 		BombActor->SetPosition(GetPosition());
+
+		// 자살 테스트
+		//ChangeBodyState(PlayerBodyState::Dead);
+		//ChangeHeadState(PlayerHeadState::Dead);
 	}
 
 	if (InvincibilityTimer_ > 0.0f)

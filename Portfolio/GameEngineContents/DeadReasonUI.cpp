@@ -58,10 +58,19 @@ void DeadReasonUI::Start()
 		break;
 	}
 
-	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 12);
-	GameEngineRenderer* Renderer = CreateRenderer("death_portraits_1.bmp", static_cast<int>(ORDER::UI));
-	Renderer->SetIndex(RandomInt);
-	Renderer->SetPivot({ 200, -210 });
+	{
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 12);
+		GameEngineRenderer* Renderer = CreateRenderer("death_portraits_1.bmp", static_cast<int>(ORDER::UI));
+		Renderer->SetIndex(RandomInt);
+		Renderer->SetPivot({ 200, -210 });
+	}
+	
+	{
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 2);
+		GameEngineRenderer* Renderer = CreateRenderer("death_items.bmp", static_cast<int>(ORDER::UI));
+		Renderer->SetIndex(RandomInt);
+		Renderer->SetPivot({ 90, -40 });
+	}
 }
 
 void DeadReasonUI::Update()

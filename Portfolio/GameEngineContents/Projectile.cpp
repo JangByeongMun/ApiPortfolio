@@ -9,6 +9,7 @@
 #include "RandomRoomManager.h"
 #include "Monster.h"
 #include "PlayerHP.h"
+#include "Fire.h"
 
 Projectile::Projectile() 
 	: Collision_()
@@ -50,6 +51,24 @@ void Projectile::Update()
 		DestroyProjectile();
 	}
 
+	// 불과 충돌했을때
+	{
+		std::vector<GameEngineCollision*> CollisionResult;
+		if (true == Collision_->CollisionResultRect("Fire", CollisionResult))
+		{
+			for (int i = 0; i < CollisionResult.size(); i++)
+			{
+				Fire* TmpFire = dynamic_cast<Fire*>(CollisionResult[i]->GetActor());
+				if (nullptr != TmpFire)
+				{
+					TmpFire->AddFireHP(-1 * Damage_);
+					DestroyProjectile();
+					break;
+				}
+			}
+		}
+	}
+
 	// 플레이어의 눈물이면
 	if (true == IsPlayerProjectile())
 	{
@@ -63,6 +82,7 @@ void Projectile::Update()
 				{
 					TmpMonster->Damaged(Damage_);
 					DestroyProjectile();
+					break;
 				}
 			}
 		}

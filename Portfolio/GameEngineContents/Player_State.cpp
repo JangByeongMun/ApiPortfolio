@@ -93,7 +93,7 @@ void Player::HeadHittedStart()
 		HeadAddRender_[i]->Off();
 	}
 	AnimTimer_ = 0.2f;
-	InvincibilityTimer_ = 1.0f;
+	InvincibilityTimer_ = 1.5f;
 }
 void Player::HeadDeadStart()
 {

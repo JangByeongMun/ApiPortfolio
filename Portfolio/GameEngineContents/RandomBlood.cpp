@@ -31,7 +31,7 @@ void RandomBlood::Start()
 		TmpRenderer_->SetAlpha(RandomAlpha);
 	}
 
-	Dir_ = float4(GameEngineRandom::MainRandom->RandomFloat(-1, 1), GameEngineRandom::MainRandom->RandomFloat(-1, 1));
+	Dir_ = float4(GameEngineRandom::MainRandom->RandomFloat(-1, 1) * 2.0f, GameEngineRandom::MainRandom->RandomFloat(-1, 1) * 2.0f);
 }
 
 void RandomBlood::Update()

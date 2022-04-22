@@ -3,6 +3,7 @@
 #include "GameEngineLevel.h"
 #include "GameEngineActor.h"
 #include <GameEngineBase/GameEngineDebug.h>
+#include <GameEngineBase/GameEngineString.h>
 
 bool (*CollisionCheckArray[static_cast<int>(CollisionType::Max)][static_cast<int>(CollisionType::Max)])(GameEngineCollision*, GameEngineCollision*);
 
@@ -48,7 +49,13 @@ bool GameEngineCollision::CollisionCheck(
 	CollisionType _Target
 )
 {
-	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+	if (false == IsUpdate())
+	{
+		return false;
+	}
+
+	std::string UpperKey = GameEngineString::ToUpperReturn(_TargetGroup);
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(UpperKey);
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{
@@ -77,7 +84,13 @@ bool GameEngineCollision::CollisionCheck(
 
 bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup, float4 _NextPos, CollisionType _This, CollisionType _Target)
 {
-	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+	if (false == IsUpdate())
+	{
+		return false;
+	}
+
+	std::string UpperKey = GameEngineString::ToUpperReturn(_TargetGroup);
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(UpperKey);
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{
@@ -116,7 +129,8 @@ bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::
 {
 	size_t StartSize = _ColResult.size();
 
-	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(_TargetGroup);
+	std::string UpperKey = GameEngineString::ToUpperReturn(_TargetGroup);
+	std::map<std::string, std::list<GameEngineCollision*>>::iterator FindTargetGroup = GetActor()->GetLevel()->AllCollision_.find(UpperKey);
 
 	if (FindTargetGroup == GetActor()->GetLevel()->AllCollision_.end())
 	{

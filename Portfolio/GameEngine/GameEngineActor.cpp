@@ -5,6 +5,7 @@
 
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineDebug.h>
+#include <GameEngineBase/GameEngineString.h>
 
 GameEngineActor::GameEngineActor() 
 	: Level_(nullptr)
@@ -222,7 +223,8 @@ GameEngineCollision* GameEngineActor::CreateCollision(const std::string& _GroupN
 	NewCollision->SetPivot(_Pivot);
 	NewCollision->SetScale(_Scale);
 
-	GetLevel()->AddCollision(_GroupName, NewCollision);
+	std::string UpperKey = GameEngineString::ToUpperReturn(_GroupName);
+	GetLevel()->AddCollision(UpperKey, NewCollision);
 	CollisionList_.push_back(NewCollision);
 	return NewCollision;
 }

@@ -15,6 +15,7 @@ Bomb::Bomb()
 	, Renderer_(nullptr)
 	, Timer_ (0.0f)
 	, BombTime_(2.0f)
+	, IsExplode(false)
 {
 }
 
@@ -32,6 +33,11 @@ void Bomb::Start()
 
 void Bomb::Update()
 {
+	if (true == IsExplode)
+	{
+		return;
+	}
+
 	Timer_ += GameEngineTime::GetDeltaTime();
 	BompAnimation();
 	
@@ -58,12 +64,31 @@ void Bomb::Update()
 
 	if (Timer_ >= BombTime_)
 	{
+		IsExplode = true;
+		// 폭발 이펙트 생성
+		{
+			GameEngineRenderer* Renderer = CreateRenderer("effect_029_explosion2.bmp", static_cast<int>(ORDER::UI));
+			Renderer->SetAlpha(100);
+			Renderer->SetPivot({0, -100});
+			Renderer->Death(0.35f);
+		}
+
+		{
+			GameEngineRenderer* Renderer = CreateRenderer(static_cast<int>(ORDER::UI), RenderPivot::CENTER);
+			Renderer->CreateAnimation("effect_029_explosion.bmp", "effect_029_explosion", 0, 11, 0.05f, false);
+			Renderer->ChangeAnimation("effect_029_explosion");
+			Renderer->SetPivot({ 0, -100 });
+			Renderer->SetDeleteEndFrame_(true);
+		}
+
 		// 폭발자국 남기기
 		PlayLevel* TmpLevel = dynamic_cast<PlayLevel*>(GetLevel());
-		GameEngineRenderer* Renderer = TmpLevel->GlobalActor->CreateRenderer("effect_017_bombradius.bmp", (int)ORDER::BACKGROUND);
-		Renderer->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 7));
-		Renderer->SetPivot(GetPosition());
-		Renderer->SetAlpha(150);
+		{
+			GameEngineRenderer* Renderer = TmpLevel->GlobalActor->CreateRenderer("effect_017_bombradius.bmp", (int)ORDER::BACKGROUND);
+			Renderer->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 7));
+			Renderer->SetPivot(GetPosition());
+			Renderer->SetAlpha(200);
+		}
 
 		// 주변에 대미지 주기
 		GameEngineCollision* Collision = TmpLevel->GlobalActor->CreateCollision("BombEffect", {288, 192}, GetPosition());
@@ -108,28 +133,29 @@ void Bomb::Update()
 			}
 		}
 
-		Death();
+		Renderer_->Death();
+		Collision_->Death();
+		Death(1.0f);
 	}
 }
-
 
 void Bomb::BompAnimation()
 {
 	if (Timer_ <= 0.25f)
 	{
-		Renderer_->SetScale({ 76, 116 });
+		Renderer_->SetScale({ 86, 106 });
 	}
 	else if (Timer_ <= 0.5f)
 	{
-		Renderer_->SetScale({ 116, 76 });
+		Renderer_->SetScale({ 106, 86 });
 	}
 	else if (Timer_ <= 0.75f)
 	{
-		Renderer_->SetScale({ 76, 116 });
+		Renderer_->SetScale({ 86, 106 });
 	}
 	else if (Timer_ <= 1.0f)
 	{
-		Renderer_->SetScale({ 116, 76 });
+		Renderer_->SetScale({ 106, 86 });
 	}
 
 	else if (Timer_ <= 1.125f)

@@ -337,6 +337,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("effect_032_bloodstains.bmp");
 		Image->CutCount(5, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_029_explosion.bmp");
+		Image->CutCount(4, 4);
 	}
 
 	/////////////////////////////////// Monster
@@ -378,6 +381,15 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(2, 3);
 		Image = GameEngineImageManager::GetInst()->Find("door_10_bossroomdoor_Right.bmp");
 		Image->CutCount(2, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_005_fire.bmp");
+		Image->CutCount(8, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("grid_fireplace.bmp");
+		Image->CutCount(2, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("grid_fireplace_Shadow.bmp");
+		Image->CutCount(2, 2);
 	}
 
 	/////////////////////////////////// Play UI
@@ -400,6 +412,8 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("death_portraits_1.bmp");
 		Image->CutCount(4, 4);
 
+		Image = GameEngineImageManager::GetInst()->Find("death_items.bmp");
+		Image->CutCount(3, 1);
 	}
 
 	/////////////////////////////////// Play Item

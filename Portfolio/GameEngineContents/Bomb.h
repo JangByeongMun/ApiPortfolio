@@ -24,6 +24,7 @@ private:
 
 	float Timer_;
 	float BombTime_;
+	bool IsExplode;
 
 	void Start() override;
 	void Update() override;

@@ -4,6 +4,7 @@
 #include "Door.h"
 #include "Pooter.h"
 #include "ContentsEnum.h"
+#include "Fire.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -45,6 +46,11 @@ void RoomActor::Setting()
 		switch (TmpTileVector[i].Type_)
 		{
 		case BlockType::FIRE:
+		{
+			Fire* TmpFire = GetLevel()->CreateActor<Fire>();
+			TmpFire->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
 			break;
 		case BlockType::HOLE:
 			break;
