@@ -15,7 +15,7 @@ Monster::Monster()
 	, Collision_(nullptr)
 	, IsLeft_(true)
 	, AttackTimer_(0.0f)
-	, AttackDelay_(5.0f)
+	, AttackDelay_(2.5f)
 	, MoveSpeed_(100.0f)
 	, HP_(0)
 {
