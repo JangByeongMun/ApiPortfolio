@@ -1,8 +1,9 @@
 #include "DeadReasonUI.h"
-#include "ContentsGlobal.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include "ContentsGlobal.h"
+#include "RandomRoomManager.h"
 
 DeadReasonUI::DeadReasonUI()
 {
@@ -14,25 +15,44 @@ DeadReasonUI::~DeadReasonUI()
 
 void DeadReasonUI::Start()
 {
-	SetPosition(GetCameraEffectPosition() + GameEngineWindow::GetScale().Half());
-	CreateRenderer("death_portraits.bmp")->CameraEffectOff();
+	float4 TestPos = GetLevel()->GetCameraPos() + GameEngineWindow::GetScale().Half();
+	SetPosition(TestPos);
+	CreateRenderer("bgblack.bmp", static_cast<int>(ORDER::UI))->SetAlpha(100);
+	CreateRenderer("death_portraits.bmp", static_cast<int>(ORDER::UI));
 
 	switch (SelectedCharacterType)
 	{
 	case CharacterType::ISAAC:
-		CreateRenderer("death_portraits_3_isaac.bmp")->CameraEffectOff();
+		CreateRenderer("death_portraits_3_isaac.bmp", static_cast<int>(ORDER::UI))->SetPivot({90, 290});
 		break;
 	case CharacterType::CAIN:
-		CreateRenderer("death_portraits_3_cain.bmp")->CameraEffectOff();
+		CreateRenderer("death_portraits_3_cain.bmp", static_cast<int>(ORDER::UI))->SetPivot({ 90, 290 });
 		break;
 	case CharacterType::MAGDALENE:
-		CreateRenderer("death_portraits_3_magdalene.bmp")->CameraEffectOff();
+		CreateRenderer("death_portraits_3_magdalene.bmp", static_cast<int>(ORDER::UI))->SetPivot({ 90, 290 });
 		break;
 	case CharacterType::JUDAS:
-		CreateRenderer("death_portraits_3_judas.bmp")->CameraEffectOff();
+		CreateRenderer("death_portraits_3_judas.bmp", static_cast<int>(ORDER::UI))->SetPivot({ 90, 290 });
 		break;
 	case CharacterType::BLUEBABY:
-		CreateRenderer("death_portraits_3_bluebaby.bmp")->CameraEffectOff();
+		CreateRenderer("death_portraits_3_bluebaby.bmp", static_cast<int>(ORDER::UI))->SetPivot({ 90, 290 });
+		break;
+	default:
+		break;
+	}
+
+	switch (RandomRoomManager::GetInst()->GetCurrentFloor())
+	{
+	case 0:
+	case 1:
+		CreateRenderer("death_portraits_2_1.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
+		break;
+	case 2:
+	case 3:
+		CreateRenderer("death_portraits_2_2.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
+		break;
+	case 4:
+		CreateRenderer("death_portraits_2_3.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
 		break;
 	default:
 		break;
@@ -41,7 +61,7 @@ void DeadReasonUI::Start()
 	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 12);
 	GameEngineRenderer* Renderer = CreateRenderer("death_portraits_1.bmp", static_cast<int>(ORDER::UI));
 	Renderer->SetIndex(RandomInt);
-	Renderer->CameraEffectOff();
+	Renderer->SetPivot({ 200, -210 });
 }
 
 void DeadReasonUI::Update()
