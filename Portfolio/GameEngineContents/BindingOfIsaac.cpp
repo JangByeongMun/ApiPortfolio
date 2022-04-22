@@ -40,7 +40,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Play");
+	ChangeLevel("Title");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -396,6 +396,10 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("minimap1.bmp");
 		Image->CutCount(5, 8);
+
+		Image = GameEngineImageManager::GetInst()->Find("death_portraits_1.bmp");
+		Image->CutCount(4, 5);
+
 	}
 
 	/////////////////////////////////// Play Item

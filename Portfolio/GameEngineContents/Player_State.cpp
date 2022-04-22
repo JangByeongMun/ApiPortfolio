@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineImage.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineTime.h>
+#include "DeadReasonUI.h"
 
 float AnimTimer_;
 
@@ -102,7 +104,7 @@ void Player::HeadDeadStart()
 		if (i == CharacterIndex)
 		{
 			AnimRender_[i]->On();
-			AnimRender_[i]->SetIndex(6);
+			AnimRender_[i]->SetIndex(0);
 		}
 		else
 		{
@@ -113,7 +115,7 @@ void Player::HeadDeadStart()
 	{
 		HeadAddRender_[i]->Off();
 	}
-	AnimTimer_ = 1.0f;
+	AnimTimer_ = 0.0f;
 }
 
 // Update
@@ -388,17 +390,27 @@ void Player::HeadHittedUpdate()
 }
 void Player::HeadDeadUpdate()
 {
-	AnimTimer_ -= GameEngineTime::GetDeltaTime();
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
-	if (AnimTimer_ <= 0)
+	if (AnimTimer_ >= 0.3f)
 	{
 		for (int i = 0; i < AnimRender_.size(); i++)
 		{
-			AnimRender_[i]->Off();
+			AnimRender_[i]->SetIndex(6);
 		}
-		for (int i = 0; i < HeadAddRender_.size(); i++)
+	}
+
+	if (AnimTimer_ >= 0.6f)
+	{
+		for (int i = 0; i < AnimRender_.size(); i++)
 		{
-			HeadAddRender_[i]->On();
+			AnimRender_[i]->SetIndex(3);
 		}
+	}
+
+	if (AnimTimer_ >= 1.0f)
+	{
+		GetLevel()->CreateActor<DeadReasonUI>();
+		GameEngineTime::Pause();
 	}
 }

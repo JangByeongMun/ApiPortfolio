@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngine/GameEngineActor.h>
 
 // 설명 : 죽은 이유를 표시해주는창
-class DeadReasonUI
+class DeadReasonUI : public GameEngineActor
 {
 public:
 	// constrcuter destructer
@@ -17,6 +18,7 @@ public:
 protected:
 
 private:
-
+	void Start() override;
+	void Update() override;
 };
 
