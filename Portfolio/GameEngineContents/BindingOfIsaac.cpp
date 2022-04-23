@@ -252,6 +252,21 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("UI");
+		ResourcesDirectory.Move("PlayLevel");
+		ResourcesDirectory.Move("BossRoom");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("UI");
 		ResourcesDirectory.Move("EndingLevel");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -474,6 +489,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("death_items.bmp");
 		Image->CutCount(3, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("vsnames.bmp");
+		Image->CutCount(5, 15);
 	}
 
 	/////////////////////////////////// Play Item

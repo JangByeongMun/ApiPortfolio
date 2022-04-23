@@ -212,6 +212,9 @@
     <ClInclude Include="Monstro.h">
       <Filter>Play\Monster\Boss</Filter>
     </ClInclude>
+    <ClInclude Include="EnterBossRoom.h">
+      <Filter>Play\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="Monstro.cpp">
       <Filter>Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="EnterBossRoom.cpp">
+      <Filter>Play\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

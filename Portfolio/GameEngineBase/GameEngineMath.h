@@ -158,6 +158,20 @@ public:
 
 		return _Start * (1 - _Value) + _Goal * _Value;
 	}
+	// 보간 필요한것같아서 제작
+	static float LerpFloat(float _Start, float _Goal, float _Value)
+	{
+		if (1 <= _Value)
+		{
+			_Value = 1;
+		}
+		if (0 >= _Value)
+		{
+			_Value = 0;
+		}
+
+		return _Start * (1 - _Value) + _Goal * _Value;
+	}
 
 	float4 operator-(const float4& _Other) const
 	{

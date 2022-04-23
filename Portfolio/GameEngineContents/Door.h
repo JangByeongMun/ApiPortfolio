@@ -30,6 +30,20 @@ public:
 	void DoorOpen();
 	void DoorClose();
 
+	inline void UnLock()
+	{
+		IsLock_ = false;
+		DoorOpen();
+	}
+	inline void SetLock(bool _Lock)
+	{
+		IsLock_ = _Lock;
+	}
+	inline bool GetLock()
+	{
+		return IsLock_;
+	}
+
 protected:
 
 private:
@@ -38,8 +52,10 @@ private:
 	DoorType Type_;
 	DoorDir Dir_;
 	bool IsOpen_;
+	bool IsLock_;
 	float AnimTimer_;
 
 	void Update() override;
+	void CloseSetting(DoorType _Type, DoorDir _Dir, std::string _Name);
 };
 

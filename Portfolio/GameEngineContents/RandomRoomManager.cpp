@@ -7,6 +7,7 @@
 #include "RoomActor.h"
 #include "Player.h"
 #include "PlayerUI.h"
+#include "ContentsGlobal.h"
 
 RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
 
@@ -51,6 +52,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 		TmpActor->SetData(RandomBossRoomData());
 		TmpActor->SetPos(RandomCornerPos());
 
+		SelectedBossType = TmpActor->GetData().GetBossType();
 		CurrentRooms_.push_back(TmpActor);
 	}
 
@@ -380,6 +382,11 @@ int RandomRoomManager::ConnectedRoomCount(float4 _Pos)
 
 RoomActor* RandomRoomManager::FindRoom(float4 _Pos)
 {
+	if (false == ExistPos(_Pos))
+	{
+		return nullptr;
+	}
+
 	for (int i = 0; i < CurrentRooms_.size(); i++)
 	{
 		if (true == CurrentRooms_[i]->GetPos().CompareInt2D(_Pos))

@@ -108,6 +108,11 @@ public:
 		return RoomType_ == RoomType::Default;
 	}
 
+	inline BossType GetBossType()
+	{
+		return AllBoss_[0].Type_;
+	}
+
 protected:
 
 private:

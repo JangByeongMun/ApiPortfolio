@@ -6,6 +6,7 @@ enum class ORDER
 	BACKGROUND,
 	PLAYER,
 	UI,
+	FRONTUI,
 };
 
 // 선택한 캐릭터 타입

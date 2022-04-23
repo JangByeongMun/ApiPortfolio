@@ -23,6 +23,7 @@
 #include "Door.h"
 #include "PlayLevel.h"
 #include "PlayerHP.h"
+#include "EnterBossRoom.h"
 
 #include "KeyItem.h"
 #include "BatteryItem.h"
@@ -177,6 +178,7 @@ void Player::Update()
 		//ChangeHeadState(PlayerHeadState::Dead);
 	}
 
+	// 무적시간 구현
 	if (InvincibilityTimer_ > 0.0f)
 	{
 		InvincibilityTimer_ -= GameEngineTime::GetDeltaTime();
@@ -567,6 +569,52 @@ void Player::AddItem(ItemType _Type)
 	PlayerUI_->SetItemUI();
 }
 
+bool Player::MinusItem(ItemType _Type, unsigned int _Value)
+{
+	switch (_Type)
+	{
+	case ItemType::Bomb:
+		if (BombCount_ >= _Value)
+		{
+			BombCount_ -= _Value;
+		}
+		else
+		{
+			return false;
+		}
+		break;
+	case ItemType::Key:
+		if (true == IsMasterKey_)
+		{
+			break;
+		}
+		else if (KeyCount_ >= _Value)
+		{
+			KeyCount_ -= _Value;
+		}
+		else
+		{
+			return false;
+		}
+		break;
+	case ItemType::Money:
+		if (MoneyCount_ >= _Value)
+		{
+			MoneyCount_ -= _Value;
+		}
+		else
+		{
+			return false;
+		}
+		break;
+	default:
+		break;
+	}
+
+	PlayerUI_->SetItemUI();
+	return true;
+}
+
 PlayerHP* Player::GetPlayerHP()
 {
 	return PlayerUI_->PlayerHP_;
@@ -607,12 +655,32 @@ void Player::ChangeRoom(DoorDir _Dir)
 
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
 	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
-	static_cast<PlayLevel*>(GetLevel())->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
-
-	if (0 != FindRoom->GetMonsterCount())
+	// 보스방 들어갈때 멈추고 보스입장 애니메이션
+	if (0 != FindRoom->GetBossCount())
 	{
-		FindRoom->CloseAllDoor();
+		GetLevel()->SetCameraPos(FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
+		
+		EnterBossRoom* TmpActor = GetLevel()->CreateActor<EnterBossRoom>();
+		TmpActor->SetPosition(FindRoom->GetPosition());
+		TmpActor->Setting();
+
+		GameEngineTime::Pause();
 	}
+	else
+	{
+		PlayLevel* TmpPlayLevel = dynamic_cast<PlayLevel*>(GetLevel());
+		TmpPlayLevel->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
+	}
+
+	if (false == PlayLevel::GetDebugMode())
+	{
+		if (0 != FindRoom->GetMonsterCount())
+		{
+			FindRoom->CloseAllDoor();
+		}
+	}
+	
+	
 
 	PlayerUI_->UpdateMiniMap(GoDir);
 }

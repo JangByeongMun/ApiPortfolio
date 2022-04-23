@@ -20,6 +20,12 @@ public:
 			Inst_ = nullptr;
 		}
 	}
+
+	// 전체 정지일때도 움직일수 있는 것들 구현을 위한것
+	static inline float GetUnstoppableDeltaTime()
+	{
+		return Inst_->DeltaTime_;
+	}
 	static inline float GetDeltaTime()
 	{
 		if (true == IsPause_)

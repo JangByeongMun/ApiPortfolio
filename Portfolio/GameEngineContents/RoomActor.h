@@ -43,6 +43,10 @@ public:
 	{
 		return MonsterCount_;
 	}
+	inline int GetBossCount()
+	{
+		return BossCount_;
+	}
 
 	void Setting();
 	Door* FindDoor(DoorDir _Dir);
@@ -59,6 +63,7 @@ private:
 	RoomData Data_;
 	float4 Pos_;
 	int MonsterCount_;
+	int BossCount_;
 
 	void Start() override;
 	void DoorSetting();

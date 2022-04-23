@@ -149,6 +149,11 @@ private:
 
 public:
 	void AddItem(ItemType _Type);
+	bool MinusItem(ItemType _Type, unsigned int _Value);
+	inline bool HaveKey()
+	{
+		return KeyCount_ >= 1 || true == IsMasterKey_;
+	}
 
 ///////////////////////////////// UI Ελ°ύ
 private:

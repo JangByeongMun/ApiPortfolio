@@ -8,6 +8,7 @@ Door::Door()
 	, Type_()
 	, Dir_()
 	, IsOpen_(false)
+	, IsLock_(false)
 	, AnimTimer_(0.0f)
 {
 }
@@ -64,60 +65,20 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		break;
 	}
 
-
-	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
-		TmpRenderer->SetIndex(1);
-		RendererVector_.push_back(TmpRenderer);
-	}
-
-	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
-		TmpRenderer->SetIndex(2);
-		RendererVector_.push_back(TmpRenderer);
-	}
-
-	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer(Name);
-		TmpRenderer->SetIndex(3);
-		RendererVector_.push_back(TmpRenderer);
-	}
-
-	switch (Dir_)
-	{
-	case DoorDir::Up:
-		RendererVector_[0]->SetPivot({0, 10});
-		RendererVector_[1]->SetPivot({-18, 0});
-		RendererVector_[2]->SetPivot({18, 0});
-		break;
-	case DoorDir::Down:
-		RendererVector_[0]->SetPivot({ 0, -10 });
-		RendererVector_[1]->SetPivot({ 18, 0 });
-		RendererVector_[2]->SetPivot({ -18, 0 });
-		break;
-	case DoorDir::Left:
-		RendererVector_[0]->SetPivot({ 10, 0 });
-		RendererVector_[1]->SetPivot({ 0, 18 });
-		RendererVector_[2]->SetPivot({ 0, -18 });
-		break;
-	case DoorDir::Right:
-		RendererVector_[0]->SetPivot({ -10, 0 });
-		RendererVector_[1]->SetPivot({ 0, -18 });
-		RendererVector_[2]->SetPivot({ 0, 18 });
-		break;
-	default:
-		break;
-	}
-
+	CloseSetting(_Type, _Dir, Name);
 	CreateRenderer(Name)->SetIndex(0);
 }
 
 void Door::DoorOpen()
 {
+	if (true == IsLock_)
+	{
+		return;
+	}
+
 	IsOpen_ = true;
 	RendererVector_[1]->Off();
 	RendererVector_[2]->Off();
-	Collision_->On();
 }
 
 void Door::DoorClose()
@@ -125,14 +86,149 @@ void Door::DoorClose()
 	IsOpen_ = false;
 	RendererVector_[1]->On();
 	RendererVector_[2]->On();
-	Collision_->Off();
 }
 
 void Door::Update()
 {
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
-		Player::MainPlayer->ChangeRoom(Dir_);
+		if (IsOpen_)
+		{
+			Player::MainPlayer->ChangeRoom(Dir_);
+		}
+		else if (IsLock_)
+		{
+			if (true == Player::MainPlayer->HaveKey())
+			{
+				Player::MainPlayer->MinusItem(ItemType::Key, 1);
+				UnLock();
+			}
+		}
+	}
+}
+
+void Door::CloseSetting(DoorType _Type, DoorDir _Dir, std::string _Name)
+{
+	switch (_Type)
+	{
+	case DoorType::Default:
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(i);
+			RendererVector_.push_back(TmpRenderer);
+		}
+		switch (Dir_)
+		{
+		case DoorDir::Up:
+			RendererVector_[0]->SetPivot({ 0, 10 });
+			RendererVector_[1]->SetPivot({ -18, 7 });
+			RendererVector_[2]->SetPivot({ 18, 7 });
+			break;
+		case DoorDir::Down:
+			RendererVector_[0]->SetPivot({ 0, -10 });
+			RendererVector_[1]->SetPivot({ 18, -7 });
+			RendererVector_[2]->SetPivot({ -18, -7 });
+			break;
+		case DoorDir::Left:
+			RendererVector_[0]->SetPivot({ 10, 0 });
+			RendererVector_[1]->SetPivot({ 7, 18 });
+			RendererVector_[2]->SetPivot({ 7, -18 });
+			break;
+		case DoorDir::Right:
+			RendererVector_[0]->SetPivot({ -10, 0 });
+			RendererVector_[1]->SetPivot({ -7, -18 });
+			RendererVector_[2]->SetPivot({ -7, 18 });
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+	case DoorType::Treasure:
+	{
+		for (int i = 1; i <= 2; i++)
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(i);
+			RendererVector_.push_back(TmpRenderer);
+		}
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(5);
+			RendererVector_.push_back(TmpRenderer);
+		}
+		switch (Dir_)
+		{
+		case DoorDir::Up:
+			RendererVector_[0]->SetPivot({ 0, 10 });
+			RendererVector_[1]->SetPivot({ -18, 10 });
+			RendererVector_[2]->SetPivot({ 10, 10 });
+			break;
+		case DoorDir::Down:
+			RendererVector_[0]->SetPivot({ 0, -10 });
+			RendererVector_[1]->SetPivot({ 18, -10 });
+			RendererVector_[2]->SetPivot({ -10, -10 });
+			break;
+		case DoorDir::Left:
+			RendererVector_[0]->SetPivot({ 10, 0 });
+			RendererVector_[1]->SetPivot({ 10, 18 });
+			RendererVector_[2]->SetPivot({ 10, -10 });
+			break;
+		case DoorDir::Right:
+			RendererVector_[0]->SetPivot({ -10, 0 });
+			RendererVector_[1]->SetPivot({ -10, -18 });
+			RendererVector_[2]->SetPivot({ -10, 10 });
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+	case DoorType::Boss:
+	{
+		for (int i = 1; i <= 3; i++)
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(i);
+			RendererVector_.push_back(TmpRenderer);
+		}
+		switch (Dir_)
+		{
+		case DoorDir::Up:
+			RendererVector_[0]->SetScale({190, 160});
+			RendererVector_[0]->SetPivot({ 0, 12 });
+			RendererVector_[1]->SetPivot({ -18, 12 });
+			RendererVector_[2]->SetPivot({ 18, 12 });
+			break;
+		case DoorDir::Down:
+			RendererVector_[0]->SetScale({ 190, 160 });
+			RendererVector_[0]->SetPivot({ 0, -12 });
+			RendererVector_[1]->SetPivot({ 18, -12 });
+			RendererVector_[2]->SetPivot({ -18, -12 });
+			break;
+		case DoorDir::Left:
+			RendererVector_[0]->SetScale({ 160, 190 });
+			RendererVector_[0]->SetPivot({ 12, 0 });
+			RendererVector_[1]->SetPivot({ 12, 18 });
+			RendererVector_[2]->SetPivot({ 12, -18 });
+			break;
+		case DoorDir::Right:
+			RendererVector_[0]->SetScale({ 160, 190 });
+			RendererVector_[0]->SetPivot({ -12, 0 });
+			RendererVector_[1]->SetPivot({ -12, -18 });
+			RendererVector_[2]->SetPivot({ -12, 18 });
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+	case DoorType::Max:
+		break;
+	default:
+		break;
 	}
 }
 

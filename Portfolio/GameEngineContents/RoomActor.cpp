@@ -142,6 +142,7 @@ void RoomActor::Setting()
 
 	// 보스몬스터 세팅
 	std::vector<RoomData::BossData> TmpBossVector = Data_.AllBoss_;
+	BossCount_ = static_cast<int>(TmpBossVector.size());
 	for (int i = 0; i < TmpBossVector.size(); i++)
 	{
 		float4 TmpTilePos = { StartX + ScaleX * TmpBossVector[i].X_, StartY + ScaleY * TmpBossVector[i].Y_ };
@@ -226,6 +227,7 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Down);
+			TmpDoor->SetLock(true);
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Down);
@@ -246,6 +248,7 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Up);
+			TmpDoor->SetLock(true);
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Up);
@@ -265,6 +268,7 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Right);
+			TmpDoor->SetLock(true);
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Right);
@@ -284,6 +288,7 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Left);
+			TmpDoor->SetLock(true);
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Left);
