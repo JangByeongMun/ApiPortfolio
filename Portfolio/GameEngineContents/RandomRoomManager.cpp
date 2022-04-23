@@ -312,7 +312,7 @@ void RandomRoomManager::Start()
 			std::vector<RoomData> TmpVector;
 			{
 				RoomData TmpData = RoomData();
-				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+				TmpData.AddBoss(7, 4, BossType::Monstro);
 
 				TmpData.RoomType_ = RoomType::Boss;
 				TmpVector.push_back(TmpData);

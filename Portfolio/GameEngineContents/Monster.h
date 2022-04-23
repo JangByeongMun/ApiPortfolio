@@ -47,6 +47,10 @@ protected:
 
 public:
 	float4 AttackNormalDir();
+	inline void SetAttackDelay(float _Value)
+	{
+		AttackDelay_ = _Value;
+	}
 
 ///////////////////////////////// ¿Ãµø
 protected:

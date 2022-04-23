@@ -8,6 +8,8 @@ RoomData::RoomData()
 	: RoomType_(RoomType::Default)
 	, AllBlock_{}
 	, AllMonster_{}
+	, AllPassives_{}
+	, AllBoss_{}
 {
 }
 
@@ -15,6 +17,8 @@ RoomData::RoomData(const RoomData& _Other)
 	: RoomType_(RoomType::Default)
 	, AllBlock_{}
 	, AllMonster_{}
+	, AllPassives_{}
+	, AllBoss_{}
 {
 	RoomType_ = _Other.RoomType_;
 
@@ -34,6 +38,12 @@ RoomData::RoomData(const RoomData& _Other)
 	for (int i = 0; i < _Other.AllPassives_.size(); i++)
 	{
 		AllPassives_.push_back(_Other.AllPassives_[i]);
+	}
+
+	AllBoss_.clear();
+	for (int i = 0; i < _Other.AllBoss_.size(); i++)
+	{
+		AllBoss_.push_back(_Other.AllBoss_[i]);
 	}
 }
 
@@ -63,6 +73,12 @@ RoomData& RoomData::operator=(RoomData& _Other)
 		AllPassives_.push_back(_Other.AllPassives_[i]);
 	}
 
+	AllBoss_.clear();
+	for (int i = 0; i < _Other.AllBoss_.size(); i++)
+	{
+		AllBoss_.push_back(_Other.AllBoss_[i]);
+	}
+
 	return *this;
 }
 
@@ -79,4 +95,9 @@ void RoomData::AddMonster(int _X, int _Y, MonsterType _Type)
 void RoomData::AddPassive(int _X, int _Y, PassiveType _Type)
 {
 	AllPassives_.push_back(PassiveData(_X, _Y, _Type));
+}
+
+void RoomData::AddBoss(int _X, int _Y, BossType _Type)
+{
+	AllBoss_.push_back(BossData(_X, _Y, _Type));
 }

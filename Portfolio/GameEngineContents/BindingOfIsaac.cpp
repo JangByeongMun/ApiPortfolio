@@ -61,6 +61,18 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.MoveParent("Portfolio");
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Map");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
@@ -75,6 +87,19 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Monster");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("BossMonster");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{
@@ -375,6 +400,14 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(4, 4);
 		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter_Right.bmp");
 		Image->CutCount(4, 4);
+	}
+
+	/////////////////////////////////// BossMonster
+	{
+		Image = GameEngineImageManager::GetInst()->Find("boss_004_monstro_Left.bmp");
+		Image->CutCount(5, 2);
+		Image = GameEngineImageManager::GetInst()->Find("boss_004_monstro_Right.bmp");
+		Image->CutCount(5, 2);
 	}
 
 	/////////////////////////////////// Map

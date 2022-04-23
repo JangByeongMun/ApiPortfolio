@@ -6,6 +6,7 @@
 #include "ContentsEnum.h"
 #include "Fire.h"
 #include "PassiveItem.h"
+#include "Monstro.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -137,6 +138,31 @@ void RoomActor::Setting()
 		PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
 		TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
 		TmpPassiveItem->Setting(TmpPassiveVector[i].Type_);
+	}
+
+	// 보스몬스터 세팅
+	std::vector<RoomData::BossData> TmpBossVector = Data_.AllBoss_;
+	for (int i = 0; i < TmpBossVector.size(); i++)
+	{
+		float4 TmpTilePos = { StartX + ScaleX * TmpBossVector[i].X_, StartY + ScaleY * TmpBossVector[i].Y_ };
+		switch (TmpBossVector[i].Type_)
+		{
+		case BossType::Default:
+			break;
+
+		case BossType::Monstro:
+		{
+			Monstro* TmpBoss = GetLevel()->CreateActor<Monstro>();
+			TmpBoss->SetPosition(GetPosition() + TmpTilePos);
+			TmpBoss->SetRoom(*this);
+			break;
+		}
+
+		case BossType::Max:
+			break;
+		default:
+			break;
+		}
 	}
 }
 

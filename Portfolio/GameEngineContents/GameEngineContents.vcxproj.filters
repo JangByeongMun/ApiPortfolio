@@ -206,6 +206,12 @@
     <ClInclude Include="PassiveItem.h">
       <Filter>Play\Passive\Base</Filter>
     </ClInclude>
+    <ClInclude Include="BossMonster.h">
+      <Filter>Play\Monster\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="Monstro.h">
+      <Filter>Play\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -410,6 +416,12 @@
     <ClCompile Include="PassiveItem.cpp">
       <Filter>Play\Passive\Base</Filter>
     </ClCompile>
+    <ClCompile Include="BossMonster.cpp">
+      <Filter>Play\Monster\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="Monstro.cpp">
+      <Filter>Play\Monster\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -468,6 +480,9 @@
     </Filter>
     <Filter Include="Play\Passive\Base">
       <UniqueIdentifier>{70a71784-2045-484c-adb5-63bea12b8cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Monster\Boss">
+      <UniqueIdentifier>{cd91f1b1-0bf2-441c-8f93-1f1f76019807}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -156,3 +156,11 @@ enum class PassiveType
 
 	Max,
 };
+
+enum class BossType
+{
+	Default,
+	Monstro,
+
+	Max,
+};
