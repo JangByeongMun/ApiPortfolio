@@ -31,7 +31,6 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		Name += "01_normaldoor";
 		break;
 	case DoorType::Treasure:
-		//Name += "02_treasureroomdoor";
 		Name += "02_treasureroomdoor";
 		break;
 	case DoorType::Boss:
@@ -71,6 +70,8 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 
 void Door::DoorOpen()
 {
+	CloseCollision_->Off();
+
 	if (true == IsLock_)
 	{
 		return;
@@ -83,6 +84,8 @@ void Door::DoorOpen()
 
 void Door::DoorClose()
 {
+	CloseCollision_->On();
+
 	IsOpen_ = false;
 	RendererVector_[1]->On();
 	RendererVector_[2]->On();

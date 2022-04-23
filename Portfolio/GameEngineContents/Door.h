@@ -44,11 +44,17 @@ public:
 		return IsLock_;
 	}
 
+	void SetCloseCollision(GameEngineCollision* _Collision)
+	{
+		CloseCollision_ = _Collision;
+	}
+
 protected:
 
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
 	GameEngineCollision* Collision_;
+	GameEngineCollision* CloseCollision_; // 문 닫혀있을때 벽을 평평하게 할 충돌체
 	DoorType Type_;
 	DoorDir Dir_;
 	bool IsOpen_;

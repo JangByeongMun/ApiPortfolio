@@ -45,6 +45,28 @@ void RoomActor::Setting()
 	CreateRenderer("bgblack.bmp", RenderPivot::CENTER, float4::ZERO, -1);
 	CreateRenderer("01_basement.bmp", RenderPivot::CENTER, float4::ZERO);
 
+	// 문닫혀있을때 벽 평평하게 만드는 컬리젼추가
+	{
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
+		TmpCollision_->SetPivot(float4(0, 300) + float4(0, 5));
+		CloseCollisionVector_.push_back(TmpCollision_);
+	}
+	{
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
+		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -63));
+		CloseCollisionVector_.push_back(TmpCollision_);
+	}
+	{
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
+		TmpCollision_->SetPivot(float4(500, 0) + float4(20, 0));
+		CloseCollisionVector_.push_back(TmpCollision_);
+	}
+	{
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
+		TmpCollision_->SetPivot(float4(-500, 0) + float4(-23, 0));
+		CloseCollisionVector_.push_back(TmpCollision_);
+	}
+
 	// 문 세팅
 	DoorSetting();
 
@@ -237,6 +259,7 @@ void RoomActor::DoorSetting()
 			break;
 		}
 
+		TmpDoor->SetCloseCollision(CloseCollisionVector_[0]);
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, -1)))
@@ -257,6 +280,8 @@ void RoomActor::DoorSetting()
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Up);
 			break;
 		}
+
+		TmpDoor->SetCloseCollision(CloseCollisionVector_[1]);
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(1, 0)))
@@ -277,6 +302,8 @@ void RoomActor::DoorSetting()
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Right);
 			break;
 		}
+
+		TmpDoor->SetCloseCollision(CloseCollisionVector_[2]);
 		DoorVector_.push_back(TmpDoor);
 	}
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(-1, 0)))
@@ -297,6 +324,8 @@ void RoomActor::DoorSetting()
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Left);
 			break;
 		}
+
+		TmpDoor->SetCloseCollision(CloseCollisionVector_[3]);
 		DoorVector_.push_back(TmpDoor);
 	}
 

@@ -165,9 +165,6 @@ void Player::Update()
 	// 상태 관리
 	StateUpdate();
 
-	// 충돌 체크
-	CollisionCheck();
-
 	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
@@ -211,19 +208,6 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	MainPlayer = this;
 }
 
-void Player::CollisionCheck()
-{
-	std::vector<GameEngineCollision*> ColVec;
-
-	if (true == PlayerCollision_->CollisionResult("Wall", ColVec, CollisionType::Rect, CollisionType::Rect))
-	{
-		for (int i = 0; i < ColVec.size(); i++)
-		{
-			ColVec[i]->Death();
-		}
-	}
-}
-
 // 벽이 있는지 확인하고 이동하도록하는 함수
 void Player::PlayerSetMove(const float4& _Value)
 {
@@ -248,7 +232,11 @@ bool Player::CanMove(const float4& _Value)
 	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
 	int Color = MapColImage_->GetImagePixel(GetPosition() + _Value - AddPivot);
 
-	if (RGB(0, 0, 0) != Color && false == PlayerCollision_->NextPosCollisionCheckRect("Stone", _Value))
+	if (
+		RGB(0, 0, 0) != Color &&
+		false == PlayerCollision_->NextPosCollisionCheckRect("Stone", _Value) &&
+		false == PlayerCollision_->NextPosCollisionCheckRect("Wall", _Value)
+		)
 	{
 		return true;
 	}
@@ -654,7 +642,24 @@ void Player::ChangeRoom(DoorDir _Dir)
 	RoomPos_ += GoDir;
 
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->FindRoom(RoomPos_);
-	SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
+
+	switch (_Dir)
+	{
+	case DoorDir::Up:
+		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 86);
+		break;
+	case DoorDir::Down:
+		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 29);
+		break;
+	case DoorDir::Left:
+		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
+		break;
+	case DoorDir::Right:
+		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);
+		break;
+	default:
+		break;
+	}
 	// 보스방 들어갈때 멈추고 보스입장 애니메이션
 	if (0 != FindRoom->GetBossCount())
 	{
@@ -679,8 +684,6 @@ void Player::ChangeRoom(DoorDir _Dir)
 			FindRoom->CloseAllDoor();
 		}
 	}
-	
-	
 
 	PlayerUI_->UpdateMiniMap(GoDir);
 }
