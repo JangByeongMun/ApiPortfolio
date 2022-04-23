@@ -115,11 +115,24 @@ void Projectile::Update()
 void Projectile::DestroyProjectile()
 {
 	PlayLevel* TmpLevel = static_cast<PlayLevel*>(GetLevel());
-	GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp");
-	TmpRenderer->CreateAnimation("effect_015_tearpoofa.bmp", "effect_015_tearpoofa", 0, 15, 0.02f, false);
-	TmpRenderer->ChangeAnimation("effect_015_tearpoofa");
-	TmpRenderer->SetDeleteEndFrame_(true);
-	TmpRenderer->SetPivot(GetPosition());
+
+	if (true == IsPlayerProjectile())
+	{
+		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp");
+		TmpRenderer->CreateAnimation("effect_015_tearpoofa.bmp", "effect_015_tearpoofa", 0, 15, 0.02f, false);
+		TmpRenderer->ChangeAnimation("effect_015_tearpoofa");
+		TmpRenderer->SetDeleteEndFrame_(true);
+		TmpRenderer->SetPivot(GetPosition());
+	}
+	else
+	{
+		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_002_bloodpoof.bmp");
+		TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.02f, false);
+		TmpRenderer->ChangeAnimation("effect_002_bloodpoof");
+		TmpRenderer->SetDeleteEndFrame_(true);
+		TmpRenderer->SetPivot(GetPosition());
+	}
+	
 	Death();
 }
 
