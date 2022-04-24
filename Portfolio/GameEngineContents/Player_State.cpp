@@ -493,6 +493,10 @@ void Player::HeadTrapdoorUpdate()
 
 	if (AnimTimer_ >= 0.9f)
 	{
+		for (int i = 0; i < HeadAddRender_.size(); i++)
+		{
+			HeadAddRender_[i]->On();
+		}
 		ChangeBodyState(PlayerBodyState::Idle);
 		ChangeHeadState(PlayerHeadState::Idle);
 		GameEngine::GetInst().ChangeLevel("Loading");

@@ -44,7 +44,6 @@ void PlayLevel::Loading()
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER);
-		Player::MainPlayer->SetPlayerInfo();
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("PlayESC"))

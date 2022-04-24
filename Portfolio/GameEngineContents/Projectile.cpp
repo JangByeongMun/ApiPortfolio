@@ -99,7 +99,6 @@ void Projectile::Update()
 		}
 	}
 	
-
 	// 벽을 못넘어가도록 넘어가려고하면 삭제
 	RoomActor* FindRoom = RandomRoomManager::GetInst()->GetCurrentRoom();
 	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();

@@ -23,6 +23,11 @@ void RandomRoomManager::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
+	if (1 == _Floor)
+	{
+		Player::MainPlayer->SetPlayerInfo();
+	}
+
 	switch (_Floor)
 	{
 	case 1:
