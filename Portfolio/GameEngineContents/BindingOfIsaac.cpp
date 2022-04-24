@@ -500,6 +500,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("vsnames.bmp");
 		Image->CutCount(5, 15);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_bosshealthbar.bmp");
+		Image->CutCount(1, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_bosshealthbar_2.bmp");
+		Image->CutCount(1, 1);
 	}
 
 	/////////////////////////////////// Play Item

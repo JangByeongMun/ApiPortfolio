@@ -209,6 +209,27 @@ void RoomActor::Setting()
 			break;
 		}
 	}
+
+	if (BossCount_ != 0)
+	{
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer("ui_bosshealthbar_Shadow.bmp", static_cast<int>(ORDER::UI), RenderPivot::Left);
+			TmpRenderer->SetPivot({ -230, -300 });
+			TmpRenderer->SetAlpha(150);
+			BossHpRendererVector_.push_back(TmpRenderer);
+		}
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer("ui_bosshealthbar.bmp", static_cast<int>(ORDER::UI), RenderPivot::Left);
+			TmpRenderer->SetPivot({ -230, -300 });
+			TmpRenderer->SetIndex(1);
+			BossHpRendererVector_.push_back(TmpRenderer);
+		}
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer("ui_bosshealthbar_2.bmp", static_cast<int>(ORDER::UI), RenderPivot::Left);
+			TmpRenderer->SetPivot({ -170, -300 });
+			BossHpRendererVector_.push_back(TmpRenderer);
+		}
+	}
 }
 
 Door* RoomActor::FindDoor(DoorDir _Dir)
@@ -242,6 +263,11 @@ void RoomActor::CloseAllDoor()
 	{
 		DoorVector_[i]->DoorClose();
 	}
+}
+
+void RoomActor::SetBossHPUI(float _Value)
+{
+	BossHpRendererVector_[2]->SetIndexWithValue(0, {-1.0f, -1.0f}, _Value);
 }
 
 void RoomActor::Start()

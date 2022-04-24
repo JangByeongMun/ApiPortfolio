@@ -78,6 +78,28 @@ void GameEngineRenderer::SetIndex(const size_t _Index, const float4& _Scale)
 	RenderImageScale_ = Image_->GetCutScale(_Index);
 }
 
+void GameEngineRenderer::SetIndexWithValue(const size_t _Index, const float4& _Scale, float _Value)
+{
+	if (false == Image_->IsCut())
+	{
+		MsgBoxAssert("잘려져있지 않은 이미지입니다.");
+		return;
+	}
+
+	float4 LerpFloat4 = _Scale;
+	if (-1.0f == _Scale.x || -1.0f == _Scale.y)
+	{
+		LerpFloat4 = float4(float4::LerpFloat(0, Image_->GetCutScale(_Index).x, _Value), Image_->GetCutScale(_Index).y);
+		RenderScale_ = LerpFloat4;
+	}
+	else
+	{
+		RenderScale_ = _Scale;
+	}
+	RenderImagePivot_ = Image_->GetCutPivot(_Index);
+	RenderImageScale_ = LerpFloat4;
+}
+
 void GameEngineRenderer::SetImageAnimationReset(const std::string& _Name)
 {
 	SetImage(_Name);
@@ -143,6 +165,25 @@ void GameEngineRenderer::Render()
 	{
 		float4 Scale = RenderScale_.Half();
 		Scale.y *= 2;
+		if (Alpha_ != 255)
+		{
+			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);
+		}
+		else if (RotZ_ != 0.0f)
+		{
+			GameEngine::BackBufferImage()->PlgCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, RotZ_, RotationFilterImage_);
+		}
+		else
+		{
+			GameEngine::BackBufferImage()->TransCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, TransColor_);
+		}
+		break;
+	}
+	case RenderPivot::Left:
+	{
+		float4 Scale = RenderScale_.Half();
+		Scale.x = 0;
+
 		if (Alpha_ != 255)
 		{
 			GameEngine::BackBufferImage()->AlphaCopy(Image_, RenderPos - Scale, RenderScale_, RenderImagePivot_, RenderImageScale_, Alpha_);

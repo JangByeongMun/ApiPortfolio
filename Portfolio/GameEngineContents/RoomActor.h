@@ -56,12 +56,15 @@ public:
 	void OpenAllDoor();
 	void CloseAllDoor();
 
+	void SetBossHPUI(float _Value);
+
 protected:
 
 private:
 	std::vector<Door*> DoorVector_;
 	std::vector<Monster*> MonsterVector_;
 	std::vector<GameEngineCollision*> CloseCollisionVector_; // 문닫혔을때 벽 평평하게 만들기용
+	std::vector <GameEngineRenderer*> BossHpRendererVector_;
 	RoomData Data_;
 	float4 Pos_;
 	int MonsterCount_;

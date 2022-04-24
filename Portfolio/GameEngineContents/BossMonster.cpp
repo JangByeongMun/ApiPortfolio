@@ -14,9 +14,15 @@ void BossMonster::Damaged(float _Damage)
 {
 	HP_ -= _Damage;
 
+	SetHPUI();
 	if (HP_ <= 0)
 	{
 		Room_->MinusMonsterCount();
 		MonsterDeath();
 	}
+}
+
+void BossMonster::SetHPUI()
+{
+	Room_->SetBossHPUI(HP_ / MaxHP_);
 }

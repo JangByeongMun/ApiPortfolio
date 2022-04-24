@@ -66,10 +66,12 @@ public:
 ///////////////////////////////// ÇÇ°Ý
 protected:
 	float HP_;
+	float MaxHP_;
 
 public:
 	inline void SetHP(float _HP)
 	{
+		MaxHP_ = _HP;
 		HP_ = _HP;
 	}
 	virtual void Damaged(float _Damage);
