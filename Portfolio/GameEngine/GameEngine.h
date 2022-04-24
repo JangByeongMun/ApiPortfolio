@@ -69,6 +69,21 @@ protected:
 		AllLevel_.insert(std::make_pair(_Name, newLevel));
 	}
 
+	template<typename levelType>
+	void ResetLevel(const std::string& _Name)
+	{
+		std::map<std::string, GameEngineLevel*>::iterator FindIter = AllLevel_.find(_Name);
+		if (AllLevel_.end() != FindIter)
+		{
+			delete FindIter->second;
+			FindIter->second = nullptr;
+			AllLevel_.erase(FindIter);
+		}
+
+		CreateLevel<levelType>(_Name);
+	}
+
+
 private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
 	static GameEngineLevel* CurrentLevel_;

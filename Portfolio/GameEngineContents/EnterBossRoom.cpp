@@ -151,7 +151,7 @@ void EnterBossRoom::Update()
 	{
 		GameEngineRenderer* TmpRenderer = CreateRenderer("vsnames_vs.bmp", static_cast<int>(ORDER::FRONTUI));
 		TmpRenderer->SetPivot({ -20, -240 });
-		TmpRenderer->SetAlpha(float4::LerpFloat(0, 255, (AnimTimer_ - 0.5f) * 4.0f));
+		TmpRenderer->SetAlpha(static_cast<unsigned int>(float4::LerpFloat(0.0f, 255.0f, (AnimTimer_ - 0.5f) * 4.0f)));
 	}
 	else
 	{

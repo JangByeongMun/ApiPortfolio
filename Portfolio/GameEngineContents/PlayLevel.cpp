@@ -13,6 +13,7 @@
 #include "ContentsEnum.h"
 #include "RandomRoomManager.h"
 #include "PlayerUI.h"
+#include "ContentsGlobal.h"
 
 PlayLevel::PlayLevel() 
 	: GlobalActor(nullptr)
@@ -38,11 +39,13 @@ void PlayLevel::CameraLerp(float4 _Start, float4 _Goal)
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
-	CreateActor<Player>((int)ORDER::PLAYER);
-	CreateActor<PlayerHP>((int)ORDER::UI);
-	CreateActor<SpacebarUI>((int)ORDER::UI);
-	
 	RandomRoomManager::SetInst(CreateActor<RandomRoomManager>((int)ORDER::BACKGROUND));
+	CreateActor<SpacebarUI>((int)ORDER::UI);
+	if (nullptr == Player::MainPlayer)
+	{
+		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER);
+		Player::MainPlayer->SetPlayerInfo();
+	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("PlayESC"))
 	{
@@ -82,7 +85,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
 	BgmPlayer_.SetVolume(0.05f);
 
-	Player::MainPlayer->SetPlayerInfo();
+	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());
 	RandomRoomManager::GetInst()->ChangeFloor(1);
 }
 

@@ -1,6 +1,7 @@
 #include "Trapdoor.h"
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngine.h>
+#include "Player.h"
 
 Trapdoor::Trapdoor() 
 	: Renderer_(nullptr)
@@ -54,7 +55,9 @@ void Trapdoor::Update()
 		{
 			if (true == Collision_->CollisionCheckRect("Player"))
 			{
-				GameEngine::GetInst().ChangeLevel("Loading");
+				Player::MainPlayer->ChangeBodyState(PlayerBodyState::TrapDoor);
+				Player::MainPlayer->ChangeHeadState(PlayerHeadState::TrapDoor);
+				Player::MainPlayer->SetPosition(GetPosition());
 			}
 		}
 		else

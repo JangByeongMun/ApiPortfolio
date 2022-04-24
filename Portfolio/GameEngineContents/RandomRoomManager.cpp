@@ -11,13 +11,23 @@
 
 RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
 
+void RandomRoomManager::LevelChangeStart(GameEngineLevel* _PrevLevel)
+{
+}
+
+void RandomRoomManager::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	Inst_ = nullptr;
+	//Destroy();
+}
+
 bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
 	CurrentFloor = _Floor;
 	switch (CurrentFloor)
 	{
 	case 1:
-		CurrentMapCount_ = 9;
+		CurrentMapCount_ = 4;
 		FloorName_ = "Basement1.bmp";
 		break;
 	case 2:
@@ -65,7 +75,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	{
 		CurrentRooms_[i]->Setting();
 	}
-	Player::MainPlayer->GetPlayerUI()->SetMiniMap();
+	Player::MainPlayer->GetPlayerUI()->MakeMiniMap();
 	return true;
 }
 
@@ -208,25 +218,6 @@ RandomRoomManager::RandomRoomManager()
 }
 RandomRoomManager::~RandomRoomManager()
 {
-	//std::map<int, std::vector<RoomData>>::iterator BeginIter = AllMaps_.begin();
-	//std::map<int, std::vector<RoomData>>::iterator EndIter = AllMaps_.end();
-	//for (; BeginIter != EndIter; ++BeginIter)
-	//{
-	//	std::vector<RoomData>& TmpGroup = BeginIter->second;
-	//	
-	//	std::vector<RoomData>::iterator BeginVectorIter = TmpGroup.begin();
-	//	std::vector<RoomData>::iterator EndVectorIter = TmpGroup.end();
-	//	for (; BeginVectorIter != EndVectorIter; ++BeginVectorIter)
-	//	{
-	//		if (nullptr == (*BeginVectorIter))
-	//		{
-	//			continue;
-	//		}
-	//
-	//		delete (*BeginVectorIter);
-	//		(*BeginVectorIter) = nullptr;
-	//	}
-	//}
 }
 
 void RandomRoomManager::Start()

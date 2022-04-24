@@ -33,6 +33,9 @@ public:
 		Inst_ = nullptr;
 	}
 
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
+
 	inline int GetCurrentFloor()
 	{
 		return CurrentFloor;

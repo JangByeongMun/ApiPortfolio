@@ -2,6 +2,7 @@
 #include "Player.h"
 
 BatteryItem::BatteryItem() 
+	: Collision_ (nullptr)
 {
 }
 

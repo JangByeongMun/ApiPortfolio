@@ -580,6 +580,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Player_AddItems.cpp" />
     <ClCompile Include="Pooter.cpp">
       <SubType>
       </SubType>

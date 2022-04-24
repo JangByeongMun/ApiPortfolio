@@ -11,6 +11,7 @@ enum class PlayerBodyState
 	Acheive,
 	Hitted,
 	Dead,
+	TrapDoor,
 };
 enum class PlayerHeadState
 {
@@ -20,6 +21,7 @@ enum class PlayerHeadState
 	Acheive,
 	Hitted,
 	Dead,
+	TrapDoor,
 };
 
 // 설명 : 플레이어
@@ -73,6 +75,7 @@ private:
 	void Start() override;
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
 
 	void PlayerSetMove(const float4& _Value);
 	bool CanMove(const float4& _Value);
@@ -99,6 +102,7 @@ private:
 	void BodyAcheiveStart();
 	void BodyHittedStart();
 	void BodyDeadStart();
+	void BodyTrapdoorStart();
 
 	// Head Start
 	void HeadIdleStart();
@@ -107,6 +111,7 @@ private:
 	void HeadAcheiveStart(); 
 	void HeadHittedStart();
 	void HeadDeadStart();
+	void HeadTrapdoorStart();
 
 	// Body Update
 	void BodyIdleUpdate();
@@ -114,6 +119,7 @@ private:
 	void BodyAcheiveUpdate();
 	void BodyHittedUpdate();
 	void BodyDeadUpdate();
+	void BodyTrapdoorUpdate();
 
 	// Head Update
 	void HeadIdleUpdate();
@@ -122,6 +128,7 @@ private:
 	void HeadAcheiveUpdate();
 	void HeadHittedUpdate();
 	void HeadDeadUpdate();
+	void HeadTrapdoorUpdate();
 
 
 ///////////////////////////////// 기본정보
@@ -210,6 +217,7 @@ public:
 		TmpName += ".bmp";
 
 		AddPassiveEffect(_Type);
+		MakeItemRenderer(_Type);
 
 		PassiveVector_.push_back(_Type);
 		ChangeBodyState(PlayerBodyState::Acheive);
@@ -231,12 +239,16 @@ public:
 			break;
 		}
 	}
+	void MakeItemRenderer(PassiveType _Type);
+
+	void EffectItem1();
 
 ///////////////////////////////// 방
 private:
 	float4 RoomPos_;
 
 public:	
+	void SetRoom(float4 _Pos);
 	void ChangeRoom(DoorDir _Value);
 	inline float4 GetCurrentRoomPos()
 	{

@@ -32,6 +32,9 @@ private:
 	void Start() override;
 	void Setting();
 
+	void LevelChangeStart(GameEngineLevel* _BeforeLevel) override;
+	void LevelChangeEnd(GameEngineLevel* _NextLevel) override;
+
 public:
 	void SetPlayerHP();
 	void SetCardUI();
@@ -39,6 +42,7 @@ public:
 	void SetAccessoryUI();
 	void SetMiniMap();
 
+	void MakeMiniMap();
 	void UpdateMiniMap(float4 _Dir);
 	void DebugMiniMap();
 
@@ -47,4 +51,3 @@ public:
 		return PlayerHP_;
 	}
 };
-

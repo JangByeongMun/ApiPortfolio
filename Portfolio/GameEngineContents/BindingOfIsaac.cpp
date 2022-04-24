@@ -7,6 +7,7 @@
 #include "MenuLoadingLevel.h"
 #include "RandomRoomManager.h"
 
+
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineImageManager.h>
 #include <GameEngineBase/GameEngineDirectory.h>
@@ -27,6 +28,11 @@ BindingOfIsaac::~BindingOfIsaac()
 {
 }
 
+void BindingOfIsaac::ResetPlayLevel(const std::string& _Name)
+{
+	ResetLevel<PlayLevel>(_Name);
+}
+
 void BindingOfIsaac::GameInit()
 {
 	GameEngineWindow::GetInst().SetWindowScaleAndPosition({ 100, 100 }, { 1280, 720 });
@@ -39,8 +45,6 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<MenuLoadingLevel>("MenuLoading");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
-	//CreateLevel<PlayLevel>("Play_2");
-	//CreateLevel<PlayLevel>("Play_3");
 	CreateLevel<EndingLevel>("Ending");
 	ChangeLevel("Play");
 
@@ -566,8 +570,10 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("pickup_016_bomb_One.bmp");
 		Image->CutCount(3, 1);
-	}
 
+		Image = GameEngineImageManager::GetInst()->Find("costume_058_sadonion.bmp");
+		Image->CutCount(3, 3);
+	}
 
 	/////////////////////////////////// Intro
 	{

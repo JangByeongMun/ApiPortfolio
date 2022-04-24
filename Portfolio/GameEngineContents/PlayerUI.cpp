@@ -5,6 +5,7 @@
 #include "ItemUI.h"
 #include "AccessoryUI.h"
 #include "MiniMap.h"
+#include "PlayLevel.h"
 
 PlayerUI::PlayerUI() 
 	: PlayerHP_(nullptr)
@@ -25,7 +26,6 @@ void PlayerUI::Start()
 	CardUI_ = GetLevel()->CreateActor<CardUI>(static_cast<int>(ORDER::UI));
 	ItemUI_ = GetLevel()->CreateActor<ItemUI>(static_cast<int>(ORDER::UI));
 	AccessoryUI_ = GetLevel()->CreateActor<AccessoryUI>(static_cast<int>(ORDER::UI));
-	MiniMap_ = GetLevel()->CreateActor<MiniMap>(static_cast<int>(ORDER::UI));
 }
 
 void PlayerUI::Setting()
@@ -33,7 +33,32 @@ void PlayerUI::Setting()
 	SetPlayerHP();
 	SetItemUI();
 	SetAccessoryUI();
-	SetMiniMap();
+}
+
+void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
+{
+	if (nullptr == dynamic_cast<PlayLevel*>(GetLevel()))
+	{
+		PlayerHP_->Off();
+		CardUI_->Off();
+		ItemUI_->Off();
+		AccessoryUI_->Off();
+	}
+	else
+	{
+		PlayerHP_->On();
+		CardUI_->On();
+		ItemUI_->On();
+		AccessoryUI_->On();
+	}
+}
+
+void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	PlayerHP_->NextLevelOn();
+	CardUI_->NextLevelOn();
+	ItemUI_->NextLevelOn();
+	AccessoryUI_->NextLevelOn();
 }
 
 void PlayerUI::SetPlayerHP()
@@ -62,6 +87,12 @@ void PlayerUI::SetMiniMap()
 {
 	MiniMap_->MakeNode();
 	MiniMap_->ChangeMap({0, 0});
+}
+
+void PlayerUI::MakeMiniMap()
+{
+	MiniMap_ = GetLevel()->CreateActor<MiniMap>(static_cast<int>(ORDER::UI));
+	SetMiniMap();
 }
 
 void PlayerUI::UpdateMiniMap(float4 _Dir)

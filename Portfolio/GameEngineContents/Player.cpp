@@ -73,8 +73,6 @@ Player::~Player()
 
 void Player::Start()
 {
-	MainPlayer = this;
-
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
 	PlayerCollision_ = CreateCollision("Player", { 85, 85 });
@@ -205,7 +203,15 @@ void Player::Update()
 
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	MainPlayer = this;
+}
+
+void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)
+{
+	NextLevelOn();
+	SetRoom({ 0, 0 });
+	PlayerUI_->NextLevelOn();
+	GetPlayerHP()->NextLevelOn();
+	SetPosition({3000, 3000});
 }
 
 // 벽이 있는지 확인하고 이동하도록하는 함수
@@ -410,6 +416,9 @@ void Player::ChangeBodyState(PlayerBodyState _State)
 		case PlayerBodyState::Dead:
 			BodyDeadStart();
 			break;
+		case PlayerBodyState::TrapDoor:
+			BodyTrapdoorStart();
+			break;
 		default:
 			break;
 		}
@@ -439,6 +448,9 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 			break;
 		case PlayerHeadState::Dead:
 			HeadDeadStart();
+			break;
+		case PlayerHeadState::TrapDoor:
+			HeadTrapdoorStart();
 			break;
 		default:
 			break;
@@ -484,6 +496,9 @@ void Player::StateUpdate()
 	case PlayerBodyState::Dead:
 		BodyDeadUpdate();
 		break;
+	case PlayerBodyState::TrapDoor:
+		BodyTrapdoorUpdate();
+		break;
 	default:
 		break;
 	}
@@ -507,6 +522,9 @@ void Player::StateUpdate()
 		break;
 	case PlayerHeadState::Dead:
 		HeadDeadUpdate();
+		break;
+	case PlayerHeadState::TrapDoor:
+		HeadTrapdoorUpdate();
 		break;
 	default:
 		break;
@@ -614,6 +632,11 @@ void Player::SetAccessory(AccessoryType _Type)
 	PlayerUI_->SetAccessoryUI();
 }
 
+void Player::SetRoom(float4 _Pos)
+{
+	RoomPos_ = _Pos;
+}
+
 void Player::ChangeRoom(DoorDir _Dir)
 {
 	float4 GoDir;
@@ -649,7 +672,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 86);
 		break;
 	case DoorDir::Down:
-		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 29);
+		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 35);
 		break;
 	case DoorDir::Left:
 		SetPosition(FindRoom->FindDoor(otherSide)->GetPosition() + GoDir * 65);

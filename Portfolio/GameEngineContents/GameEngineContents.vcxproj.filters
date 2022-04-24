@@ -434,6 +434,9 @@
     <ClCompile Include="Trapdoor.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
+    <ClCompile Include="Player_AddItems.cpp">
+      <Filter>Play\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">

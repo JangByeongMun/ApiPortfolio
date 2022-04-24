@@ -7,6 +7,7 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include "DeadReasonUI.h"
 #include "PlayLevel.h"
+#include <GameEngine/GameEngine.h>
 
 float AnimTimer_;
 
@@ -33,6 +34,10 @@ void Player::BodyHittedStart()
 	BodyRender_->ChangeAnimation("None");
 }
 void Player::BodyDeadStart()
+{
+	BodyRender_->ChangeAnimation("None");
+}
+void Player::BodyTrapdoorStart()
 {
 	BodyRender_->ChangeAnimation("None");
 }
@@ -118,6 +123,29 @@ void Player::HeadDeadStart()
 	}
 	AnimTimer_ = 0.0f;
 }
+void Player::HeadTrapdoorStart()
+{
+	HeadRender_->ChangeAnimation("None");
+	MoveDir_ = float4::ZERO;
+	int CharacterIndex = static_cast<int>(CharacterType_);
+	for (int i = 0; i < AnimRender_.size(); i++)
+	{
+		if (i == CharacterIndex)
+		{
+			AnimRender_[i]->On();
+			AnimRender_[i]->SetIndex(4);
+		}
+		else
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+	for (int i = 0; i < HeadAddRender_.size(); i++)
+	{
+		HeadAddRender_[i]->Off();
+	}
+	AnimTimer_ = 0.0f;
+}
 
 // Update
 void Player::BodyIdleUpdate()
@@ -186,6 +214,9 @@ void Player::BodyHittedUpdate()
 {
 }
 void Player::BodyDeadUpdate()
+{
+}
+void Player::BodyTrapdoorUpdate()
 {
 }
 
@@ -400,7 +431,7 @@ void Player::HeadHittedUpdate()
 }
 void Player::HeadDeadUpdate()
 {
-	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	AnimTimer_ -= GameEngineTime::GetDeltaTime();
 
 	if (AnimTimer_ >= 0.3f)
 	{
@@ -422,5 +453,48 @@ void Player::HeadDeadUpdate()
 	{
 		GetLevel()->CreateActor<DeadReasonUI>();
 		GameEngineTime::Pause();
+	}
+}
+void Player::HeadTrapdoorUpdate()
+{
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	for (int i = 0; i < AnimRender_.size(); i++)
+	{
+		AnimRender_[i]->SetPivot({0, -100});
+	}
+
+	if (AnimTimer_ >= 0.3f)
+	{
+		float4 LerpPos = float4::Lerp({ 0, -100 }, {0, -80}, (AnimTimer_-0.3f) * 5.0f);
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->SetIndex(8);
+			AnimRender_[i]->SetPivot(LerpPos);
+		}
+	}
+
+	if (AnimTimer_ >= 0.5f)
+	{
+		float4 LerpPos = float4::Lerp({ 0, -80 }, { 0, 0 }, (AnimTimer_ - 0.5f) * 4.0f);
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->SetIndex(9);
+			AnimRender_[i]->SetPivot(LerpPos);
+		}
+	}
+
+	if (AnimTimer_ >= 0.7f)
+	{
+		for (int i = 0; i < AnimRender_.size(); i++)
+		{
+			AnimRender_[i]->Off();
+		}
+	}
+
+	if (AnimTimer_ >= 0.9f)
+	{
+		ChangeBodyState(PlayerBodyState::Idle);
+		ChangeHeadState(PlayerHeadState::Idle);
+		GameEngine::GetInst().ChangeLevel("Loading");
 	}
 }
