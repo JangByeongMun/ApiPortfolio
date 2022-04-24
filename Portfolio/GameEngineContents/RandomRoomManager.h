@@ -70,6 +70,10 @@ private:
 	std::vector<RoomActor*> CurrentRooms_;
 	int CurrentMapCount_;
 
+	std::string FloorName_;
+	GameEngineRenderer* FloorRenderer_;
+	float AnimTimer_;
+
 	// constrcuter destructer
 	RandomRoomManager();
 	~RandomRoomManager();
@@ -81,4 +85,5 @@ private:
 	RandomRoomManager& operator=(RandomRoomManager&& _Other) noexcept = delete;
 
 	void Start() override;
+	void Update() override;
 };

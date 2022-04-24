@@ -18,17 +18,22 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	{
 	case 1:
 		CurrentMapCount_ = 9;
+		FloorName_ = "Basement1.bmp";
 		break;
 	case 2:
 		CurrentMapCount_ = 12;
+		FloorName_ = "Basement1.bmp";
 		break;
 	case 3:
 		CurrentMapCount_ = 15;
+		FloorName_ = "Basement1.bmp";
 		break;
 	default:
 		return false;
 	}
-	
+	AnimTimer_ = 0.0f;
+	FloorRenderer_ = CreateRenderer(FloorName_, static_cast<int>(ORDER::UI), RenderPivot::CENTER, { -700, 0 });
+
 	// ÇöÀç ÃþÀÇ ¸Ê¼ö¸¸Å­ ¹Ýº¹
 	for (int i = 0; i < CurrentMapCount_ - 2; i++)
 	{
@@ -197,6 +202,8 @@ RoomData RandomRoomManager::RandomBossRoomData()
 
 RandomRoomManager::RandomRoomManager()
 	: CurrentMapCount_(0)
+	, AnimTimer_(-1.0f)
+	, FloorRenderer_(nullptr)
 {
 }
 RandomRoomManager::~RandomRoomManager()
@@ -313,13 +320,32 @@ void RandomRoomManager::Start()
 			std::vector<RoomData> TmpVector;
 			{
 				RoomData TmpData = RoomData();
-				TmpData.AddBoss(7, 4, BossType::Monstro);
+				TmpData.AddBoss(0, 0, BossType::Monstro);
 
 				TmpData.RoomType_ = RoomType::Boss;
 				TmpVector.push_back(TmpData);
 			}
 			AllBossRooms_.insert({ 0, TmpVector });
 		}
+	}
+}
+void RandomRoomManager::Update()
+{
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+
+	if (AnimTimer_ <= 1.7f)
+	{
+		float4 LerpPos = float4::Lerp({ -900, -300 }, { 0, -300 }, AnimTimer_ * 4.0f);
+		FloorRenderer_->SetPivot(LerpPos + GameEngineWindow::GetScale().Half());
+	}
+	else if (AnimTimer_ <= 2.0f)
+	{
+		float4 LerpPos = float4::Lerp({ 0, -300 }, { 900, -300 }, (AnimTimer_ - 1.7f) * 4.0f);
+		FloorRenderer_->SetPivot(LerpPos + GameEngineWindow::GetScale().Half());
+	}
+	else
+	{
+		FloorRenderer_->Death();
 	}
 }
 bool RandomRoomManager::ExistPos(float4 _Pos)

@@ -8,6 +8,7 @@
 #include "RandomRoomManager.h"
 #include "PlayLevel.h"
 #include "RandomBlood.h"
+#include "PlayerHP.h"
 
 Monster::Monster()
 	: Room_(nullptr)
@@ -39,6 +40,12 @@ void Monster::Update()
 
 	IsLeft_ = AttackNormalDir().x <= 0;
 	MonsterUpdate();
+
+	// 몬스터 충돌시
+	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
+	{
+		Player::MainPlayer->GetPlayerHP()->AddRedHp(-1, true);
+	}
 }
 
 ///////////////////////////////// 공격

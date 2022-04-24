@@ -186,7 +186,7 @@ public:
 	}
 	void SetActive();
 
-///////////////////////////////// 액티브 아이템
+///////////////////////////////// 패시브 아이템
 private:
 	std::vector<PassiveType> PassiveVector_;
 
@@ -209,10 +209,27 @@ public:
 		}
 		TmpName += ".bmp";
 
+		AddPassiveEffect(_Type);
+
 		PassiveVector_.push_back(_Type);
 		ChangeBodyState(PlayerBodyState::Acheive);
 		ChangeHeadState(PlayerHeadState::Acheive);
 		SetAcheiveRenderer(TmpName);
+	}
+	inline void AddPassiveEffect(PassiveType _Type)
+	{
+		switch (_Type)
+		{
+		case PassiveType::Default:
+			break;
+		case PassiveType::Item1:
+			AttackSpeed_ += 0.7f;
+			break;
+		case PassiveType::Max:
+			break;
+		default:
+			break;
+		}
 	}
 
 ///////////////////////////////// 방

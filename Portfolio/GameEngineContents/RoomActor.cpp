@@ -198,7 +198,7 @@ void RoomActor::Setting()
 		case BossType::Monstro:
 		{
 			Monstro* TmpBoss = GetLevel()->CreateActor<Monstro>();
-			TmpBoss->SetPosition(GetPosition() + TmpTilePos);
+			TmpBoss->SetPosition(GetPosition());
 			TmpBoss->SetRoom(*this);
 			break;
 		}
