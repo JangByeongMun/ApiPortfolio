@@ -75,7 +75,7 @@ void Player::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
 	PlayerUI_ = GetLevel()->CreateActor<PlayerUI>();
-	PlayerCollision_ = CreateCollision("Player", { 85, 85 });
+	PlayerCollision_ = CreateCollision("Player", { 60, 65 });
 
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 

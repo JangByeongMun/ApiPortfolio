@@ -86,7 +86,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	BgmPlayer_.SetVolume(0.05f);
 
 	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());
-	RandomRoomManager::GetInst()->ChangeFloor(1);
+	RandomRoomManager::GetInst()->ChangeFloor(CurrentFloor);
 }
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)

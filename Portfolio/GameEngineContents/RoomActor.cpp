@@ -62,22 +62,22 @@ void RoomActor::Setting()
 	// 문닫혀있을때 벽 평평하게 만드는 컬리젼추가
 	{
 		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 1000, 80 });
-		TmpCollision_->SetPivot(float4(0, 300) + float4(0, -5));
+		TmpCollision_->SetPivot(float4(0, 300) + float4(0, -15));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
 		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 1000, 80 });
-		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -50));
+		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -40));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 600 });
-		TmpCollision_->SetPivot(float4(500, 0) + float4(16, 0));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 700 });
+		TmpCollision_->SetPivot(float4(500, 0) + float4(4, 0));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 600 });
-		TmpCollision_->SetPivot(float4(-500, 0) + float4(-19, 0));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 700 });
+		TmpCollision_->SetPivot(float4(-500, 0) + float4(-8, 0));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 
@@ -289,7 +289,10 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Down);
-			TmpDoor->SetLock(true);
+			if (1 != CurrentFloor)
+			{
+				TmpDoor->SetLock(true);
+			}
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Down);
@@ -311,7 +314,10 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Up);
-			TmpDoor->SetLock(true);
+			if (1 != CurrentFloor)
+			{
+				TmpDoor->SetLock(true);
+			}
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Up);
@@ -333,7 +339,10 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Right);
-			TmpDoor->SetLock(true);
+			if (1 != CurrentFloor)
+			{
+				TmpDoor->SetLock(true);
+			}
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Right);
@@ -355,7 +364,10 @@ void RoomActor::DoorSetting()
 		{
 		case RoomType::Treasure:
 			TmpDoor->Setting(DoorType::Treasure, DoorDir::Left);
-			TmpDoor->SetLock(true);
+			if (1 != CurrentFloor)
+			{
+				TmpDoor->SetLock(true);
+			}
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Left);

@@ -49,15 +49,15 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		Name += "_Up.bmp";
 		break;
 	case DoorDir::Down:
-		Collision_->SetPivot({ 0, 5 });
+		Collision_->SetPivot({ 0, -5 });
 		Name += "_Down.bmp";
 		break;
 	case DoorDir::Left:
-		Collision_->SetPivot({ -20, 0 });
+		Collision_->SetPivot({ -15, 0 });
 		Name += "_Left.bmp";
 		break;
 	case DoorDir::Right:
-		Collision_->SetPivot({ 20, 0 });
+		Collision_->SetPivot({ 15, 0 });
 		Name += "_Right.bmp";
 		break;
 	default:

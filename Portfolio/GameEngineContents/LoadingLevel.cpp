@@ -7,6 +7,7 @@
 #include <GameEngine/GameEngine.h>
 #include "PlayLevel.h"
 #include "BindingOfIsaac.h"
+#include "ContentsGlobal.h"
 
 LoadingLevel::LoadingLevel() 
 {
@@ -35,6 +36,7 @@ void LoadingLevel::Update()
 		{
 			TmpEngine->ResetPlayLevel("Play");
 			TmpEngine->ChangeLevel("Play");
+			CurrentFloor += 1;
 		}
 	}
 }
