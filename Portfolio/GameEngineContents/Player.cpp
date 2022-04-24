@@ -557,7 +557,7 @@ void Player::AddItem(ItemType _Type)
 	PlayerUI_->SetItemUI();
 }
 
-bool Player::MinusItem(ItemType _Type, unsigned int _Value)
+bool Player::MinusItem(ItemType _Type, int _Value)
 {
 	switch (_Type)
 	{
@@ -679,7 +679,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 
 	if (false == PlayLevel::GetDebugMode())
 	{
-		if (0 != FindRoom->GetMonsterCount())
+		if (0 != FindRoom->GetMonsterCount() || 0 != FindRoom->GetBossCount())
 		{
 			FindRoom->CloseAllDoor();
 		}

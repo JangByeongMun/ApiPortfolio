@@ -21,7 +21,7 @@ void Monstro::Start()
 
 	// ±×¸²ÀÚ
 	GameEngineRenderer* Shadow = CreateRenderer("shadow.bmp", 0);
-	Shadow->SetAlpha(100);
+	Shadow->SetAlpha(70);
 	Shadow->SetScale({ 220, 90 });
 	Shadow->SetPivot({ 0, 90 });
 
@@ -59,6 +59,11 @@ void Monstro::MonsterUpdate()
 	StateUpdate();
 }
 
+void Monstro::MonsterDeath()
+{
+	ChangeState(MonstroState::Dead);
+}
+
 void Monstro::IdleStart()
 {
 	ChangeMonstroAnimation("_2");
@@ -87,6 +92,8 @@ void Monstro::AttackStart()
 void Monstro::DeadStart()
 {
 	ChangeMonstroAnimation("_8");
+	AnimTimer_ = 0.0f;
+	IsAnim_ = true;
 }
 
 void Monstro::IdleUpdate()
@@ -104,7 +111,7 @@ void Monstro::LargeJumpUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 	
-	if (AnimTimer_ >= 1.6f)
+	if (AnimTimer_ >= 1.7f)
 	{
 		ChangeState(MonstroState::Idle);
 		return;
@@ -147,7 +154,7 @@ void Monstro::SmallJumpUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
-	if (AnimTimer_ >= 1.4f)
+	if (AnimTimer_ >= 1.5f)
 	{
 		ChangeState(MonstroState::Idle);
 		return;
@@ -189,7 +196,7 @@ void Monstro::SmallJumpUpdate()
 void Monstro::AttackUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
-	if (AnimTimer_ >= 1.2f)
+	if (AnimTimer_ >= 1.3f)
 	{
 		ChangeState(MonstroState::Idle);
 		return;
@@ -197,18 +204,6 @@ void Monstro::AttackUpdate()
 	else if (AnimTimer_ >= 1.1f)
 	{
 		ChangeMonstroAnimation("_8");
-		return;
-	}
-	else if (AnimTimer_ >= 1.0f)
-	{
-		ChangeMonstroAnimation("_5");
-		return;
-	}
-	else if (AnimTimer_ >= 0.8f)
-	{
-		ChangeMonstroAnimation("_4");
-		float4 LerpFloat4 = float4::Lerp(float4(0, -200), float4(0, 0), (AnimTimer_ - 0.6f) * 5.0f);
-		Renderer_->SetPivot(LerpFloat4);
 		return;
 	}
 	else if (AnimTimer_ >= 0.5f)
@@ -230,6 +225,49 @@ void Monstro::AttackUpdate()
 
 void Monstro::DeadUpdate()
 {
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	if (AnimTimer_ >= 1.4f)
+	{
+		Death();
+		return;
+	}
+	else if (AnimTimer_ >= 0.9f )
+	{
+		if (true == IsAnim_)
+		{
+			IsAnim_ = false;
+			GameEngineRenderer* TmpRenderer = CreateRenderer("effect_002_bloodpoof.bmp", static_cast<int>(ORDER::FRONTUI));
+			TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.04f, false);
+			TmpRenderer->ChangeAnimation("effect_002_bloodpoof");
+			TmpRenderer->SetPivot({ GameEngineRandom::MainRandom->RandomFloat(-85, 85), GameEngineRandom::MainRandom->RandomFloat(-85, 85) });
+		}
+		return;
+	}
+	else if (AnimTimer_ >= 0.6f)
+	{
+		if (false == IsAnim_)
+		{
+			IsAnim_ = true;
+			GameEngineRenderer* TmpRenderer = CreateRenderer("effect_002_bloodpoof.bmp", static_cast<int>(ORDER::FRONTUI));
+			TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.04f, false);
+			TmpRenderer->ChangeAnimation("effect_002_bloodpoof");
+			TmpRenderer->SetPivot({ GameEngineRandom::MainRandom->RandomFloat(-85, 85), GameEngineRandom::MainRandom->RandomFloat(-85, 85) });
+		}
+		return;
+	}
+	else if (AnimTimer_ >= 0.3f)
+	{
+		if (true == IsAnim_)
+		{
+			IsAnim_ = false;
+			GameEngineRenderer* TmpRenderer = CreateRenderer("effect_002_bloodpoof.bmp", static_cast<int>(ORDER::FRONTUI));
+			TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.04f, false);
+			TmpRenderer->ChangeAnimation("effect_002_bloodpoof");
+			TmpRenderer->SetPivot({ GameEngineRandom::MainRandom->RandomFloat(-85, 85), GameEngineRandom::MainRandom->RandomFloat(-85, 85) });
+		}
+
+		return;
+	}
 }
 
 void Monstro::ChangeState(MonstroState _State)

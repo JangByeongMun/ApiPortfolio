@@ -6,6 +6,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include "DeadReasonUI.h"
+#include "PlayLevel.h"
 
 float AnimTimer_;
 
@@ -234,9 +235,18 @@ void Player::HeadAttackUpdate()
 		ChangeDirText = "Down";
 	}
 
+	
+
 	if (NextAttackTime_ <= CurrentAttackTime_ && false == AttackDir.IsZero2D())
 	{
-		Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_);
+		if (true == PlayLevel::GetDebugMode())
+		{
+			Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, 100);
+		}
+		else
+		{
+			Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_);
+		}
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 

@@ -72,7 +72,7 @@ public:
 	{
 		HP_ = _HP;
 	}
-	void Damaged(float _Damage);
+	virtual void Damaged(float _Damage);
 	void MakeRandomBlood(int _Min, int _Max);
 	virtual void MonsterDeath();
 };

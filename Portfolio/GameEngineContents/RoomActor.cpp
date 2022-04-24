@@ -15,6 +15,7 @@ float ScaleY = 75.0f;
 
 RoomActor::RoomActor()
 	: MonsterCount_(0)
+	, BossCount_(0)
 {
 }
 
@@ -30,9 +31,30 @@ void RoomActor::MinusMonsterCount()
 	{
 		MonsterCount_ = 0;
 
-		for (int i = 0; i < DoorVector_.size(); i++)
+		if (BossCount_ <= 0)
 		{
-			DoorVector_[i]->DoorOpen();
+			for (int i = 0; i < DoorVector_.size(); i++)
+			{
+				DoorVector_[i]->DoorOpen();
+			}
+		}
+	}
+}
+
+void RoomActor::MinusBossCount()
+{
+	BossCount_ -= 1;
+
+	if (BossCount_ <= 0)
+	{
+		BossCount_ = 0;
+
+		if (MonsterCount_ <= 0)
+		{
+			for (int i = 0; i < DoorVector_.size(); i++)
+			{
+				DoorVector_[i]->DoorOpen();
+			}
 		}
 	}
 }
@@ -47,23 +69,23 @@ void RoomActor::Setting()
 
 	// 문닫혀있을때 벽 평평하게 만드는 컬리젼추가
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
-		TmpCollision_->SetPivot(float4(0, 300) + float4(0, 5));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 1000, 80 });
+		TmpCollision_->SetPivot(float4(0, 300) + float4(0, -5));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
-		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -63));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 1000, 80 });
+		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -52));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
-		TmpCollision_->SetPivot(float4(500, 0) + float4(20, 0));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 600 });
+		TmpCollision_->SetPivot(float4(500, 0) + float4(16, 0));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
-		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 88, 100 });
-		TmpCollision_->SetPivot(float4(-500, 0) + float4(-23, 0));
+		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 80, 600 });
+		TmpCollision_->SetPivot(float4(-500, 0) + float4(-19, 0));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 

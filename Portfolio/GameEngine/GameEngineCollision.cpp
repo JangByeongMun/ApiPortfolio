@@ -163,7 +163,10 @@ bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::
 	{
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
-			_ColResult.push_back(*StartIter);
+			if (true == (*StartIter)->IsUpdate())
+			{
+				_ColResult.push_back(*StartIter);
+			}
 		}
 	}
 

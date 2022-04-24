@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include "Shooter.h"
 #include <vector>
+#include <string>
 
 enum class PlayerBodyState
 {
@@ -73,7 +74,6 @@ private:
 	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 
-	void CollisionCheck();
 	void PlayerSetMove(const float4& _Value);
 	bool CanMove(const float4& _Value);
 
@@ -149,7 +149,7 @@ private:
 
 public:
 	void AddItem(ItemType _Type);
-	bool MinusItem(ItemType _Type, unsigned int _Value);
+	bool MinusItem(ItemType _Type, int _Value);
 	inline bool HaveKey()
 	{
 		return KeyCount_ >= 1 || true == IsMasterKey_;
@@ -193,7 +193,26 @@ private:
 public:
 	inline void AddPassive(PassiveType _Type)
 	{
+		std::string TmpName = "collectibles_";
+		int TypeInt = static_cast<int>(_Type);
+		if (TypeInt >= 100)
+		{
+			TmpName += std::to_string(TypeInt);
+		}
+		else if (TypeInt >= 10)
+		{
+			TmpName += "0" + std::to_string(TypeInt);
+		}
+		else
+		{
+			TmpName += "00" + std::to_string(TypeInt);
+		}
+		TmpName += ".bmp";
+
 		PassiveVector_.push_back(_Type);
+		ChangeBodyState(PlayerBodyState::Acheive);
+		ChangeHeadState(PlayerHeadState::Acheive);
+		SetAcheiveRenderer(TmpName);
 	}
 
 ///////////////////////////////// ¹æ

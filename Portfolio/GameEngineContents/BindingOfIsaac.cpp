@@ -39,6 +39,8 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<MenuLoadingLevel>("MenuLoading");
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
+	//CreateLevel<PlayLevel>("Play_2");
+	//CreateLevel<PlayLevel>("Play_3");
 	CreateLevel<EndingLevel>("Ending");
 	ChangeLevel("Play");
 
@@ -400,6 +402,9 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(4, 4);
 
 		Image = GameEngineImageManager::GetInst()->Find("effect_002_bloodpoof.bmp");
+		Image->CutCount(4, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_003_bloodtear.bmp");
 		Image->CutCount(4, 4);
 
 		Image = GameEngineImageManager::GetInst()->Find("effect_030_bloodgibs.bmp");

@@ -126,9 +126,9 @@ void Projectile::DestroyProjectile()
 	}
 	else
 	{
-		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_002_bloodpoof.bmp");
-		TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.02f, false);
-		TmpRenderer->ChangeAnimation("effect_002_bloodpoof");
+		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_003_bloodtear.bmp");
+		TmpRenderer->CreateAnimation("effect_003_bloodtear.bmp", "effect_003_bloodtear", 0, 15, 0.02f, false);
+		TmpRenderer->ChangeAnimation("effect_003_bloodtear");
 		TmpRenderer->SetDeleteEndFrame_(true);
 		TmpRenderer->SetPivot(GetPosition());
 	}

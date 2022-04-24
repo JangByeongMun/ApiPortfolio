@@ -22,7 +22,7 @@ void Fire::Start()
 		Renderer->CreateAnimation("grid_fireplace.bmp", "grid_fireplace_Off", 0, 0, 0, false);
 		Renderer->CreateAnimation("grid_fireplace.bmp", "grid_fireplace_On", 1, 3, 0.1f, true);
 		Renderer->ChangeAnimation("grid_fireplace_On");
-		Renderer->SetPivot({ 0, 40 });
+		Renderer->SetPivot({ 0, 20 });
 
 		FirePlaceRenderer_.push_back(Renderer);
 	}
@@ -32,7 +32,7 @@ void Fire::Start()
 		Renderer->CreateAnimation("grid_fireplace_Shadow.bmp", "grid_fireplace_Off", 0, 0, 0, false);
 		Renderer->CreateAnimation("grid_fireplace_Shadow.bmp", "grid_fireplace_On", 1, 3, 0.1f, true);
 		Renderer->ChangeAnimation("grid_fireplace_On");
-		Renderer->SetPivot({ 0, 40 });
+		Renderer->SetPivot({ 0, 20 });
 		Renderer->SetAlpha(100);
 
 		FirePlaceRenderer_.push_back(Renderer);
@@ -41,9 +41,10 @@ void Fire::Start()
 	Renderer_ = CreateRenderer(static_cast<int>(ORDER::UI), RenderPivot::CENTER);
 	Renderer_->CreateAnimation("effect_005_fire.bmp", "effect_005_fire", 0, 5, 0.1f, true);
 	Renderer_->ChangeAnimation("effect_005_fire");
+	Renderer_->SetPivot({ 0, -20 });
 	Renderer_->SetAlpha(150);
 
-	Collision_ = CreateCollision("Fire", {60, 65});
+	Collision_ = CreateCollision("Fire", {60, 45});
 }
 
 void Fire::Update()

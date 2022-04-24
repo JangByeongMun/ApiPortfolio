@@ -13,8 +13,8 @@ RandomRoomManager* RandomRoomManager::Inst_ = nullptr;
 
 bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
-	CurrentFloor_ = _Floor;
-	switch (CurrentFloor_)
+	CurrentFloor = _Floor;
+	switch (CurrentFloor)
 	{
 	case 1:
 		CurrentMapCount_ = 9;
@@ -178,26 +178,25 @@ float4 RandomRoomManager::RandomCornerPos()
 
 RoomData RandomRoomManager::RandomData()
 {
-	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllRooms_[CurrentFloor_ - 1].size() - 1));
-	RoomData RandomData = AllRooms_[CurrentFloor_ - 1][RandomInt];
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllRooms_[CurrentFloor - 1].size() - 1));
+	RoomData RandomData = AllRooms_[CurrentFloor - 1][RandomInt];
 	return RandomData;
 }
 RoomData RandomRoomManager::RandomTreasureRoomData()
 {
-	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllTreasureRooms_[CurrentFloor_ - 1].size() - 1));
-	RoomData RandomData = AllTreasureRooms_[CurrentFloor_ - 1][RandomInt];
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllTreasureRooms_[CurrentFloor - 1].size() - 1));
+	RoomData RandomData = AllTreasureRooms_[CurrentFloor - 1][RandomInt];
 	return RandomData;
 }
 RoomData RandomRoomManager::RandomBossRoomData()
 {
-	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllBossRooms_[CurrentFloor_ - 1].size() - 1));
-	RoomData RandomData = AllBossRooms_[CurrentFloor_ - 1][RandomInt];
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllBossRooms_[CurrentFloor - 1].size() - 1));
+	RoomData RandomData = AllBossRooms_[CurrentFloor - 1][RandomInt];
 	return RandomData;
 }
 
 RandomRoomManager::RandomRoomManager()
-	: CurrentFloor_(0)
-	, CurrentMapCount_(0)
+	: CurrentMapCount_(0)
 {
 }
 RandomRoomManager::~RandomRoomManager()

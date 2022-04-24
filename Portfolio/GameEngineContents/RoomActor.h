@@ -39,6 +39,7 @@ public:
 	}
 
 	void MinusMonsterCount();
+	void MinusBossCount();
 	inline int GetMonsterCount()
 	{
 		return MonsterCount_;

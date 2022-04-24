@@ -26,14 +26,14 @@ public:
 	{
 		Type_ = _Type;
 
-		int AddValue = 0;
+		int AddValue = 5;
 		if (false == IsPlayerProjectile())
 		{
-			AddValue = 16;
+			AddValue += 16;
 		}
 
 		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 });
-		Renderer->SetIndex(AddValue + 5);
+		Renderer->SetIndex(AddValue);
 	}
 	inline void SetLifeTime_(float _Value)
 	{

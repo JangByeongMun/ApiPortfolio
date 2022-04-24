@@ -43,15 +43,15 @@ void DeadReasonUI::Start()
 
 	switch (RandomRoomManager::GetInst()->GetCurrentFloor())
 	{
-	case 0:
 	case 1:
+	case 2:
 		CreateRenderer("death_portraits_2_1.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
 		break;
-	case 2:
 	case 3:
+	case 4:
 		CreateRenderer("death_portraits_2_2.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
 		break;
-	case 4:
+	case 5:
 		CreateRenderer("death_portraits_2_3.bmp", static_cast<int>(ORDER::UI))->SetPivot({ -100, -27 });
 		break;
 	default:

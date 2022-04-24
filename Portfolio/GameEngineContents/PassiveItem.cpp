@@ -38,6 +38,7 @@ void PassiveItem::Update()
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->AddPassive(Type_);
+		Death();
 	}
 
 	// 애니메이션 

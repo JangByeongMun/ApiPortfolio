@@ -18,5 +18,7 @@ public:
 protected:
 	BossType Type_;
 
+
+	void Damaged(float _Damage) override;
 };
 

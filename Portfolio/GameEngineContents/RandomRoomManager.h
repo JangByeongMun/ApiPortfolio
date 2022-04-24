@@ -4,6 +4,7 @@
 #include "MapPos.h"
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineLevel.h>
+#include "ContentsGlobal.h"	
 
 // Ό³Έν :
 class RoomData;
@@ -34,7 +35,7 @@ public:
 
 	inline int GetCurrentFloor()
 	{
-		return CurrentFloor_;
+		return CurrentFloor;
 	}
 
 	bool ChangeFloor(const int& _floor);
@@ -67,7 +68,6 @@ private:
 	std::map<int, std::vector<RoomData>> AllBossRooms_;
 
 	std::vector<RoomActor*> CurrentRooms_;
-	int CurrentFloor_;
 	int CurrentMapCount_;
 
 	// constrcuter destructer
