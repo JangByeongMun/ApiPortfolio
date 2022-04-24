@@ -231,7 +231,7 @@ void Monstro::DeadUpdate()
 		Death();
 		return;
 	}
-	else if (AnimTimer_ >= 0.9f )
+	else if (AnimTimer_ >= 0.9f)
 	{
 		if (true == IsAnim_)
 		{

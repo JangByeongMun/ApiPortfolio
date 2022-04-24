@@ -24,7 +24,7 @@
 #include "PlayLevel.h"
 #include "PlayerHP.h"
 #include "EnterBossRoom.h"
-
+#include "Trapdoor.h"
 #include "KeyItem.h"
 #include "BatteryItem.h"
 
@@ -683,6 +683,12 @@ void Player::ChangeRoom(DoorDir _Dir)
 		{
 			FindRoom->CloseAllDoor();
 		}
+	}
+
+	// 보스를 잡은후의 보스방이면 TrapDoor가 있는데 방에 들어가자마자 이동하는걸 막기위해 닫아놨다가 나중에 열리도록
+	if (nullptr != FindRoom->GetTrapdoor())
+	{
+		FindRoom->GetTrapdoor()->TurnOn(false);
 	}
 
 	PlayerUI_->UpdateMiniMap(GoDir);

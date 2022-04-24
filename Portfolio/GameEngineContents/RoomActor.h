@@ -7,6 +7,7 @@
 
 class Door;
 class Monster;
+class Trapdoor;
 class RoomActor : public GameEngineActor
 {
 public:
@@ -40,6 +41,8 @@ public:
 
 	void MinusMonsterCount();
 	void MinusBossCount();
+	void OpenNextStage();
+
 	inline int GetMonsterCount()
 	{
 		return MonsterCount_;
@@ -58,6 +61,11 @@ public:
 
 	void SetBossHPUI(float _Value);
 
+	inline Trapdoor* GetTrapdoor()
+	{
+		return Trapdoor_;
+	}
+
 protected:
 
 private:
@@ -69,6 +77,8 @@ private:
 	float4 Pos_;
 	int MonsterCount_;
 	int BossCount_;
+
+	Trapdoor* Trapdoor_;
 
 	void Start() override;
 	void DoorSetting();

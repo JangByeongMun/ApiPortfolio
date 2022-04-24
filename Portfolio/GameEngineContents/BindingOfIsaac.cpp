@@ -473,6 +473,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("grid_fireplace_Shadow.bmp");
 		Image->CutCount(2, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("door_20_secrettrapdoor.bmp");
+		Image->CutCount(3, 2);
 	}
 
 	/////////////////////////////////// Play UI

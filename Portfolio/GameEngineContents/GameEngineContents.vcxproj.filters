@@ -215,6 +215,9 @@
     <ClInclude Include="EnterBossRoom.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
+    <ClInclude Include="Trapdoor.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -427,6 +430,9 @@
     </ClCompile>
     <ClCompile Include="EnterBossRoom.cpp">
       <Filter>Play\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Trapdoor.cpp">
+      <Filter>Play\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -12,12 +12,17 @@ BossMonster::~BossMonster()
 
 void BossMonster::Damaged(float _Damage)
 {
+	if (HP_ <= 0)
+	{
+		return;
+	}
+
 	HP_ -= _Damage;
 
 	SetHPUI();
 	if (HP_ <= 0)
 	{
-		Room_->MinusMonsterCount();
+		Room_->MinusBossCount();
 		MonsterDeath();
 	}
 }

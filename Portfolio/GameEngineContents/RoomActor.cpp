@@ -7,6 +7,7 @@
 #include "Fire.h"
 #include "PassiveItem.h"
 #include "Monstro.h"
+#include "Trapdoor.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -27,17 +28,9 @@ void RoomActor::MinusMonsterCount()
 {
 	MonsterCount_ -= 1;
 
-	if (MonsterCount_ <= 0)
+	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
-		MonsterCount_ = 0;
-
-		if (BossCount_ <= 0)
-		{
-			for (int i = 0; i < DoorVector_.size(); i++)
-			{
-				DoorVector_[i]->DoorOpen();
-			}
-		}
+		OpenAllDoor();
 	}
 }
 
@@ -45,18 +38,17 @@ void RoomActor::MinusBossCount()
 {
 	BossCount_ -= 1;
 
-	if (BossCount_ <= 0)
+	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
-		BossCount_ = 0;
-
-		if (MonsterCount_ <= 0)
-		{
-			for (int i = 0; i < DoorVector_.size(); i++)
-			{
-				DoorVector_[i]->DoorOpen();
-			}
-		}
+		OpenAllDoor();
+		OpenNextStage();
 	}
+}
+
+void RoomActor::OpenNextStage()
+{
+	Trapdoor_ = GetLevel()->CreateActor<Trapdoor>();
+	Trapdoor_->SetPosition(GetPosition() + float4(0, -150));
 }
 
 void RoomActor::Setting()
@@ -75,7 +67,7 @@ void RoomActor::Setting()
 	}
 	{
 		GameEngineCollision* TmpCollision_ = CreateCollision("Wall", { 1000, 80 });
-		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -52));
+		TmpCollision_->SetPivot(float4(0, -300) + float4(0, -50));
 		CloseCollisionVector_.push_back(TmpCollision_);
 	}
 	{
