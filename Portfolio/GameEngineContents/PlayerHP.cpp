@@ -23,6 +23,7 @@ void PlayerHP::Start()
 	RendererVector_.reserve(MaxCount);
 	for (int i = 0; i < MaxCount; i++)
 	{
+		GameEngineRenderer* TmpShadowRenderer = CreateRenderer("ui_hearts_1_Shadow.bmp");
 		GameEngineRenderer* TmpRenderer = CreateRenderer("ui_hearts_1.bmp");
 
 		if (i < MaxRedHP_)
@@ -32,6 +33,7 @@ void PlayerHP::Start()
 		else
 		{
 			TmpRenderer->SetIndex(9);
+			TmpShadowRenderer->Off();
 		}
 
 		float x = static_cast<float>((i % (MaxCount / 2)) * 36);
@@ -39,6 +41,11 @@ void PlayerHP::Start()
 		TmpRenderer->SetPivot({ x, y });
 		TmpRenderer->CameraEffectOff();
 		RendererVector_.push_back(TmpRenderer);
+
+		TmpShadowRenderer->SetPivot({ x, y });
+		TmpShadowRenderer->CameraEffectOff();
+		TmpShadowRenderer->SetAlpha(100);
+		ShadowRendererVector_.push_back(TmpShadowRenderer);
 	}
 }
 
@@ -63,21 +70,25 @@ void PlayerHP::UpdateUI()
 		if (i < CurrentRedHP_ - 1)
 		{
 			RendererVector_[i]->SetIndex(0);
+			ShadowRendererVector_[i]->On();
 		}
 		else if (i < CurrentRedHP_)
 		{
 			if (true == IsHalfRed_)
 			{
 				RendererVector_[i]->SetIndex(1);
+				ShadowRendererVector_[i]->On();
 			}
 			else
 			{
 				RendererVector_[i]->SetIndex(0);
+				ShadowRendererVector_[i]->On();
 			}
 		}
 		else if (i < MaxRedHP_)
 		{
 			RendererVector_[i]->SetIndex(2);
+			ShadowRendererVector_[i]->On();
 		}
 		else if (i - MaxRedHP_ < CurrentAddHP_ - 1)
 		{
@@ -85,10 +96,12 @@ void PlayerHP::UpdateUI()
 			if (AddHeartVector_[TmpValue] == HeartType::SoulHeart)
 			{
 				RendererVector_[i]->SetIndex(5);
+				ShadowRendererVector_[i]->On();
 			}
 			if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
 			{
 				RendererVector_[i]->SetIndex(7);
+				ShadowRendererVector_[i]->On();
 			}
 		}
 		else if (i - MaxRedHP_ < CurrentAddHP_)
@@ -99,10 +112,12 @@ void PlayerHP::UpdateUI()
 				if (true == IsHalfAdd_)
 				{
 					RendererVector_[i]->SetIndex(6);
+					ShadowRendererVector_[i]->On();
 				}
 				else
 				{
 					RendererVector_[i]->SetIndex(5);
+					ShadowRendererVector_[i]->On();
 				}
 			}
 			else if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
@@ -110,10 +125,12 @@ void PlayerHP::UpdateUI()
 				if (true == IsHalfAdd_)
 				{
 					RendererVector_[i]->SetIndex(8);
+					ShadowRendererVector_[i]->On();
 				}
 				else
 				{
 					RendererVector_[i]->SetIndex(7);
+					ShadowRendererVector_[i]->On();
 				}
 			}
 		}

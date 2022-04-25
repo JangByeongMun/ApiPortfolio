@@ -27,6 +27,7 @@ protected:
 
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
+	std::vector<GameEngineRenderer*> ShadowRendererVector_;
 	std::vector<HeartType> AddHeartVector_;
 
 	const int MaxCount = 12;
