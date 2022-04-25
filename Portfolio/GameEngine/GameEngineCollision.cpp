@@ -49,7 +49,7 @@ bool GameEngineCollision::CollisionCheck(
 	CollisionType _Target
 )
 {
-	if (false == IsUpdate())
+	if (false == IsUpdate() || true == IsDeath())
 	{
 		return false;
 	}
@@ -61,7 +61,6 @@ bool GameEngineCollision::CollisionCheck(
 	{
 		return false;
 	}
-
 	if (nullptr == CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)])
 	{
 		MsgBoxAssert("처리할 수 없는 충돌조합입니다.");
@@ -73,10 +72,11 @@ bool GameEngineCollision::CollisionCheck(
 	std::list<GameEngineCollision*>::iterator EndIter = TargetGroup.end();
 	for (; StartIter != EndIter; ++StartIter)
 	{
-		if (false == (*StartIter)->IsUpdate())
+		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 		{
 			return false;
 		}
+
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
 			return true;
@@ -88,7 +88,7 @@ bool GameEngineCollision::CollisionCheck(
 
 bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup, float4 _NextPos, CollisionType _This, CollisionType _Target)
 {
-	if (false == IsUpdate())
+	if (false == IsUpdate() || true == IsDeath())
 	{
 		return false;
 	}
@@ -120,10 +120,11 @@ bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup,
 	{
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
-			if (false == (*StartIter)->IsUpdate())
+			if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 			{
 				return false;
 			}
+
 			else
 			{
 				return true;
@@ -138,6 +139,11 @@ bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup,
 
 bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::vector<GameEngineCollision*>& _ColResult, CollisionType _This, CollisionType _Target)
 {
+	if (false == IsUpdate() || true == IsDeath())
+	{
+		return false;
+	}
+
 	size_t StartSize = _ColResult.size();
 
 	std::string UpperKey = GameEngineString::ToUpperReturn(_TargetGroup);
