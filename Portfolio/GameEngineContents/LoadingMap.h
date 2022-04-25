@@ -18,7 +18,10 @@ public:
 protected:
 
 private:
-	void Start() override;
+	std::vector<GameEngineRenderer*> FloorMaps_;
+	GameEngineRenderer* PlayerRenderer_;
 
+	void Start() override;
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 

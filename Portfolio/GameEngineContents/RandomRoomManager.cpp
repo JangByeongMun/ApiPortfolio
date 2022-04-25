@@ -226,7 +226,7 @@ RandomRoomManager::~RandomRoomManager()
 
 void RandomRoomManager::Start()
 {
-	// 0Ãþ
+	// 1Ãþ
 	{
 		// ±âº»¹æ
 		{
@@ -324,7 +324,7 @@ void RandomRoomManager::Start()
 		}
 	}
 
-	// 1Ãþ
+	// 2Ãþ
 	{
 		// ±âº»¹æ
 		{
@@ -392,6 +392,77 @@ void RandomRoomManager::Start()
 				TmpVector.push_back(TmpData);
 			}
 			AllBossRooms_.insert({ 1, TmpVector });
+		}
+	}
+
+	// 3Ãþ
+	{
+		// ±âº»¹æ
+		{
+			std::vector<RoomData> TmpVector;
+
+			{
+				RoomData TmpData = RoomData();
+				for (int y = 1; y < 3; y++)
+				{
+					for (int x = 4; x < 9; x++)
+					{
+						TmpData.AddBlock(x, y, BlockType::STONE);
+					}
+				}
+				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			AllRooms_.insert({ 2, TmpVector });
+		}
+
+		// È²±Ý¹æ
+		{
+			std::vector<RoomData> TmpVector;
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(3, 1, BlockType::STONE);
+				TmpData.AddBlock(4, 1, BlockType::STONE);
+				TmpData.AddBlock(5, 1, BlockType::STONE);
+				TmpData.AddBlock(6, 1, BlockType::STONE);
+				TmpData.AddBlock(7, 1, BlockType::STONE);
+				TmpData.AddBlock(8, 1, BlockType::STONE);
+				TmpData.AddBlock(9, 1, BlockType::STONE);
+
+				TmpData.AddBlock(3, 2, BlockType::STONE);
+				TmpData.AddBlock(4, 2, BlockType::STONE);
+				TmpData.AddBlock(5, 2, BlockType::STONEURN);
+				TmpData.AddBlock(6, 2, BlockType::FIRE);
+				TmpData.AddBlock(7, 2, BlockType::STONEURN);
+				TmpData.AddBlock(8, 2, BlockType::STONE);
+				TmpData.AddBlock(9, 2, BlockType::STONE);
+
+				TmpData.AddBlock(3, 3, BlockType::STONEURN);
+				TmpData.AddBlock(4, 3, BlockType::FIRE);
+				TmpData.AddBlock(8, 3, BlockType::FIRE);
+				TmpData.AddBlock(9, 3, BlockType::STONEURN);
+
+				TmpData.AddPassive(6, 4, PassiveType::Item1);
+
+				TmpData.RoomType_ = RoomType::Treasure;
+				TmpVector.push_back(TmpData);
+			}
+			AllTreasureRooms_.insert({ 2, TmpVector });
+		}
+
+		// º¸½º¹æ
+		{
+			std::vector<RoomData> TmpVector;
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBoss(0, 0, BossType::Monstro);
+
+				TmpData.RoomType_ = RoomType::Boss;
+				TmpVector.push_back(TmpData);
+			}
+			AllBossRooms_.insert({ 2, TmpVector });
 		}
 	}
 }

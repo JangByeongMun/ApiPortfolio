@@ -6,6 +6,7 @@
 #include "AccessoryUI.h"
 #include "MiniMap.h"
 #include "PlayLevel.h"
+#include <GameEngine/GameEngine.h>
 
 PlayerUI::PlayerUI() 
 	: PlayerHP_(nullptr)
@@ -55,10 +56,20 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 
 void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	PlayerHP_->NextLevelOn();
-	CardUI_->NextLevelOn();
-	ItemUI_->NextLevelOn();
-	AccessoryUI_->NextLevelOn();
+	if (_NextLevel == GameEngine::GetInst().FindLevel("Ending"))
+	{
+		PlayerHP_->NextLevelOff();
+		CardUI_->NextLevelOff();
+		ItemUI_->NextLevelOff();
+		AccessoryUI_->NextLevelOff();
+	}
+	else
+	{
+		PlayerHP_->NextLevelOn();
+		CardUI_->NextLevelOn();
+		ItemUI_->NextLevelOn();
+		AccessoryUI_->NextLevelOn();
+	}
 }
 
 void PlayerUI::SetPlayerHP()

@@ -207,11 +207,20 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	NextLevelOn();
-	SetRoom({ 0, 0 });
-	PlayerUI_->NextLevelOn();
-	GetPlayerHP()->NextLevelOn();
-	SetPosition({3000, 3000});
+	if (_NextLevel == GameEngine::GetInst().FindLevel("Ending"))
+	{
+		NextLevelOff();
+		PlayerUI_->NextLevelOff();
+		GetPlayerHP()->NextLevelOff();
+	}
+	else
+	{
+		NextLevelOn();
+		SetRoom({ 0, 0 });
+		PlayerUI_->NextLevelOn();
+		GetPlayerHP()->NextLevelOn();
+		SetPosition({ 3000, 3000 });
+	}
 }
 
 // 벽이 있는지 확인하고 이동하도록하는 함수

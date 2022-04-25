@@ -480,6 +480,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("door_20_secrettrapdoor.bmp");
 		Image->CutCount(3, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_005_Clearchests.bmp");
+		Image->CutCount(4, 1);
 	}
 
 	/////////////////////////////////// Play UI

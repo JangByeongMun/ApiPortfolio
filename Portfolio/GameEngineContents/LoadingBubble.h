@@ -16,9 +16,14 @@ public:
 	LoadingBubble& operator=(LoadingBubble&& _Other) noexcept = delete;
 
 protected:
-	void Start() override;
 
 private:
+	std::vector<GameEngineRenderer*> RendererVector;
+	float AnimTimer_;
 
+	void Start() override;
+	void Update() override;
+
+	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 

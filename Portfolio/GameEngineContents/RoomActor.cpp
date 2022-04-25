@@ -8,6 +8,7 @@
 #include "PassiveItem.h"
 #include "Monstro.h"
 #include "Trapdoor.h"
+#include "ClearBox.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -47,8 +48,21 @@ void RoomActor::MinusBossCount()
 
 void RoomActor::OpenNextStage()
 {
-	Trapdoor_ = GetLevel()->CreateActor<Trapdoor>();
-	Trapdoor_->SetPosition(GetPosition() + float4(0, -150));
+	if (3 == CurrentFloor)
+	{
+		ClearBox* ClearBox_ = GetLevel()->CreateActor<ClearBox>();
+		ClearBox_->SetPosition(GetPosition() + float4(0, -150));
+	}
+	else
+	{
+		Trapdoor_ = GetLevel()->CreateActor<Trapdoor>();
+		Trapdoor_->SetPosition(GetPosition() + float4(0, -150));
+	}
+
+	for (int i = 0; i < BossHpRendererVector_.size(); i++)
+	{
+		BossHpRendererVector_[i]->Off();
+	}
 }
 
 void RoomActor::Setting()
