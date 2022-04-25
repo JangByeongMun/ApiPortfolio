@@ -56,15 +56,15 @@ void LoadingMap::Update()
 	float4 LerpPos = float4::Lerp(FloorMaps_[CurrentFloor - 1]->GetPivot(), FloorMaps_[CurrentFloor]->GetPivot(), AnimTimer_);
 	PlayerRenderer_->SetPivot(LerpPos);
 
-	if (AnimTimer_ >= 2.5f)
+	if (AnimTimer_ >= 3.5f)
 	{
-		BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
-		if (nullptr != TmpEngine)
-		{
-			TmpEngine->ResetPlayLevel("Play");
-			TmpEngine->ChangeLevel("Play");
-			CurrentFloor += 1;
-		}
+		//BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
+		//if (nullptr != TmpEngine)
+		//{
+		//	TmpEngine->ResetPlayLevel("Play");
+		//	TmpEngine->ChangeLevel("Play");
+		//	CurrentFloor += 1;
+		//}
 	}
 }
 

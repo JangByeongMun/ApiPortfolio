@@ -629,103 +629,112 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(2, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("intro09_3.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro09_4.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro09_5.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro09_6.bmp");
+Image->CutCount(4, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro09_7.bmp");
+Image->CutCount(4, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro09_8.bmp");
+Image->CutCount(4, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro10_1.bmp");
+Image->CutCount(1, 2);
+
+Image = GameEngineImageManager::GetInst()->Find("intro10_2.bmp");
+Image->CutCount(1, 2);
+
+Image = GameEngineImageManager::GetInst()->Find("intro12_1.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro12_2.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro13_1.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro14_1.bmp");
+Image->CutCount(2, 3);
+
+Image = GameEngineImageManager::GetInst()->Find("intro15_1.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro16_2.bmp");
+Image->CutCount(1, 2);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_2.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_3.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_4.bmp");
+Image->CutCount(1, 2);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_5.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_6.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro18_7.bmp");
+Image->CutCount(1, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro19_2.bmp");
+Image->CutCount(1, 2);
+
+Image = GameEngineImageManager::GetInst()->Find("intro19_3.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro20_1.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro21_2.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro22_2.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro22_4.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro23_3.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro23_4.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro24_2.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro24_3.bmp");
+Image->CutCount(1, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro25_1.bmp");
+Image->CutCount(2, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro25_3.bmp");
+Image->CutCount(1, 1);
+
+Image = GameEngineImageManager::GetInst()->Find("intro25_4.bmp");
+Image->CutCount(2, 1);
+	}
+
+	/////////////////////////////////// Loading
+	{
+		Image = GameEngineImageManager::GetInst()->Find("nightmare_1_3.bmp");
 		Image->CutCount(2, 1);
+	}
+	{
 
-		Image = GameEngineImageManager::GetInst()->Find("intro09_4.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro09_5.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro09_6.bmp");
-		Image->CutCount(4, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro09_7.bmp");
-		Image->CutCount(4, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro09_8.bmp");
-		Image->CutCount(4, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro10_1.bmp");
-		Image->CutCount(1, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro10_2.bmp");
-		Image->CutCount(1, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro12_1.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro12_2.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro13_1.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro14_1.bmp");
-		Image->CutCount(2, 3);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro15_1.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro16_2.bmp");
-		Image->CutCount(1, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_2.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_3.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_4.bmp");
-		Image->CutCount(1, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_5.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_6.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro18_7.bmp");
-		Image->CutCount(1, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro19_2.bmp");
-		Image->CutCount(1, 2);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro19_3.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro20_1.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro21_2.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro22_2.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro22_4.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro23_3.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro23_4.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro24_2.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro24_3.bmp");
-		Image->CutCount(1, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro25_1.bmp");
-		Image->CutCount(2, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro25_3.bmp");
-		Image->CutCount(1, 1);
-
-		Image = GameEngineImageManager::GetInst()->Find("intro25_4.bmp");
-		Image->CutCount(2, 1);
 	}
 
 	/////////////////////////////////// Ending

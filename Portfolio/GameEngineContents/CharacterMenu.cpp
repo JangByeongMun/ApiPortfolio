@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngine.h>
 #include "ContentsGlobal.h"
 #include <GameEngineBase/GameEngineRandom.h>
+#include "BindingOfIsaac.h"
 
 CharacterMenu::CharacterMenu() 
 	: CurrentIndex_(0)
@@ -165,6 +166,11 @@ void CharacterMenu::SelectIndex()
 		CurrentIndex_ = Random.RandomInt(0, 5);
 	}
 
+	//BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
+	//if (nullptr != TmpEngine)
+	//{
+	//	TmpEngine->ResetPlayLevel("Play");
+	//}
 	SelectedCharacterType = static_cast<CharacterType>(CurrentIndex_);
 	GameEngine::GetInst().ChangeLevel("MenuLoading");
 }

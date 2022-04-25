@@ -221,7 +221,10 @@
     <ClInclude Include="ClearBox.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="LoadingAnim.h">
+    <ClInclude Include="LoadingAnim1.h">
+      <Filter>Loading</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadingAnim2.h">
       <Filter>Loading</Filter>
     </ClInclude>
   </ItemGroup>
@@ -446,7 +449,10 @@
     <ClCompile Include="ClearBox.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
-    <ClCompile Include="LoadingAnim.cpp">
+    <ClCompile Include="LoadingAnim1.cpp">
+      <Filter>Loading</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingAnim2.cpp">
       <Filter>Loading</Filter>
     </ClCompile>
   </ItemGroup>

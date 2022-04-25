@@ -260,10 +260,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="LoadingAnim.h">
+    <ClInclude Include="LoadingAnim1.h">
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LoadingAnim2.h" />
     <ClInclude Include="Monstro.h">
       <SubType>
       </SubType>
@@ -546,10 +547,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="LoadingAnim.cpp">
+    <ClCompile Include="LoadingAnim1.cpp">
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LoadingAnim2.cpp" />
     <ClCompile Include="Monstro.cpp">
       <SubType>
       </SubType>

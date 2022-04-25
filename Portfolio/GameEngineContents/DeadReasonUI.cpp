@@ -88,6 +88,7 @@ void DeadReasonUI::Update()
 		true == GameEngineInput::GetInst()->IsDown("ResetSpace")
 		)
 	{
+		GameEngineTime::SetPause(false);
 		GameEngine::GetInst().ChangeLevel("Menu");
 	}
 }

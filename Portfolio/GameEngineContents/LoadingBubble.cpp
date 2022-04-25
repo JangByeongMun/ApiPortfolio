@@ -2,9 +2,12 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include <GameEngine/GameEngineRenderer.h>
+#include "LoadingAnim1.h"
+#include "LoadingAnim2.h"
 
 LoadingBubble::LoadingBubble() 
 	: AnimTimer_(0.0f)
+	, CreateNightmare(false)
 {
 }
 
@@ -38,6 +41,13 @@ void LoadingBubble::Update()
 	if (AnimTimer_ >= 0.6f)
 	{
 		RendererVector[0]->On();
+	}
+
+	if (AnimTimer_ >= 0.8f && CreateNightmare == false)
+	{
+		//GetLevel()->CreateActor<LoadingAnim1>()->SetPosition(GetPosition() + float4(0, -250));
+		GetLevel()->CreateActor<LoadingAnim2>()->SetPosition(GetPosition() + float4(0, -250));
+		CreateNightmare = true;
 	}
 }
 

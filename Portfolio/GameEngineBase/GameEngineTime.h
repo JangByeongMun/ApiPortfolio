@@ -67,6 +67,10 @@ public:
 	void Reset();
 	void Update();
 
+	static inline void SetPause(bool _Value)
+	{
+		IsPause_ = _Value;
+	}
 	static inline void Pause()
 	{
 		IsPause_ = !IsPause_;

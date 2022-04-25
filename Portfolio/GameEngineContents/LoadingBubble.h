@@ -20,6 +20,7 @@ protected:
 private:
 	std::vector<GameEngineRenderer*> RendererVector;
 	float AnimTimer_;
+	bool CreateNightmare;
 
 	void Start() override;
 	void Update() override;
