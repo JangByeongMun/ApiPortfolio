@@ -9,6 +9,8 @@
 #include "Monstro.h"
 #include "Trapdoor.h"
 #include "ClearBox.h"
+#include <GameEngineBase/GameEngineRandom.h>
+#include "Player.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -32,6 +34,7 @@ void RoomActor::MinusMonsterCount()
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
 		OpenAllDoor();
+		Player::MainPlayer->AddGaze(1);
 	}
 }
 
@@ -43,6 +46,7 @@ void RoomActor::MinusBossCount()
 	{
 		OpenAllDoor();
 		OpenNextStage();
+		Player::MainPlayer->AddGaze(1);
 	}
 }
 
@@ -187,7 +191,9 @@ void RoomActor::Setting()
 		float4 TmpTilePos = { StartX + ScaleX * TmpPassiveVector[i].X_, StartY + ScaleY * TmpPassiveVector[i].Y_ };
 		PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
 		TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
-		TmpPassiveItem->Setting(TmpPassiveVector[i].Type_);
+		
+		PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+		TmpPassiveItem->Setting(TmpType);
 	}
 
 	// 보스몬스터 세팅

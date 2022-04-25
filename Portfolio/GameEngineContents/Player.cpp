@@ -57,9 +57,9 @@ Player::Player()
 	, IsMasterKey_(false)
 	, PlayerUI_(nullptr)
 	, HavingAccessory_(AccessoryType::None)
-	, HaveActive_(false)
 	, MaxGaze_(0)
 	, CurrentGaze_(0)
+	, IsUsingActive(false)
 	, AcheiveItemRender_(nullptr)
 	, CharacterType_(CharacterType::ISAAC)
 	, RoomPos_({0, 0})
@@ -144,6 +144,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("AttackUp", VK_UP);
 		GameEngineInput::GetInst()->CreateKey("AttackDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Bomb", 'E');
+		GameEngineInput::GetInst()->CreateKey("SpaceBar", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("Test1", 'R');
 		GameEngineInput::GetInst()->CreateKey("Test2", 'T');
 	}
@@ -167,10 +168,16 @@ void Player::Update()
 	{
 		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 		BombActor->SetPosition(GetPosition());
+	}
 
-		// 자살 테스트
-		//ChangeBodyState(PlayerBodyState::Dead);
-		//ChangeHeadState(PlayerHeadState::Dead);
+	if (true == GameEngineInput::GetInst()->IsDown("SpaceBar"))
+	{
+		UseActive();
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
+	{
+		AddGaze(100);
 	}
 
 	// 무적시간 구현
@@ -254,7 +261,8 @@ bool Player::CanMove(const float4& _Value)
 	if (
 		RGB(0, 0, 0) != Color &&
 		false == PlayerCollision_->NextPosCollisionCheckRect("Stone", _Value) &&
-		false == PlayerCollision_->NextPosCollisionCheckRect("Wall", _Value)
+		false == PlayerCollision_->NextPosCollisionCheckRect("Wall", _Value) &&
+		false == PlayerCollision_->NextPosCollisionCheckRect("Poop", _Value)
 		)
 	{
 		return true;
@@ -306,6 +314,7 @@ void Player::SetPlayerInfo()
 		KeyCount_ = 0;
 		BombCount_ = 0;
 
+		SetActiveType(ActiveType::Item045);
 		MakeHeadAddRenderer("character_002_maggiesbeautifulgoldenlocks.bmp");
 		break;
 	case CharacterType::JUDAS:
@@ -320,6 +329,7 @@ void Player::SetPlayerInfo()
 		KeyCount_ = 0;
 		BombCount_ = 0;
 
+		SetActiveType(ActiveType::Item034);
 		MakeHeadAddRenderer("character_004_judasfez.bmp");
 		break;
 	case CharacterType::BLUEBABY:
@@ -333,12 +343,20 @@ void Player::SetPlayerInfo()
 		MoneyCount_ = 0;
 		KeyCount_ = 0;
 		BombCount_ = 0;
+
+		SetActiveType(ActiveType::Item036);
 		break;
 	default:
 		break;
 	}
 
 	PlayerUI_->Setting();
+	if (SelectedCharacterType == CharacterType::BLUEBABY)
+	{
+		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
+		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
+		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
+	}
 
 	ChangeHeadState(PlayerHeadState::Attack);
 	ChangeBodyState(PlayerBodyState::Move);
@@ -728,4 +746,14 @@ void Player::ChangeRoom(DoorDir _Dir)
 	}
 
 	PlayerUI_->UpdateMiniMap(GoDir);
+
+	// 액티브 스킬 사용중이였다면 끄기
+	if (true == IsUsingActive)
+	{
+		IsUsingActive = false;
+		if (ActiveType_ == ActiveType::Item034)
+		{
+			Damage_ -= 2;
+		}
+	}
 }

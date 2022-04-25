@@ -53,9 +53,6 @@
     <ClInclude Include="Poop.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
-    <ClInclude Include="PoopRed.h">
-      <Filter>Play\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Stone.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
@@ -279,9 +276,6 @@
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="Poop.cpp">
-      <Filter>Play\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="PoopRed.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Stone.cpp">

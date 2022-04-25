@@ -302,7 +302,7 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(8, 3, BlockType::FIRE);
 				TmpData.AddBlock(9, 3, BlockType::STONEURN);
 
-				TmpData.AddPassive(6, 4, PassiveType::Item1);
+				TmpData.AddPassive(6, 4);
 
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);
@@ -373,7 +373,7 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(8, 3, BlockType::FIRE);
 				TmpData.AddBlock(9, 3, BlockType::STONEURN);
 
-				TmpData.AddPassive(6, 4, PassiveType::Item1);
+				TmpData.AddPassive(6, 4);
 
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);
@@ -444,7 +444,7 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(8, 3, BlockType::FIRE);
 				TmpData.AddBlock(9, 3, BlockType::STONEURN);
 
-				TmpData.AddPassive(6, 4, PassiveType::Item1);
+				TmpData.AddPassive(6, 4);
 
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);

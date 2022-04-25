@@ -154,7 +154,17 @@ enum class RoomType
 enum class PassiveType
 {
 	Default,
-	Item1,
+	Item001,
+
+	Max,
+};
+
+enum class ActiveType
+{
+	Default,
+	Item034,
+	Item036,
+	Item045,
 
 	Max,
 };

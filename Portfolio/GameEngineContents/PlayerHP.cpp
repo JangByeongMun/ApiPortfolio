@@ -190,6 +190,9 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 	UpdateUI();
 }
 
+// 이거 _Value 에 1, -1을 제외한걸 넣으면 안됨
+// 원래 큰수도 한번에 하려고했었는데 중간에 포문 또 돌려야되서 지금도 복잡한데 더 복잡해짐
+// 다음에는 마이너스는 일단 따로 빼는식으로 구현해야할듯
 void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 {
 	if (_Value > 0) // 하트 추가일떄

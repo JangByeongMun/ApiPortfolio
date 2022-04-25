@@ -1,12 +1,72 @@
 #include "Player.h"
+#include "PassiveItem.h"
+#include "PlayerHP.h"
+#include "Poop.h"
 
+void Player::UseActive()
+{
+	if (false == IsActiveOn())
+	{
+		return;
+	}
+
+	switch (ActiveType_)
+	{
+	case ActiveType::Default:
+		break;
+	case ActiveType::Item034:
+		IsUsingActive = true;
+		Damage_ += 2;
+		break;
+	case ActiveType::Item036:
+		GetLevel()->CreateActor<Poop>()->SetPosition(GetPosition());
+		break;
+	case ActiveType::Item045:
+		GetPlayerHP()->AddRedHp(1, false);
+		break;
+	case ActiveType::Max:
+		break;
+	default:
+		break;
+	}
+
+	SetGaze(0);
+}
+
+void Player::AddPassive(PassiveType _Type)
+{
+	std::string TmpName = PassiveItem::ItemNameVector_[static_cast<int>(_Type)];
+
+	AddPassiveEffect(_Type);
+	MakeItemRenderer(_Type);
+
+	PassiveVector_.push_back(_Type);
+	ChangeBodyState(PlayerBodyState::Acheive);
+	ChangeHeadState(PlayerHeadState::Acheive);
+	SetAcheiveRenderer(TmpName);
+}
+void Player::AddPassiveEffect(PassiveType _Type)
+{
+	switch (_Type)
+	{
+	case PassiveType::Default:
+		break;
+	case PassiveType::Item001:
+		AttackSpeed_ += 0.7f;
+		break;
+	case PassiveType::Max:
+		break;
+	default:
+		break;
+	}
+}
 void Player::MakeItemRenderer(PassiveType _Type)
 {
 	switch (_Type)
 	{
 	case PassiveType::Default:
 		break;
-	case PassiveType::Item1:
+	case PassiveType::Item001:
 		EffectItem1();
 		break;
 	case PassiveType::Max:
@@ -14,7 +74,6 @@ void Player::MakeItemRenderer(PassiveType _Type)
 	default:
 		break;
 	}
-	
 }
 
 void Player::EffectItem1()

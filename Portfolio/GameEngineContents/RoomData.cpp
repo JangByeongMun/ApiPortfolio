@@ -92,9 +92,9 @@ void RoomData::AddMonster(int _X, int _Y, MonsterType _Type)
 	AllMonster_.push_back(MonsterData(_X, _Y, _Type));
 }
 
-void RoomData::AddPassive(int _X, int _Y, PassiveType _Type)
+void RoomData::AddPassive(int _X, int _Y)
 {
-	AllPassives_.push_back(PassiveData(_X, _Y, _Type));
+	AllPassives_.push_back(PassiveData(_X, _Y));
 }
 
 void RoomData::AddBoss(int _X, int _Y, BossType _Type)

@@ -20,11 +20,11 @@ public:
 	PassiveItem& operator=(PassiveItem&& _Other) noexcept = delete;
 
 	void Setting(PassiveType _Type);
-
+	
+	static std::vector<std::string> ItemNameVector_;
 protected:
 
 private:
-	std::vector<std::string> ItemNameVector_;
 	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	PassiveType Type_;

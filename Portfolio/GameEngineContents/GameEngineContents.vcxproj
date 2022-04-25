@@ -396,10 +396,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PoopRed.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Projectile.h">
       <SubType>
       </SubType>
@@ -680,10 +676,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Poop.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="PoopRed.cpp">
       <SubType>
       </SubType>
     </ClCompile>

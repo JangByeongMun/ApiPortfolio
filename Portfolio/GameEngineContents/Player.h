@@ -182,63 +182,61 @@ public:
 
 ///////////////////////////////// 액티브 아이템
 private:
-	bool HaveActive_;
+	ActiveType ActiveType_;
 	int MaxGaze_;
 	int CurrentGaze_;
+	bool IsUsingActive;
 
 public:
 	inline bool IsActiveOn()
 	{
 		return MaxGaze_ <= CurrentGaze_;
 	}
-	void SetActive();
+	inline void SetActiveType(ActiveType _Type)
+	{
+		ActiveType_ = _Type;
+		switch (_Type)
+		{
+		case ActiveType::Default:
+			break;
+		case ActiveType::Item034:
+			MaxGaze_ = 3;
+			break;
+		case ActiveType::Item036:
+			MaxGaze_ = 1;
+			break;
+		case ActiveType::Item045:
+			MaxGaze_ = 4;
+			break;
+		case ActiveType::Max:
+			break;
+		default:
+			break;
+		}
+		CurrentGaze_ = 0;
+	}
+	inline void SetGaze(int _Value)
+	{
+		CurrentGaze_ = _Value;
+	}
+	inline void AddGaze(int _Value)
+	{
+		CurrentGaze_ += _Value;
+
+		if (CurrentGaze_ >= MaxGaze_)
+		{
+			CurrentGaze_ = MaxGaze_;
+		}
+	}
+	void UseActive();
 
 ///////////////////////////////// 패시브 아이템
 private:
 	std::vector<PassiveType> PassiveVector_;
 
 public:
-	inline void AddPassive(PassiveType _Type)
-	{
-		std::string TmpName = "collectibles_";
-		int TypeInt = static_cast<int>(_Type);
-		if (TypeInt >= 100)
-		{
-			TmpName += std::to_string(TypeInt);
-		}
-		else if (TypeInt >= 10)
-		{
-			TmpName += "0" + std::to_string(TypeInt);
-		}
-		else
-		{
-			TmpName += "00" + std::to_string(TypeInt);
-		}
-		TmpName += ".bmp";
-
-		AddPassiveEffect(_Type);
-		MakeItemRenderer(_Type);
-
-		PassiveVector_.push_back(_Type);
-		ChangeBodyState(PlayerBodyState::Acheive);
-		ChangeHeadState(PlayerHeadState::Acheive);
-		SetAcheiveRenderer(TmpName);
-	}
-	inline void AddPassiveEffect(PassiveType _Type)
-	{
-		switch (_Type)
-		{
-		case PassiveType::Default:
-			break;
-		case PassiveType::Item1:
-			AttackSpeed_ += 0.7f;
-			break;
-		case PassiveType::Max:
-			break;
-		default:
-			break;
-		}
-	}
+	void AddPassive(PassiveType _Type);
+	void AddPassiveEffect(PassiveType _Type);
 	void MakeItemRenderer(PassiveType _Type);
 
 	void EffectItem1();

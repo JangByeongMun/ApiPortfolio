@@ -10,6 +10,7 @@
 #include "Monster.h"
 #include "PlayerHP.h"
 #include "Fire.h"
+#include "Poop.h"
 
 Projectile::Projectile() 
 	: Collision_()
@@ -69,9 +70,28 @@ void Projectile::Update()
 		}
 	}
 
+	// 똥과 충돌했을때
+	{
+		std::vector<GameEngineCollision*> CollisionResult;
+		if (true == Collision_->CollisionResultRect("Poop", CollisionResult))
+		{
+			for (int i = 0; i < CollisionResult.size(); i++)
+			{
+				Poop* TmpPoop = dynamic_cast<Poop*>(CollisionResult[i]->GetActor());
+				if (nullptr != TmpPoop)
+				{
+					TmpPoop->AddHp(-1 * Damage_);
+					DestroyProjectile();
+					break;
+				}
+			}
+		}
+	}
+
 	// 플레이어의 눈물이면
 	if (true == IsPlayerProjectile())
 	{
+		// 몬스터와 충돌했을때
 		std::vector<GameEngineCollision*> CollisionResult;
 		if (true == Collision_->CollisionResultRect("Monster", CollisionResult))
 		{

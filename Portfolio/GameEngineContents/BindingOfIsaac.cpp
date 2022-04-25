@@ -483,6 +483,15 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("pickup_005_Clearchests.bmp");
 		Image->CutCount(4, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("grid_poop_1.bmp");
+		Image->CutCount(5, 1);
+		Image = GameEngineImageManager::GetInst()->Find("grid_poop_2.bmp");
+		Image->CutCount(5, 1);
+		Image = GameEngineImageManager::GetInst()->Find("grid_poop_3.bmp");
+		Image->CutCount(5, 1);
+		Image = GameEngineImageManager::GetInst()->Find("grid_poop_4.bmp");
+		Image->CutCount(5, 1);
 	}
 
 	/////////////////////////////////// Play UI

@@ -2,10 +2,14 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include "Player.h"
 
+std::vector<std::string> PassiveItem::ItemNameVector_ = {};
+
+
 PassiveItem::PassiveItem()
 	: Renderer_(nullptr)
 	, Collision_(nullptr)
 	, Type_(PassiveType::Default)
+	, AnimTimer_(0.0f)
 {
 }
 
@@ -29,7 +33,7 @@ void PassiveItem::Setting(PassiveType _Type)
 void PassiveItem::Start()
 {
 	ItemNameVector_.push_back("None.bmp");
-	ItemNameVector_.push_back("collectibles_001.bmp");
+	ItemNameVector_.push_back("collectibles_001_thesadonion.bmp");
 }
 
 void PassiveItem::Update()
