@@ -36,14 +36,16 @@ void LoadingAnim1::Update()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
-	if (AnimTimer_ <= 0.5)
+	if (AnimTimer_ <= 0.2)
 	{
 
 	}
-	else if (AnimTimer_ <= 1.0)
+	else if (AnimTimer_ <= 0.4)
 	{
 		RendererVector_[0]->On();
-
+	}
+	else if (AnimTimer_ <= 1.0)
+	{
 		float4 LerpScale = float4::Lerp({ 305, 243 }, { 610, 486 }, (AnimTimer_ - 0.5f) * 3.0f);
 		RendererVector_[0]->SetScale(LerpScale);
 	}

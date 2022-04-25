@@ -58,13 +58,13 @@ void LoadingMap::Update()
 
 	if (AnimTimer_ >= 3.5f)
 	{
-		//BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
-		//if (nullptr != TmpEngine)
-		//{
-		//	TmpEngine->ResetPlayLevel("Play");
-		//	TmpEngine->ChangeLevel("Play");
-		//	CurrentFloor += 1;
-		//}
+		BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
+		if (nullptr != TmpEngine)
+		{
+			TmpEngine->ResetPlayLevel("Play");
+			TmpEngine->ChangeLevel("Play");
+			CurrentFloor += 1;
+		}
 	}
 }
 

@@ -4,6 +4,7 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "LoadingAnim1.h"
 #include "LoadingAnim2.h"
+#include <GameEngineBase/GameEngineRandom.h>
 
 LoadingBubble::LoadingBubble() 
 	: AnimTimer_(0.0f)
@@ -45,8 +46,19 @@ void LoadingBubble::Update()
 
 	if (AnimTimer_ >= 0.8f && CreateNightmare == false)
 	{
-		//GetLevel()->CreateActor<LoadingAnim1>()->SetPosition(GetPosition() + float4(0, -250));
-		GetLevel()->CreateActor<LoadingAnim2>()->SetPosition(GetPosition() + float4(0, -250));
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 1);
+		if (RandomInt == 0)
+		{
+			LoadingAnim1* TmpAnim = GetLevel()->CreateActor<LoadingAnim1>();
+			TmpAnim->SetPosition(GetPosition() + float4(0, -250));
+			TmpAnim->Death(2.7f);
+		}
+		else
+		{
+			LoadingAnim2* TmpAnim = GetLevel()->CreateActor<LoadingAnim2>();
+			TmpAnim->SetPosition(GetPosition() + float4(0, -250));
+			TmpAnim->Death(2.7f);
+		}
 		CreateNightmare = true;
 	}
 }
@@ -54,6 +66,7 @@ void LoadingBubble::Update()
 void LoadingBubble::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
 	AnimTimer_ = 0.0f;
+	CreateNightmare = false;
 	for (int i = 0; i < RendererVector.size(); i++)
 	{
 		RendererVector[i]->Off();
