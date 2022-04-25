@@ -28,7 +28,6 @@ protected:
 private:
 	std::vector<GameEngineActor*> AllActors_;
 	std::vector<float> AllTimer_;
-	float LevelTime_;
 	float PrevTime_;
 	int CurrentIndex_;
 	EndingManager* EndingPtr_;

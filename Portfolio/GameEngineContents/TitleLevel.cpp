@@ -33,12 +33,10 @@ void TitleLevel::Loading()
 
 void TitleLevel::Update()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("TitleESC"))
-	{
-		IntroPtr_->Stop();
-		GameEngine::GetInst().ChangeLevel("Menu");
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("TitleSpace"))
+	if (
+		true == GameEngineInput::GetInst()->IsDown("TitleESC") ||
+		true == GameEngineInput::GetInst()->IsDown("TitleSpace")
+		)
 	{
 		IntroPtr_->Stop();
 		GameEngine::GetInst().ChangeLevel("Menu");

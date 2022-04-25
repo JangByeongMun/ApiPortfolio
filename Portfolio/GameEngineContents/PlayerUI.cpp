@@ -56,7 +56,11 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 
 void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	if (_NextLevel == GameEngine::GetInst().FindLevel("Ending"))
+	if (
+		_NextLevel == GameEngine::GetInst().FindLevel("Ending") ||
+		_NextLevel == GameEngine::GetInst().FindLevel("Menu") ||
+		_NextLevel == GameEngine::GetInst().FindLevel("Title")
+		)
 	{
 		PlayerHP_->NextLevelOff();
 		CardUI_->NextLevelOff();

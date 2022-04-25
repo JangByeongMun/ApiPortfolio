@@ -4,6 +4,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include "ContentsGlobal.h"
 #include "RandomRoomManager.h"
+#include <GameEngine/GameEngine.h>
+#include <GameEngineBase/GameEngineInput.h>
 
 DeadReasonUI::DeadReasonUI()
 {
@@ -71,9 +73,21 @@ void DeadReasonUI::Start()
 		Renderer->SetIndex(RandomInt);
 		Renderer->SetPivot({ 90, -40 });
 	}
+
+	if (false == GameEngineInput::GetInst()->IsKey("ResetSpace"))
+	{
+		GameEngineInput::GetInst()->CreateKey("ResetESC", VK_ESCAPE);
+		GameEngineInput::GetInst()->CreateKey("ResetSpace", VK_SPACE);
+	}
 }
 
 void DeadReasonUI::Update()
 {
+	if (
+		true == GameEngineInput::GetInst()->IsDown("ResetESC") ||
+		true == GameEngineInput::GetInst()->IsDown("ResetSpace")
+		)
+	{
+		GameEngine::GetInst().ChangeLevel("Menu");
+	}
 }
-

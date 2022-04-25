@@ -2,8 +2,11 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include "ContentsGlobal.h"
+#include "BindingOfIsaac.h"
 
 LoadingMap::LoadingMap() 
+	: PlayerRenderer_(nullptr)
+	, AnimTimer_(0.0f)
 {
 }
 
@@ -47,9 +50,27 @@ void LoadingMap::Start()
 	rendererBoss->SetIndex(6);
 }
 
+void LoadingMap::Update()
+{
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	float4 LerpPos = float4::Lerp(FloorMaps_[CurrentFloor - 1]->GetPivot(), FloorMaps_[CurrentFloor]->GetPivot(), AnimTimer_);
+	PlayerRenderer_->SetPivot(LerpPos);
+
+	if (AnimTimer_ >= 2.5f)
+	{
+		BindingOfIsaac* TmpEngine = dynamic_cast<BindingOfIsaac*>(&GameEngine::GetInst());
+		if (nullptr != TmpEngine)
+		{
+			TmpEngine->ResetPlayLevel("Play");
+			TmpEngine->ChangeLevel("Play");
+			CurrentFloor += 1;
+		}
+	}
+}
+
 void LoadingMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	PlayerRenderer_->SetPivot(FloorMaps_[CurrentFloor - 1]->GetPivot());
+	AnimTimer_ = 0.0f;
 	for (int i = 0; i < FloorMaps_.size(); i++)
 	{
 		if (i <= CurrentFloor)
@@ -73,4 +94,3 @@ void LoadingMap::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		FloorMaps_[i]->SetIndex(1);
 	}
 }
-

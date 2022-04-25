@@ -221,6 +221,9 @@
     <ClInclude Include="ClearBox.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
+    <ClInclude Include="LoadingAnim.h">
+      <Filter>Loading</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -442,6 +445,9 @@
     </ClCompile>
     <ClCompile Include="ClearBox.cpp">
       <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadingAnim.cpp">
+      <Filter>Loading</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

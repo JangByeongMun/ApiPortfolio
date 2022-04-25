@@ -15,6 +15,7 @@ void Player::SetAcheiveRenderer(const std::string& _Name)
 {
 	AcheiveItemRender_ = CreateRenderer(_Name);
 	AcheiveItemRender_->SetPivot({0, -30});
+	AcheiveItemRender_->Death(1.0f);
 }
 
 // Start
@@ -76,7 +77,7 @@ void Player::HeadAcheiveStart()
 	{
 		HeadAddRender_[i]->Off();
 	}
-	AnimTimer_ = 1.0f;
+	AnimTimer_ = 0.0f;
 }
 void Player::HeadHittedStart()
 {
@@ -336,9 +337,9 @@ void Player::HeadMoveUpdate()
 }
 void Player::HeadAcheiveUpdate()
 {
-	AnimTimer_ -= GameEngineTime::GetDeltaTime();
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
-	if (AnimTimer_ <= 0)
+	if (AnimTimer_ >= 1.0f)
 	{
 		for (int i = 0; i < AnimRender_.size(); i++)
 		{
@@ -431,7 +432,7 @@ void Player::HeadHittedUpdate()
 }
 void Player::HeadDeadUpdate()
 {
-	AnimTimer_ -= GameEngineTime::GetDeltaTime();
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
 	if (AnimTimer_ >= 0.3f)
 	{

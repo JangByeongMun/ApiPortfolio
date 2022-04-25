@@ -207,7 +207,11 @@ void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	if (_NextLevel == GameEngine::GetInst().FindLevel("Ending"))
+	if (
+		_NextLevel == GameEngine::GetInst().FindLevel("Ending") ||
+		_NextLevel == GameEngine::GetInst().FindLevel("Menu") ||
+		_NextLevel == GameEngine::GetInst().FindLevel("Title")
+		)
 	{
 		NextLevelOff();
 		PlayerUI_->NextLevelOff();

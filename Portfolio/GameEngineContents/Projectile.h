@@ -32,7 +32,7 @@ public:
 			AddValue += 16;
 		}
 
-		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 });
+		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::Projectile));
 		Renderer->SetIndex(AddValue);
 	}
 	inline void SetLifeTime_(float _Value)

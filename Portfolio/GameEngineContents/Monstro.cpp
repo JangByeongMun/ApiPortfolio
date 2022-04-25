@@ -91,6 +91,8 @@ void Monstro::AttackStart()
 
 void Monstro::DeadStart()
 {
+	Renderer_->SetPivot(float4::ZERO);
+	Collision_->Off();
 	ChangeMonstroAnimation("_8");
 	AnimTimer_ = 0.0f;
 	IsAnim_ = true;
@@ -226,6 +228,7 @@ void Monstro::AttackUpdate()
 void Monstro::DeadUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
+
 	if (AnimTimer_ >= 1.4f)
 	{
 		Death();

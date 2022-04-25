@@ -20,8 +20,10 @@ protected:
 private:
 	std::vector<GameEngineRenderer*> FloorMaps_;
 	GameEngineRenderer* PlayerRenderer_;
+	float AnimTimer_;
 
 	void Start() override;
+	void Update() override;
 	void LevelChangeStart(GameEngineLevel* _PrevLevel) override;
 };
 
