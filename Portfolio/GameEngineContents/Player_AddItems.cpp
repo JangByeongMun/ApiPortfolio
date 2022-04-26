@@ -45,7 +45,7 @@ void Player::UseActive()
 		Damage_ += 2;
 		break;
 	case ActiveType::Item036:
-		GetLevel()->CreateActor<Poop>()->SetPosition(GetPosition());
+		GetLevel()->CreateActor<Poop>()->SetPosition(GetPosition() + float4(0, -60));
 		break;
 	case ActiveType::Item045:
 		GetPlayerHP()->AddRedHp(false);
@@ -57,11 +57,6 @@ void Player::UseActive()
 	}
 
 	SetGaze(0);
-}
-
-void Player::ChangeActiveGaze()
-{
-
 }
 
 void Player::AddPassive(PassiveType _Type)

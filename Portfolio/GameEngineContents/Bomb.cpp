@@ -9,6 +9,8 @@
 #include "Player.h"
 #include "PlayerUI.h"
 #include "PlayerHP.h"
+#include "Poop.h"
+#include "Fire.h"
 
 Bomb::Bomb() 
 	: Collision_(nullptr)
@@ -129,6 +131,32 @@ void Bomb::Update()
 				if (nullptr != TmpActor)
 				{
 					TmpActor->GetPlayerUI()->GetPlayerHP()->MinusHearts(false);
+				}
+			}
+		}
+
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("Poop", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Poop* TmpActor = dynamic_cast<Poop*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->AddHp(-60);
+				}
+			}
+		}
+
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("Poop", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Fire* TmpActor = dynamic_cast<Fire*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->AddFireHP(-60);
 				}
 			}
 		}

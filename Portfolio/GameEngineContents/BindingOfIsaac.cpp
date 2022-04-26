@@ -586,6 +586,9 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("pickup_003_key.bmp");
 		Image->CutCount(4, 1);
 
+		Image = GameEngineImageManager::GetInst()->Find("pickup_016_bomb.bmp");
+		Image->CutCount(3, 1);
+
 		Image = GameEngineImageManager::GetInst()->Find("pickup_016_bomb_One.bmp");
 		Image->CutCount(3, 1);
 

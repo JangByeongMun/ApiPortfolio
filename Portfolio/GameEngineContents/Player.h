@@ -226,7 +226,6 @@ public:
 	void AddGaze(int _Value);
 	
 	void UseActive();
-	void ChangeActiveGaze();
 
 ///////////////////////////////// 패시브 아이템
 private:

@@ -21,11 +21,11 @@ void ActiveUI::SettingUI()
 		break;
 	case ActiveType::Item036:
 		SelectItemRenderer(1);
-		SelectGazeRenderer(3);
+		SelectGazeRenderer(1);
 		break;
 	case ActiveType::Item045:
 		SelectItemRenderer(2);
-		SelectGazeRenderer(1);
+		SelectGazeRenderer(3);
 		break;
 	case ActiveType::Max:
 		break;
@@ -44,10 +44,10 @@ void ActiveUI::SetGaze(int _Value)
 		GazeRenderer[2]->SetIndex(_Value);
 		break;
 	case ActiveType::Item036:
-		GazeRenderer[3]->SetIndex(_Value);
+		GazeRenderer[1]->SetIndex(_Value);
 		break;
 	case ActiveType::Item045:
-		GazeRenderer[1]->SetIndex(_Value);
+		GazeRenderer[3]->SetIndex(_Value);
 		break;
 	case ActiveType::Max:
 		break;

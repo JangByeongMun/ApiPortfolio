@@ -11,6 +11,10 @@
 #include "ClearBox.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "Player.h"
+#include "KeyItem.h"
+#include "BombItem.h"
+#include "MoneyItem.h"
+#include "BatteryItem.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -35,6 +39,7 @@ void RoomActor::MinusMonsterCount()
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
 		OpenAllDoor();
+		MakeMapReward();
 		Player::MainPlayer->AddGaze(1);
 	}
 }
@@ -47,6 +52,7 @@ void RoomActor::MinusBossCount()
 	{
 		OpenAllDoor();
 		OpenNextStage();
+		MakePassive();
 		Player::MainPlayer->AddGaze(1);
 	}
 }
@@ -105,12 +111,12 @@ void RoomActor::Setting()
 
 	// 시작방에선 오브젝트 안만들고 가이드 UI 생성
 	// 생각해보니 생성할때 0, 0엔 빈방을 만들고 나머지를 랜덤으로 채우는게 좋았을듯
-	if (Pos_.CompareInt2D({0, 0}))
+	if (Pos_.CompareInt2D({ 0, 0 }))
 	{
 		CreateRenderer("StartGuide.bmp");
 		return;
 	}
-	
+
 	// 블럭 세팅
 	std::vector<RoomData::BlockData> TmpTileVector = Data_.AllBlock_;
 	for (int i = 0; i < TmpTileVector.size(); i++)
@@ -124,7 +130,7 @@ void RoomActor::Setting()
 			TmpFire->SetPosition(GetPosition() + TmpTilePos);
 			break;
 		}
-			break;
+		break;
 		case BlockType::HOLE:
 			break;
 		case BlockType::POOP:
@@ -192,7 +198,7 @@ void RoomActor::Setting()
 		float4 TmpTilePos = { StartX + ScaleX * TmpPassiveVector[i].X_, StartY + ScaleY * TmpPassiveVector[i].Y_ };
 		PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
 		TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
-		
+
 		PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
 		TmpPassiveItem->Setting(TmpType);
 	}
@@ -280,7 +286,7 @@ void RoomActor::CloseAllDoor()
 
 void RoomActor::SetBossHPUI(float _Value)
 {
-	BossHpRendererVector_[2]->SetIndexWithValue(0, {-1.0f, -1.0f}, _Value);
+	BossHpRendererVector_[2]->SetIndexWithValue(0, { -1.0f, -1.0f }, _Value);
 }
 
 void RoomActor::Start()
@@ -304,7 +310,7 @@ void RoomActor::DoorSetting()
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, 1)))
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
-		TmpDoor->SetPosition(GetPosition() + float4( 0, 300 ));
+		TmpDoor->SetPosition(GetPosition() + float4(0, 300));
 
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(0, 1))->Data_.RoomType_)
 		{
@@ -380,7 +386,7 @@ void RoomActor::DoorSetting()
 	{
 		Door* TmpDoor = GetLevel()->CreateActor<Door>(0);
 		TmpDoor->SetPosition(GetPosition() + float4(-500, 0));
-		
+
 		switch (RandomRoomManager::GetInst()->FindRoom(Pos_ + float4(-1, 0))->Data_.RoomType_)
 		{
 		case RoomType::Treasure:
@@ -408,13 +414,91 @@ void RoomActor::DoorSetting()
 void RoomActor::MakeMapReward()
 {
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
-	if (0.0f <= RandomFloat && RandomFloat < 0.1f)
+	if (0.0f <= RandomFloat && RandomFloat < 0.15f)
 	{
-
+		// 열쇠 1개
+		KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+		TmpObject->SetType(KeyType::Normal);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.15f <= RandomFloat && RandomFloat < 0.3f)
+	{
+		// 폭탄 1개
+		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
+		TmpObject->SetType(BombType::Normal);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.3f <= RandomFloat && RandomFloat < 0.45f)
+	{
+		// 1원
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Normal);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.45f <= RandomFloat && RandomFloat < 0.5f)
+	{
+		// 열쇠 2개
+		KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+		TmpObject->SetType(KeyType::Two);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.5f <= RandomFloat && RandomFloat < 0.55f)
+	{
+		// 폭탄 2개
+		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
+		TmpObject->SetType(BombType::Two);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.55f <= RandomFloat && RandomFloat < 0.6f)
+	{
+		// 5원
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Black);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.6f <= RandomFloat && RandomFloat < 0.65f)
+	{
+		// 그냥상자
+		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
+		TmpObject->SetType(BombType::Two);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.65f <= RandomFloat && RandomFloat < 0.7f)
+	{
+		// 황금상자
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Black);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.7f <= RandomFloat && RandomFloat < 0.75f)
+	{
+		// 배터리
+		BatteryItem* TmpObject = GetLevel()->CreateActor<BatteryItem>();
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.75f <= RandomFloat && RandomFloat < 0.775f)
+	{
+		// 마스터키
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Black);
+		TmpObject->SetPosition(GetPosition());
+	}
+	else if (0.775f <= RandomFloat && RandomFloat < 0.8f)
+	{
+		// 10원
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Silver);
+		TmpObject->SetPosition(GetPosition());
 	}
 }
 
 void RoomActor::MakePassive()
 {
+	// 패시브 아이템 세팅
+	float4 TmpTilePos = { StartX + ScaleX * 6, StartY + ScaleY * 4 };
+	PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
+	TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
 
+	PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+	TmpPassiveItem->Setting(TmpType);
 }
