@@ -7,6 +7,7 @@
 #include "MiniMap.h"
 #include "PlayLevel.h"
 #include <GameEngine/GameEngine.h>
+#include "ActiveUI.h"
 
 PlayerUI::PlayerUI() 
 	: PlayerHP_(nullptr)
@@ -14,6 +15,7 @@ PlayerUI::PlayerUI()
 	, ItemUI_(nullptr)
 	, AccessoryUI_(nullptr)
 	, MiniMap_(nullptr)
+	, ActiveUI_(nullptr)
 {
 }
 
@@ -27,6 +29,7 @@ void PlayerUI::Start()
 	CardUI_ = GetLevel()->CreateActor<CardUI>(static_cast<int>(ORDER::UI));
 	ItemUI_ = GetLevel()->CreateActor<ItemUI>(static_cast<int>(ORDER::UI));
 	AccessoryUI_ = GetLevel()->CreateActor<AccessoryUI>(static_cast<int>(ORDER::UI));
+	ActiveUI_ = GetLevel()->CreateActor<ActiveUI>((int)ORDER::UI);
 }
 
 void PlayerUI::Setting()
@@ -34,6 +37,7 @@ void PlayerUI::Setting()
 	SetPlayerHP();
 	SetItemUI();
 	SetAccessoryUI();
+	SetActiveUI();
 }
 
 void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
@@ -44,6 +48,7 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 		CardUI_->Off();
 		ItemUI_->Off();
 		AccessoryUI_->Off();
+		ActiveUI_->Off();
 	}
 	else
 	{
@@ -51,6 +56,7 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 		CardUI_->On();
 		ItemUI_->On();
 		AccessoryUI_->On();
+		ActiveUI_->On();
 	}
 }
 
@@ -66,6 +72,7 @@ void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		CardUI_->NextLevelOff();
 		ItemUI_->NextLevelOff();
 		AccessoryUI_->NextLevelOff();
+		ActiveUI_->NextLevelOff();
 	}
 	else
 	{
@@ -73,6 +80,7 @@ void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		CardUI_->NextLevelOn();
 		ItemUI_->NextLevelOn();
 		AccessoryUI_->NextLevelOn();
+		ActiveUI_->NextLevelOn();
 	}
 }
 
@@ -102,6 +110,11 @@ void PlayerUI::SetMiniMap()
 {
 	MiniMap_->MakeNode();
 	MiniMap_->ChangeMap({0, 0});
+}
+
+void PlayerUI::SetActiveUI()
+{
+	ActiveUI_->SettingUI();
 }
 
 void PlayerUI::MakeMiniMap()

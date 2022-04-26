@@ -8,7 +8,7 @@
 #include "Projectile.h"
 #include "PlayerHP.h"
 #include "PlayBackGround.h"
-#include "SpacebarUI.h"
+#include "ActiveUI.h"
 #include "Accessory.h"
 #include "ContentsEnum.h"
 #include "RandomRoomManager.h"
@@ -40,7 +40,6 @@ void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
 	RandomRoomManager::SetInst(CreateActor<RandomRoomManager>((int)ORDER::BACKGROUND));
-	CreateActor<SpacebarUI>((int)ORDER::UI);
 	if (nullptr == Player::MainPlayer)
 	{
 		Player::MainPlayer = CreateActor<Player>((int)ORDER::PLAYER);

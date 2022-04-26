@@ -196,6 +196,8 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 		{
 			CurrentRedHP_ += _Value;
 		}
+
+		PlayerDeadCheck();
 	}
 
 	if (CurrentRedHP_ > MaxRedHP_)
@@ -203,7 +205,6 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 		CurrentRedHP_ = MaxRedHP_;
 		IsHalfRed_ = false;
 	}
-	PlayerDeadCheck();
 	UpdateUI();
 }
 
@@ -250,6 +251,7 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 			AddHeartVector_.pop_back();
 		}
 
+		PlayerDeadCheck();
 	}
 
 	if (CurrentAddHP_ + MaxRedHP_ > MaxCount)
@@ -257,6 +259,5 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 		CurrentAddHP_ = MaxCount - MaxRedHP_;
 		IsHalfRed_ = false;
 	}
-	PlayerDeadCheck();
 	UpdateUI();
 }

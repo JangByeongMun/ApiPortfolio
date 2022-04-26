@@ -215,6 +215,10 @@ public:
 		}
 		CurrentGaze_ = 0;
 	}
+	inline ActiveType GetActiveType()
+	{
+		return ActiveType_;
+	}
 	inline void SetGaze(int _Value)
 	{
 		CurrentGaze_ = _Value;
@@ -229,6 +233,7 @@ public:
 		}
 	}
 	void UseActive();
+	void ChangeActiveGaze();
 
 ///////////////////////////////// 패시브 아이템
 private:

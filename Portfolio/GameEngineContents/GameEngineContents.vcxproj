@@ -408,7 +408,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SpacebarUI.h">
+    <ClInclude Include="ActiveUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -691,7 +691,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="SpacebarUI.cpp">
+    <ClCompile Include="ActiveUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

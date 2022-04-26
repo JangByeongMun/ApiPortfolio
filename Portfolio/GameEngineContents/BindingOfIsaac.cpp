@@ -499,9 +499,6 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("ui_hearts_1.bmp");
 		Image->CutCount(5, 2);
 
-		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_1.bmp");
-		Image->CutCount(4, 2);
-
 		Image = GameEngineImageManager::GetInst()->Find("hudpickups.bmp");
 		Image->CutCount(3, 2);
 
@@ -525,6 +522,15 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("ui_bosshealthbar_2.bmp");
 		Image->CutCount(1, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_1.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_3.bmp");
+		Image->CutCount(4, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_4.bmp");
+		Image->CutCount(5, 1);
 	}
 
 	/////////////////////////////////// Play Item

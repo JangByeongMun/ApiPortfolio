@@ -33,6 +33,11 @@ void Player::UseActive()
 	SetGaze(0);
 }
 
+void Player::ChangeActiveGaze()
+{
+
+}
+
 void Player::AddPassive(PassiveType _Type)
 {
 	std::string TmpName = PassiveItem::ItemNameVector_[static_cast<int>(_Type)];

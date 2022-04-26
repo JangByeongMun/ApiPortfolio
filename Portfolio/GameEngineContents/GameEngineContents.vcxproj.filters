@@ -20,7 +20,7 @@
     <ClInclude Include="CardUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
-    <ClInclude Include="SpacebarUI.h">
+    <ClInclude Include="ActiveUI.h">
       <Filter>Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="PauseUI.h">
@@ -245,7 +245,7 @@
     <ClCompile Include="CardUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SpacebarUI.cpp">
+    <ClCompile Include="ActiveUI.cpp">
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="PauseUI.cpp">
