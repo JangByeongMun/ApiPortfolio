@@ -12,13 +12,13 @@ PlayerHP::PlayerHP()
 {
 }
 
-PlayerHP::~PlayerHP() 
+PlayerHP::~PlayerHP()
 {
 }
 
 void PlayerHP::Start()
 {
-	SetPosition({130, 35});
+	SetPosition({ 130, 35 });
 
 	RendererVector_.reserve(MaxCount);
 	for (int i = 0; i < MaxCount; i++)
@@ -134,6 +134,11 @@ void PlayerHP::UpdateUI()
 				}
 			}
 		}
+		else
+		{
+			RendererVector_[i]->SetIndex(9);
+			ShadowRendererVector_[i]->Off();
+		}
 	}
 }
 
@@ -156,48 +161,20 @@ void PlayerHP::AddMaxHp(int _Value, int _Heal)
 	UpdateUI();
 }
 
-void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
+void PlayerHP::AddRedHp(bool _IsHalf)
 {
-	if (_Value > 0) // 하트 추가일떄
+	if (true == _IsHalf) // 추가가 절반짜리일때
 	{
-		if (true == _IsHalf) // 추가가 절반짜리일때
+		if (false == IsHalfRed_) // 현재상태가 절반이 아니였을떄
 		{
-			if (false == IsHalfRed_) // 현재상태가 절반이 아니였을떄
-			{
-				CurrentRedHP_ += _Value;
-			}
+			CurrentRedHP_ += 1;
+		}
 
-			IsHalfRed_ = !IsHalfRed_;
-		}
-		else if (false == _IsHalf) // 추가가 정수일때
-		{
-			CurrentRedHP_ += _Value;
-		}
+		IsHalfRed_ = !IsHalfRed_;
 	}
-
-
-	else if (_Value < 0) // 하트 감소일때
+	else if (false == _IsHalf) // 추가가 정수일때
 	{
-		if (true == Player::MainPlayer->IsInvincibillity()) // 무적시간 이면 스킵
-		{
-			return;
-		}
-
-		if (true == _IsHalf) // 감소가 절반짜리일때
-		{
-			if (true == IsHalfRed_)// 현재상태가 절반이 였을때
-			{
-				CurrentRedHP_ += _Value;
-			}
-
-			IsHalfRed_ = !IsHalfRed_;
-		}
-		else if (false == _IsHalf) // 감소가 정수일때
-		{
-			CurrentRedHP_ += _Value;
-		}
-
-		PlayerDeadCheck();
+		CurrentRedHP_ += 1;
 	}
 
 	if (CurrentRedHP_ > MaxRedHP_)
@@ -208,50 +185,22 @@ void PlayerHP::AddRedHp(int _Value, bool _IsHalf)
 	UpdateUI();
 }
 
-// 이거 _Value 에 1, -1을 제외한걸 넣으면 안됨
-// 원래 큰수도 한번에 하려고했었는데 중간에 포문 또 돌려야되서 지금도 복잡한데 더 복잡해짐
-// 다음에는 마이너스는 일단 따로 빼는식으로 구현해야할듯
-void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
+void PlayerHP::AddHearts(HeartType _Type, bool _IsHalf)
 {
-	if (_Value > 0) // 하트 추가일떄
+	if (true == _IsHalf) // 추가가 절반짜리일때
 	{
-		if (true == _IsHalf) // 추가가 절반짜리일때
+		if (false == IsHalfAdd_) // 현재상태가 절반이 아니였을떄
 		{
-			if (false == IsHalfAdd_) // 현재상태가 절반이 아니였을떄
-			{
-				CurrentAddHP_ += _Value;
-				AddHeartVector_.push_back(_Type);
-			}
-			
-			IsHalfAdd_ = !IsHalfAdd_;
-		}
-		else if(false == _IsHalf) // 추가가 정수일때
-		{
-			CurrentAddHP_ += _Value;
+			CurrentAddHP_ += 1;
 			AddHeartVector_.push_back(_Type);
 		}
+
+		IsHalfAdd_ = !IsHalfAdd_;
 	}
-
-
-	else if (_Value < 0) // 하트 감소일때
+	else if (false == _IsHalf) // 추가가 정수일때
 	{
-		if (true == _IsHalf) // 감소가 절반짜리일때
-		{
-			if (true == IsHalfAdd_)// 현재상태가 절반이 였을때
-			{
-				CurrentAddHP_ += _Value;
-				AddHeartVector_.pop_back();
-			}
-
-			IsHalfAdd_ = !IsHalfAdd_;
-		}
-		else if (false == _IsHalf) // 감소가 정수일때
-		{
-			CurrentAddHP_ += _Value;
-			AddHeartVector_.pop_back();
-		}
-
-		PlayerDeadCheck();
+		CurrentAddHP_ += 1;
+		AddHeartVector_.push_back(_Type);
 	}
 
 	if (CurrentAddHP_ + MaxRedHP_ > MaxCount)
@@ -259,5 +208,51 @@ void PlayerHP::AddHearts(int _Value, HeartType _Type, bool _IsHalf)
 		CurrentAddHP_ = MaxCount - MaxRedHP_;
 		IsHalfRed_ = false;
 	}
+	UpdateUI();
+}
+
+void PlayerHP::MinusHearts(bool _IsHalf)
+{
+	if (true == Player::MainPlayer->IsInvincibillity()) // 무적시간 이면 스킵
+	{
+		return;
+	}
+
+	if (CurrentAddHP_ > 0) // 추가 하트가 있을경우
+	{
+		if (true == _IsHalf) // 감소가 절반짜리일때
+		{
+			if (true == IsHalfAdd_)// 현재상태가 절반이 였을때
+			{
+				CurrentAddHP_ -= 1;
+				AddHeartVector_.pop_back();
+			}
+
+			IsHalfAdd_ = !IsHalfAdd_;
+		}
+		else if (false == _IsHalf) // 감소가 정수일때
+		{
+			CurrentAddHP_ -= 1;
+			AddHeartVector_.pop_back();
+		}
+	}
+	else
+	{
+		if (true == _IsHalf) // 감소가 절반짜리일때
+		{
+			if (true == IsHalfRed_)// 현재상태가 절반이 였을때
+			{
+				CurrentRedHP_ -= 1;
+			}
+
+			IsHalfRed_ = !IsHalfRed_;
+		}
+		else if (false == _IsHalf) // 감소가 정수일때
+		{
+			CurrentRedHP_ -= 1;
+		}
+	}
+
+	PlayerDeadCheck();
 	UpdateUI();
 }

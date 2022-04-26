@@ -51,7 +51,7 @@ void Fire::Update()
 {
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
-		Player::MainPlayer->GetPlayerHP()->AddRedHp(-1, true);
+		Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
 	}
 }
 

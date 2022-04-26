@@ -48,7 +48,7 @@ void Player::UseActive()
 		GetLevel()->CreateActor<Poop>()->SetPosition(GetPosition());
 		break;
 	case ActiveType::Item045:
-		GetPlayerHP()->AddRedHp(1, false);
+		GetPlayerHP()->AddRedHp(false);
 		break;
 	case ActiveType::Max:
 		break;

@@ -44,7 +44,7 @@ void Monster::Update()
 	// 몬스터 충돌시
 	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 	{
-		Player::MainPlayer->GetPlayerHP()->AddRedHp(-1, true);
+		Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
 	}
 }
 

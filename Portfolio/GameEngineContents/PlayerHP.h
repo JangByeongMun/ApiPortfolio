@@ -20,8 +20,9 @@ public:
 	void UpdateUI();
 	void SetMaxHp(int _Value);
 	void AddMaxHp(int _Value, int _Heal = -1);
-	void AddRedHp(int _Value, bool _IsHalf = "false");
-	void AddHearts(int _Value, HeartType _Type, bool _IsHalf = false);
+	void AddRedHp(bool _IsHalf = "false");
+	void AddHearts(HeartType _Type, bool _IsHalf = false);
+	void MinusHearts(bool _IsHalf);
 
 protected:
 

@@ -58,6 +58,7 @@ Player::Player()
 	, IsMasterKey_(false)
 	, PlayerUI_(nullptr)
 	, HavingAccessory_(AccessoryType::None)
+	, ActiveType_(ActiveType::Default)
 	, MaxGaze_(0)
 	, CurrentGaze_(0)
 	, IsUsingActive(false)
@@ -354,9 +355,9 @@ void Player::SetPlayerInfo()
 	PlayerUI_->Setting();
 	if (SelectedCharacterType == CharacterType::BLUEBABY)
 	{
-		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
-		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
-		GetPlayerHP()->AddHearts(1, HeartType::SoulHeart);
+		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
+		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
+		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
 	}
 
 	ChangeHeadState(PlayerHeadState::Attack);
