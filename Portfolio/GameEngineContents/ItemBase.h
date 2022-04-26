@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineImage.h>
+#include <GameEngineBase/GameEngineRandom.h>
 
 class RoomActor;
 class ItemBase : public GameEngineActor
@@ -20,9 +21,18 @@ public:
 	{
 		Dir_ += _Dir;
 	}
+	inline void AddRanomDir(float _Min, float _Max)
+	{
+		Dir_ += {GameEngineRandom::MainRandom->RandomFloat(_Min, _Max), GameEngineRandom::MainRandom->RandomFloat(_Min, _Max)};
+	}
 	void SetRoom(float4 _Pos);
 	bool CanMove(float4 _Value);
 	void SetObjectMove();
+
+	inline GameEngineCollision* GetCollision()
+	{
+		return Collision_;
+	}
 
 protected:
 	RoomActor* Room_;

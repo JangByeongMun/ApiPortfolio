@@ -169,8 +169,12 @@ void Player::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
 	{
-		GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
-		BombActor->SetPosition(GetPosition());
+		if (BombCount_ > 0)
+		{
+			GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
+			BombActor->SetPosition(GetPosition());
+			MinusItem(ItemType::Bomb, 1);
+		}
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("SpaceBar"))
@@ -181,6 +185,9 @@ void Player::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
 		AddGaze(100);
+		KeyCount_ += 10;
+		BombCount_ += 10;
+		PlayerUI_->SetItemUI();
 	}
 
 	// 무적시간 구현
@@ -495,24 +502,6 @@ void Player::ChangeHeadState(PlayerHeadState _State)
 }
 void Player::StateUpdate()
 {
-	if (true == GameEngineInput::GetInst()->IsDown("Bomb"))
-	{
-		KeyItem* Test = GetLevel()->CreateActor<KeyItem>();
-		Test->SetType(KeyType::Master);
-		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
-	{
-		KeyItem* Test = GetLevel()->CreateActor<KeyItem>();
-		Test->SetType(KeyType::Normal);
-		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
-	{
-		BatteryItem* Test = GetLevel()->CreateActor<BatteryItem>();
-		Test->SetPosition(GameEngineWindow::GetScale().Half() + float4(100, 0));
-	}
-
 	switch (CurBody_)
 	{
 	case PlayerBodyState::Idle:
@@ -611,6 +600,12 @@ void Player::AddItem(ItemType _Type)
 
 bool Player::MinusItem(ItemType _Type, int _Value)
 {
+	// 양수를 넣는다고 생각했는데 음수를 받았을때 양수로 바꾼다음 빼주도록
+	if (_Value < 0)
+	{
+		_Value *= -1;
+	}
+
 	switch (_Type)
 	{
 	case ItemType::Bomb:

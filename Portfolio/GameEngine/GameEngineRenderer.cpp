@@ -309,6 +309,13 @@ void GameEngineRenderer::CreateAnimationTimeKey(const std::string& _Image, const
 
 void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 {
+	// 종종애니메이션 못찾는다는 버그가 나옴 
+	// 예외처리 되는지 확인중
+	if (false == IsUpdate())
+	{
+		return;
+	}
+
 	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
 	if (Animations_.end() == FindIter)
 	{

@@ -25,7 +25,7 @@ void Monstro::Start()
 	Shadow->SetScale({ 220, 90 });
 	Shadow->SetPivot({ 0, 90 });
 
-	Collision_ = CreateCollision("Monster", { 200, 170 }, {0, 40});
+	Collision_ = CreateCollision("Monster", { 180, 150 }, {0, 30});
 	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
 	Renderer_->CreateAnimation("boss_004_monstro_Left.bmp", "boss_004_monstro_Left_0", 0, 0, 0, false);
 	Renderer_->CreateAnimation("boss_004_monstro_Left.bmp", "boss_004_monstro_Left_1", 1, 1, 0, false);

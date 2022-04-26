@@ -218,7 +218,7 @@ void RoomActor::Setting()
 		case BossType::Monstro:
 		{
 			Monstro* TmpBoss = GetLevel()->CreateActor<Monstro>();
-			TmpBoss->SetPosition(GetPosition() + float4(0, -100));
+			TmpBoss->SetPosition(GetPosition() + float4(0, -60));
 			TmpBoss->SetRoom(*this);
 			break;
 		}
@@ -414,9 +414,9 @@ void RoomActor::DoorSetting()
 
 void RoomActor::MakeMapReward()
 {
-	// 열쇠 1개
+	// 박스 확정 테스트
 	BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
-	TmpObject->SetType(BoxType::Normal);
+	TmpObject->SetType(BoxType::Gold);
 	TmpObject->SetPosition(GetPosition());
 	return;
 
@@ -427,6 +427,7 @@ void RoomActor::MakeMapReward()
 		KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 		TmpObject->SetType(KeyType::Normal);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.15f <= RandomFloat && RandomFloat < 0.3f)
 	{
@@ -434,6 +435,7 @@ void RoomActor::MakeMapReward()
 		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 		TmpObject->SetType(BombType::Normal);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.3f <= RandomFloat && RandomFloat < 0.45f)
 	{
@@ -441,6 +443,7 @@ void RoomActor::MakeMapReward()
 		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 		TmpObject->SetType(MoneyType::Normal);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.45f <= RandomFloat && RandomFloat < 0.5f)
 	{
@@ -448,6 +451,7 @@ void RoomActor::MakeMapReward()
 		KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 		TmpObject->SetType(KeyType::Two);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.5f <= RandomFloat && RandomFloat < 0.55f)
 	{
@@ -455,6 +459,7 @@ void RoomActor::MakeMapReward()
 		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 		TmpObject->SetType(BombType::Two);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.55f <= RandomFloat && RandomFloat < 0.6f)
 	{
@@ -462,33 +467,38 @@ void RoomActor::MakeMapReward()
 		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 		TmpObject->SetType(MoneyType::Black);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.6f <= RandomFloat && RandomFloat < 0.65f)
 	{
 		// 그냥상자
-		BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
-		TmpObject->SetType(BombType::Two);
+		BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
+		TmpObject->SetType(BoxType::Normal);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.65f <= RandomFloat && RandomFloat < 0.7f)
 	{
 		// 황금상자
-		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
-		TmpObject->SetType(MoneyType::Black);
+		BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
+		TmpObject->SetType(BoxType::Gold);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.7f <= RandomFloat && RandomFloat < 0.75f)
 	{
 		// 배터리
 		BatteryItem* TmpObject = GetLevel()->CreateActor<BatteryItem>();
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.75f <= RandomFloat && RandomFloat < 0.775f)
 	{
 		// 마스터키
-		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
-		TmpObject->SetType(MoneyType::Black);
+		KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+		TmpObject->SetType(KeyType::Master);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 	else if (0.775f <= RandomFloat && RandomFloat < 0.8f)
 	{
@@ -496,6 +506,7 @@ void RoomActor::MakeMapReward()
 		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 		TmpObject->SetType(MoneyType::Silver);
 		TmpObject->SetPosition(GetPosition());
+		TmpObject->SetRoom(GetPos());
 	}
 }
 

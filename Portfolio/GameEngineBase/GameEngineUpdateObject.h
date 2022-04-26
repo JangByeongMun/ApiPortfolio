@@ -24,10 +24,17 @@ public:
 		}
 
 		DeathTime_ -= GameEngineTime::GetDeltaTime();
-
-		if (0.0f >= DeathTime_)
+		if (0.0f >= DeathTime_ && true == IsDeathStart_)
 		{
 			IsDeath_ = true;
+		}
+
+		OnTime_ -= GameEngineTime::GetDeltaTime();
+		if (0.0f >= OnTime_ && true == IsOnStart_)
+		{
+			IsUpdate_ = true;
+			IsOnStart_ = false;
+			IsReleaseUpdate_ = false;
 		}
 	}
 
@@ -35,6 +42,13 @@ public:
 	{
 		IsUpdate_ = true;
 	}
+	inline void On(float _Time)
+	{
+		IsOnStart_ = true;
+		IsReleaseUpdate_ = true;
+		OnTime_ = _Time;
+	}
+
 	inline void Off()
 	{
 		IsUpdate_ = false;
@@ -50,6 +64,7 @@ public:
 	}
 	inline void Death(float _Time)
 	{
+		IsDeathStart_ = true;
 		IsReleaseUpdate_ = true;
 		DeathTime_ = _Time;
 	}
@@ -95,5 +110,11 @@ private:
 
 	float DeathTime_;
 	bool IsDeath_;
+	
+	// 죽는거말고 켜지는것도 시간제한 둘려고 죽는게 켜졌을때를 확인하는기능을 따로 만듬
+	bool IsDeathStart_;
+	
+	float OnTime_;
+	bool IsOnStart_;
 };
 

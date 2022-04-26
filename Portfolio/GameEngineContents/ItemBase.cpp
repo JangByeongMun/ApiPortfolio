@@ -34,6 +34,11 @@ bool ItemBase::CanMove(float4 _Value)
 	float4 AddPivot = Room_->GetPosition() - GameEngineWindow::GetScale().Half();
 	int Color = MapColImage_->GetImagePixel(GetPosition() + _Value - AddPivot);
 
+	if (nullptr == Collision_)
+	{
+		return false;
+	}
+
 	if (
 		RGB(0, 0, 0) != Color &&
 		false == Collision_->NextPosCollisionCheckRect("Stone", _Value) &&

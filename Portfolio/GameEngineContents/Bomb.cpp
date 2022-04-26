@@ -59,22 +59,13 @@ void Bomb::Update()
 
 			MoveDir += (GetPosition() - CollisionResult_[i]->GetCollisionPos());
 			MoveDir.Normal2D();
-			AddDir(MoveDir);
+			AddDir(MoveDir * 2.0f);
 		}
 
 		SetMove(MoveDir * 0.1f);
 	}
 	CollisionResult_.clear();
 
-	if (Timer_ >= 1.0)
-	{
-		if (true == Collision_->CollisionCheckRect("Player"))
-		{
-			float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
-			TmpDir.Normal2D();
-			AddDir(TmpDir * 1.0f);
-		}
-	}
 	SetObjectMove();
 
 
