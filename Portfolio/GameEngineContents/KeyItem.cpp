@@ -59,4 +59,6 @@ void KeyItem::Update()
 
 		Death();
 	}
+
+	SetObjectMove();
 }

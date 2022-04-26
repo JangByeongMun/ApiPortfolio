@@ -11,10 +11,10 @@
 #include "PlayerHP.h"
 #include "Poop.h"
 #include "Fire.h"
+#include "ItemBase.h"
 
 Bomb::Bomb() 
-	: Collision_(nullptr)
-	, Renderer_(nullptr)
+	: Renderer_(nullptr)
 	, Timer_ (0.0f)
 	, BombTime_(2.0f)
 	, IsExplode(false)
@@ -57,12 +57,26 @@ void Bomb::Update()
 			Projectile* TmpProjectile = static_cast<Projectile*>(CollisionResult_[i]->GetActor());
 			TmpProjectile->DestroyProjectile();
 
-			MoveDir += (GetPosition() - CollisionResult_[i]->GetCollisionPos()) * 10.0f;
+			MoveDir += (GetPosition() - CollisionResult_[i]->GetCollisionPos());
+			MoveDir.Normal2D();
+			AddDir(MoveDir);
 		}
 
 		SetMove(MoveDir * 0.1f);
 	}
 	CollisionResult_.clear();
+
+	if (Timer_ >= 1.0)
+	{
+		if (true == Collision_->CollisionCheckRect("Player"))
+		{
+			float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
+			TmpDir.Normal2D();
+			AddDir(TmpDir * 1.0f);
+		}
+	}
+	SetObjectMove();
+
 
 	if (Timer_ >= BombTime_)
 	{
@@ -149,7 +163,7 @@ void Bomb::Update()
 		}
 
 		ResultVector.clear();
-		if (true == Collision->CollisionResultRect("Poop", ResultVector))
+		if (true == Collision->CollisionResultRect("Fire", ResultVector))
 		{
 			for (int i = 0; i < ResultVector.size(); i++)
 			{
@@ -157,6 +171,21 @@ void Bomb::Update()
 				if (nullptr != TmpActor)
 				{
 					TmpActor->AddFireHP(-60);
+				}
+			}
+		}
+
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("Item", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				ItemBase* TmpActor = dynamic_cast<ItemBase*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					float4 TmpDir = TmpActor->GetPosition() - GetPosition();
+					TmpDir.Normal2D();
+					TmpActor->AddDir(TmpDir * 100.0f);
 				}
 			}
 		}

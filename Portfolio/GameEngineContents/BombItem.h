@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "ItemBase.h"
 
 enum class BombType
 {
@@ -11,7 +12,7 @@ enum class BombType
 };
 
 // Ό³Έν :
-class BombItem : public GameEngineActor
+class BombItem : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -31,7 +32,6 @@ protected:
 private:
 	BombType Type_;
 	GameEngineRenderer* Renderer_;
-	GameEngineCollision* Collision_;
 
 	void Update() override;
 };

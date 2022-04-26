@@ -2,9 +2,10 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "ItemBase.h"
 
 // Ό³Έν :
-class BatteryItem : public GameEngineActor
+class BatteryItem : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -20,8 +21,6 @@ public:
 protected:
 
 private:
-	GameEngineCollision* Collision_;
-
 	void Start() override;
 	void Update() override;
 };

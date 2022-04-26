@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "ItemBase.h"
 
 enum class MoneyType
 {
@@ -12,7 +13,7 @@ enum class MoneyType
 };
 
 // Ό³Έν :
-class MoneyItem : public GameEngineActor
+class MoneyItem : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -33,7 +34,6 @@ private:
 	MoneyType Type_;
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* ShadowRenderer_;
-	GameEngineCollision* Collision_;
 
 	void Update() override;
 };

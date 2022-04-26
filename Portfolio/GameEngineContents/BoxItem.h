@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
+#include "ItemBase.h"
 
 enum class BoxType
 {
@@ -8,7 +9,7 @@ enum class BoxType
 };
 
 // Ό³Έν :
-class BoxItem : public GameEngineActor
+class BoxItem : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -27,10 +28,14 @@ protected:
 
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
-	GameEngineCollision* Collision_;
 	BoxType Type_;
+	float AnimTimer_;
+	bool IsOpen_;
 
 	void Start();
 	void Update();
+
+	void NormalBoxReward();
+	void GoldBoxReward();
 };
 

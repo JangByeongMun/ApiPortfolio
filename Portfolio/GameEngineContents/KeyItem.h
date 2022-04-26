@@ -2,6 +2,7 @@
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "ItemBase.h"
 
 enum class KeyType
 {
@@ -12,7 +13,7 @@ enum class KeyType
 };
 
 // Ό³Έν :
-class KeyItem : public GameEngineActor
+class KeyItem : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -32,7 +33,6 @@ protected:
 private:
 	KeyType Type_;
 	GameEngineRenderer* Renderer_;
-	GameEngineCollision* Collision_;
 
 	void Update() override;
 };

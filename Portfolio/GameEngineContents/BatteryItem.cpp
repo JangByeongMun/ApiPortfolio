@@ -2,7 +2,6 @@
 #include "Player.h"
 
 BatteryItem::BatteryItem() 
-	: Collision_ (nullptr)
 {
 }
 
@@ -18,12 +17,20 @@ void BatteryItem::Start()
 
 void BatteryItem::Update()
 {
+	if (true == Collision_->CollisionCheckRect("Player"))
+	{
+		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
+		TmpDir.Normal2D();
+		AddDir(TmpDir * 100.0f * GameEngineTime::GetDeltaTime());
+	}
+	SetObjectMove();
+
 	if (true == Player::MainPlayer->IsActiveOn())
 	{
 		return;
 	}
 
-	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
+	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->AddItem(ItemType::Battery);
 		Death();

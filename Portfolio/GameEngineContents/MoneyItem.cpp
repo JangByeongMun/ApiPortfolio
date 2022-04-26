@@ -5,7 +5,6 @@ MoneyItem::MoneyItem()
 	: Type_(MoneyType::None)
 	, Renderer_(nullptr)
 	, ShadowRenderer_(nullptr)
-	, Collision_(nullptr)
 {
 }
 
@@ -131,4 +130,6 @@ void MoneyItem::Update()
 	{
 		Death();
 	}
+
+	SetObjectMove();
 }

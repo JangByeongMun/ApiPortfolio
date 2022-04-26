@@ -594,6 +594,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("costume_058_sadonion.bmp");
 		Image->CutCount(3, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_005_chests_Normal.bmp");
+		Image->CutCount(3, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("pickup_005_chests_Gold.bmp");
+		Image->CutCount(3, 3);
 	}
 
 	/////////////////////////////////// Intro

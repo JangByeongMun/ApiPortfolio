@@ -1,9 +1,10 @@
 #pragma once
 #include <GameEngine/GameEngineActor.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "ItemBase.h"
 
 // Ό³Έν :
-class Bomb : public GameEngineActor
+class Bomb : public ItemBase
 {
 public:
 	// constrcuter destructer
@@ -19,7 +20,6 @@ public:
 protected:
 
 private:
-	GameEngineCollision* Collision_;
 	GameEngineRenderer* Renderer_;
 
 	float Timer_;

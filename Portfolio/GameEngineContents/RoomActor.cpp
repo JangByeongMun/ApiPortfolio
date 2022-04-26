@@ -15,6 +15,7 @@
 #include "BombItem.h"
 #include "MoneyItem.h"
 #include "BatteryItem.h"
+#include "BoxItem.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -413,6 +414,12 @@ void RoomActor::DoorSetting()
 
 void RoomActor::MakeMapReward()
 {
+	// ¿­¼è 1°³
+	BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
+	TmpObject->SetType(BoxType::Normal);
+	TmpObject->SetPosition(GetPosition());
+	return;
+
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
 	if (0.0f <= RandomFloat && RandomFloat < 0.15f)
 	{

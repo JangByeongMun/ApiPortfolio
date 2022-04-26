@@ -4,7 +4,6 @@
 BombItem::BombItem() 
 	: Type_(BombType::None)
 	, Renderer_(nullptr)
-	, Collision_(nullptr)
 {
 }
 
@@ -57,5 +56,7 @@ void BombItem::Update()
 
 		Death();
 	}
+	
+	SetObjectMove();
 }
 
