@@ -74,7 +74,7 @@ bool GameEngineCollision::CollisionCheck(
 	{
 		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
 		{
-			return false;
+			continue;
 		}
 
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
@@ -118,17 +118,14 @@ bool GameEngineCollision::NextPosCollisionCheck(const std::string& _TargetGroup,
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
+		{
+			continue;
+		}
+
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
-			if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
-			{
-				return false;
-			}
-
-			else
-			{
-				return true;
-			}
+			return true;
 		}
 	}
 
@@ -167,12 +164,14 @@ bool GameEngineCollision::CollisionResult(const std::string& _TargetGroup, std::
 
 	for (; StartIter != EndIter; ++StartIter)
 	{
+		if (false == (*StartIter)->IsUpdate() || true == (*StartIter)->IsDeath())
+		{
+			continue;
+		}
+
 		if (CollisionCheckArray[static_cast<int>(_This)][static_cast<int>(_Target)](this, *StartIter))
 		{
-			if (true == (*StartIter)->IsUpdate())
-			{
-				_ColResult.push_back(*StartIter);
-			}
+			_ColResult.push_back(*StartIter);
 		}
 	}
 
