@@ -2,6 +2,32 @@
 #include "PassiveItem.h"
 #include "PlayerHP.h"
 #include "Poop.h"
+#include "ActiveUI.h"
+
+void Player::SetGaze(int _Value)
+{
+	CurrentGaze_ = _Value;
+	if (CurrentGaze_ <= 0)
+	{
+		CurrentGaze_ = 0;
+	}
+	if (CurrentGaze_ >= MaxGaze_)
+	{
+		CurrentGaze_ = MaxGaze_;
+	}
+	GetActiveUI()->SetGaze(CurrentGaze_);
+}
+
+void Player::AddGaze(int _Value)
+{
+	CurrentGaze_ += _Value;
+
+	if (CurrentGaze_ >= MaxGaze_)
+	{
+		CurrentGaze_ = MaxGaze_;
+	}
+	GetActiveUI()->SetGaze(CurrentGaze_);
+}
 
 void Player::UseActive()
 {

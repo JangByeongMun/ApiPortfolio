@@ -18,6 +18,7 @@ public:
 	ActiveUI& operator=(ActiveUI&& _Other) noexcept = delete;
 
 	void SettingUI();
+	void SetGaze(int _Value);
 
 protected:
 

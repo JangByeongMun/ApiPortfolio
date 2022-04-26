@@ -28,6 +28,7 @@ enum class PlayerHeadState
 class GameEngineImage;
 class PlayerUI;
 class PlayerHP;
+class ActiveUI;
 class Player : public Shooter
 {
 	friend PlayerUI;
@@ -172,6 +173,7 @@ public:
 		return PlayerUI_;
 	}
 	PlayerHP* GetPlayerHP();
+	ActiveUI* GetActiveUI();
 
 ///////////////////////////////// ¾Ç¼¼»ç¸®
 private:
@@ -219,19 +221,9 @@ public:
 	{
 		return ActiveType_;
 	}
-	inline void SetGaze(int _Value)
-	{
-		CurrentGaze_ = _Value;
-	}
-	inline void AddGaze(int _Value)
-	{
-		CurrentGaze_ += _Value;
-
-		if (CurrentGaze_ >= MaxGaze_)
-		{
-			CurrentGaze_ = MaxGaze_;
-		}
-	}
+	void SetGaze(int _Value);
+	void AddGaze(int _Value);
+	
 	void UseActive();
 	void ChangeActiveGaze();
 

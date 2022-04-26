@@ -27,6 +27,7 @@
 #include "Trapdoor.h"
 #include "KeyItem.h"
 #include "BatteryItem.h"
+#include "ActiveUI.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -655,6 +656,11 @@ bool Player::MinusItem(ItemType _Type, int _Value)
 PlayerHP* Player::GetPlayerHP()
 {
 	return PlayerUI_->PlayerHP_;
+}
+
+ActiveUI* Player::GetActiveUI()
+{
+	return PlayerUI_->ActiveUI_;
 }
 
 void Player::SetAccessory(AccessoryType _Type)

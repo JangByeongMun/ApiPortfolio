@@ -11,8 +11,7 @@ ActiveUI::~ActiveUI()
 
 void ActiveUI::SettingUI()
 {
-	ActiveType _Type = Player::MainPlayer->GetActiveType();
-	switch (_Type)
+	switch (Player::MainPlayer->GetActiveType())
 	{
 	case ActiveType::Default:
 		break;
@@ -27,6 +26,28 @@ void ActiveUI::SettingUI()
 	case ActiveType::Item045:
 		SelectItemRenderer(2);
 		SelectGazeRenderer(2);
+		break;
+	case ActiveType::Max:
+		break;
+	default:
+		break;
+	}
+}
+
+void ActiveUI::SetGaze(int _Value)
+{
+	switch (Player::MainPlayer->GetActiveType())
+	{
+	case ActiveType::Default:
+		break;
+	case ActiveType::Item034:
+		GazeRenderer[1]->SetIndex(_Value);
+		break;
+	case ActiveType::Item036:
+		GazeRenderer[2]->SetIndex(_Value);
+		break;
+	case ActiveType::Item045:
+		GazeRenderer[3]->SetIndex(_Value);
 		break;
 	case ActiveType::Max:
 		break;
