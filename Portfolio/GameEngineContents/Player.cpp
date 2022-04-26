@@ -43,6 +43,7 @@ Player::Player()
 	, CurBody_()
 	, CurHead_()
 	, MoveDir_({ 0, 0 })
+	, IsDead_(false)
 	, MaxHp_(3)
 	, Damage_(3.5f)
 	, AttackSpeed_(2.73f)
@@ -292,7 +293,7 @@ void Player::SetPlayerInfo()
 		break;
 	case CharacterType::CAIN:
 		MaxHp_ = 2;
-		Damage_ = 3.5f;
+		Damage_ = 4.2f;
 		AttackSpeed_ = 2.73f;
 		ShotSpeed_ = 1;
 		Range_ = 4.5f;
@@ -321,7 +322,7 @@ void Player::SetPlayerInfo()
 		break;
 	case CharacterType::JUDAS:
 		MaxHp_ = 1;
-		Damage_ = 3.5f;
+		Damage_ = 4.73f;
 		AttackSpeed_ = 2.73f;
 		ShotSpeed_ = 1;
 		Range_ = 6.5f;
@@ -336,7 +337,7 @@ void Player::SetPlayerInfo()
 		break;
 	case CharacterType::BLUEBABY:
 		MaxHp_ = 0;
-		Damage_ = 3.5f;
+		Damage_ = 3.7f;
 		AttackSpeed_ = 2.73f;
 		ShotSpeed_ = 1;
 		Range_ = 6.5f;

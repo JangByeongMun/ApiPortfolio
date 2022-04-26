@@ -62,9 +62,13 @@ void Trapdoor::Update()
 		}
 		else
 		{
-			if (false == Collision_->CollisionCheckRect("Player"))
+			AnimTimer_ += GameEngineTime::GetDeltaTime();
+			if (AnimTimer_ >= 0.4f)
 			{
-				TurnOn(true);
+				if (false == Collision_->CollisionCheckRect("Player"))
+				{
+					TurnOn(true);
+				}
 			}
 		}
 	}
@@ -73,12 +77,13 @@ void Trapdoor::Update()
 void Trapdoor::TurnOn(bool _On)
 {
 	IsOpen_ = _On;
-	if (_On)
+	if (IsOpen_)
 	{
 		Renderer_->SetIndex(0);
 	}
 	else
 	{
+		AnimTimer_ = 0.0f;
 		Renderer_->SetIndex(3);
 	}
 }

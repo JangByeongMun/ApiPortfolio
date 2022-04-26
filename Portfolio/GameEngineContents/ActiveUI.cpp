@@ -17,15 +17,15 @@ void ActiveUI::SettingUI()
 		break;
 	case ActiveType::Item034:
 		SelectItemRenderer(0);
-		SelectGazeRenderer(0);
+		SelectGazeRenderer(2);
 		break;
 	case ActiveType::Item036:
 		SelectItemRenderer(1);
-		SelectGazeRenderer(1);
+		SelectGazeRenderer(3);
 		break;
 	case ActiveType::Item045:
 		SelectItemRenderer(2);
-		SelectGazeRenderer(2);
+		SelectGazeRenderer(1);
 		break;
 	case ActiveType::Max:
 		break;
@@ -41,13 +41,13 @@ void ActiveUI::SetGaze(int _Value)
 	case ActiveType::Default:
 		break;
 	case ActiveType::Item034:
-		GazeRenderer[1]->SetIndex(_Value);
-		break;
-	case ActiveType::Item036:
 		GazeRenderer[2]->SetIndex(_Value);
 		break;
-	case ActiveType::Item045:
+	case ActiveType::Item036:
 		GazeRenderer[3]->SetIndex(_Value);
+		break;
+	case ActiveType::Item045:
+		GazeRenderer[1]->SetIndex(_Value);
 		break;
 	case ActiveType::Max:
 		break;
@@ -135,7 +135,7 @@ void ActiveUI::SelectGazeRenderer(int _Value)
 {
 	for (int i = 0; i < GazeRenderer.size(); i++)
 	{
-		if (i == 0 || i == _Value + 1)
+		if (i == 0 || i == _Value)
 		{
 			GazeRenderer[i]->On();
 		}

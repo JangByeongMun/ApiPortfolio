@@ -20,6 +20,7 @@ float ScaleY = 75.0f;
 RoomActor::RoomActor()
 	: MonsterCount_(0)
 	, BossCount_(0)
+	, Trapdoor_(nullptr)
 {
 }
 
@@ -402,4 +403,18 @@ void RoomActor::DoorSetting()
 	}
 
 	OpenAllDoor();
+}
+
+void RoomActor::MakeMapReward()
+{
+	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
+	if (0.0f <= RandomFloat && RandomFloat < 0.1f)
+	{
+
+	}
+}
+
+void RoomActor::MakePassive()
+{
+
 }

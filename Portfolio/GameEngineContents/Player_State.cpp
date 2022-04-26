@@ -450,8 +450,9 @@ void Player::HeadDeadUpdate()
 		}
 	}
 
-	if (AnimTimer_ >= 1.0f)
+	if (AnimTimer_ >= 1.0f && false == IsDead_)
 	{
+		IsDead_ = true;
 		GetLevel()->CreateActor<DeadReasonUI>();
 		GameEngineTime::Pause();
 	}

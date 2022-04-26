@@ -86,6 +86,7 @@ private:
 	PlayerBodyState CurBody_;
 	PlayerHeadState CurHead_;
 	float4 MoveDir_;
+	bool IsDead_;
 
 	bool IsMoveKey();
 	bool IsAttackKey();

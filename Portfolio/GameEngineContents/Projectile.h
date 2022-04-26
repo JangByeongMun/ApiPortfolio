@@ -32,6 +32,31 @@ public:
 			AddValue += 16;
 		}
 
+		if (2.0f <= Damage_ && Damage_ < 3.0f)
+		{
+			AddValue -= 1;
+		}
+		else if (4.0f <= Damage_ && Damage_ < 5.0f)
+		{
+			AddValue += 1;
+		}
+		else if (5.0f <= Damage_ && Damage_ < 6.0f)
+		{
+			AddValue += 2;
+		}
+		else if (6.0f <= Damage_ && Damage_ < 7.0f)
+		{
+			AddValue += 3;
+		}
+		else if (7.0f <= Damage_ && Damage_ < 8.0f)
+		{
+			AddValue += 4;
+		}
+		else if (8.0f <= Damage_)
+		{
+			AddValue += 5;
+		}
+
 		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::Projectile));
 		Renderer->SetIndex(AddValue);
 	}

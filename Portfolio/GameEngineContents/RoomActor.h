@@ -82,4 +82,6 @@ private:
 
 	void Start() override;
 	void DoorSetting();
+	void MakeMapReward();
+	void MakePassive();
 };
