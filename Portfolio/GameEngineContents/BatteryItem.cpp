@@ -25,6 +25,12 @@ void BatteryItem::Update()
 	}
 	SetObjectMove();
 
+
+	if (StartTimer_ < 0.2f)
+	{
+		return;
+	}
+
 	if (true == Player::MainPlayer->IsActiveOn())
 	{
 		return;

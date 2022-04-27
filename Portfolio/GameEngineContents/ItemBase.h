@@ -39,6 +39,7 @@ protected:
 	GameEngineImage* MapColImage_;
 	float4 Dir_;
 	GameEngineCollision* Collision_;
+	float StartTimer_;
 
 };
 

@@ -66,19 +66,41 @@ void BoxItem::Start()
 
 void BoxItem::Update()
 {
-	if (false == IsOpen_) // 닫혀있을떄
+	// 오픈여부 상관없이 플레이어와 충돌했을때
+	// 밀리도록 구현
+	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 	{
-		AnimTimer_ += GameEngineTime::GetDeltaTime();
-		if (AnimTimer_ >= 0.3f)
-		{
-			for (int i = 0; i < RendererVector_.size(); i++)
-			{
-				RendererVector_[i]->ChangeAnimation("Idle");
-			}
+		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
+		TmpDir.Normal2D();
+		AddDir(TmpDir * 2.0f);
+	}
+	SetObjectMove();
 
-			Collision_ = CreateCollision("Box", { 90, 60 });
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	if (AnimTimer_ >= 0.3f)
+	{
+		switch (Type_)
+		{
+		case BoxType::Normal:
+			RendererVector_[0]->ChangeAnimation("Idle");
+			break;
+		case BoxType::Gold:
+			RendererVector_[1]->ChangeAnimation("Idle");
+			break;
+		default:
+			break;
 		}
 
+		Collision_ = CreateCollision("Box", { 90, 60 });
+	}
+
+	if (StartTimer_ < 0.2f)
+	{
+		return;
+	}
+
+	if (false == IsOpen_) // 닫혀있을떄
+	{
 		// 박스가 플레이어랑 충돌했을때
 		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player")) 
 		{
@@ -119,16 +141,6 @@ void BoxItem::Update()
 			}
 		}
 	}
-
-	// 오픈여부 상관없이 플레이어와 충돌했을때
-	// 밀리도록 구현
-	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
-	{
-		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
-		TmpDir.Normal2D();
-		AddDir(TmpDir * 2.0f);
-	}
-	SetObjectMove();
 }
 
 void BoxItem::NormalBoxReward()

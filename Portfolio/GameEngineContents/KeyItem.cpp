@@ -37,6 +37,13 @@ void KeyItem::SetType(KeyType _Type)
 
 void KeyItem::Update()
 {
+	SetObjectMove();
+
+	if (StartTimer_ < 0.2f)
+	{
+		return;
+	}
+
 	/////// Ãæµ¹
 	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
@@ -59,6 +66,4 @@ void KeyItem::Update()
 
 		Death();
 	}
-
-	SetObjectMove();
 }

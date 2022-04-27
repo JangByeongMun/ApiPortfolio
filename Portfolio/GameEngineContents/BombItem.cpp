@@ -37,6 +37,13 @@ void BombItem::SetType(BombType _Type)
 
 void BombItem::Update()
 {
+	SetObjectMove();
+
+	if (StartTimer_ < 0.2f)
+	{
+		return;
+	}
+
 	/////// Ãæµ¹
 	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
@@ -56,7 +63,5 @@ void BombItem::Update()
 
 		Death();
 	}
-	
-	SetObjectMove();
 }
 

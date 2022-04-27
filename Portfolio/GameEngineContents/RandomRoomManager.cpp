@@ -31,7 +31,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	switch (_Floor)
 	{
 	case 1:
-		CurrentMapCount_ = 3;
+		CurrentMapCount_ = 4;
 		FloorName_ = "Basement1.bmp";
 		break;
 	case 2:

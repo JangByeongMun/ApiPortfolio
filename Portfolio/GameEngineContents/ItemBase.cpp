@@ -11,6 +11,7 @@ ItemBase::ItemBase()
 	, MapColImage_(nullptr)
 	, Dir_({0, 0})
 	, Collision_(nullptr)
+	, StartTimer_(0.0f)
 {
 }
 
@@ -75,4 +76,6 @@ void ItemBase::SetObjectMove()
 	{
 		Dir_ = float4::ZERO;
 	}
+
+	StartTimer_ += GameEngineTime::GetDeltaTime();
 }

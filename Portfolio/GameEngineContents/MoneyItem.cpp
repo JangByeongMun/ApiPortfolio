@@ -70,6 +70,15 @@ void MoneyItem::SetType(MoneyType _Type)
 
 void MoneyItem::Update()
 {
+	SetObjectMove();
+
+	if (StartTimer_ < 0.2f)
+	{
+		return;
+	}
+
+	
+
 	/////// 충돌
 	if (true == Collision_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
@@ -119,7 +128,7 @@ void MoneyItem::Update()
 		ShadowRenderer_->ChangeAnimation("pickup_002_coinsilver_1_Shadow");
 	}
 
-
+	// 먹힌후 애니메이션 실행하고 삭제
 	if (
 		Renderer_->CurrentAnimation() == Renderer_->FindAnimation("pickup_002_coin_3")
 		||
@@ -130,6 +139,4 @@ void MoneyItem::Update()
 	{
 		Death();
 	}
-
-	SetObjectMove();
 }

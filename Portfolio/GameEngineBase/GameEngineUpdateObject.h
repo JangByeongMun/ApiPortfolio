@@ -27,6 +27,7 @@ public:
 		if (0.0f >= DeathTime_ && true == IsDeathStart_)
 		{
 			IsDeath_ = true;
+			IsReleaseUpdate_ = false;
 		}
 
 		OnTime_ -= GameEngineTime::GetDeltaTime();
