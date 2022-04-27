@@ -24,6 +24,8 @@ private:
 	ShopType Type_;
 	GameEngineCollision* Collision_;
 	std::vector<GameEngineRenderer*> RendererVector_;
+	int Price_;
+	PassiveType PassiveType_;
 
 	void Update() override;
 };

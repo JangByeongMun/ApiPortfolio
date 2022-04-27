@@ -417,6 +417,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ShopKeeper.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="StatsMenu.h">
       <SubType>
       </SubType>
@@ -702,6 +706,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ShopItem.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ShopKeeper.cpp">
       <SubType>
       </SubType>
     </ClCompile>

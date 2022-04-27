@@ -17,6 +17,7 @@
 #include "BatteryItem.h"
 #include "BoxItem.h"
 #include "ShopItem.h"
+#include "ShopKeeper.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -240,6 +241,12 @@ void RoomActor::Setting()
 		ShopItem* TmpItem = GetLevel()->CreateActor<ShopItem>();
 		TmpItem->SetPosition(GetPosition() + TmpTilePos);
 		TmpItem->SetType(TmpShopVector[i].Type_);
+	}
+	if (RoomType::Shop == Data_.RoomType_)
+	{
+		float4 TmpTilePos = { StartX + ScaleX * 6, StartY + ScaleY * 2 };
+		ShopKeeper* TmpItem = GetLevel()->CreateActor<ShopKeeper>();
+		TmpItem->SetPosition(GetPosition() + TmpTilePos);
 	}
 
 	if (BossCount_ != 0)

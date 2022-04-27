@@ -230,6 +230,9 @@
     <ClInclude Include="ShopItem.h">
       <Filter>Play\Map</Filter>
     </ClInclude>
+    <ClInclude Include="ShopKeeper.h">
+      <Filter>Play\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -459,6 +462,9 @@
       <Filter>Play\Item\Base</Filter>
     </ClCompile>
     <ClCompile Include="ShopItem.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopKeeper.cpp">
       <Filter>Play\Map</Filter>
     </ClCompile>
   </ItemGroup>

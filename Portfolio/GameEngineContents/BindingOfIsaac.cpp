@@ -414,6 +414,9 @@ void BindingOfIsaac::ImageCut()
 	{
 		Image = GameEngineImageManager::GetInst()->Find("shop_001_bitfont.bmp");
 		Image->CutCount(6, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("effect_000_shopkeepers.bmp");
+		Image->CutCount(4, 4);
 	}
 
 	/////////////////////////////////// Effect

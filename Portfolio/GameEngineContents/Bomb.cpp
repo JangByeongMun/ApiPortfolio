@@ -12,6 +12,7 @@
 #include "Poop.h"
 #include "Fire.h"
 #include "ItemBase.h"
+#include "ShopKeeper.h"
 
 Bomb::Bomb() 
 	: Renderer_(nullptr)
@@ -177,6 +178,20 @@ void Bomb::Update()
 					float4 TmpDir = TmpActor->GetPosition() - GetPosition();
 					TmpDir.Normal2D();
 					TmpActor->AddDir(TmpDir * 100.0f);
+				}
+			}
+		}
+		
+
+		ResultVector.clear();
+		if (true == Collision->CollisionResultRect("ShopKeeper", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				ShopKeeper* TmpActor = dynamic_cast<ShopKeeper*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpActor)
+				{
+					TmpActor->DeadAnim();
 				}
 			}
 		}

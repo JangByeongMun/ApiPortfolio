@@ -163,6 +163,10 @@ public:
 	{
 		return KeyCount_ >= 1 || true == IsMasterKey_;
 	}
+	inline int GetMoney()
+	{
+		return MoneyCount_;
+	}
 
 ///////////////////////////////// UI Ελ°ύ
 private:

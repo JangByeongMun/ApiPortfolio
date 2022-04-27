@@ -24,6 +24,11 @@ public:
 	void AddHearts(HeartType _Type, bool _IsHalf = false);
 	void MinusHearts(bool _IsHalf);
 
+	inline bool IsFullRed()
+	{
+		return MaxRedHP_ <= CurrentRedHP_;
+	}
+
 protected:
 
 private:
