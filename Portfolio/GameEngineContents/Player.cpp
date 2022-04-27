@@ -186,8 +186,8 @@ void Player::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
 		AddGaze(100);
-		KeyCount_ += 10;
-		BombCount_ += 10;
+		AddItem(ItemType::KeyTwo);
+		AddItem(ItemType::BombTwo);
 		PlayerUI_->SetItemUI();
 	}
 
@@ -572,27 +572,55 @@ void Player::AddItem(ItemType _Type)
 		break;
 	case ItemType::Bomb:
 		BombCount_ += 1;
+		if (BombCount_ >= 99)
+		{
+			BombCount_ = 99;
+		}
 		break;
 	case ItemType::BombTwo:
 		BombCount_ += 2;
+		if (BombCount_ >= 99)
+		{
+			BombCount_ = 99;
+		}
 		break;
 	case ItemType::Key:
 		KeyCount_ += 1;
+		if (KeyCount_ >= 99)
+		{
+			KeyCount_ = 99;
+		}
 		break;
 	case ItemType::KeyTwo:
 		KeyCount_ += 2;
+		if (KeyCount_ >= 99)
+		{
+			KeyCount_ = 99;
+		}
 		break;
 	case ItemType::keyMaster:
 		IsMasterKey_ = true;
 		break;
 	case ItemType::Money:
 		MoneyCount_ += 1;
+		if (MoneyCount_ >= 99)
+		{
+			MoneyCount_ = 99;
+		}
 		break;
 	case ItemType::MoneyBlack:
 		MoneyCount_ += 5;
+		if (MoneyCount_ >= 99)
+		{
+			MoneyCount_ = 99;
+		}
 		break;
 	case ItemType::MoneySilver:
 		MoneyCount_ += 10;
+		if (MoneyCount_ >= 99)
+		{
+			MoneyCount_ = 99;
+		}
 		break;
 	case ItemType::Battery:
 		CurrentGaze_ = MaxGaze_;

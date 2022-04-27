@@ -102,7 +102,7 @@ void BoxItem::Update()
 	if (false == IsOpen_) // 닫혀있을떄
 	{
 		// 박스가 플레이어랑 충돌했을때
-		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player")) 
+		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 		{
 			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
 			{
@@ -110,7 +110,10 @@ void BoxItem::Update()
 				AnimTimer_ = 0.0f;
 				for (int i = 0; i < RendererVector_.size(); i++)
 				{
-					RendererVector_[i]->ChangeAnimation("Opening");
+					if (true == RendererVector_[i]->IsUpdate())
+					{
+						RendererVector_[i]->ChangeAnimation("Opening");
+					}
 				}
 				NormalBoxReward();
 			}
@@ -123,7 +126,10 @@ void BoxItem::Update()
 					AnimTimer_ = 0.0f;
 					for (int i = 0; i < RendererVector_.size(); i++)
 					{
-						RendererVector_[i]->ChangeAnimation("Opening");
+						if (true == RendererVector_[i]->IsUpdate())
+						{
+							RendererVector_[i]->ChangeAnimation("Opening");
+						}
 					}
 					GoldBoxReward();
 				}
@@ -329,7 +335,6 @@ void BoxItem::NormalBoxReward()
 		}
 	}
 }
-
 void BoxItem::GoldBoxReward()
 {
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
