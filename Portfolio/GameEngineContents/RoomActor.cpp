@@ -16,6 +16,7 @@
 #include "MoneyItem.h"
 #include "BatteryItem.h"
 #include "BoxItem.h"
+#include "ShopItem.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -230,6 +231,17 @@ void RoomActor::Setting()
 		}
 	}
 
+	// 상점 아이템 세팅
+	std::vector<RoomData::ShopData> TmpShopVector = Data_.AllShop_;
+	for (int i = 0; i < TmpShopVector.size(); i++)
+	{
+		float4 TmpTilePos = { StartX + ScaleX * TmpShopVector[i].X_, StartY + ScaleY * TmpShopVector[i].Y_ };
+
+		ShopItem* TmpItem = GetLevel()->CreateActor<ShopItem>();
+		TmpItem->SetPosition(GetPosition() + TmpTilePos);
+		TmpItem->SetType(TmpShopVector[i].Type_);
+	}
+
 	if (BossCount_ != 0)
 	{
 		{
@@ -307,6 +319,10 @@ void RoomActor::DoorSetting()
 	{
 		DefaultDoorType = DoorType::Boss;
 	}
+	else if (RoomType::Shop == Data_.RoomType_)
+	{
+		DefaultDoorType = DoorType::Shop;
+	}
 
 	if (true == RandomRoomManager::GetInst()->ExistPos(Pos_ + float4(0, 1)))
 	{
@@ -324,6 +340,10 @@ void RoomActor::DoorSetting()
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Down);
+			break;
+		case RoomType::Shop:
+			TmpDoor->Setting(DoorType::Shop, DoorDir::Down);
+			TmpDoor->SetLock(true);
 			break;
 		default:
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Down);
@@ -350,6 +370,10 @@ void RoomActor::DoorSetting()
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Up);
 			break;
+		case RoomType::Shop:
+			TmpDoor->Setting(DoorType::Shop, DoorDir::Up);
+			TmpDoor->SetLock(true);
+			break;
 		default:
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Up);
 			break;
@@ -375,6 +399,10 @@ void RoomActor::DoorSetting()
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Right);
 			break;
+		case RoomType::Shop:
+			TmpDoor->Setting(DoorType::Shop, DoorDir::Right);
+			TmpDoor->SetLock(true);
+			break;
 		default:
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Right);
 			break;
@@ -399,6 +427,10 @@ void RoomActor::DoorSetting()
 			break;
 		case RoomType::Boss:
 			TmpDoor->Setting(DoorType::Boss, DoorDir::Left);
+			break;
+		case RoomType::Shop:
+			TmpDoor->Setting(DoorType::Shop, DoorDir::Left);
+			TmpDoor->SetLock(true);
 			break;
 		default:
 			TmpDoor->Setting(DefaultDoorType, DoorDir::Left);

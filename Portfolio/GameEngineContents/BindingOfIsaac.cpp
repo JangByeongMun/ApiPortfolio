@@ -46,7 +46,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Menu");
+	ChangeLevel("Play");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -80,6 +80,19 @@ void BindingOfIsaac::ResourcesLoad()
 		ResourcesDirectory.Move("Resources");
 		ResourcesDirectory.Move("Image");
 		ResourcesDirectory.Move("Map");
+		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
+		for (int i = 0; i < AllFileVec.size(); i++)
+		{
+			GameEngineImageManager::GetInst()->Load(AllFileVec[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineDirectory ResourcesDirectory;
+		ResourcesDirectory.MoveParent("Portfolio");
+		ResourcesDirectory.Move("Resources");
+		ResourcesDirectory.Move("Image");
+		ResourcesDirectory.Move("Shop");
 		std::vector<GameEngineFile> AllFileVec = ResourcesDirectory.GetAllFile();
 		for (int i = 0; i < AllFileVec.size(); i++)
 		{
@@ -395,6 +408,12 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("02_momkill_Save.bmp");
 		Image->CutCount(2, 1);
+	}
+
+	/////////////////////////////////// Shop
+	{
+		Image = GameEngineImageManager::GetInst()->Find("shop_001_bitfont.bmp");
+		Image->CutCount(6, 2);
 	}
 
 	/////////////////////////////////// Effect

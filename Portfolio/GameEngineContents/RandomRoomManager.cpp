@@ -49,7 +49,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	FloorRenderer_ = CreateRenderer(FloorName_, static_cast<int>(ORDER::UI), RenderPivot::CENTER, { -700, 0 });
 
 	// 현재 층의 맵수만큼 반복
-	for (int i = 0; i < CurrentMapCount_ - 2; i++)
+	for (int i = 0; i < CurrentMapCount_ - 3; i++)
 	{
 		RoomActor* TmpActor = GetLevel()->CreateActor<RoomActor>();
 		TmpActor->SetData(RandomData());
@@ -58,7 +58,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 		CurrentRooms_.push_back(TmpActor);
 	}
 
-	// 황금방, 보스룸은 연결된 방이 1개인 곳으로 추가
+	// 상점, 황금방, 보스룸은 연결된 방이 1개인 곳으로 추가
 	{ // 황금방
 		RoomActor* TmpActor = GetLevel()->CreateActor<RoomActor>();
 		TmpActor->SetData(RandomTreasureRoomData());
@@ -72,6 +72,13 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 		TmpActor->SetPos(RandomCornerPos());
 
 		SelectedBossType = TmpActor->GetData().GetBossType();
+		CurrentRooms_.push_back(TmpActor);
+	}
+	{ // 상점
+		RoomActor* TmpActor = GetLevel()->CreateActor<RoomActor>();
+		TmpActor->SetData(RandomShopRoomData());
+		TmpActor->SetPos(RandomCornerPos());
+
 		CurrentRooms_.push_back(TmpActor);
 	}
 
@@ -213,6 +220,12 @@ RoomData RandomRoomManager::RandomBossRoomData()
 	RoomData RandomData = AllBossRooms_[CurrentFloor - 1][RandomInt];
 	return RandomData;
 }
+RoomData RandomRoomManager::RandomShopRoomData()
+{
+	int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(AllShopRooms_[CurrentFloor - 1].size() - 1));
+	RoomData RandomData = AllShopRooms_[CurrentFloor - 1][RandomInt];
+	return RandomData;
+}
 
 RandomRoomManager::RandomRoomManager()
 	: CurrentMapCount_(0)
@@ -276,6 +289,26 @@ void RandomRoomManager::Start()
 			AllRooms_.insert({ 0, TmpVector });
 		}
 		
+		// 상점
+		{
+			std::vector<RoomData> TmpVector;
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(1, 1, BlockType::FIRE);
+				TmpData.AddBlock(11, 1, BlockType::FIRE);
+
+				TmpData.AddShop(4, 4, ShopType::Bomb);
+				TmpData.AddShop(6, 4, ShopType::Key);
+				TmpData.AddShop(8, 4, ShopType::Passive);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			AllShopRooms_.insert({ 0, TmpVector });
+		}
+
 		// 황금방
 		{
 			std::vector<RoomData> TmpVector;

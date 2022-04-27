@@ -70,6 +70,13 @@ void MiniMap::MakeNode()
 			TmpNode->IconRenderer_->Off();
 			TmpNode->IconRenderer_->CameraEffectOff();
 		}
+		if (RoomType::Shop == TmpRooms[i]->GetData().GetRoomType())
+		{
+			TmpNode->IconRenderer_ = CreateRenderer("minimap1.bmp", RenderPivot::CENTER, TmpNode->Pos_ * 25.0f);
+			TmpNode->IconRenderer_->SetIndex(3);
+			TmpNode->IconRenderer_->Off();
+			TmpNode->IconRenderer_->CameraEffectOff();
+		}
 
 		NodeVecter_.push_back(TmpNode);
 	}

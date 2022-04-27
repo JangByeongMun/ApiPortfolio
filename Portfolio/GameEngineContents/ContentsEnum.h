@@ -124,6 +124,7 @@ enum class DoorType
 	Default,
 	Treasure,
 	Boss,
+	Shop,
 	Max,
 };
 
@@ -148,6 +149,7 @@ enum class RoomType
 	Default,
 	Treasure,
 	Boss,
+	Shop,
 	Max,
 };
 
@@ -174,5 +176,15 @@ enum class BossType
 	Default,
 	Monstro,
 
+	Max,
+};
+
+enum class ShopType
+{
+	Default,
+	Passive,
+	Bomb, 
+	Key,
+	Heart,
 	Max,
 };

@@ -49,6 +49,7 @@ public:
 	RoomData RandomData();
 	RoomData RandomTreasureRoomData();
 	RoomData RandomBossRoomData();
+	RoomData RandomShopRoomData();
 
 	bool ExistPos(float4 _Pos);
 	bool CornerPos(float4 _Pos);
@@ -69,6 +70,7 @@ private:
 	std::map<int, std::vector<RoomData>> AllRooms_;
 	std::map<int, std::vector<RoomData>> AllTreasureRooms_;
 	std::map<int, std::vector<RoomData>> AllBossRooms_;
+	std::map<int, std::vector<RoomData>> AllShopRooms_;
 
 	std::vector<RoomActor*> CurrentRooms_;
 	int CurrentMapCount_;

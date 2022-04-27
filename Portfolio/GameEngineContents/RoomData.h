@@ -80,6 +80,23 @@ public:
 		int Y_;
 		BossType Type_;
 	};
+	class ShopData
+	{
+	public:
+		ShopData(int _X, int _Y, ShopType _Type)
+			: X_(_X)
+			, Y_(_Y)
+			, Type_(_Type)
+		{
+		}
+		~ShopData()
+		{
+		}
+
+		int X_;
+		int Y_;
+		ShopType Type_;
+	};
 
 public:
 	RoomData();
@@ -92,6 +109,7 @@ public:
 	void AddMonster(int _X, int _Y, MonsterType _Type);
 	void AddPassive(int _X, int _Y);
 	void AddBoss(int _X, int _Y, BossType _Type);
+	void AddShop(int _X, int _Y, ShopType _Type);
 	
 	inline void SetRoomType(RoomType _Type)
 	{
@@ -119,4 +137,5 @@ private:
 	std::vector<MonsterData> AllMonster_;
 	std::vector<PassiveData> AllPassives_;
 	std::vector<BossData> AllBoss_;
+	std::vector<ShopData> AllShop_;
 };

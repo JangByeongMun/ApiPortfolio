@@ -5,6 +5,7 @@
 
 Door::Door() 
 	: Collision_(nullptr)
+	, CloseCollision_(nullptr)
 	, Type_()
 	, Dir_()
 	, IsOpen_(false)
@@ -35,6 +36,9 @@ void Door::Setting(DoorType _Type, DoorDir _Dir)
 		break;
 	case DoorType::Boss:
 		Name += "10_bossroomdoor";
+		break;
+	case DoorType::Shop:
+		Name += "01_normaldoor";
 		break;
 	case DoorType::Max:
 		break;
@@ -149,6 +153,7 @@ void Door::CloseSetting(DoorType _Type, DoorDir _Dir, std::string _Name)
 		}
 		break;
 	}
+
 	case DoorType::Treasure:
 	{
 		for (int i = 1; i <= 2; i++)
@@ -189,6 +194,7 @@ void Door::CloseSetting(DoorType _Type, DoorDir _Dir, std::string _Name)
 		}
 		break;
 	}
+
 	case DoorType::Boss:
 	{
 		for (int i = 1; i <= 3; i++)
@@ -228,6 +234,53 @@ void Door::CloseSetting(DoorType _Type, DoorDir _Dir, std::string _Name)
 		}
 		break;
 	}
+
+	case DoorType::Shop:
+	{
+		for (int i = 1; i <= 2; i++)
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(i);
+			RendererVector_.push_back(TmpRenderer);
+		}
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer(_Name);
+			TmpRenderer->SetIndex(5);
+			RendererVector_.push_back(TmpRenderer);
+		}
+
+		switch (Dir_)
+		{
+		case DoorDir::Up:
+			RendererVector_[0]->SetScale({190, 160});
+			RendererVector_[0]->SetPivot({ 0, 12 });
+			RendererVector_[1]->SetPivot({ -18, 12 });
+			RendererVector_[2]->SetPivot({ 8, 12 });
+			break;
+		case DoorDir::Down:
+			RendererVector_[0]->SetScale({ 190, 160 });
+			RendererVector_[0]->SetPivot({ 0, -12 });
+			RendererVector_[1]->SetPivot({ 18, -12 });
+			RendererVector_[2]->SetPivot({ -8, -12 });
+			break;
+		case DoorDir::Left:
+			RendererVector_[0]->SetScale({ 160, 190 });
+			RendererVector_[0]->SetPivot({ 12, 0 });
+			RendererVector_[1]->SetPivot({ 12, 18 });
+			RendererVector_[2]->SetPivot({ 12, -8 });
+			break;
+		case DoorDir::Right:
+			RendererVector_[0]->SetScale({ 160, 190 });
+			RendererVector_[0]->SetPivot({ -12, 0 });
+			RendererVector_[1]->SetPivot({ -12, -18 });
+			RendererVector_[2]->SetPivot({ -12, 8 });
+			break;
+		default:
+			break;
+		}
+		break;
+	}
+
 	case DoorType::Max:
 		break;
 	default:
