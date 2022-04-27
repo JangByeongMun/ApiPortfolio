@@ -28,6 +28,7 @@
 #include "KeyItem.h"
 #include "BatteryItem.h"
 #include "ActiveUI.h"
+#include "BoxItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -188,6 +189,13 @@ void Player::Update()
 		KeyCount_ += 10;
 		BombCount_ += 10;
 		PlayerUI_->SetItemUI();
+	}
+
+	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
+	{
+		BoxItem* TmpBox =GetLevel()->CreateActor<BoxItem>();
+		TmpBox->SetPosition(GetPosition());
+		TmpBox->SetType(BoxType::Gold);
 	}
 
 	// 무적시간 구현

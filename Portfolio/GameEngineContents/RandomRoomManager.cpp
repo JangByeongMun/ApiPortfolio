@@ -31,7 +31,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	switch (_Floor)
 	{
 	case 1:
-		CurrentMapCount_ = 4;
+		CurrentMapCount_ = 3;
 		FloorName_ = "Basement1.bmp";
 		break;
 	case 2:
@@ -145,7 +145,7 @@ float4 RandomRoomManager::RandomCornerPos()
 		int RandomInt = 0;
 		do
 		{
-			RandomInt = GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(CurrentRooms_.size() - 1));
+			RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(CurrentRooms_.size() - 1));
 		} while (
 			4 == ConnectedRoomCount(CurrentRooms_[RandomInt]->GetPos()) ||
 			false == CurrentRooms_[RandomInt]->GetData().IsDefaultType()

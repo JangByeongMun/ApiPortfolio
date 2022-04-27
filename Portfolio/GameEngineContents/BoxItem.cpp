@@ -127,8 +127,6 @@ void BoxItem::Update()
 		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
 		TmpDir.Normal2D();
 		AddDir(TmpDir * 2.0f);
-		Collision_->Off();
-		Collision_->On(1.0f);
 	}
 	SetObjectMove();
 }
@@ -143,8 +141,6 @@ void BoxItem::NormalBoxReward()
 		TmpObject->SetType(KeyType::Normal);
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.15f <= RandomFloat && RandomFloat < 0.3f)
 	{
@@ -153,8 +149,6 @@ void BoxItem::NormalBoxReward()
 		TmpObject->SetType(BombType::Normal);
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.3f <= RandomFloat && RandomFloat < 0.45f)
 	{
@@ -164,24 +158,18 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.45f <= RandomFloat && RandomFloat < 0.5f)
@@ -191,8 +179,6 @@ void BoxItem::NormalBoxReward()
 		TmpObject->SetType(KeyType::Two);
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.5f <= RandomFloat && RandomFloat < 0.55f)
 	{
@@ -202,8 +188,6 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(BombType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		
 		{
@@ -211,8 +195,6 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.55f <= RandomFloat && RandomFloat < 0.6f)
@@ -222,8 +204,6 @@ void BoxItem::NormalBoxReward()
 		TmpObject->SetType(MoneyType::Black);
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.6f <= RandomFloat && RandomFloat < 0.65f)
 	{
@@ -233,32 +213,24 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 			TmpObject->SetType(BombType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.65f <= RandomFloat && RandomFloat < 0.7f)
@@ -269,32 +241,24 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.7f <= RandomFloat && RandomFloat < 0.75f)
@@ -303,8 +267,6 @@ void BoxItem::NormalBoxReward()
 		BatteryItem* TmpObject = GetLevel()->CreateActor<BatteryItem>();
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.75f <= RandomFloat && RandomFloat < 0.775f)
 	{
@@ -314,8 +276,6 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(KeyType::Master);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.775f <= RandomFloat && RandomFloat < 0.8f)
@@ -326,24 +286,18 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(MoneyType::Black);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 			TmpObject->SetType(BombType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else
@@ -354,16 +308,12 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 }
@@ -379,32 +329,24 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 			TmpObject->SetType(BombType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.15f <= RandomFloat && RandomFloat < 0.3f)
@@ -415,32 +357,24 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.3f <= RandomFloat && RandomFloat < 0.45f)
@@ -451,32 +385,24 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Black);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.45f <= RandomFloat && RandomFloat < 0.5f)
@@ -487,24 +413,18 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.5f <= RandomFloat && RandomFloat < 0.55f)
@@ -515,8 +435,6 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(BombType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 
 		{
@@ -524,8 +442,6 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(KeyType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.55f <= RandomFloat && RandomFloat < 0.6f)
@@ -535,8 +451,6 @@ void BoxItem::GoldBoxReward()
 		TmpObject->SetType(MoneyType::Black);
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.6f <= RandomFloat && RandomFloat < 0.65f)
 	{
@@ -546,16 +460,12 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Black);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 			TmpObject->SetType(BombType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.65f <= RandomFloat && RandomFloat < 0.7f)
@@ -566,16 +476,12 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Black);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.7f <= RandomFloat && RandomFloat < 0.75f)
@@ -584,8 +490,6 @@ void BoxItem::GoldBoxReward()
 		BatteryItem* TmpObject = GetLevel()->CreateActor<BatteryItem>();
 		TmpObject->SetPosition(GetPosition());
 		TmpObject->AddRanomDir(-10, 10);
-		TmpObject->GetCollision()->Off();
-		TmpObject->GetCollision()->On(1.0f);
 	}
 	else if (0.75f <= RandomFloat && RandomFloat < 0.775f)
 	{
@@ -595,8 +499,6 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(KeyType::Master);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else if (0.775f <= RandomFloat && RandomFloat < 0.8f)
@@ -607,24 +509,18 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Black);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
 			TmpObject->SetType(BombType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 	else
@@ -635,16 +531,12 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetType(MoneyType::Silver);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Two);
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
-			TmpObject->GetCollision()->Off();
-			TmpObject->GetCollision()->On(1.0f);
 		}
 	}
 }
