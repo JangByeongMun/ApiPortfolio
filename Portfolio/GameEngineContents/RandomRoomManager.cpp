@@ -31,7 +31,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	switch (_Floor)
 	{
 	case 1:
-		CurrentMapCount_ = 4;
+		CurrentMapCount_ = 9;
 		FloorName_ = "Basement1.bmp";
 		break;
 	case 2:
@@ -378,6 +378,26 @@ void RandomRoomManager::Start()
 			}
 
 			AllRooms_.insert({ 1, TmpVector });
+		}
+
+		// 상점
+		{
+			std::vector<RoomData> TmpVector;
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(1, 1, BlockType::FIRE);
+				TmpData.AddBlock(11, 1, BlockType::FIRE);
+
+				TmpData.AddShop(4, 4, ShopType::Bomb);
+				TmpData.AddShop(6, 4, ShopType::Key);
+				TmpData.AddShop(8, 4, ShopType::Passive);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			AllShopRooms_.insert({ 1, TmpVector });
 		}
 
 		// 황금방

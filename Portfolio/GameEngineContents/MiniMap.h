@@ -16,6 +16,7 @@ class MapNode
 public:
 	float4 Pos_;
 	NodeState State_;
+	GameEngineRenderer* BGRenderer_;
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* IconRenderer_;
 };
@@ -40,9 +41,13 @@ public:
 protected:
 
 private:
+	std::vector<GameEngineRenderer*> FrameRendererVecter_;
 	std::vector<MapNode*> NodeVecter_;
-	void Start() override;
+	std::vector<MapNode*> BigNodeVecter_;
+	bool IsBigsize_;
 
+	void Start() override;
+	void Update() override;
 	bool IsInsideNode(float4 _Pivot);
 };
 

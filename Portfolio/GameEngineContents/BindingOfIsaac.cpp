@@ -530,6 +530,9 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("minimap1.bmp");
 		Image->CutCount(5, 8);
 
+		Image = GameEngineImageManager::GetInst()->Find("minimap2.bmp");
+		Image->CutCount(5, 3);
+
 		Image = GameEngineImageManager::GetInst()->Find("death_portraits_1.bmp");
 		Image->CutCount(4, 4);
 

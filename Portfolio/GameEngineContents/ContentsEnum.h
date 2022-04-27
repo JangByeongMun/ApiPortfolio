@@ -6,6 +6,7 @@ enum class ORDER
 	BACKGROUND,
 	PLAYER,
 	Projectile,
+	BACKUI,
 	UI,
 	FRONTUI,
 };
