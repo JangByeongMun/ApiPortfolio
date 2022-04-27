@@ -4,6 +4,7 @@
 #include "GameEngineImageManager.h"
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include "GameEngineImage.h"
 
 #pragma comment(lib, "msimg32.lib")
 
@@ -312,7 +313,7 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _Name)
 	std::map<std::string, FrameAnimation>::iterator FindIter = Animations_.find(_Name);
 	if (Animations_.end() == FindIter)
 	{
-		MsgBoxAssert("존재하지 않는 애니메이션으로 변경하려 했습니다.");
+		MsgBoxAssertString(Image_->GetNameCopy() + ", " + _Name + " : 존재하지 않는 애니메이션으로 변경하려 했습니다.");
 		return;
 	}
 

@@ -13,6 +13,7 @@ BoxItem::BoxItem()
 	: Type_(BoxType::Normal)
 	, AnimTimer_(0.0f)
 	, IsOpen_(false)
+	, IsSetting_(false)
 {
 }
 
@@ -38,6 +39,8 @@ void BoxItem::SetType(BoxType _Type)
 	default:
 		break;
 	}
+
+	IsSetting_ = true;
 }
 
 void BoxItem::Start()
@@ -66,6 +69,11 @@ void BoxItem::Start()
 
 void BoxItem::Update()
 {
+	if (false == IsSetting_)
+	{
+		return;
+	}
+
 	// 오픈여부 상관없이 플레이어와 충돌했을때
 	// 밀리도록 구현
 	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
@@ -108,12 +116,16 @@ void BoxItem::Update()
 			{
 				IsOpen_ = true;
 				AnimTimer_ = 0.0f;
-				for (int i = 0; i < RendererVector_.size(); i++)
+				switch (Type_)
 				{
-					if (true == RendererVector_[i]->IsUpdate())
-					{
-						RendererVector_[i]->ChangeAnimation("Opening");
-					}
+				case BoxType::Normal:
+					RendererVector_[0]->ChangeAnimation("Opening");
+					break;
+				case BoxType::Gold:
+					RendererVector_[1]->ChangeAnimation("Opening");
+					break;
+				default:
+					break;
 				}
 				NormalBoxReward();
 			}
@@ -124,12 +136,16 @@ void BoxItem::Update()
 					Player::MainPlayer->MinusItem(ItemType::Key, 1);
 					IsOpen_ = true;
 					AnimTimer_ = 0.0f;
-					for (int i = 0; i < RendererVector_.size(); i++)
+					switch (Type_)
 					{
-						if (true == RendererVector_[i]->IsUpdate())
-						{
-							RendererVector_[i]->ChangeAnimation("Opening");
-						}
+					case BoxType::Normal:
+						RendererVector_[0]->ChangeAnimation("Opening");
+						break;
+					case BoxType::Gold:
+						RendererVector_[1]->ChangeAnimation("Opening");
+						break;
+					default:
+						break;
 					}
 					GoldBoxReward();
 				}
@@ -141,9 +157,16 @@ void BoxItem::Update()
 		AnimTimer_ += GameEngineTime::GetDeltaTime();
 		if (AnimTimer_ >= 0.3f)
 		{
-			for (int i = 0; i < RendererVector_.size(); i++)
+			switch (Type_)
 			{
-				RendererVector_[i]->ChangeAnimation("Open");
+			case BoxType::Normal:
+				RendererVector_[0]->ChangeAnimation("Open");
+				break;
+			case BoxType::Gold:
+				RendererVector_[1]->ChangeAnimation("Open");
+				break;
+			default:
+				break;
 			}
 		}
 	}

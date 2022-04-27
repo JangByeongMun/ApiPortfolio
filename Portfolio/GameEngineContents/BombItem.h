@@ -32,6 +32,7 @@ protected:
 private:
 	BombType Type_;
 	GameEngineRenderer* Renderer_;
+	bool IsSetting_;
 
 	void Update() override;
 };

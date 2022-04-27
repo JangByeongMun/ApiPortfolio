@@ -34,6 +34,7 @@ private:
 	MoneyType Type_;
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* ShadowRenderer_;
+	bool IsSetting_;
 
 	void Update() override;
 };

@@ -5,6 +5,7 @@ MoneyItem::MoneyItem()
 	: Type_(MoneyType::None)
 	, Renderer_(nullptr)
 	, ShadowRenderer_(nullptr)
+	, IsSetting_(false)
 {
 }
 
@@ -65,25 +66,18 @@ void MoneyItem::SetType(MoneyType _Type)
 		break;
 	}
 
-	Collision_ = CreateCollision("Item", { 60, 60 });
+	IsSetting_ = true;
 }
-
 void MoneyItem::Update()
 {
 	SetObjectMove();
-
-	if (StartTimer_ < 0.2f)
-	{
-		return;
-	}
-
-	if (nullptr == Collision_ || nullptr == Renderer_)
+	if (false == IsSetting_)
 	{
 		return;
 	}
 
 	/////// 충돌
-	if (true == Collision_->IsUpdate() && true == Renderer_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
+	if (nullptr != Collision_ && true == Collision_->IsUpdate() && true == Renderer_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
 	{
 		switch (Type_)
 		{
@@ -107,20 +101,19 @@ void MoneyItem::Update()
 	}
 
 	/////// 애니메이션
-	if (true == Renderer_->IsEndAnimation())
+	if (true == Renderer_->IsUpdate() && true == Renderer_->IsEndAnimation())
 	{
 		if (Renderer_->CurrentAnimation() == Renderer_->FindAnimation("coin_Appear"))
 		{
 			Renderer_->ChangeAnimation("coin_Idle");
 			ShadowRenderer_->ChangeAnimation("coin_Idle_Shadow");
+			Collision_ = CreateCollision("Item", { 60, 60 });
 		}
 
 		// 먹힌후 애니메이션 실행하고 삭제
 		if (Renderer_->CurrentAnimation() == Renderer_->FindAnimation("coin_Destroy"))
 		{
-			Renderer_ = nullptr;
-			ShadowRenderer_ = nullptr;
-			Collision_ = nullptr;
+			Off();
 			Death(1.0f);
 		}
 	}

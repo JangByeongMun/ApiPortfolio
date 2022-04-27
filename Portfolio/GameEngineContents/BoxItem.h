@@ -31,6 +31,7 @@ private:
 	BoxType Type_;
 	float AnimTimer_;
 	bool IsOpen_;
+	bool IsSetting_;
 
 	void Start();
 	void Update();

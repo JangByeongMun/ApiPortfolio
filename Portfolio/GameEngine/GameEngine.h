@@ -58,6 +58,11 @@ public:
 		return PrevLevel_;
 	}
 
+	inline static const GameEngineLevel* CurrentLevel()
+	{
+		return CurrentLevel_;
+	}
+
 protected:
 	template<typename levelType>
 	void CreateLevel(const std::string& _Name)
@@ -82,7 +87,6 @@ protected:
 
 		CreateLevel<levelType>(_Name);
 	}
-
 
 private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;

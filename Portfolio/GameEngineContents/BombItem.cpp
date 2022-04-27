@@ -4,6 +4,7 @@
 BombItem::BombItem() 
 	: Type_(BombType::None)
 	, Renderer_(nullptr)
+	, IsSetting_(false)
 {
 }
 
@@ -32,6 +33,7 @@ void BombItem::SetType(BombType _Type)
 		break;
 	}
 
+	IsSetting_ = true;
 	Collision_ = CreateCollision("Item", { 60, 60 });
 }
 
@@ -39,7 +41,7 @@ void BombItem::Update()
 {
 	SetObjectMove();
 
-	if (StartTimer_ < 0.2f)
+	if (StartTimer_ < 0.2f || false == IsSetting_)
 	{
 		return;
 	}

@@ -165,6 +165,11 @@ void Player::Update()
 		return;
 	}
 
+	if (GameEngine::CurrentLevel() != GameEngine::GetInst().FindLevel("Play"))
+	{
+		return;
+	}
+
 	// 상태 관리
 	StateUpdate();
 
