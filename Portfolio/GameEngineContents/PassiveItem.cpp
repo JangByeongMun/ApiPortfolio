@@ -22,11 +22,11 @@ void PassiveItem::Setting(PassiveType _Type)
 	Type_ = _Type;
 
 	{
-	 	GameEngineRenderer* Renderer = CreateRenderer("levelitem_001_itemaltar.bmp");
+	 	GameEngineRenderer* Renderer = CreateRenderer("levelitem_001_itemaltar.bmp", static_cast<int>(ORDER::PLAYER));
 		Renderer->SetPivot({0, 20});
 	}
 
-	Renderer_ = CreateRenderer(ItemNameVector_[static_cast<int>(Type_)]);
+	Renderer_ = CreateRenderer(ItemNameVector_[static_cast<int>(Type_)], static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Passive", { 50, 50 });
 }
 

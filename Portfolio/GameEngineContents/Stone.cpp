@@ -65,20 +65,22 @@ void Stone::MakeRandomItemToBlackStone()
 	if (0.0f <= RandomFloat && RandomFloat < 0.6f)
 	{
 		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->SetPosition(GetPosition());
 		TmpHeart->Setting(HeartType::Soul);
 	}
 	else if (0.6f <= RandomFloat && RandomFloat < 0.7f)
 	{
 		{
 			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->SetPosition(GetPosition());
 			TmpHeart->Setting(HeartType::Soul);
+			TmpHeart->AddRanomDir(-5, 5);
 		}
 		{
 			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->SetPosition(GetPosition());
 			TmpHeart->Setting(HeartType::Soul);
+			TmpHeart->AddRanomDir(-5, 5);
 		}
 	}
 }

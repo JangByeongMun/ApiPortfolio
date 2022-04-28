@@ -4,6 +4,7 @@
 enum class ORDER
 {
 	BACKGROUND,
+	BACKPLAYER,
 	PLAYER,
 	BACKUI,
 	UI,

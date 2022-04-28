@@ -13,7 +13,7 @@ float AnimTimer_;
 
 void Player::SetAcheiveRenderer(const std::string& _Name)
 {
-	AcheiveItemRender_ = CreateRenderer(_Name);
+	AcheiveItemRender_ = CreateRenderer(_Name, static_cast<int>(ORDER::BACKUI));
 	AcheiveItemRender_->SetPivot({0, -30});
 	AcheiveItemRender_->Death(1.0f);
 }

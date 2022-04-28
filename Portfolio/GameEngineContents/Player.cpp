@@ -98,7 +98,7 @@ void Player::Start()
 		}
 	}
 
-	BodyRender_ = CreateRenderer(RenderPivot::CENTER, { 0, 30 });
+	BodyRender_ = CreateRenderer(static_cast<int>(ORDER::BACKPLAYER), RenderPivot::CENTER, { 0, 30 });
 	BodyRender_->CreateAnimation("001_isaac_left.bmp", "Body_Left", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Right", 16, 25, 0.1f, true);
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Up", 6, 15, 0.1f, true);
@@ -107,7 +107,7 @@ void Player::Start()
 	BodyRender_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
 	BodyRender_->ChangeAnimation("Body_Idle");
 	
-	HeadRender_ = CreateRenderer(RenderPivot::CENTER, { 0, -10 });
+	HeadRender_ = CreateRenderer(static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0, -10 });
 	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_1", 2, 2, 0, false);
 	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_2", 2, 3, 0.1f, false);
 	HeadRender_->CreateAnimation("001_isaac.bmp", "Head_Right_1", 2, 2, 0, false);

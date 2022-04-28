@@ -314,6 +314,11 @@ void RoomActor::AllMonsterAttack(float _Damage)
 {
 	for (int i = 0; i < MonsterVector_.size(); i++)
 	{
+		if (MonsterVector_[i] == nullptr || MonsterVector_[i]->IsUpdate() == false)
+		{
+			continue;
+		}
+
 		MonsterVector_[i]->Damaged(_Damage);
 	}
 }

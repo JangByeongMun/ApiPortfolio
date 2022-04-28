@@ -97,13 +97,13 @@ void Fire::RandomDrop()
 	if (0.0f <= RandomFloat && RandomFloat < 0.3f)
 	{
 		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->SetPosition(GetPosition());
 		TmpHeart->Setting(HeartType::RedHalf);
 	}
 	else if (0.3f <= RandomFloat && RandomFloat < 0.6f)
 	{
 		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->SetPosition(GetPosition());
 		TmpHeart->Setting(HeartType::Red);
 	}
 	else if (0.6f <= RandomFloat && RandomFloat < 0.9f)
