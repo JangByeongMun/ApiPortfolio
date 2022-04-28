@@ -29,6 +29,7 @@
 #include "BatteryItem.h"
 #include "ActiveUI.h"
 #include "BoxItem.h"
+#include "HeartItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -198,9 +199,23 @@ void Player::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 	{
-		BoxItem* TmpBox =GetLevel()->CreateActor<BoxItem>();
-		TmpBox->SetPosition(GetPosition());
-		TmpBox->SetType(BoxType::Gold);
+		{
+			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
+			TmpBox->SetPosition(GetPosition());
+			TmpBox->SetType(BoxType::Gold);
+		}
+		
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->Setting(HeartType::Black);
+		}
+
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
+			TmpHeart->Setting(HeartType::Red);
+		}
 	}
 
 	// 무적시간 구현
@@ -376,9 +391,9 @@ void Player::SetPlayerInfo()
 	PlayerUI_->Setting();
 	if (SelectedCharacterType == CharacterType::BLUEBABY)
 	{
-		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
-		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
-		GetPlayerHP()->AddHearts(HeartType::SoulHeart, false);
+		GetPlayerHP()->AddHearts(HeartData::SoulHeart, false);
+		GetPlayerHP()->AddHearts(HeartData::SoulHeart, false);
+		GetPlayerHP()->AddHearts(HeartData::SoulHeart, false);
 	}
 
 	ChangeHeadState(PlayerHeadState::Attack);

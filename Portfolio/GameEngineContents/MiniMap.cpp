@@ -328,6 +328,7 @@ void MiniMap::ChangeMap(float4 _Dir)
 				break;
 			}
 
+			NodeVecter_[i]->BGRenderer_->SetPivot(NodeVecter_[i]->BGRenderer_->GetPivot() - _Dir * 25.0f);
 			NodeVecter_[i]->Renderer_->SetPivot(NodeVecter_[i]->Renderer_->GetPivot() - _Dir * 25.0f);
 			if (nullptr != NodeVecter_[i]->IconRenderer_)
 			{

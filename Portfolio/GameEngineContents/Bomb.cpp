@@ -177,7 +177,7 @@ void Bomb::Update()
 				{
 					float4 TmpDir = TmpActor->GetPosition() - GetPosition();
 					TmpDir.Normal2D();
-					TmpActor->AddDir(TmpDir * 100.0f);
+					TmpActor->AddDir(TmpDir * 2.0f);
 				}
 			}
 		}

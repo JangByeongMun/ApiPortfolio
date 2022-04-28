@@ -20,8 +20,8 @@ public:
 	void UpdateUI();
 	void SetMaxHp(int _Value);
 	void AddMaxHp(int _Value, int _Heal = -1);
-	void AddRedHp(bool _IsHalf = "false");
-	void AddHearts(HeartType _Type, bool _IsHalf = false);
+	bool AddRedHp(bool _IsHalf = "false");
+	bool AddHearts(HeartData _Type, bool _IsHalf = false);
 	void MinusHearts(bool _IsHalf);
 
 	inline bool IsFullRed()
@@ -34,7 +34,7 @@ protected:
 private:
 	std::vector<GameEngineRenderer*> RendererVector_;
 	std::vector<GameEngineRenderer*> ShadowRendererVector_;
-	std::vector<HeartType> AddHeartVector_;
+	std::vector<HeartData> AddHeartVector_;
 
 	const int MaxCount = 12;
 

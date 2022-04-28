@@ -289,7 +289,7 @@ void PauseUI::Start()
 		GameEngineInput::GetInst()->CreateKey("PauseEnter", VK_RETURN);
 	}
 
-	//Off();
+	Off();
 }
 
 void PauseUI::Update()

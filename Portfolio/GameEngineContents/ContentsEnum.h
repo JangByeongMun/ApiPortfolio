@@ -64,7 +64,7 @@ enum class ProjectileType
 
 };
 
-enum class HeartType
+enum class HeartData
 {
 	SoulHeart,
 	BlackHeart,

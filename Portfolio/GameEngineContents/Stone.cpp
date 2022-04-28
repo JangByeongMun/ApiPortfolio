@@ -16,13 +16,14 @@ void Stone::BombStone()
 {
 	switch (StoneType_)
 	{
-	case 0:
+	case 0: // 일반 돌
 		Renderer_->SetIndex(3);
 		break;
-	case 1:
+	case 1: // 검은 돌
 		Renderer_->SetIndex(7);
+		MakeRandomItemToBlackStone();
 		break;
-	case 2:
+	case 2: // 항아리
 		Renderer_->SetIndex(7);
 		break;
 	default:
@@ -39,13 +40,13 @@ void Stone::Create(int _StonType)
 
 	switch (StoneType_)
 	{
-	case 0:
+	case 0: // 일반 돌
 		Renderer_->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 2));
 		break;
-	case 1:
+	case 1: // 검은 돌
 		Renderer_->SetIndex(5);
 		break;
-	case 2:
+	case 2: // 항아리
 	{
 		int RandomInt = (GameEngineRandom::MainRandom->RandomInt(0, 2));
 		Renderer_->SetIndex(6 + (4 * RandomInt));
@@ -57,7 +58,15 @@ void Stone::Create(int _StonType)
 	Collision_ = CreateCollision("Stone", { 60, 65 });
 }
 
-void Stone::Update()
+void Stone::MakeRandomItemToBlackStone()
 {
+	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0, 1);
+	if (0.0f <= RandomFloat && RandomFloat < 0.6f)
+	{
 
+	}
+	else if (0.6f <= RandomFloat && RandomFloat < 0.8f)
+	{
+
+	}
 }

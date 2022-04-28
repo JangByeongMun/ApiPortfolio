@@ -21,7 +21,7 @@ void BatteryItem::Update()
 	{
 		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
 		TmpDir.Normal2D();
-		AddDir(TmpDir * 100.0f * GameEngineTime::GetDeltaTime());
+		AddDir(TmpDir * 2.0f);
 	}
 	SetObjectMove();
 

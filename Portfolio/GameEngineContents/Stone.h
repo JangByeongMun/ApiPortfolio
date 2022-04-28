@@ -27,5 +27,5 @@ private:
 	GameEngineCollision* Collision_;
 	int StoneType_;
 
-	void Update() override;
+	void MakeRandomItemToBlackStone();
 };

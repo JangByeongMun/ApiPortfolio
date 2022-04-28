@@ -93,12 +93,12 @@ void PlayerHP::UpdateUI()
 		else if (i - MaxRedHP_ < CurrentAddHP_ - 1)
 		{
 			int TmpValue = i - MaxRedHP_;
-			if (AddHeartVector_[TmpValue] == HeartType::SoulHeart)
+			if (AddHeartVector_[TmpValue] == HeartData::SoulHeart)
 			{
 				RendererVector_[i]->SetIndex(5);
 				ShadowRendererVector_[i]->On();
 			}
-			if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
+			if (AddHeartVector_[TmpValue] == HeartData::BlackHeart)
 			{
 				RendererVector_[i]->SetIndex(7);
 				ShadowRendererVector_[i]->On();
@@ -107,7 +107,7 @@ void PlayerHP::UpdateUI()
 		else if (i - MaxRedHP_ < CurrentAddHP_)
 		{
 			int TmpValue = i - MaxRedHP_;
-			if (AddHeartVector_[TmpValue] == HeartType::SoulHeart)
+			if (AddHeartVector_[TmpValue] == HeartData::SoulHeart)
 			{
 				if (true == IsHalfAdd_)
 				{
@@ -120,7 +120,7 @@ void PlayerHP::UpdateUI()
 					ShadowRendererVector_[i]->On();
 				}
 			}
-			else if (AddHeartVector_[TmpValue] == HeartType::BlackHeart)
+			else if (AddHeartVector_[TmpValue] == HeartData::BlackHeart)
 			{
 				if (true == IsHalfAdd_)
 				{
@@ -161,8 +161,13 @@ void PlayerHP::AddMaxHp(int _Value, int _Heal)
 	UpdateUI();
 }
 
-void PlayerHP::AddRedHp(bool _IsHalf)
+bool PlayerHP::AddRedHp(bool _IsHalf)
 {
+	if (IsHalfRed_ == false && CurrentRedHP_ == MaxRedHP_)
+	{
+		return false;
+	}
+
 	if (true == _IsHalf) // 추가가 절반짜리일때
 	{
 		if (false == IsHalfRed_) // 현재상태가 절반이 아니였을떄
@@ -183,10 +188,16 @@ void PlayerHP::AddRedHp(bool _IsHalf)
 		IsHalfRed_ = false;
 	}
 	UpdateUI();
+	return true;
 }
 
-void PlayerHP::AddHearts(HeartType _Type, bool _IsHalf)
+bool PlayerHP::AddHearts(HeartData _Type, bool _IsHalf)
 {
+	if (IsHalfAdd_ == false && MaxRedHP_ + CurrentAddHP_ == MaxCount)
+	{
+		return false;
+	}
+
 	if (true == _IsHalf) // 추가가 절반짜리일때
 	{
 		if (false == IsHalfAdd_) // 현재상태가 절반이 아니였을떄
@@ -209,6 +220,7 @@ void PlayerHP::AddHearts(HeartType _Type, bool _IsHalf)
 		IsHalfRed_ = false;
 	}
 	UpdateUI();
+	return true;
 }
 
 void PlayerHP::MinusHearts(bool _IsHalf)
