@@ -31,6 +31,7 @@
 #include "BoxItem.h"
 #include "HeartItem.h"
 #include "BlackHeartEffect.h"
+#include "RandomRoomManager.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -264,6 +265,7 @@ void Player::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		NextLevelOff();
 		PlayerUI_->NextLevelOff();
 		GetPlayerHP()->NextLevelOff();
+		MainPlayer = nullptr;
 	}
 	else
 	{

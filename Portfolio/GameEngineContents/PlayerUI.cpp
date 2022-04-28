@@ -53,6 +53,7 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 		ItemUI_->Off();
 		AccessoryUI_->Off();
 		ActiveUI_->Off();
+		PauseUI_->Off();
 	}
 	else
 	{
@@ -61,6 +62,7 @@ void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
 		ItemUI_->On();
 		AccessoryUI_->On();
 		ActiveUI_->On();
+		PauseUI_->Off();
 	}
 }
 
@@ -77,6 +79,7 @@ void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		ItemUI_->NextLevelOff();
 		AccessoryUI_->NextLevelOff();
 		ActiveUI_->NextLevelOff();
+		PauseUI_->NextLevelOff();
 	}
 	else
 	{
@@ -85,6 +88,7 @@ void PlayerUI::LevelChangeEnd(GameEngineLevel* _NextLevel)
 		ItemUI_->NextLevelOn();
 		AccessoryUI_->NextLevelOn();
 		ActiveUI_->NextLevelOn();
+		PauseUI_->NextLevelOn();
 	}
 }
 

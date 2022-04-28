@@ -17,7 +17,6 @@ public:
 	BindingOfIsaac& operator=(const BindingOfIsaac& _Other) = delete;
 	BindingOfIsaac& operator=(BindingOfIsaac&& _Other) noexcept = delete;
 
-	void CreatePlayLevel(const std::string& _Name);
 	void ResetPlayLevel(const std::string& _Name);
 
 protected:
