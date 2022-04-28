@@ -46,7 +46,7 @@ void BoxItem::SetType(BoxType _Type)
 void BoxItem::Start()
 {
 	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Normal.bmp");
+		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Normal.bmp", static_cast<int>(ORDER::PLAYER));
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Idle", 0, 0, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Open", 1, 1, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Appear", 6, 8, 0.1f, false);
@@ -56,7 +56,7 @@ void BoxItem::Start()
 		RendererVector_.push_back(TmpRenderer);
 	}
 	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Gold.bmp");
+		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Gold.bmp", static_cast<int>(ORDER::PLAYER));
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Idle", 0, 0, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Open", 1, 1, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Appear", 6, 8, 0.1f, false);

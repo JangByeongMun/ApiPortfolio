@@ -14,7 +14,7 @@ BombItem::~BombItem()
 
 void BombItem::SetType(BombType _Type)
 {
-	Renderer_ = CreateRenderer("pickup_016_bomb.bmp", RenderPivot::CENTER, { 0, 0 });
+	Renderer_ = CreateRenderer("pickup_016_bomb.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 
 	Type_ = _Type;
 	switch (Type_)

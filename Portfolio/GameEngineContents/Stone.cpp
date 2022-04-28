@@ -1,9 +1,12 @@
 #include "Stone.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "HeartItem.h"
+#include "ContentsEnum.h"
+#include "ContentsGlobal.h"
 
 Stone::Stone() 
 	: Renderer_(nullptr)
+	, ShadowRenderer_(nullptr)
 	, Collision_(nullptr)
 	, StoneType_(0)
 {
@@ -19,13 +22,16 @@ void Stone::BombStone()
 	{
 	case 0: // 일반 돌
 		Renderer_->SetIndex(3);
+		ShadowRenderer_->SetIndex(3);
 		break;
 	case 1: // 검은 돌
 		Renderer_->SetIndex(7);
+		ShadowRenderer_->SetIndex(7);
 		MakeRandomItemToBlackStone();
 		break;
 	case 2: // 항아리
 		Renderer_->SetIndex(7);
+		ShadowRenderer_->SetIndex(7);
 		break;
 	default:
 		break;
@@ -37,20 +43,43 @@ void Stone::BombStone()
 void Stone::Create(int _StonType)
 {
 	StoneType_ = _StonType;
-	Renderer_ = CreateRenderer("rocks_basement.bmp");
+	std::string TmpName = "";
+	switch (CurrentFloor)
+	{
+	case 1:
+		TmpName = "rocks_basement";
+		break;
+	case 2:
+		TmpName = "rocks_caves";
+		break;
+	case 3:
+		TmpName = "rocks_depths";
+		break;
+	default:
+		break;
+	}
+	Renderer_ = CreateRenderer(TmpName + ".bmp", static_cast<int>(ORDER::PLAYER));
+	ShadowRenderer_ = CreateRenderer(TmpName + "_Shadow.bmp", static_cast<int>(ORDER::PLAYER));
+	ShadowRenderer_->SetAlpha(100);
 
 	switch (StoneType_)
 	{
 	case 0: // 일반 돌
-		Renderer_->SetIndex(GameEngineRandom::MainRandom->RandomInt(0, 2));
+	{
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 2);
+		Renderer_->SetIndex(RandomInt);
+		ShadowRenderer_->SetIndex(RandomInt);
 		break;
+	}
 	case 1: // 검은 돌
 		Renderer_->SetIndex(5);
+		ShadowRenderer_->SetIndex(5);
 		break;
 	case 2: // 항아리
 	{
 		int RandomInt = (GameEngineRandom::MainRandom->RandomInt(0, 2));
 		Renderer_->SetIndex(6 + (4 * RandomInt));
+		ShadowRenderer_->SetIndex(6 + (4 * RandomInt));
 		break;
 	}
 	default:

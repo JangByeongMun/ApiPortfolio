@@ -11,7 +11,7 @@ KeyItem::~KeyItem()
 
 void KeyItem::SetType(KeyType _Type)
 {
-	Renderer_ = CreateRenderer("pickup_003_key.bmp", RenderPivot::CENTER, {0, 0});
+	Renderer_ = CreateRenderer("pickup_003_key.bmp", RenderPivot::CENTER, {0, 0}, static_cast<int>(ORDER::PLAYER));
 
 	Type_ = _Type;
 	switch (Type_)

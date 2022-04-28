@@ -4,9 +4,12 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "HeartItem.h"
 #include "MoneyItem.h"
+#include "ContentsEnum.h"
 
 Poop::Poop() 
 	: CurrentHP_(10)
+	, Collision_(nullptr)
+	, Renderer_(nullptr)
 {
 }
 
@@ -18,7 +21,7 @@ void Poop::Start()
 {
 	Collision_ = CreateCollision("Poop", {60, 60});
 	int RandomInt = GameEngineRandom::MainRandom->RandomInt(1, 4);
-	Renderer_ = CreateRenderer("grid_poop_" + std::to_string(RandomInt) + ".bmp");
+	Renderer_ = CreateRenderer("grid_poop_" + std::to_string(RandomInt) + ".bmp", static_cast<int>(ORDER::PLAYER));
 	Renderer_->SetIndex(0);
 }
 

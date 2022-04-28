@@ -16,7 +16,7 @@ HeartItem::~HeartItem()
 
 void HeartItem::Setting(HeartType _Type)
 {
-	Renderer_ = CreateRenderer("pickup_001_heart.bmp");
+	Renderer_ = CreateRenderer("pickup_001_heart.bmp", static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Item", { 50, 50 });
 
 	Type_ = _Type;

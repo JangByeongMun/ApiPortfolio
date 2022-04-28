@@ -11,7 +11,7 @@ BatteryItem::~BatteryItem()
 
 void BatteryItem::Start()
 {
-	CreateRenderer("pickup_018_littlebattery.bmp", RenderPivot::CENTER, { 0, 0 });
+	CreateRenderer("pickup_018_littlebattery.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Item", { 60, 60 });
 }
 

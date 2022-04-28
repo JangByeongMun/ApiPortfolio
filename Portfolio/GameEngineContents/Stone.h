@@ -24,6 +24,7 @@ protected:
 
 private:
 	GameEngineRenderer* Renderer_;
+	GameEngineRenderer* ShadowRenderer_;
 	GameEngineCollision* Collision_;
 	int StoneType_;
 

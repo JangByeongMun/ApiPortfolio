@@ -17,8 +17,8 @@ MoneyItem::~MoneyItem()
 void MoneyItem::SetType(MoneyType _Type)
 {
 	Type_ = _Type;
-	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
-	ShadowRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
+	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
+	ShadowRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Item", {50, 50});
 
 	switch (_Type)
@@ -163,6 +163,6 @@ void MoneyItem::DestroyUpdate()
 {
 	if (Renderer_->IsEndAnimation())
 	{
-		Death();
+		Off();
 	}
 }

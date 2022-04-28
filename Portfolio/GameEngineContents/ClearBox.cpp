@@ -17,7 +17,7 @@ ClearBox::~ClearBox()
 
 void ClearBox::Start()
 {
-	Renderer_ = CreateRenderer("pickup_005_Clearchests.bmp");
+	Renderer_ = CreateRenderer("pickup_005_Clearchests.bmp", static_cast<int>(ORDER::PLAYER));
 }
 
 void ClearBox::Update()

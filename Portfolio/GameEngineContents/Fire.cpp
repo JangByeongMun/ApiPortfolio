@@ -74,7 +74,7 @@ void Fire::Start()
 		FirePlaceRenderer_.push_back(Renderer);
 	}
 
-	Renderer_ = CreateRenderer(static_cast<int>(ORDER::UI), RenderPivot::CENTER);
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER);
 	Renderer_->CreateAnimation("effect_005_fire.bmp", "effect_005_fire", 0, 5, 0.1f, true);
 	Renderer_->ChangeAnimation("effect_005_fire");
 	Renderer_->SetPivot({ 0, -20 });

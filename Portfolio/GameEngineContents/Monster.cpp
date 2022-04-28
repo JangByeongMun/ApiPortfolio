@@ -108,5 +108,5 @@ void Monster::MakeRandomBlood(int _Min, int _Max)
 
 void Monster::MonsterDeath()
 {
-	Death();
+	Off();
 }

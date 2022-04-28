@@ -463,6 +463,16 @@ void BindingOfIsaac::ImageCut()
 	{
 		Image = GameEngineImageManager::GetInst()->Find("rocks_basement.bmp");
 		Image->CutCount(4, 8);
+		Image = GameEngineImageManager::GetInst()->Find("rocks_basement_Shadow.bmp");
+		Image->CutCount(4, 8);
+		Image = GameEngineImageManager::GetInst()->Find("rocks_caves.bmp");
+		Image->CutCount(4, 8);
+		Image = GameEngineImageManager::GetInst()->Find("rocks_caves_Shadow.bmp");
+		Image->CutCount(4, 8);
+		Image = GameEngineImageManager::GetInst()->Find("rocks_depths.bmp");
+		Image->CutCount(4, 8);
+		Image = GameEngineImageManager::GetInst()->Find("rocks_depths_Shadow.bmp");
+		Image->CutCount(4, 8);
 
 		Image = GameEngineImageManager::GetInst()->Find("door_01_normaldoor_Up.bmp");
 		Image->CutCount(2, 3);
