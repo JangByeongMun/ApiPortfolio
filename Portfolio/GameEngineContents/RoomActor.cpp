@@ -579,11 +579,11 @@ std::string RoomActor::GetCurrentFloorName()
 	}
 	else if (CurrentFloor == 2)
 	{
-		ReturnString += "01_basement";
+		ReturnString += "03_caves";
 	}
 	else if (CurrentFloor == 3)
 	{
-		ReturnString += "01_basement";
+		ReturnString += "05_depths";
 	}
 
 	if (RoomType::Boss == Data_.RoomType_)
