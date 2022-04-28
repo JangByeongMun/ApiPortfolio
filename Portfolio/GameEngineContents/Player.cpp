@@ -30,6 +30,7 @@
 #include "ActiveUI.h"
 #include "BoxItem.h"
 #include "HeartItem.h"
+#include "BlackHeartEffect.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -187,6 +188,8 @@ void Player::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("SpaceBar"))
 	{
 		UseActive();
+		float4 CurrentRoomPos = RandomRoomManager::GetInst()->FindRoom(Player::MainPlayer->GetCurrentRoomPos())->GetPosition();
+		GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
 	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
@@ -704,6 +707,11 @@ bool Player::MinusItem(ItemType _Type, int _Value)
 
 	PlayerUI_->SetItemUI();
 	return true;
+}
+
+void Player::BlackHeartDestroy()
+{
+	RandomRoomManager::GetInst()->FindRoom(RoomPos_)->AllMonsterAttack(40);
 }
 
 PlayerHP* Player::GetPlayerHP()

@@ -1,6 +1,9 @@
 #include "PlayerHP.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "Player.h"
+#include "RandomRoomManager.h"
+#include "RoomActor.h"
+#include "BlackHeartEffect.h"
 
 PlayerHP::PlayerHP()
 	: RendererVector_()
@@ -236,6 +239,11 @@ void PlayerHP::MinusHearts(bool _IsHalf)
 		{
 			if (true == IsHalfAdd_)// 현재상태가 절반이 였을때
 			{
+				if (HeartData::BlackHeart == AddHeartVector_[AddHeartVector_.size() - 1])
+				{
+					float4 CurrentRoomPos = RandomRoomManager::GetInst()->FindRoom(Player::MainPlayer->GetCurrentRoomPos())->GetPosition();
+					GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
+				}
 				CurrentAddHP_ -= 1;
 				AddHeartVector_.pop_back();
 			}
@@ -244,11 +252,16 @@ void PlayerHP::MinusHearts(bool _IsHalf)
 		}
 		else if (false == _IsHalf) // 감소가 정수일때
 		{
+			if (HeartData::BlackHeart == AddHeartVector_[AddHeartVector_.size() - 1])
+			{
+				float4 CurrentRoomPos = RandomRoomManager::GetInst()->FindRoom(Player::MainPlayer->GetCurrentRoomPos())->GetPosition();
+				GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
+			}
 			CurrentAddHP_ -= 1;
 			AddHeartVector_.pop_back();
 		}
 	}
-	else
+	else // 빨간하트만 있을경우
 	{
 		if (true == _IsHalf) // 감소가 절반짜리일때
 		{

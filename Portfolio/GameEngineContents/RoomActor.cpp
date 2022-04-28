@@ -183,6 +183,7 @@ void RoomActor::Setting()
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->SetMoveSpeed(10.0f);
+			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
 
@@ -306,7 +307,15 @@ void RoomActor::CloseAllDoor()
 
 void RoomActor::SetBossHPUI(float _Value)
 {
-	BossHpRendererVector_[2]->SetIndexWithValue(0, { -1.0f, -1.0f }, _Value);
+	BossHpRendererVector_[2]->SetIndexWithValue(0, { -1.0f, -1.0f }	, _Value);;
+}
+
+void RoomActor::AllMonsterAttack(float _Damage)
+{
+	for (int i = 0; i < MonsterVector_.size(); i++)
+	{
+		MonsterVector_[i]->Damaged(_Damage);
+	}
 }
 
 void RoomActor::Start()

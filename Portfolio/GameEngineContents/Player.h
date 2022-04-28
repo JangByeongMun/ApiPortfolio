@@ -193,6 +193,7 @@ public:
 	{
 		return MoneyCount_;
 	}
+	void BlackHeartDestroy();
 
 ///////////////////////////////// UI Ελ°ύ
 private:

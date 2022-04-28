@@ -236,6 +236,9 @@
     <ClInclude Include="HeartItem.h">
       <Filter>Play\Item</Filter>
     </ClInclude>
+    <ClInclude Include="BlackHeartEffect.h">
+      <Filter>Play\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -473,6 +476,9 @@
     <ClCompile Include="HeartItem.cpp">
       <Filter>Play\Item</Filter>
     </ClCompile>
+    <ClCompile Include="BlackHeartEffect.cpp">
+      <Filter>Play\Effect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Level">
@@ -537,6 +543,9 @@
     </Filter>
     <Filter Include="Play\Item\Base">
       <UniqueIdentifier>{f22461a5-db10-4e38-b67d-b021400f7388}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play\Effect">
+      <UniqueIdentifier>{969d834d-aa15-4771-9eca-58be72c053b5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

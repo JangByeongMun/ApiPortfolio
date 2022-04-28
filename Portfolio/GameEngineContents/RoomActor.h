@@ -66,6 +66,7 @@ public:
 		return Trapdoor_;
 	}
 
+	void AllMonsterAttack(float _Damage);
 protected:
 
 private:
