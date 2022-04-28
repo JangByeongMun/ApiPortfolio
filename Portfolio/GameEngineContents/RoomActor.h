@@ -84,4 +84,5 @@ private:
 	void DoorSetting();
 	void MakeMapReward();
 	void MakePassive();
+	std::string GetCurrentFloorName();
 };

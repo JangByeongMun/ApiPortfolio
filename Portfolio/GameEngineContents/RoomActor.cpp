@@ -18,7 +18,7 @@
 #include "BoxItem.h"
 #include "ShopItem.h"
 #include "ShopKeeper.h"
-
+#include "ContentsGlobal.h"
 float StartX = -420.0f;
 float StartY = -225.0f;
 float ScaleX = 70.0f;
@@ -85,7 +85,7 @@ void RoomActor::Setting()
 	SetPosition(TmpRenderPos + GameEngineWindow::GetScale().Half());
 
 	CreateRenderer("bgblack.bmp", RenderPivot::CENTER, float4::ZERO, -1);
-	CreateRenderer("01_basement.bmp", RenderPivot::CENTER, float4::ZERO);
+	CreateRenderer(GetCurrentFloorName(), RenderPivot::CENTER, float4::ZERO);
 
 	// 문닫혀있을때 벽 평평하게 만드는 컬리젼추가
 	{
@@ -558,4 +558,30 @@ void RoomActor::MakePassive()
 
 	PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
 	TmpPassiveItem->Setting(TmpType);
+}
+
+std::string RoomActor::GetCurrentFloorName()
+{
+	std::string ReturnString = "";
+
+	if (CurrentFloor == 1)
+	{
+		ReturnString += "01_basement";
+	}
+	else if (CurrentFloor == 2)
+	{
+		ReturnString += "01_basement";
+	}
+	else if (CurrentFloor == 3)
+	{
+		ReturnString += "01_basement";
+	}
+
+	if (RoomType::Boss == Data_.RoomType_)
+	{
+		ReturnString += "_Boss";
+	}
+
+	ReturnString += ".bmp";
+	return ReturnString;
 }
