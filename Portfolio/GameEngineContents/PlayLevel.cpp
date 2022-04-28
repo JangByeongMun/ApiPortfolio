@@ -53,6 +53,7 @@ void PlayLevel::Loading()
 	}
 
 	GlobalActor = CreateActor<GameEngineActor>();
+	YSortOn(static_cast<int>(ORDER::PLAYER));
 }
 
 void PlayLevel::Update()

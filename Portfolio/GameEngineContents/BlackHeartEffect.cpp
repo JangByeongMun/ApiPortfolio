@@ -39,7 +39,9 @@ void BlackHeartEffect::Update()
 	{
 		float4 LerpScale = float4::Lerp({ 320, 320 }, {640, 640}, AnimTimer_ * 2.0f);
 		Renderer_->SetScale(LerpScale);
-		Renderer_->SetAlpha(float4::LerpFloat(0.0f, 255.0f, AnimTimer_ * 2.0f));
+
+		unsigned int LerpAlpha = static_cast<unsigned int>(float4::LerpFloat(0.0f, 255.0f, AnimTimer_ * 2.0f));
+		Renderer_->SetAlpha(LerpAlpha);
 	}
 	else if (AnimTimer_ <= 0.6f)
 	{
@@ -67,7 +69,10 @@ void BlackHeartEffect::Update()
 
 		float4 LerpScale = float4::Lerp({ 640, 640 }, { 960, 960 }, (AnimTimer_ - 1.0f) * 4.0f);
 		Renderer_->SetScale(LerpScale);
-		Renderer_->SetAlpha(float4::LerpFloat(255.0f, 0.0f, (AnimTimer_ - 1.0f) * 4.0f));
+
+		unsigned int LerpAlpha = static_cast<unsigned int>(float4::LerpFloat(0.0f, 255.0f, AnimTimer_ * 2.0f));
+		Renderer_->SetAlpha(LerpAlpha);
+
 		if (false == IsDestroy_)
 		{
 			IsDestroy_ = true;

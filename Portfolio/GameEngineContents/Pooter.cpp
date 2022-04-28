@@ -14,7 +14,7 @@ Pooter::~Pooter()
 
 void Pooter::Start()
 {
-	Renderer_ = CreateRenderer(1);
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
 	Renderer_->CreateAnimation("monster_001_pooter_Right.bmp", "monster_001_pooter_Idle_Right", 0, 1, 0.1f, true);
 	Renderer_->CreateAnimation("monster_001_pooter_Right.bmp", "monster_001_pooter_Attack_Right", 2, 15, 0.05f, false);
 	Renderer_->CreateAnimation("monster_001_pooter_Left.bmp", "monster_001_pooter_Idle_Left", 0, 1, 0.1f, true);

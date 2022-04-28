@@ -28,7 +28,7 @@ void ShopItem::SetType(ShopType _Type)
 		break;
 	case ShopType::Passive:
 	{
-		int RandomInt = GameEngineRandom::MainRandom->RandomInt(1, PassiveItem::ItemNameVector_.size() - 1);
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveItem::ItemNameVector_.size() - 1));
 		std::string TmpName = PassiveItem::ItemNameVector_[RandomInt];
 		PassiveType_ = static_cast<PassiveType>(RandomInt);
 		GameEngineRenderer* TmpRenderer = CreateRenderer(TmpName);

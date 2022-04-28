@@ -3,6 +3,7 @@
 #include "GameEngineCollision.h"
 #include "GameEngineRenderer.h"
 #include <GameEngineBase/GameEngineDebug.h>
+#include "GameEngineImage.h"
 
 bool GameEngineLevel::IsDebug = false;
 

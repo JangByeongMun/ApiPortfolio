@@ -57,7 +57,7 @@ public:
 			AddValue += 5;
 		}
 
-		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::Projectile));
+		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 		Renderer->SetIndex(AddValue);
 	}
 	inline void SetLifeTime_(float _Value)
