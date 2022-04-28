@@ -10,6 +10,7 @@ class ItemUI;
 class AccessoryUI;
 class MiniMap;
 class ActiveUI;
+class PauseUI;
 class PlayerUI : public GameEngineActor
 {
 	friend GameEngineLevel;
@@ -30,6 +31,7 @@ private:
 	AccessoryUI* AccessoryUI_;
 	MiniMap* MiniMap_;
 	ActiveUI* ActiveUI_;
+	PauseUI* PauseUI_;
 
 	void Start() override;
 	void Setting();
@@ -44,6 +46,7 @@ public:
 	void SetAccessoryUI();
 	void SetMiniMap();
 	void SetActiveUI();
+	void SetPauseUI();
 
 	void MakeMiniMap();
 	void UpdateMiniMap(float4 _Dir);
@@ -52,5 +55,9 @@ public:
 	inline PlayerHP* GetPlayerHP()
 	{
 		return PlayerHP_;
+	}
+	inline PauseUI* GetPausetUI()
+	{
+		return PauseUI_;
 	}
 };

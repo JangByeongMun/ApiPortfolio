@@ -144,6 +144,32 @@ private:
 	float MoveSpeed_;
 	float Luck_;
 
+public:
+	inline float GetDamage()
+	{
+		return Damage_;
+	}
+	inline float GetAttackSpeed()
+	{
+		return AttackSpeed_;
+	}
+	inline float GetRange()
+	{
+		return Range_;
+	}
+	inline float GetShotSpeed()
+	{
+		return ShotSpeed_;
+	}
+	inline float GetMoveSpeed()
+	{
+		return MoveSpeed_;
+	}
+	inline float GetLuck()
+	{
+		return Luck_;
+	}
+
 ///////////////////////////////// 공격속도
 private:
 	float NextAttackTime_;

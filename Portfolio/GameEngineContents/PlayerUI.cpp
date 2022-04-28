@@ -8,6 +8,7 @@
 #include "PlayLevel.h"
 #include <GameEngine/GameEngine.h>
 #include "ActiveUI.h"
+#include "PauseUI.h"
 
 PlayerUI::PlayerUI() 
 	: PlayerHP_(nullptr)
@@ -16,6 +17,7 @@ PlayerUI::PlayerUI()
 	, AccessoryUI_(nullptr)
 	, MiniMap_(nullptr)
 	, ActiveUI_(nullptr)
+	, PauseUI_(nullptr)
 {
 }
 
@@ -30,6 +32,7 @@ void PlayerUI::Start()
 	ItemUI_ = GetLevel()->CreateActor<ItemUI>(static_cast<int>(ORDER::UI));
 	AccessoryUI_ = GetLevel()->CreateActor<AccessoryUI>(static_cast<int>(ORDER::UI));
 	ActiveUI_ = GetLevel()->CreateActor<ActiveUI>((int)ORDER::UI);
+	PauseUI_ = GetLevel()->CreateActor<PauseUI>((int)ORDER::FRONTUI);
 }
 
 void PlayerUI::Setting()
@@ -38,6 +41,7 @@ void PlayerUI::Setting()
 	SetItemUI();
 	SetAccessoryUI();
 	SetActiveUI();
+	SetPauseUI();
 }
 
 void PlayerUI::LevelChangeStart(GameEngineLevel* _BeforeLevel)
@@ -115,6 +119,11 @@ void PlayerUI::SetMiniMap()
 void PlayerUI::SetActiveUI()
 {
 	ActiveUI_->SettingUI();
+}
+
+void PlayerUI::SetPauseUI()
+{
+	PauseUI_->SettingValue();
 }
 
 void PlayerUI::MakeMiniMap()

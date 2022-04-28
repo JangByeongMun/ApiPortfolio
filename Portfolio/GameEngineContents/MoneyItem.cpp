@@ -1,11 +1,12 @@
 #include "MoneyItem.h"
 #include "Player.h"
+#include <GameEngine/GameEngineRenderer.h>
 
 MoneyItem::MoneyItem()
 	: Type_(MoneyType::None)
 	, Renderer_(nullptr)
 	, ShadowRenderer_(nullptr)
-	, IsSetting_(false)
+	, State_(MoneyState::Default)
 {
 }
 
@@ -18,6 +19,7 @@ void MoneyItem::SetType(MoneyType _Type)
 	Type_ = _Type;
 	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
 	ShadowRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 });
+	Collision_ = CreateCollision("Item", {50, 50});
 
 	switch (_Type)
 	{
@@ -27,12 +29,10 @@ void MoneyItem::SetType(MoneyType _Type)
 		Renderer_->CreateAnimation("pickup_002_coin_1.bmp", "coin_Idle", 0, 5, 0.1f, true);
 		Renderer_->CreateAnimation("pickup_002_coin_2.bmp", "coin_Appear", 0, 7, 0.05f, false);
 		Renderer_->CreateAnimation("pickup_002_coin_3.bmp", "coin_Destroy", 0, 8, 0.05f, false);
-		Renderer_->ChangeAnimation("coin_Appear");
 
 		ShadowRenderer_->CreateAnimation("pickup_002_coin_1_Shadow.bmp", "coin_Idle_Shadow", 0, 5, 0.05f, true);
-		ShadowRenderer_->CreateAnimation("pickup_002_coin_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, true);
+		ShadowRenderer_->CreateAnimation("pickup_002_coin_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, false);
 		ShadowRenderer_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
-		ShadowRenderer_->ChangeAnimation("coin_Appear_Shadow");
 		break;
 
 
@@ -40,12 +40,10 @@ void MoneyItem::SetType(MoneyType _Type)
 		Renderer_->CreateAnimation("pickup_002_coinblack_1.bmp", "coin_Idle", 0, 5, 0.1f, true);
 		Renderer_->CreateAnimation("pickup_002_coinblack_2.bmp", "coin_Appear", 0, 7, 0.05f, false);
 		Renderer_->CreateAnimation("pickup_002_coinblack_3.bmp", "coin_Destroy", 0, 6, 0.05f, false);
-		Renderer_->ChangeAnimation("coin_Appear");
 
 		ShadowRenderer_->CreateAnimation("pickup_002_coinblack_1_Shadow.bmp", "coin_Idle_Shadow", 0, 5, 0.05f, true);
-		ShadowRenderer_->CreateAnimation("pickup_002_coinblack_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, true);
+		ShadowRenderer_->CreateAnimation("pickup_002_coinblack_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, false);
 		ShadowRenderer_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
-		ShadowRenderer_->ChangeAnimation("coin_Appear_Shadow");
 		break;
 
 
@@ -53,31 +51,93 @@ void MoneyItem::SetType(MoneyType _Type)
 		Renderer_->CreateAnimation("pickup_002_coinsilver_1.bmp", "coin_Idle", 0, 5, 0.1f, true);
 		Renderer_->CreateAnimation("pickup_002_coinsilver_2.bmp", "coin_Appear", 0, 7, 0.05f, false);
 		Renderer_->CreateAnimation("pickup_002_coinsilver_3.bmp", "coin_Destroy", 0, 6, 0.05f, false);
-		Renderer_->ChangeAnimation("coin_Appear");
 
 		ShadowRenderer_->CreateAnimation("pickup_002_coinsilver_1_Shadow.bmp", "coin_Idle_Shadow", 0, 5, 0.05f, true);
-		ShadowRenderer_->CreateAnimation("pickup_002_coinsilver_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, true);
+		ShadowRenderer_->CreateAnimation("pickup_002_coinsilver_2_Shadow.bmp", "coin_Appear_Shadow", 0, 7, 0.05f, false);
 		ShadowRenderer_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
-		ShadowRenderer_->ChangeAnimation("coin_Appear_Shadow");
 		break;
 
 
 	default:
 		break;
 	}
-
-	IsSetting_ = true;
+	ChangeState(MoneyState::Appear);
 }
 void MoneyItem::Update()
 {
 	SetObjectMove();
-	if (false == IsSetting_)
+	StateUpdate();
+}
+
+//////////////////// FSM
+void MoneyItem::ChangeState(MoneyState _State)
+{
+	if (State_ == _State)
 	{
 		return;
 	}
 
-	/////// 충돌
-	if (nullptr != Collision_ && true == Collision_->IsUpdate() && true == Renderer_->IsUpdate() && true == Collision_->CollisionCheckRect("Player"))
+	State_ = _State;
+	switch (State_)
+	{
+	case MoneyState::Appear:
+		AppearStart();
+		break;
+	case MoneyState::Idle:
+		IdleStart();
+		break;
+	case MoneyState::Destroy:
+		DestroyStart();
+		break;
+	default:
+		break;
+	}
+}
+void MoneyItem::StateUpdate()
+{
+	switch (State_)
+	{
+	case MoneyState::Appear:
+		AppearUpdate();
+		break;
+	case MoneyState::Idle:
+		IdleUpdate();
+		break;
+	case MoneyState::Destroy:
+		DestroyUpdate();
+		break;
+	default:
+		break;
+	}
+}
+
+void MoneyItem::AppearStart()
+{
+	Renderer_->ChangeAnimation("coin_Appear");
+	ShadowRenderer_->ChangeAnimation("coin_Appear_Shadow");
+}
+void MoneyItem::IdleStart()
+{
+	Renderer_->ChangeAnimation("coin_Idle");
+	ShadowRenderer_->ChangeAnimation("coin_Idle_Shadow");
+}
+void MoneyItem::DestroyStart()
+{
+	Renderer_->ChangeAnimation("coin_Destroy");
+	ShadowRenderer_->ChangeAnimation("None");
+}
+
+
+void MoneyItem::AppearUpdate()
+{
+	if (Renderer_->IsEndAnimation())
+	{
+		ChangeState(MoneyState::Idle);
+	}
+}
+void MoneyItem::IdleUpdate()
+{
+	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		switch (Type_)
 		{
@@ -95,26 +155,14 @@ void MoneyItem::Update()
 		default:
 			break;
 		}
-		Renderer_->ChangeAnimation("coin_Destroy");
-		ShadowRenderer_->ChangeAnimation("None");
 		Collision_->Off();
+		ChangeState(MoneyState::Destroy);
 	}
-
-	/////// 애니메이션
-	if (true == Renderer_->IsUpdate() && true == Renderer_->IsEndAnimation())
+}
+void MoneyItem::DestroyUpdate()
+{
+	if (Renderer_->IsEndAnimation())
 	{
-		if (Renderer_->CurrentAnimation() == Renderer_->FindAnimation("coin_Appear"))
-		{
-			Renderer_->ChangeAnimation("coin_Idle");
-			ShadowRenderer_->ChangeAnimation("coin_Idle_Shadow");
-			Collision_ = CreateCollision("Item", { 60, 60 });
-		}
-
-		// 먹힌후 애니메이션 실행하고 삭제
-		if (Renderer_->CurrentAnimation() == Renderer_->FindAnimation("coin_Destroy"))
-		{
-			Off();
-			Death(1.0f);
-		}
+		Death();
 	}
 }

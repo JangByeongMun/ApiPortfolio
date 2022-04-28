@@ -556,6 +556,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("ui_chargebar_4.bmp");
 		Image->CutCount(5, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("pausescreen_Value.bmp");
+		Image->CutCount(7, 2);
 	}
 
 	/////////////////////////////////// Play Item

@@ -14,6 +14,7 @@
 #include "RandomRoomManager.h"
 #include "PlayerUI.h"
 #include "ContentsGlobal.h"
+#include "PauseUI.h"
 
 PlayLevel::PlayLevel() 
 	: GlobalActor(nullptr)
@@ -59,6 +60,8 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
 	{
 		GameEngineTime::Pause();
+		bool Test = GameEngineTime::IsPause();
+		Player::MainPlayer->GetPlayerUI()->GetPausetUI()->TurnOn(Test);
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
 	{

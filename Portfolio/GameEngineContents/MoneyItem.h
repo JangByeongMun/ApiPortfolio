@@ -4,6 +4,14 @@
 #include <GameEngine/GameEngineCollision.h>
 #include "ItemBase.h"
 
+enum class MoneyState
+{
+	Default,
+	Appear,
+	Idle,
+	Destroy
+};
+
 enum class MoneyType
 {
 	None,
@@ -34,8 +42,20 @@ private:
 	MoneyType Type_;
 	GameEngineRenderer* Renderer_;
 	GameEngineRenderer* ShadowRenderer_;
-	bool IsSetting_;
+	MoneyState State_;
 
 	void Update() override;
+
+	//////////////////// FSM
+	void ChangeState(MoneyState _State);
+	void StateUpdate();
+
+	void AppearStart();
+	void IdleStart();
+	void DestroyStart();
+
+	void AppearUpdate();
+	void IdleUpdate();
+	void DestroyUpdate();
 };
 

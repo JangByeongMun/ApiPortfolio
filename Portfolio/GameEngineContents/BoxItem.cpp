@@ -102,11 +102,6 @@ void BoxItem::Update()
 		Collision_ = CreateCollision("Box", { 90, 60 });
 	}
 
-	if (StartTimer_ < 0.2f)
-	{
-		return;
-	}
-
 	if (false == IsOpen_) // 닫혀있을떄
 	{
 		// 박스가 플레이어랑 충돌했을때
