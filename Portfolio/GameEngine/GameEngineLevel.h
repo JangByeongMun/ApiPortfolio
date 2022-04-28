@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include <map>
+#include <set>
 #include <vector>
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineMath.h>
@@ -101,6 +102,11 @@ public:
 
 	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
 
+	void YSortOn(int _SortOrder)
+	{
+		IsYSort_.insert(_SortOrder);
+	}
+
 protected:
 	virtual void Loading() = 0;
 	virtual void Update() = 0;
@@ -130,6 +136,7 @@ private:
 	//////////////////// ·»´õ·¯
 private:
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+	std::set<int> IsYSort_;
 	std::vector<ChangeOrderItem> ChangeOrderList;
 	
 	void AddRenderer(GameEngineRenderer* _Renderer);

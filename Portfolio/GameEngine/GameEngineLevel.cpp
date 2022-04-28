@@ -131,6 +131,10 @@ void GameEngineLevel::ActorUpdate()
 	}
 }
 
+bool SortY(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
+{
+	return _Left->GetSortingPivot().y < _Right->GetSortingPivot().y;
+}
 void GameEngineLevel::ActorRender()
 {
 	// ·£´õ·¯ 
@@ -140,6 +144,11 @@ void GameEngineLevel::ActorRender()
 		for (; GroupStart != GroupEnd; ++GroupStart)
 		{
 			std::list<GameEngineRenderer*>& TmpGroup = GroupStart->second;
+
+			if (IsYSort_.end() != IsYSort_.find(GroupStart->first))
+			{
+				TmpGroup.sort(SortY);
+			}
 
 			std::list<GameEngineRenderer*>::iterator StartRenderer = TmpGroup.begin();
 			std::list<GameEngineRenderer*>::iterator EndRenderer = TmpGroup.end();

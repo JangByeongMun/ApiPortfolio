@@ -24,6 +24,7 @@ GameEngineRenderer::GameEngineRenderer()
 	, IsDeleteEndFrame_(false)
 	, RotZ_(0.0f)
 	, RotationFilterImage_(nullptr)
+	, SortingPivot(float4::ZERO)
 {
 }
 

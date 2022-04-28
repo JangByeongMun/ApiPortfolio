@@ -82,6 +82,11 @@ public:
 		return Alpha_;
 	}
 
+	inline float4 GetSortingPivot()
+	{
+		return GetActor()->GetPosition() + RenderPivot_ + SortingPivot;
+	}
+
 	void SetImageScale();
 	void SetImage(const std::string& _Name);
 	void SetIndex(const size_t _Index, const float4& _Scale = { -1.0f, -1.0f });
@@ -142,6 +147,8 @@ private:
 	// 잘라낼 좌표와 크기
 	float4 RenderImageScale_;
 	float4 RenderImagePivot_;
+
+	float4 SortingPivot;	
 
 	unsigned int TransColor_;
 	unsigned int Alpha_;
