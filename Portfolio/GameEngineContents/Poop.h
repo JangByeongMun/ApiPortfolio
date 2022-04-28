@@ -25,5 +25,6 @@ private:
 	float CurrentHP_;
 
 	void Start() override;
+	void RandomDrop();
 };
 

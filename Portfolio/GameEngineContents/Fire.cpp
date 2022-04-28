@@ -3,6 +3,9 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include "Player.h"
 #include "PlayerHP.h"
+#include <GameEngineBase/GameEngineRandom.h>
+#include "MoneyItem.h"
+#include "HeartItem.h"
 
 Fire::Fire() 
 	: Renderer_(nullptr)
@@ -13,6 +16,39 @@ Fire::Fire()
 
 Fire::~Fire() 
 {
+}
+
+void Fire::AddFireHP(float _Value)
+{
+	FireHp_ += _Value;
+
+	if (FireHp_ >= 10.0f)
+	{
+		Renderer_->SetScale(float4(144.0f, 144.0f));
+	}
+	else if (FireHp_ >= 6.0f)
+	{
+		Renderer_->SetScale(float4(144.0f, 144.0f) * 0.7f);
+	}
+	else
+	{
+		Renderer_->SetScale(float4(144.0f, 144.0f) * 0.5f);
+	}
+
+
+	if (FireHp_ <= 0.5f)
+	{
+		FireHp_ = 0.0f;
+
+		for (int i = 0; i < FirePlaceRenderer_.size(); i++)
+		{
+			FirePlaceRenderer_[i]->ChangeAnimation("grid_fireplace_Off");
+		}
+
+		RandomDrop();
+		Renderer_->Off();
+		Collision_->Off();
+	}
 }
 
 void Fire::Start()
@@ -52,6 +88,29 @@ void Fire::Update()
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
+	}
+}
+
+void Fire::RandomDrop()
+{
+	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
+	if (0.0f <= RandomFloat && RandomFloat < 0.3f)
+	{
+		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->Setting(HeartType::RedHalf);
+	}
+	else if (0.3f <= RandomFloat && RandomFloat < 0.6f)
+	{
+		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->Setting(HeartType::Red);
+	}
+	else if (0.6f <= RandomFloat && RandomFloat < 0.9f)
+	{
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Normal);
+		TmpObject->SetPosition(GetPosition());
 	}
 }
 

@@ -2,6 +2,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngine/GameEngineCollision.h>
+#include "HeartItem.h"
+#include "MoneyItem.h"
 
 Poop::Poop() 
 	: CurrentHP_(10)
@@ -20,6 +22,29 @@ void Poop::Start()
 	Renderer_->SetIndex(0);
 }
 
+void Poop::RandomDrop()
+{
+	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
+	if (0.0f <= RandomFloat && RandomFloat < 0.3f)
+	{
+		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->Setting(HeartType::RedHalf);
+	}
+	else if (0.3f <= RandomFloat && RandomFloat < 0.6f)
+	{
+		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->Setting(HeartType::Red);
+	}
+	else if (0.6f <= RandomFloat && RandomFloat < 0.9f)
+	{
+		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+		TmpObject->SetType(MoneyType::Normal);
+		TmpObject->SetPosition(GetPosition());
+	}
+}
+
 void Poop::AddHp(float _Value)
 {
 	CurrentHP_ += _Value;
@@ -27,6 +52,7 @@ void Poop::AddHp(float _Value)
 	{
 		CurrentHP_ = 0.0f;
 		Collision_->Off();
+		RandomDrop();
 	}
 
 	if (CurrentHP_ >= 8.0f)

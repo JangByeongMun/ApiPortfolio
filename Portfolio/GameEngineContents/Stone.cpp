@@ -1,5 +1,6 @@
 #include "Stone.h"
 #include <GameEngineBase/GameEngineRandom.h>
+#include "HeartItem.h"
 
 Stone::Stone() 
 	: Renderer_(nullptr)
@@ -63,10 +64,21 @@ void Stone::MakeRandomItemToBlackStone()
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0, 1);
 	if (0.0f <= RandomFloat && RandomFloat < 0.6f)
 	{
-
+		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->Setting(HeartType::Soul);
 	}
-	else if (0.6f <= RandomFloat && RandomFloat < 0.8f)
+	else if (0.6f <= RandomFloat && RandomFloat < 0.7f)
 	{
-
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->Setting(HeartType::Soul);
+		}
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->Setting(HeartType::Soul);
+		}
 	}
 }
