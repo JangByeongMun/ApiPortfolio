@@ -11,73 +11,51 @@
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
 
-BoxItem::BoxItem() 
-	: Type_(BoxType::Normal)
+BoxItem::BoxItem()
+	: Renderer_(nullptr)
+	, Type_(BoxType::Normal)
 	, AnimTimer_(0.0f)
 	, IsOpen_(false)
 	, IsSetting_(false)
 {
 }
 
-BoxItem::~BoxItem() 
+BoxItem::~BoxItem()
 {
 }
 
 void BoxItem::SetType(BoxType _Type)
 {
 	Type_ = _Type;
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
+
+	std::string TmpName = "";
 	switch (Type_)
 	{
 	case BoxType::Normal:
-		RendererVector_[0]->On();
-		RendererVector_[0]->ChangeAnimation("Appear");
-		AnimTimer_ = 0.0f;
+		TmpName = "pickup_005_chests_Normal.bmp";
 		break;
 	case BoxType::Gold:
-		RendererVector_[1]->On();
-		RendererVector_[1]->ChangeAnimation("Appear");
-		AnimTimer_ = 0.0f;
+		TmpName = "pickup_005_chests_Gold.bmp";
 		break;
 	default:
 		break;
 	}
 
-	IsSetting_ = true;
-}
+	Renderer_->CreateAnimation(TmpName, "Idle", 0, 0, 0, false);
+	Renderer_->CreateAnimation(TmpName, "Open", 1, 1, 0, false);
+	Renderer_->CreateAnimation(TmpName, "Appear", 6, 8, 0.1f, false);
+	Renderer_->CreateAnimation(TmpName, "Opening", 2, 4, 0.1f, false);
 
-void BoxItem::Start()
-{
-	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Normal.bmp", static_cast<int>(ORDER::PLAYER));
-		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Idle", 0, 0, 0, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Open", 1, 1, 0, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Appear", 6, 8, 0.1f, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Opening", 2, 4, 0.1f, false);
-		TmpRenderer->Off();
-		RendererVector_.push_back(TmpRenderer);
-	}
-	{
-		GameEngineRenderer* TmpRenderer = CreateRenderer("pickup_005_chests_Gold.bmp", static_cast<int>(ORDER::PLAYER));
-		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Idle", 0, 0, 0, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Open", 1, 1, 0, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Appear", 6, 8, 0.1f, false);
-		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Opening", 2, 4, 0.1f, false);
-		TmpRenderer->Off();
-		RendererVector_.push_back(TmpRenderer);
-	}
+	GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 0.01f * Option_SFX);
 
-	{
-		GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 0.01f * Option_SFX);
-	}
+	Renderer_->On();
+	Renderer_->ChangeAnimation("Appear");
+	AnimTimer_ = 0.0f;
 }
 
 void BoxItem::Update()
 {
-	if (false == IsSetting_)
-	{
-		return;
-	}
-
 	// 오픈여부 상관없이 플레이어와 충돌했을때
 	// 밀리도록 구현
 	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
@@ -91,18 +69,7 @@ void BoxItem::Update()
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 	if (AnimTimer_ >= 0.3f)
 	{
-		switch (Type_)
-		{
-		case BoxType::Normal:
-			RendererVector_[0]->ChangeAnimation("Idle");
-			break;
-		case BoxType::Gold:
-			RendererVector_[1]->ChangeAnimation("Idle");
-			break;
-		default:
-			break;
-		}
-
+		Renderer_->ChangeAnimation("Idle");
 		Collision_ = CreateCollision("Box", { 90, 60 });
 	}
 
@@ -115,17 +82,7 @@ void BoxItem::Update()
 			{
 				IsOpen_ = true;
 				AnimTimer_ = 0.0f;
-				switch (Type_)
-				{
-				case BoxType::Normal:
-					RendererVector_[0]->ChangeAnimation("Opening");
-					break;
-				case BoxType::Gold:
-					RendererVector_[1]->ChangeAnimation("Opening");
-					break;
-				default:
-					break;
-				}
+				Renderer_->ChangeAnimation("Opening");
 				NormalBoxReward();
 				GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
 			}
@@ -136,17 +93,7 @@ void BoxItem::Update()
 					Player::MainPlayer->MinusItem(ItemType::Key, 1);
 					IsOpen_ = true;
 					AnimTimer_ = 0.0f;
-					switch (Type_)
-					{
-					case BoxType::Normal:
-						RendererVector_[0]->ChangeAnimation("Opening");
-						break;
-					case BoxType::Gold:
-						RendererVector_[1]->ChangeAnimation("Opening");
-						break;
-					default:
-						break;
-					}
+					Renderer_->ChangeAnimation("Opening");
 					GoldBoxReward();
 					GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
 				}
@@ -158,17 +105,7 @@ void BoxItem::Update()
 		AnimTimer_ += GameEngineTime::GetDeltaTime();
 		if (AnimTimer_ >= 0.3f)
 		{
-			switch (Type_)
-			{
-			case BoxType::Normal:
-				RendererVector_[0]->ChangeAnimation("Open");
-				break;
-			case BoxType::Gold:
-				RendererVector_[1]->ChangeAnimation("Open");
-				break;
-			default:
-				break;
-			}
+			Renderer_->ChangeAnimation("Open");
 		}
 	}
 }
@@ -231,7 +168,7 @@ void BoxItem::NormalBoxReward()
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
 		}
-		
+
 		{
 			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
 			TmpObject->SetType(KeyType::Normal);
@@ -511,7 +448,7 @@ void BoxItem::GoldBoxReward()
 	}
 	else if (0.65f <= RandomFloat && RandomFloat < 0.7f)
 	{
-	 // 5원 + 열쇠2개
+		// 5원 + 열쇠2개
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 			TmpObject->SetType(MoneyType::Black);

@@ -36,7 +36,7 @@ void MiniMap::Start()
 
 	{
 		GameEngineRenderer* Renderer = CreateRenderer("minimap_BG.bmp");
-		Renderer->SetAlpha(100);
+		Renderer->SetAlpha(100 + (10 * (Option_SFX - 5)));
 		Renderer->CameraEffectOff();
 		FrameRendererVecter_.push_back(Renderer);
 	}

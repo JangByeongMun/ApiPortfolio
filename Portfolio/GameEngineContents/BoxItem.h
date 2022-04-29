@@ -27,13 +27,12 @@ public:
 protected:
 
 private:
-	std::vector<GameEngineRenderer*> RendererVector_;
+	GameEngineRenderer* Renderer_;
 	BoxType Type_;
 	float AnimTimer_;
 	bool IsOpen_;
 	bool IsSetting_;
 
-	void Start();
 	void Update();
 
 	void NormalBoxReward();
