@@ -5,6 +5,7 @@
 #include "ContentsGlobal.h"
 #include <GameEngineBase/GameEngineRandom.h>
 #include "BindingOfIsaac.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 CharacterMenu::CharacterMenu() 
 	: CurrentIndex_(0)
@@ -27,6 +28,15 @@ void CharacterMenu::ChangeIndex(int _Index)
 
 void CharacterMenu::AddIndex(int _Index)
 {
+	if (_Index > 0)
+	{
+		GameEngineSound::SoundPlayOneShotWithVolume("character select right.wav", 0, 0.01f * Option_SFX);
+	}
+	else
+	{
+		GameEngineSound::SoundPlayOneShotWithVolume("character select left.wav", 0, 0.01f * Option_SFX);
+	}
+
 	CurrentIndex_ += _Index;
 	if (CurrentIndex_ < 0)
 	{

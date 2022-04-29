@@ -23,6 +23,12 @@ MenuLevel::MenuLevel()
 	, IsChanging_(false)
 	, ChangeIndex_(0)
 	, CurrentIndex_(0)
+	, Index0_(nullptr)
+	, Index1_(nullptr)
+	, Index2_(nullptr)
+	, Index3_(nullptr)
+	, Index4_(nullptr)
+	, Index5_(nullptr)
 {
 }
 
@@ -81,7 +87,6 @@ void MenuLevel::Update()
 			break;
 		case 3:
 			Index3_->SelectIndex();
-			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.01f * Option_SFX);
 			break;
 		case 4:
 			break;
