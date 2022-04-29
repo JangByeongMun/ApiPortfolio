@@ -37,6 +37,11 @@ void PlayLevel::CameraLerp(float4 _Start, float4 _Goal)
 	Goal_ = _Goal;
 }
 
+void PlayLevel::StopBGM()
+{
+	BgmPlayer_.Stop();
+}
+
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);

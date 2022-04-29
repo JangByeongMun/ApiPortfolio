@@ -260,7 +260,7 @@ void MenuLevel::ChangeIndex(int _Index)
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	CurrentPos_ = GetCameraPos();
-	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.01f * Option_SFX);
+	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(100);
 }
 
 void MenuLevel::ChangeIndexImmediate(int _Index)

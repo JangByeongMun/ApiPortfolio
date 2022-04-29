@@ -8,9 +8,12 @@
 #include "HeartItem.h"
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
+#include "RoomActor.h"
+#include "RandomRoomManager.h"
 
 Fire::Fire() 
-	: Renderer_(nullptr)
+	: Room_(nullptr)
+	, Renderer_(nullptr)
 	, Collision_(nullptr)
 	, FireHp_(10.0f)
 {
@@ -53,9 +56,15 @@ void Fire::AddFireHP(float _Value)
 	}
 }
 
+void Fire::SetRoom(RoomActor* _Room)
+{
+	Room_ = _Room;
+}
+
 void Fire::Start()
 {
-	GameEngineSound::SoundPlayControl("fire burning.wav").SetVolume(0.015f * Option_SFX);
+	BGMPlayer_ = GameEngineSound::SoundPlayControl("fire burning.wav");
+	BGMPlayer_.SetVolume(0.0f * Option_SFX);
 
 	{
 		GameEngineRenderer* Renderer = CreateRenderer(RenderPivot::CENTER);
@@ -92,6 +101,15 @@ void Fire::Update()
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
 		Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
+	}
+
+	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
+	{
+		BGMPlayer_.SetVolume(5.0f * Option_SFX);
+	}
+	else
+	{
+		BGMPlayer_.SetVolume(0.0f * Option_SFX);
 	}
 }
 

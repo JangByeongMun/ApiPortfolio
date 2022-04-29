@@ -18,6 +18,7 @@ public:
 	PlayLevel& operator=(PlayLevel&& _Other) noexcept = delete;
 
 	void CameraLerp(float4 _Start, float4 _Goal);
+	void StopBGM();
 
 	GameEngineActor* GlobalActor;
 

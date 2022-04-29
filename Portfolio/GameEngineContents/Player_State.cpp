@@ -454,6 +454,13 @@ void Player::HeadDeadUpdate()
 	{
 		IsDead_ = true;
 		GetLevel()->CreateActor<DeadReasonUI>();
+
+		PlayLevel* TmpLevel = dynamic_cast<PlayLevel*>(GetLevel());
+		if (TmpLevel != nullptr)
+		{
+			TmpLevel->StopBGM();
+		}
+
 		GameEngineTime::Pause();
 	}
 }

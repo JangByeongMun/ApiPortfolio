@@ -136,6 +136,7 @@ void RoomActor::Setting()
 		{
 			Fire* TmpFire = GetLevel()->CreateActor<Fire>();
 			TmpFire->SetPosition(GetPosition() + TmpTilePos);
+			TmpFire->SetRoom(this);
 			break;
 		}
 		break;
