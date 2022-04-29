@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include "ContentsGlobal.h"
+#include "MenuLevel.h"
 
 OptionsMenu::OptionsMenu() 
 {
@@ -38,19 +39,26 @@ void OptionsMenu::AddValue(int _Value)
 		AllOptionValues[CurrentIndex_] = 0;
 	}
 
+	MenuLevel* TmpLevel = dynamic_cast<MenuLevel*>(GetLevel());
+
 	switch (CurrentIndex_)
 	{
 	case 0: 
 		VolumeSfx_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
 		Option_SFX = AllOptionValues[CurrentIndex_];
+		GameEngineSound::SoundPlayOneShotWithVolume("plop.wav", 0, 0.01f * Option_SFX);
 		break;
 	case 1:
 		VolumeMusic_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
-		Option_SFX = AllOptionValues[CurrentIndex_];
+		Option_MUSIC = AllOptionValues[CurrentIndex_];
+		if (TmpLevel != nullptr)
+		{
+			TmpLevel->ChangeBGMVolume();
+		}
 		break;
 	case 2:
 		VolumeMapOpacity_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
-		Option_SFX = AllOptionValues[CurrentIndex_];
+		Option_MAPOPACITY = AllOptionValues[CurrentIndex_];
 		break;
 	default:
 		break;

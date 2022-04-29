@@ -13,6 +13,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngine.h>
 
+#include "ContentsGlobal.h"
+
 MenuLevel::MenuLevel()
 	: CurrentLevelTime_(0)
 	, AllScreenPos_()
@@ -75,11 +77,11 @@ void MenuLevel::Update()
 			break;
 		case 2:
 			Index2_->SelectMenu();
-			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
+			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.01f * Option_SFX);
 			break;
 		case 3:
 			Index3_->SelectIndex();
-			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
+			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.01f * Option_SFX);
 			break;
 		case 4:
 			break;
@@ -238,7 +240,7 @@ void MenuLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("MenuLevel.ogg");
-	BgmPlayer_.SetVolume(0.03f);
+	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
 }
 
 void MenuLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -253,13 +255,17 @@ void MenuLevel::ChangeIndex(int _Index)
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	CurrentPos_ = GetCameraPos();
-	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
+	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.01f * Option_SFX);
 }
-
 
 void MenuLevel::ChangeIndexImmediate(int _Index)
 {
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	SetCameraPos(AllScreenPos_[ChangeIndex_]);
+}
+
+void MenuLevel::ChangeBGMVolume()
+{
+	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
 }

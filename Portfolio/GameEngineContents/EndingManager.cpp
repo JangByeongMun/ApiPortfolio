@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngine.h>
+#include "ContentsGlobal.h"
 
 EndingManager::EndingManager()
 	: CurrentTime_()
@@ -23,7 +24,7 @@ void EndingManager::Play()
 	IsPlaying_ = true;
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("Ending.ogg");
-	BgmPlayer_.SetVolume(0.1f);
+	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
 }
 
 void EndingManager::Stop()

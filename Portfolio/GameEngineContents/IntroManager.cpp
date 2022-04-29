@@ -5,6 +5,7 @@
 #include "Intro17.h"
 #include "Intro18.h"
 #include <GameEngine/GameEngine.h>
+#include "ContentsGlobal.h"
 
 IntroManager::IntroManager() 
 	: CurrentTime_(0)
@@ -28,7 +29,7 @@ void IntroManager::Play()
 	IsPlaying_ = true;
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("Intro.ogg");
-	BgmPlayer_.SetVolume(0.1f);
+	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
 }
 
 void IntroManager::Stop()

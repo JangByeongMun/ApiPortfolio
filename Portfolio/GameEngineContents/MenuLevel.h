@@ -58,7 +58,8 @@ private:
 public:
 	void ChangeIndex(int _Index);
 	void ChangeIndexImmediate(int _Index);
-	
+	void ChangeBGMVolume();
+
 private:
 	std::vector<float4> AllScreenPos_;
 	float4 CurrentPos_;

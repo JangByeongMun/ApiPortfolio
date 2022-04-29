@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 RandomMenuLoading::RandomMenuLoading() 
 {
@@ -27,7 +28,7 @@ void RandomMenuLoading::Start()
 void RandomMenuLoading::RandomLoading()
 {
 	GameEngineSoundPlayer TmpPlayer = GameEngineSound::SoundPlayControlOneShot("MenuLoadingSound.ogg");
-	TmpPlayer.SetVolume(0.1f);
+	TmpPlayer.SetVolume(0.01f * Option_MUSIC);
 
 	GameEngineRandom TmpRandom;
 	int SelectedIndex = TmpRandom.RandomInt(0, 5);
