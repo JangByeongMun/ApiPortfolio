@@ -13,6 +13,7 @@
 #include "Fire.h"
 #include "ItemBase.h"
 #include "ShopKeeper.h"
+#include "ContentsGlobal.h"
 
 Bomb::Bomb() 
 	: Renderer_(nullptr)
@@ -87,6 +88,12 @@ void Bomb::Update()
 			Renderer->ChangeAnimation("effect_029_explosion");
 			Renderer->SetPivot({ 0, -100 });
 			Renderer->SetDeleteEndFrame_(true);
+		}
+
+		{
+			std::string TmpName = "explosions";
+			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
+			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.01f * Option_SFX);
 		}
 
 		// 폭발자국 남기기

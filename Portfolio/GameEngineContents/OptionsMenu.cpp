@@ -29,36 +29,62 @@ void OptionsMenu::AddIndex(int _Index)
 
 void OptionsMenu::AddValue(int _Value)
 {
-	AllOptionValues[CurrentIndex_] += _Value;
-	if (AllOptionValues[CurrentIndex_] > 10)
+	switch (CurrentIndex_)
 	{
-		AllOptionValues[CurrentIndex_] = 10;
+	case 0:
+		Option_SFX += _Value;
+		if (Option_SFX > 10)
+		{
+			Option_SFX = 10;
+		}
+		if (Option_SFX < 0)
+		{
+			Option_SFX = 0;
+		}
+		break;
+	case 1:
+		Option_MUSIC += _Value;
+		if (Option_MUSIC > 10)
+		{
+			Option_MUSIC = 10;
+		}
+		if (Option_MUSIC < 0)
+		{
+			Option_MUSIC = 0;
+		}
+		break;
+	case 2:
+		Option_MAPOPACITY += _Value;
+		if (Option_MAPOPACITY > 10)
+		{
+			Option_MAPOPACITY = 10;
+		}
+		if (Option_MAPOPACITY < 0)
+		{
+			Option_MAPOPACITY = 0;
+		}
+		break;
+	default:
+		break;
 	}
-	if (AllOptionValues[CurrentIndex_] < 0)
-	{
-		AllOptionValues[CurrentIndex_] = 0;
-	}
-
+	
 	MenuLevel* TmpLevel = dynamic_cast<MenuLevel*>(GetLevel());
 
 	switch (CurrentIndex_)
 	{
 	case 0: 
-		VolumeSfx_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
-		Option_SFX = AllOptionValues[CurrentIndex_];
+		VolumeSfx_->SetIndex(10 - Option_SFX);
 		GameEngineSound::SoundPlayOneShotWithVolume("plop.wav", 0, 0.01f * Option_SFX);
 		break;
 	case 1:
-		VolumeMusic_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
-		Option_MUSIC = AllOptionValues[CurrentIndex_];
+		VolumeMusic_->SetIndex(10 - Option_MUSIC);
 		if (TmpLevel != nullptr)
 		{
 			TmpLevel->ChangeBGMVolume();
 		}
 		break;
 	case 2:
-		VolumeMapOpacity_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
-		Option_MAPOPACITY = AllOptionValues[CurrentIndex_];
+		VolumeMapOpacity_->SetIndex(10 - Option_MAPOPACITY);
 		break;
 	default:
 		break;
@@ -78,9 +104,9 @@ void OptionsMenu::Start()
 	VolumeSfx_ = CreateRenderer("optionsmenu_VolumeRight.bmp", RenderPivot::CENTER, { 150, -140 });
 	VolumeMusic_ = CreateRenderer("optionsmenu_VolumeLeft.bmp", RenderPivot::CENTER, { 150, -70 });
 	VolumeMapOpacity_ = CreateRenderer("optionsmenu_VolumeRight.bmp", RenderPivot::CENTER, { 150, 0 });
-	VolumeSfx_->SetIndex(10 - AllOptionValues[0]);
-	VolumeMusic_->SetIndex(10 - AllOptionValues[1]);
-	VolumeMapOpacity_->SetIndex(10 - AllOptionValues[2]);
+	VolumeSfx_->SetIndex(10 - Option_SFX);
+	VolumeMusic_->SetIndex(10 - Option_MUSIC);
+	VolumeMapOpacity_->SetIndex(10 - Option_MAPOPACITY);
 	
 	Arrow_ = CreateRenderer("GameMenu_Arrow.bmp", RenderPivot::CENTER, { -170, -140 });
 	ArrowPos_.push_back({ -170, -140 });

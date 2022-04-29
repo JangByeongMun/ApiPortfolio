@@ -2,6 +2,9 @@
 #include "RoomActor.h"
 #include "RandomRoomManager.h"
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 Pooter::Pooter() 
 	: IsAttackAnim(false)
@@ -80,6 +83,12 @@ void Pooter::Attack()
 
 void Pooter::MonsterDeath()
 {
-	MakeRandomBlood(2, 4);
+	{
+		std::string TmpName = "DeathBurstSmall";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.03f * Option_SFX);
+	}
+
+	MakeRandomBlood(2, 5);
 	Death();
 }

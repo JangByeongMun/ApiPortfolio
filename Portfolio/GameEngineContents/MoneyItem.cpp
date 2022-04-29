@@ -1,6 +1,8 @@
 #include "MoneyItem.h"
 #include "Player.h"
 #include <GameEngine/GameEngineRenderer.h>
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 MoneyItem::MoneyItem()
 	: Type_(MoneyType::None)
@@ -17,6 +19,7 @@ MoneyItem::~MoneyItem()
 void MoneyItem::SetType(MoneyType _Type)
 {
 	Type_ = _Type;
+	GameEngineSound::SoundPlayOneShotWithVolume("penny drop 1.wav", 0, 0.015f * Option_SFX);
 	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	ShadowRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Item", {50, 50});
@@ -163,6 +166,7 @@ void MoneyItem::DestroyUpdate()
 {
 	if (Renderer_->IsEndAnimation())
 	{
+		GameEngineSound::SoundPlayOneShotWithVolume("penny pickup 1.wav", 0, 0.015f * Option_SFX);
 		Off();
 	}
 }

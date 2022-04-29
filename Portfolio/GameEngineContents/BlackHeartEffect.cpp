@@ -4,6 +4,8 @@
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineWindow.h>
 #include "Player.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 BlackHeartEffect::BlackHeartEffect() 
 	: Renderer_(nullptr)
@@ -19,6 +21,8 @@ BlackHeartEffect::~BlackHeartEffect()
 
 void BlackHeartEffect::Start()
 {
+	GameEngineSound::SoundPlayOneShotWithVolume("death card mix.wav", 0, 0.015f * Option_SFX);
+
 	Renderer_ = CreateRenderer("giantbook_rebirth_002_blackheart.bmp", static_cast<int>(ORDER::FRONTUI));
 	Renderer_->SetScale({ 320, 320 });
 	Renderer_->SetAlpha(0);

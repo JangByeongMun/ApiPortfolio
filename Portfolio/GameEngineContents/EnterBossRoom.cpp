@@ -1,4 +1,6 @@
 #include "EnterBossRoom.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 EnterBossRoom::EnterBossRoom() 
 	: AnimTimer_(0.0f)
@@ -127,6 +129,9 @@ void EnterBossRoom::Start()
 		BossRenderers_.push_back(TmpRenderer);
 	}
 
+	{
+		GameEngineSound::SoundPlayOneShotWithVolume("castleportcullis.wav", 0, 0.01f * Option_SFX);
+	}
 }
 
 void EnterBossRoom::Update()

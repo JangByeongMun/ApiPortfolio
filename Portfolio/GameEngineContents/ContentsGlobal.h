@@ -5,8 +5,6 @@
 extern CharacterType SelectedCharacterType;
 extern BossType SelectedBossType;
 
-extern std::vector<int> AllOptionValues;
-
 extern int CurrentFloor;
 
 extern int Option_SFX;

@@ -84,7 +84,18 @@ void PlayLevel::Update()
 
 void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 {
-	BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
+	if (CurrentFloor == 1)
+	{
+		BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
+	}
+	else if (CurrentFloor == 2)
+	{
+		BgmPlayer_ = GameEngineSound::SoundPlayControl("the caves.ogg");
+	}
+	else if (CurrentFloor == 3)
+	{
+		BgmPlayer_ = GameEngineSound::SoundPlayControl("the depths.ogg");
+	}
 	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
 
 	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());

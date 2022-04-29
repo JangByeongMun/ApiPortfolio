@@ -8,6 +8,8 @@
 #include "BombItem.h"
 #include "MoneyItem.h"
 #include "BatteryItem.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 BoxItem::BoxItem() 
 	: Type_(BoxType::Normal)
@@ -51,7 +53,6 @@ void BoxItem::Start()
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Open", 1, 1, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Appear", 6, 8, 0.1f, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Normal.bmp", "Opening", 2, 4, 0.1f, false);
-		TmpRenderer->ChangeAnimation("Idle");
 		TmpRenderer->Off();
 		RendererVector_.push_back(TmpRenderer);
 	}
@@ -61,9 +62,12 @@ void BoxItem::Start()
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Open", 1, 1, 0, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Appear", 6, 8, 0.1f, false);
 		TmpRenderer->CreateAnimation("pickup_005_chests_Gold.bmp", "Opening", 2, 4, 0.1f, false);
-		TmpRenderer->ChangeAnimation("Idle");
 		TmpRenderer->Off();
 		RendererVector_.push_back(TmpRenderer);
+	}
+
+	{
+		GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 0.01f * Option_SFX);
 	}
 }
 
@@ -107,6 +111,10 @@ void BoxItem::Update()
 		// 박스가 플레이어랑 충돌했을때
 		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 		{
+			{
+				GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
+			}
+
 			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
 			{
 				IsOpen_ = true;
