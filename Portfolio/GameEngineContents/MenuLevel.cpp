@@ -6,6 +6,7 @@
 #include "StatsMenu.h"
 #include "OptionsMenu.h"
 #include "TitleForeGround.h"
+#include "ContentsGlobal.h"
 
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
@@ -74,9 +75,11 @@ void MenuLevel::Update()
 			break;
 		case 2:
 			Index2_->SelectMenu();
+			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
 			break;
 		case 3:
 			Index3_->SelectIndex();
+			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
 			break;
 		case 4:
 			break;
@@ -250,6 +253,7 @@ void MenuLevel::ChangeIndex(int _Index)
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	CurrentPos_ = GetCameraPos();
+	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.02f * Option_SFX);
 }
 
 

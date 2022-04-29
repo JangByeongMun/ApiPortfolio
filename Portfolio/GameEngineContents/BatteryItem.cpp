@@ -1,6 +1,7 @@
 #include "BatteryItem.h"
 #include "Player.h"
-
+#include <GameEngineBase/GameEngineSound.h>
+	
 BatteryItem::BatteryItem() 
 {
 }
@@ -25,7 +26,6 @@ void BatteryItem::Update()
 	}
 	SetObjectMove();
 
-
 	if (StartTimer_ < 0.2f)
 	{
 		return;
@@ -38,6 +38,8 @@ void BatteryItem::Update()
 
 	if (true == Collision_->CollisionCheckRect("Player"))
 	{
+		GameEngineSound::SoundPlayControl("battery_charge.ogg").SetVolume(0.05f);
+
 		Player::MainPlayer->AddItem(ItemType::Battery);
 		Death();
 	}

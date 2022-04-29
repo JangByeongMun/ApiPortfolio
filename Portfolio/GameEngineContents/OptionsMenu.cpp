@@ -42,12 +42,15 @@ void OptionsMenu::AddValue(int _Value)
 	{
 	case 0: 
 		VolumeSfx_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
+		Option_SFX = AllOptionValues[CurrentIndex_];
 		break;
 	case 1:
 		VolumeMusic_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
+		Option_SFX = AllOptionValues[CurrentIndex_];
 		break;
 	case 2:
 		VolumeMapOpacity_->SetIndex(10 - AllOptionValues[CurrentIndex_]);
+		Option_SFX = AllOptionValues[CurrentIndex_];
 		break;
 	default:
 		break;

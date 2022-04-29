@@ -30,6 +30,7 @@ public:
 	static GameEngineSoundPlayer SoundPlayControlOneShot(const std::string& _Name); // 한번만 실행하면서 관리하는 플레이어 제작
 
 	static void SoundPlayOneShot(const std::string& _Name, int _LoopCount = 0);
+	static void SoundPlayOneShotWithVolume(const std::string& _Name, int _LoopCount = 0, float _Volume = 1.0f);
 	static void Update();
 
 ////////////////////////////////////////// 리소스 매니지먼트
