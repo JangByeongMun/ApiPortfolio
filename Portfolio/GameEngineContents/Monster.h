@@ -57,7 +57,8 @@ protected:
 	float MoveSpeed_;
 
 public:
-	void MonsterSetMove(float4 _Value);
+	void MonsterSetMoveToFly(float4 _Value);
+	void MonsterSetMoveToWalk(float4 _Value);
 	inline void SetMoveSpeed(float _Speed) 
 	{
 		MoveSpeed_ = _Speed;

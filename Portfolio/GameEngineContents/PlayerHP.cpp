@@ -15,6 +15,7 @@ PlayerHP::PlayerHP()
 	, CurrentAddHP_(0)
 	, IsHalfRed_(false)
 	, IsHalfAdd_(false)
+	, IsDeath_(false)
 {
 }
 
@@ -57,11 +58,18 @@ void PlayerHP::Start()
 
 void PlayerHP::PlayerDeadCheck()
 {
+	if (IsDeath_ == true)
+	{
+		return;
+	}
+
 	if (CurrentRedHP_ <= 0 && CurrentAddHP_ <= 0)
 	{
+		IsDeath_ = true;
+
 		Player::MainPlayer->ChangeBodyState(PlayerBodyState::Dead);
 		Player::MainPlayer->ChangeHeadState(PlayerHeadState::Dead);
-
+		
 		{
 			std::string TmpName = "IsaacDiesNew";
 			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
@@ -72,6 +80,12 @@ void PlayerHP::PlayerDeadCheck()
 	{
 		Player::MainPlayer->ChangeBodyState(PlayerBodyState::Hitted);
 		Player::MainPlayer->ChangeHeadState(PlayerHeadState::Hitted);
+
+		{
+			std::string TmpName = "hurtgrunt";
+			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
+			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 5.0f * Option_SFX);
+		}
 	}
 }
 
@@ -240,12 +254,6 @@ void PlayerHP::MinusHearts(bool _IsHalf)
 	if (true == Player::MainPlayer->IsInvincibillity()) // 무적시간 이면 스킵
 	{
 		return;
-	}
-
-	{
-		std::string TmpName = "hurtgrunt";
-		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
-		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 5.0f * Option_SFX);
 	}
 
 	if (CurrentAddHP_ > 0) // 추가 하트가 있을경우

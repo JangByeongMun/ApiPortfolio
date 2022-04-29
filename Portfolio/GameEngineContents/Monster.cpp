@@ -57,7 +57,7 @@ float4 Monster::AttackNormalDir()
 }
 
 ///////////////////////////////// 이동
-void Monster::MonsterSetMove(float4 _Value)
+void Monster::MonsterSetMoveToFly(float4 _Value)
 {
 	GameEngineImage* MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
@@ -81,6 +81,54 @@ void Monster::MonsterSetMove(float4 _Value)
 		SetMove(float4(_Value.x, 0));
 	}
 	else if (RGB(0, 0, 0) != Color_y)
+	{
+		SetMove(float4(0, _Value.y));
+	}
+}
+
+void Monster::MonsterSetMoveToWalk(float4 _Value)
+{
+	GameEngineImage* MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
+
+	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->GetCurrentRoom();
+	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
+
+	// x축이나 y축으로 더이상 갈수없을경우 x나 y중 한군데를 제외하고 이동
+	float4 NextPos = GetPosition() + _Value;
+	float4 NextPos_x = GetPosition() + float4(_Value.x, 0);
+	float4 NextPos_y = GetPosition() + float4(0, _Value.y);
+	int Color = MapColImage_->GetImagePixel(NextPos - AddPivot);
+	int Color_x = MapColImage_->GetImagePixel(NextPos_x - AddPivot);
+	int Color_y = MapColImage_->GetImagePixel(NextPos_y - AddPivot);
+
+	if (
+		RGB(0, 0, 0) != Color &&
+		false == Collision_->NextPosCollisionCheckRect("Stone", _Value) &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", _Value) &&
+		false == Collision_->NextPosCollisionCheckRect("Poop", _Value) &&
+		false == Collision_->NextPosCollisionCheckRect("Hole", _Value)
+		)
+	{
+		SetMove(_Value);
+	}
+	else if (
+		RGB(0, 0, 0) != Color &&
+		false == Collision_->NextPosCollisionCheckRect("Stone", float4(_Value.x, 0)) &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", float4(_Value.x, 0)) &&
+		false == Collision_->NextPosCollisionCheckRect("Poop", float4(_Value.x, 0)) &&
+		false == Collision_->NextPosCollisionCheckRect("Hole", float4(_Value.x, 0))
+		)
+	{
+		SetMove(float4(_Value.x, 0));
+	}
+	else if (
+		RGB(0, 0, 0) != Color &&
+		false == Collision_->NextPosCollisionCheckRect("Stone", float4(0, _Value.y)) &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", float4(0, _Value.y)) &&
+		false == Collision_->NextPosCollisionCheckRect("Poop", float4(0, _Value.y)) &&
+		false == Collision_->NextPosCollisionCheckRect("Hole", float4(0, _Value.y))
+		)
 	{
 		SetMove(float4(0, _Value.y));
 	}

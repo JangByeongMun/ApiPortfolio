@@ -1,6 +1,9 @@
 #include "Gaper.h"
+#include <GameEngineBase/GameEngineRandom.h>
 
 Gaper::Gaper() 
+	: AnimTimer_(0.0f)
+	, IsChange_(false)
 {
 }
 
@@ -10,34 +13,29 @@ Gaper::~Gaper()
 
 void Gaper::Start()
 {
-	Renderer_ = CreateRenderer(1);
-	Renderer_->CreateAnimation("monster_017_gaper.bmp", "monster_017_gaper_Idle", 0, 1, 0.1f, true);
-	Renderer_->CreateAnimation("monster_017_gaper.bmp", "monster_017_gaper_Attack", 2, 15, 0.05f, false);
-	Renderer_->ChangeAnimation("monster_017_gaper_Idle");
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0, -10 });
+	Renderer_->CreateAnimation("monster_017_gaper.bmp", "Idle", 0, 0, 0.1f, false);
+	Renderer_->CreateAnimation("monster_017_gaper.bmp", "StartChase1", 0, 1, 0.1f, false);
+	Renderer_->CreateAnimation("monster_017_gaper.bmp", "StartChase2", 2, 3, 0.1f, false);
+	Renderer_->ChangeAnimation("Idle");
+
+	Collision_ = CreateCollision("Monster", {40, 40});
+
+	BodySetting();
 }
 
 void Gaper::MonsterUpdate()
 {
-	AttackTimer_ += GameEngineTime::GetDeltaTime();
-
-	if (AttackTimer_ >= AttackDelay_ - 0.5f)
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	if (AnimTimer_ >= 1.5f && IsChange_ == false)
 	{
-		Renderer_->ChangeAnimation("monster_017_gaper_Attack");
-	}
-	if (AttackTimer_ >= AttackDelay_)
-	{
-		AttackTimer_ = 0.0f;
-		Attack();
+		IsChange_ = true;
+		int RandomInt = GameEngineRandom::MainRandom->RandomInt(1, 2);
+		std::string TmpName = "StartChase" + std::to_string(RandomInt);
+		Renderer_->ChangeAnimation(TmpName);
 	}
 
-	if (true == Renderer_->IsEndAnimation())
-	{
-		Renderer_->ChangeAnimation("monster_017_gaper_Idle");
-	}
+	float4 MoveFloat4 = AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime();
+	MonsterSetMoveToWalk(MoveFloat4);
+	BodyUpdate(MoveFloat4);
 }
-
-void Gaper::Attack()
-{
-	Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC);
-}
-

@@ -28,19 +28,19 @@ void Poop::Start()
 void Poop::RandomDrop()
 {
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
-	if (0.0f <= RandomFloat && RandomFloat < 0.3f)
+	if (0.0f <= RandomFloat && RandomFloat < 0.2f)
 	{
 		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->SetPosition(GetPosition());
 		TmpHeart->Setting(HeartType::RedHalf);
 	}
-	else if (0.3f <= RandomFloat && RandomFloat < 0.6f)
+	else if (0.2f <= RandomFloat && RandomFloat < 0.4f)
 	{
 		HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-		TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		TmpHeart->SetPosition(GetPosition());
 		TmpHeart->Setting(HeartType::Red);
 	}
-	else if (0.6f <= RandomFloat && RandomFloat < 0.9f)
+	else if (0.4f <= RandomFloat && RandomFloat < 0.6f)
 	{
 		MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
 		TmpObject->SetType(MoneyType::Normal);
@@ -55,6 +55,7 @@ void Poop::AddHp(float _Value)
 	{
 		CurrentHP_ = 0.0f;
 		Collision_->Off();
+		Renderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));
 		RandomDrop();
 	}
 

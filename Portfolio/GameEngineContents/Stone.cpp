@@ -37,6 +37,8 @@ void Stone::BombStone()
 		break;
 	}
 
+	Renderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));
+	ShadowRenderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));
 	Collision_->Off();
 }
 

@@ -63,6 +63,8 @@ public:
 		return CurrentRooms_;
 	}
 
+	void MakeRooms();
+
 protected:
 
 private:

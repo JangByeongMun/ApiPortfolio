@@ -141,7 +141,7 @@ enum class MonsterType
 {
 	Default,
 	Pooter,
-
+	Gaper,
 	Max,
 };
 

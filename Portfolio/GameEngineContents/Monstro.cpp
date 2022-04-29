@@ -147,7 +147,7 @@ void Monstro::LargeJumpUpdate()
 		float4 LerpFloat4 = float4::Lerp(float4(0, 0), float4(0, -700), (AnimTimer_ - 0.3f) * 4.0f);
 		Renderer_->SetPivot(LerpFloat4);
 		Collision_->Off();
-		MonsterSetMove(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 		return;
 	}
 }
@@ -176,13 +176,13 @@ void Monstro::SmallJumpUpdate()
 		ChangeMonstroAnimation("_4");
 		float4 LerpFloat4 = float4::Lerp(float4(0, -200), float4(0, 0), (AnimTimer_ - 1.0f) * 5.0f);
 		Renderer_->SetPivot(LerpFloat4);
-		MonsterSetMove(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 		return;
 	}
 	else if (AnimTimer_ >= 0.5f)
 	{
 		ChangeMonstroAnimation("_7");
-		MonsterSetMove(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 		return;
 	}
 	else if (AnimTimer_ >= 0.3f)
@@ -190,7 +190,7 @@ void Monstro::SmallJumpUpdate()
 		ChangeMonstroAnimation("_6");
 		float4 LerpFloat4 = float4::Lerp(float4(0, 0), float4(0, -200), (AnimTimer_ - 0.3f) * 4.0f);
 		Renderer_->SetPivot(LerpFloat4);
-		MonsterSetMove(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 		return;
 	}
 }

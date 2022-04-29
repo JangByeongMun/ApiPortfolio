@@ -17,6 +17,6 @@ void Sucker::Start()
 
 void Sucker::MonsterUpdate()
 {
-	MonsterSetMove(AttackNormalDir() * 300);
+	MonsterSetMoveToFly(AttackNormalDir() * 300);
 }
 

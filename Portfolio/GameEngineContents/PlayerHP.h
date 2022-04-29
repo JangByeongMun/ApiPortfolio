@@ -43,6 +43,7 @@ private:
 	int CurrentAddHP_;
 	bool IsHalfRed_;
 	bool IsHalfAdd_;
+	bool IsDeath_;
 
 	void Start() override;
 	void PlayerDeadCheck();

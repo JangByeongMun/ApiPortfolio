@@ -72,7 +72,7 @@ void Pooter::MonsterUpdate()
 			Renderer_->ChangeAnimation("monster_001_pooter_Idle_Right");
 		}
 		
-		MonsterSetMove(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 	}
 }
 

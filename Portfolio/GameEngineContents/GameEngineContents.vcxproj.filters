@@ -239,6 +239,12 @@
     <ClInclude Include="BlackHeartEffect.h">
       <Filter>Play\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Mulligoon.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="BodyMonster.h">
+      <Filter>Play\Monster\Base</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -478,6 +484,15 @@
     </ClCompile>
     <ClCompile Include="BlackHeartEffect.cpp">
       <Filter>Play\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomRoomMaker.cpp">
+      <Filter>Play\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Mulligoon.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BodyMonster.cpp">
+      <Filter>Play\Monster\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

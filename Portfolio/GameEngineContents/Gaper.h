@@ -1,8 +1,8 @@
 #pragma once
-#include "Monster.h"
+#include "BodyMonster.h"
 
 // Ό³Έν :
-class Gaper : public Monster
+class Gaper : public BodyMonster
 {
 public:
 	// constrcuter destructer
@@ -18,8 +18,10 @@ public:
 protected:
 
 private:
+	float AnimTimer_;
+	bool IsChange_;
+
 	void Start() override;
 	void MonsterUpdate() override;
-	void Attack();
 };
 

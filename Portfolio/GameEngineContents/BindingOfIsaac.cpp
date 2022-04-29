@@ -46,7 +46,7 @@ void BindingOfIsaac::GameInit()
 	CreateLevel<LoadingLevel>("Loading");
 	CreateLevel<PlayLevel>("Play");
 	CreateLevel<EndingLevel>("Ending");
-	ChangeLevel("Menu");
+	ChangeLevel("Play");
 
 	if (false == GameEngineInput::GetInst()->IsKey("Exit"))
 	{
@@ -449,6 +449,20 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(4, 4);
 		Image = GameEngineImageManager::GetInst()->Find("monster_001_pooter_Right.bmp");
 		Image->CutCount(4, 4);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_000_bodies01_Left.bmp");
+		Image->CutCount(4, 5);
+		Image = GameEngineImageManager::GetInst()->Find("monster_000_bodies01_Right.bmp");
+		Image->CutCount(4, 5);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_017_gaper.bmp");
+		Image->CutCount(2, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_061_muliboom.bmp");
+		Image->CutCount(3, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_078_sucker.bmp");
+		Image->CutCount(2, 1);
 	}
 
 	/////////////////////////////////// BossMonster

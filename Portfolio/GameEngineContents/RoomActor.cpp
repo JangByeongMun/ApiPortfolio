@@ -21,6 +21,8 @@
 #include "ContentsGlobal.h"
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
+#include "Poop.h"
+#include "Gaper.h"
 
 
 float StartX = -420.0f;
@@ -143,7 +145,12 @@ void RoomActor::Setting()
 		case BlockType::HOLE:
 			break;
 		case BlockType::POOP:
+		{
+			Poop* TmpActor = GetLevel()->CreateActor<Poop>();
+			TmpActor->SetPosition(GetPosition() + TmpTilePos);
+			//TmpActor->Create(0);
 			break;
+		}
 		case BlockType::STONE:
 		{
 			Stone* TmpStone = GetLevel()->CreateActor<Stone>();
@@ -178,7 +185,8 @@ void RoomActor::Setting()
 	for (int i = 0; i < TmpMonsterVector.size(); i++)
 	{
 		float4 TmpTilePos = { StartX + ScaleX * TmpMonsterVector[i].X_, StartY + ScaleY * TmpMonsterVector[i].Y_ };
-		switch (TmpMonsterVector[i].Type_)
+		MonsterType TmpType = TmpMonsterVector[i].Type_;
+		switch (TmpType)
 		{
 		case MonsterType::Default:
 			break;
@@ -192,7 +200,15 @@ void RoomActor::Setting()
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
-
+		case MonsterType::Gaper:
+		{
+			Gaper* TmpMonster = GetLevel()->CreateActor<Gaper>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetMoveSpeed(100.0f);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
 		case MonsterType::Max:
 			break;
 
