@@ -19,6 +19,10 @@
 #include "ShopItem.h"
 #include "ShopKeeper.h"
 #include "ContentsGlobal.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
+
+
 float StartX = -420.0f;
 float StartY = -225.0f;
 float ScaleX = 70.0f;
@@ -41,6 +45,7 @@ void RoomActor::MinusMonsterCount()
 
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
+		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 0.015f * Option_SFX);
 		OpenAllDoor();
 		MakeMapReward();
 		Player::MainPlayer->AddGaze(1);

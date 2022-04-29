@@ -1,7 +1,11 @@
 #include "KeyItem.h"
 #include "Player.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 KeyItem::KeyItem() 
+	: Renderer_(nullptr)
+	, Type_(KeyType::None)
 {
 }
 
@@ -59,6 +63,7 @@ void KeyItem::Update()
 			break;
 		case KeyType::Master:
 			Player::MainPlayer->AddItem(ItemType::keyMaster);
+			GameEngineSound::SoundPlayOneShotWithVolume("golden key.wav", 0, 0.015f * Option_SFX);
 			break;
 		default:
 			break;

@@ -111,10 +111,6 @@ void BoxItem::Update()
 		// 박스가 플레이어랑 충돌했을때
 		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 		{
-			{
-				GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
-			}
-
 			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
 			{
 				IsOpen_ = true;
@@ -131,6 +127,7 @@ void BoxItem::Update()
 					break;
 				}
 				NormalBoxReward();
+				GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
 			}
 			else if (BoxType::Gold == Type_) // 황금박스면 키가 잇어야 열린다
 			{
@@ -151,6 +148,7 @@ void BoxItem::Update()
 						break;
 					}
 					GoldBoxReward();
+					GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
 				}
 			}
 		}

@@ -32,6 +32,8 @@
 #include "HeartItem.h"
 #include "BlackHeartEffect.h"
 #include "RandomRoomManager.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -183,6 +185,8 @@ void Player::Update()
 			GameEngineActor* BombActor = GetLevel()->CreateActor<Bomb>();
 			BombActor->SetPosition(GetPosition());
 			MinusItem(ItemType::Bomb, 1);
+
+			GameEngineSound::SoundPlayOneShotWithVolume("fetus land.wav", 0, 0.02f * Option_SFX);
 		}
 	}
 
@@ -805,6 +809,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 		if (0 != FindRoom->GetMonsterCount() || 0 != FindRoom->GetBossCount())
 		{
 			FindRoom->CloseAllDoor();
+			GameEngineSound::SoundPlayOneShotWithVolume("door heavy close.wav", 0, 0.015f * Option_SFX);
 		}
 	}
 

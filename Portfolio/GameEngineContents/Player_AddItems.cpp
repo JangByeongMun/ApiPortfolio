@@ -3,6 +3,9 @@
 #include "PlayerHP.h"
 #include "Poop.h"
 #include "ActiveUI.h"
+#include <GameEngineBase/GameEngineRandom.h>
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 void Player::SetGaze(int _Value)
 {
@@ -46,9 +49,15 @@ void Player::UseActive()
 		break;
 	case ActiveType::Item036:
 		GetLevel()->CreateActor<Poop>()->SetPosition(GetPosition() + float4(0, -60));
+		{
+			std::string TmpName = "fart";
+			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 3)) + ".wav";
+			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.01f * Option_SFX);
+		}
 		break;
 	case ActiveType::Item045:
 		GetPlayerHP()->AddRedHp(false);
+		GameEngineSound::SoundPlayOneShotWithVolume("vamp.wav", 0, 0.015f * Option_SFX);
 		break;
 	case ActiveType::Max:
 		break;

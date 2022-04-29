@@ -6,6 +6,8 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include "MoneyItem.h"
 #include "HeartItem.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 Fire::Fire() 
 	: Renderer_(nullptr)
@@ -53,6 +55,8 @@ void Fire::AddFireHP(float _Value)
 
 void Fire::Start()
 {
+	GameEngineSound::SoundPlayControl("fire burning.wav").SetVolume(0.015f * Option_SFX);
+
 	{
 		GameEngineRenderer* Renderer = CreateRenderer(RenderPivot::CENTER);
 		Renderer->CreateAnimation("grid_fireplace.bmp", "grid_fireplace_Off", 0, 0, 0, false);

@@ -2,6 +2,9 @@
 #include <string>
 #include <GameEngine/GameEngineRenderer.h>
 #include "Player.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
+
 
 Door::Door() 
 	: Collision_(nullptr)
@@ -107,6 +110,7 @@ void Door::Update()
 		{
 			if (true == Player::MainPlayer->HaveKey())
 			{
+				GameEngineSound::SoundPlayOneShotWithVolume("unlock.wav", 0, 0.015f * Option_SFX);
 				Player::MainPlayer->MinusItem(ItemType::Key, 1);
 				UnLock();
 			}
