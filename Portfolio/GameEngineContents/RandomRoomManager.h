@@ -45,6 +45,7 @@ public:
 	
 	float4 RandomPos();
 	float4 RandomCornerPos();
+	float4 RandomBossPos();
 
 	RoomData RandomData();
 	RoomData RandomTreasureRoomData();

@@ -26,7 +26,6 @@ void DamageableActor::DamageTake(float _Value)
 	if (0 >= HP_)
 	{
 		HP_ = 0;
-		
 	}
 }
 

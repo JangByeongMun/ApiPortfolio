@@ -69,7 +69,7 @@ bool RandomRoomManager::ChangeFloor(const int& _Floor)
 	{ // 보스방
 		RoomActor* TmpActor = GetLevel()->CreateActor<RoomActor>();
 		TmpActor->SetData(RandomBossRoomData());
-		TmpActor->SetPos(RandomCornerPos());
+		TmpActor->SetPos(RandomBossPos());
 
 		SelectedBossType = TmpActor->GetData().GetBossType();
 		CurrentRooms_.push_back(TmpActor);
@@ -153,6 +153,66 @@ float4 RandomRoomManager::RandomCornerPos()
 		do
 		{
 			RandomInt = GameEngineRandom::MainRandom->RandomInt(0, static_cast<int>(CurrentRooms_.size() - 1));
+		} while (
+			4 == ConnectedRoomCount(CurrentRooms_[RandomInt]->GetPos()) ||
+			false == CurrentRooms_[RandomInt]->GetData().IsDefaultType()
+			);
+
+		int RandomDir = GameEngineRandom::MainRandom->RandomInt(0, 3);
+		for (int i = 0; i < 4; i++)
+		{
+			float4 TmpPos = CurrentRooms_[RandomInt]->GetPos();
+
+			if (RandomDir == 0)
+			{
+				TmpPos += {0, 1};
+			}
+			else if (RandomDir == 1)
+			{
+				TmpPos += {0, -1};
+			}
+			else if (RandomDir == 2)
+			{
+				TmpPos += {1, 0};
+			}
+			else if (RandomDir == 3)
+			{
+				TmpPos += {-1, 0};
+			}
+
+			if (true == ExistPos(TmpPos)) // 이미 해당위치에 방이 존재할때
+			{
+				RandomDir = (RandomDir + 1) % 4;
+			}
+			else // 방이 없을경우
+			{
+				if (1 == ConnectedRoomCount(TmpPos)) // 해당 위치랑 이어진 방이 1개 뿐일경우()
+				{
+					return TmpPos;
+				}
+				else
+				{
+					RandomDir = (RandomDir + 1) % 4;
+				}
+			}
+		}
+	}
+
+	MsgBoxAssert("코너방을 못찾았습니다.");
+	return { 0, 0 };
+}
+float4 RandomRoomManager::RandomBossPos()
+{
+	// 보스방은 시작방에 안붙어있도록 추가된 기능
+ 
+	// 방을 못찾았을때 다시 돌리도록
+	while (true)
+	{
+		// 근처에 모든 방이 있는방을 제외하고, 특수방이 아닌 방 인덱스
+		int RandomInt = 0;
+		do
+		{
+			RandomInt = GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(CurrentRooms_.size() - 1));
 		} while (
 			4 == ConnectedRoomCount(CurrentRooms_[RandomInt]->GetPos()) ||
 			false == CurrentRooms_[RandomInt]->GetData().IsDefaultType()
