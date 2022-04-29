@@ -524,6 +524,16 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(5, 1);
 		Image = GameEngineImageManager::GetInst()->Find("grid_poop_4.bmp");
 		Image->CutCount(5, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("grid_pit.bmp");
+		Image->CutCount(4, 9);
+		Image = GameEngineImageManager::GetInst()->Find("grid_pit_depths.bmp");
+		Image->CutCount(4, 9);
+
+		Image = GameEngineImageManager::GetInst()->Find("grid_spikes.bmp");
+		Image->CutCount(4, 5);
+		Image = GameEngineImageManager::GetInst()->Find("grid_spikes_Shadow.bmp");
+		Image->CutCount(4, 5);
 	}
 
 	/////////////////////////////////// Play UI
