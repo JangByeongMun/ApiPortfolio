@@ -10,6 +10,7 @@ ShopItem::ShopItem()
 	: Type_(ShopType::Default)
 	, Collision_(nullptr)
 	, Price_ (0)
+	, PassiveType_(PassiveType::Default)
 {
 }
 

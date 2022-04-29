@@ -298,9 +298,9 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(1, 1, BlockType::FIRE);
 				TmpData.AddBlock(11, 1, BlockType::FIRE);
 
-				TmpData.AddShop(4, 4, ShopType::Bomb);
-				TmpData.AddShop(6, 4, ShopType::Key);
-				TmpData.AddShop(8, 4, ShopType::Passive);
+				TmpData.AddShop(4, 3, ShopType::Bomb);
+				TmpData.AddShop(6, 3, ShopType::Key);
+				TmpData.AddShop(8, 3, ShopType::Passive);
 
 				TmpData.RoomType_ = RoomType::Shop;
 				TmpVector.push_back(TmpData);
@@ -389,9 +389,9 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(1, 1, BlockType::FIRE);
 				TmpData.AddBlock(11, 1, BlockType::FIRE);
 
-				TmpData.AddShop(4, 4, ShopType::Bomb);
-				TmpData.AddShop(6, 4, ShopType::Key);
-				TmpData.AddShop(8, 4, ShopType::Passive);
+				TmpData.AddShop(4, 3, ShopType::Bomb);
+				TmpData.AddShop(6, 3, ShopType::Key);
+				TmpData.AddShop(8, 3, ShopType::Passive);
 
 				TmpData.RoomType_ = RoomType::Shop;
 				TmpVector.push_back(TmpData);
@@ -480,9 +480,9 @@ void RandomRoomManager::Start()
 				TmpData.AddBlock(1, 1, BlockType::FIRE);
 				TmpData.AddBlock(11, 1, BlockType::FIRE);
 
-				TmpData.AddShop(4, 4, ShopType::Bomb);
-				TmpData.AddShop(6, 4, ShopType::Key);
-				TmpData.AddShop(8, 4, ShopType::Passive);
+				TmpData.AddShop(4, 3, ShopType::Bomb);
+				TmpData.AddShop(6, 3, ShopType::Key);
+				TmpData.AddShop(8, 3, ShopType::Passive);
 
 				TmpData.RoomType_ = RoomType::Shop;
 				TmpVector.push_back(TmpData);
