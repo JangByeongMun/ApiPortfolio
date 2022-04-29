@@ -25,9 +25,11 @@ void KeyItem::SetType(KeyType _Type)
 		break;
 	case KeyType::Normal:
 		Renderer_->SetIndex(0);
+		GameEngineSound::SoundPlayOneShotWithVolume("keydrop.wav", 0, 0.015f * Option_SFX);
 		break;
 	case KeyType::Two:
 		Renderer_->SetIndex(2);
+		GameEngineSound::SoundPlayOneShotWithVolume("keydrop.wav", 0, 0.015f * Option_SFX);
 		break;
 	case KeyType::Master:
 		Renderer_->SetIndex(1);
@@ -57,9 +59,11 @@ void KeyItem::Update()
 			break;
 		case KeyType::Normal:
 			Player::MainPlayer->AddItem(ItemType::Key);
+			GameEngineSound::SoundPlayOneShotWithVolume("keypickup.wav", 0, 0.015f * Option_SFX);
 			break;
 		case KeyType::Two:
 			Player::MainPlayer->AddItem(ItemType::KeyTwo);
+			GameEngineSound::SoundPlayOneShotWithVolume("keypickup.wav", 0, 0.015f * Option_SFX);
 			break;
 		case KeyType::Master:
 			Player::MainPlayer->AddItem(ItemType::keyMaster);
