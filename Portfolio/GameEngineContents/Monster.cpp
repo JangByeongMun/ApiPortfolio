@@ -140,8 +140,8 @@ void Monster::Damaged(float _Damage)
 
 	if (HP_ <= 0)
 	{
-		Room_->MinusMonsterCount();
 		MonsterDeath();
+		Room_->MinusMonsterCount();
 	}
 }
 

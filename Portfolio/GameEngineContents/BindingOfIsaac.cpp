@@ -455,6 +455,11 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("monster_000_bodies01_Right.bmp");
 		Image->CutCount(4, 5);
 
+		Image = GameEngineImageManager::GetInst()->Find("monster_000_bodies02_Left.bmp");
+		Image->CutCount(4, 5);
+		Image = GameEngineImageManager::GetInst()->Find("monster_000_bodies02_Right.bmp");
+		Image->CutCount(4, 5);
+
 		Image = GameEngineImageManager::GetInst()->Find("monster_017_gaper.bmp");
 		Image->CutCount(2, 2);
 

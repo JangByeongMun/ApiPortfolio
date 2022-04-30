@@ -41,6 +41,11 @@ RoomActor::~RoomActor()
 {
 }
 
+void RoomActor::AddMonsterCount()
+{
+	MonsterCount_ += 1;
+}
+
 void RoomActor::MinusMonsterCount()
 {
 	MonsterCount_ -= 1;
@@ -343,6 +348,11 @@ void RoomActor::AllMonsterAttack(float _Damage)
 
 		MonsterVector_[i]->Damaged(_Damage);
 	}
+}
+
+void RoomActor::AddMonster(Monster* _Monster)
+{
+	MonsterVector_.push_back(_Monster);
 }
 
 void RoomActor::Start()

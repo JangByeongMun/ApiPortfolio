@@ -24,6 +24,10 @@ public:
 	{
 		Room_ = &_Room;
 	}
+	inline RoomActor* GetRoom()
+	{
+		return Room_;
+	}
 
 protected:
 	RoomActor* Room_;

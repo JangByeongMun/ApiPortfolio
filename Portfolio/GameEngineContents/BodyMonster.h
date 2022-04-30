@@ -26,6 +26,7 @@ protected:
 	GameEngineRenderer* BodyRenderer_;
 
 	virtual void BodySetting();
+	virtual void BodySettingBlood();
 	void BodyUpdate(float4 _Pos);
 	MoveDir GetDir(float4 _Dir);
 };

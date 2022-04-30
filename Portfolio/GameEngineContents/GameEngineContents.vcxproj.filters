@@ -245,6 +245,9 @@
     <ClInclude Include="BodyMonster.h">
       <Filter>Play\Monster\Base</Filter>
     </ClInclude>
+    <ClInclude Include="Gusher.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -493,6 +496,9 @@
     </ClCompile>
     <ClCompile Include="BodyMonster.cpp">
       <Filter>Play\Monster\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Gusher.cpp">
+      <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

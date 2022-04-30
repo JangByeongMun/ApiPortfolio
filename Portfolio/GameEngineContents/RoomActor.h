@@ -39,6 +39,7 @@ public:
 		return Pos_;
 	}
 
+	void AddMonsterCount();
 	void MinusMonsterCount();
 	void MinusBossCount();
 	void OpenNextStage();
@@ -67,6 +68,8 @@ public:
 	}
 
 	void AllMonsterAttack(float _Damage);
+	void AddMonster(Monster* _Monster);
+
 protected:
 
 private:
