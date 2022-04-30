@@ -215,6 +215,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Clot.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Clotty.h">
       <SubType>
       </SubType>
@@ -274,6 +278,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Hole.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Iblob.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -536,6 +544,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Clot.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Clotty.cpp">
       <SubType>
       </SubType>
@@ -594,6 +606,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Hole.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Iblob.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -151,7 +151,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(0, 5, BlockType::STONE);
 				TmpData.AddBlock(12, 5, BlockType::STONE);
 
-				TmpData.AddMonster(6, 3, MonsterType::Clotty);
+				TmpData.AddMonster(6, 3, MonsterType::Clot);
 
 				TmpVector.push_back(TmpData);
 			}

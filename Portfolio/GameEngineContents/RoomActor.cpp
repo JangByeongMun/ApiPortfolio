@@ -32,6 +32,8 @@
 #include "KeyItem.h"
 #include "MoneyItem.h"
 #include "Clotty.h"
+#include "Iblob.h"
+#include "Clot.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -239,9 +241,25 @@ void RoomActor::Setting()
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
+		case MonsterType::Clot:
+		{
+			Clot* TmpMonster = GetLevel()->CreateActor<Clot>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
 		case MonsterType::Clotty:
 		{
 			Clotty* TmpMonster = GetLevel()->CreateActor<Clotty>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Iblob:
+		{
+			Iblob* TmpMonster = GetLevel()->CreateActor<Iblob>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);

@@ -2,6 +2,7 @@
 #include "Shooter.h"
 #include <GameEngine/GameEngineRenderer.h>
 #include <GameEngine/GameEngineCollision.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include <vector>
 
 // 설명 : 몬스터들 기본

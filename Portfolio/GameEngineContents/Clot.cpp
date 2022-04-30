@@ -1,52 +1,51 @@
-#include "Clotty.h"
-#include <GameEngineBase/GameEngineRandom.h>
+#include "Clot.h"
 
-Clotty::Clotty() 
-	: State_(ClottyState::Default)
+Clot::Clot() 
+	: State_(ClotState::Default)
 	, AnimTimer_(0.0f)
 	, MoveDir_(float4::ZERO)
 	, IsAttack_(false)
 {
 }
 
-Clotty::~Clotty() 
+Clot::~Clot() 
 {
 }
 
-void Clotty::Start()
+void Clot::Start()
 {
-	Collision_ = CreateCollision("Monster", {50, 50});
+	Collision_ = CreateCollision("Monster", { 50, 50 });
 	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
-	Renderer_->CreateAnimation("monster_065_clotty_Right.bmp", "Idle_Right", 0, 0, 0.1f, false);
-	Renderer_->CreateAnimation("monster_065_clotty_Right.bmp", "Move_Right", 0, 8, 0.1f, true);
-	Renderer_->CreateAnimation("monster_065_clotty_Right.bmp", "Attack_Right", 8, 10, 0.1f, false);
-	Renderer_->CreateAnimation("monster_065_clotty_Left.bmp", "Idle_Left", 0, 0, 0.1f, false);
-	Renderer_->CreateAnimation("monster_065_clotty_Left.bmp", "Move_Left", 0, 8, 0.1f, true);
-	Renderer_->CreateAnimation("monster_065_clotty_Left.bmp", "Attack_Left", 8, 10, 0.1f, false);
+	Renderer_->CreateAnimation("monster_071_clot_Right.bmp", "Idle_Right", 0, 0, 0.1f, false);
+	Renderer_->CreateAnimation("monster_071_clot_Right.bmp", "Move_Right", 0, 8, 0.1f, true);
+	Renderer_->CreateAnimation("monster_071_clot_Right.bmp", "Attack_Right", 8, 10, 0.1f, false);
+	Renderer_->CreateAnimation("monster_071_clot_Left.bmp", "Idle_Left", 0, 0, 0.1f, false);
+	Renderer_->CreateAnimation("monster_071_clot_Left.bmp", "Move_Left", 0, 8, 0.1f, true);
+	Renderer_->CreateAnimation("monster_071_clot_Left.bmp", "Attack_Left", 8, 10, 0.1f, false);
 	Renderer_->ChangeAnimation("Idle_Right");
 
-	
+
 	SetHP(15);
 	SetAttackDelay(3.0f);
 	SetMoveSpeed(100.0f);
-	ChangeState(ClottyState::Idle);
+	ChangeState(ClotState::Idle);
 }
 
-void Clotty::MonsterUpdate()
+void Clot::MonsterUpdate()
 {
 	StateUpdate();
 	AttackTimer_ += GameEngineTime::GetDeltaTime();
-	
+
 	if (AttackTimer_ >= AttackDelay_)
 	{
 		AttackTimer_ = 0.0f;
-		ChangeState(ClottyState::Attack);
+		ChangeState(ClotState::Attack);
 	}
 
 	MonsterSetMoveToWalk(MoveDir_);
 }
 
-void Clotty::ChangeState(ClottyState _State)
+void Clot::ChangeState(ClotState _State)
 {
 	if (State_ == _State)
 	{
@@ -56,30 +55,31 @@ void Clotty::ChangeState(ClottyState _State)
 	State_ = _State;
 	switch (State_)
 	{
-	case ClottyState::Idle:
+	case ClotState::Idle:
 		IdleStart();
 		break;
-	case ClottyState::Move:
+	case ClotState::Move:
 		MoveStart();
 		break;
-	case ClottyState::Attack:
+	case ClotState::Attack:
 		AttackStart();
 		break;
 	default:
 		break;
 	}
 }
-void Clotty::StateUpdate()
+
+void Clot::StateUpdate()
 {
 	switch (State_)
 	{
-	case ClottyState::Idle:
+	case ClotState::Idle:
 		IdleUpdate();
 		break;
-	case ClottyState::Move:
+	case ClotState::Move:
 		MoveUpdate();
 		break;
-	case ClottyState::Attack:
+	case ClotState::Attack:
 		AttackUpdate();
 		break;
 	default:
@@ -87,8 +87,7 @@ void Clotty::StateUpdate()
 	}
 }
 
-
-void Clotty::IdleStart()
+void Clot::IdleStart()
 {
 	AnimTimer_ = 0.0f;
 	MoveDir_ = float4::ZERO;
@@ -103,7 +102,7 @@ void Clotty::IdleStart()
 	}
 }
 
-void Clotty::MoveStart()
+void Clot::MoveStart()
 {
 	AnimTimer_ = 0.0f;
 	MoveDir_ = float4(GameEngineRandom::MainRandom->RandomFloat(-2, 2), GameEngineRandom::MainRandom->RandomFloat(-2, 2));
@@ -120,7 +119,7 @@ void Clotty::MoveStart()
 	}
 }
 
-void Clotty::AttackStart()
+void Clot::AttackStart()
 {
 	AnimTimer_ = 0.0f;
 	MoveDir_ = float4::ZERO;
@@ -135,18 +134,18 @@ void Clotty::AttackStart()
 	}
 }
 
-void Clotty::IdleUpdate()
+void Clot::IdleUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
-	
+
 	if (AnimTimer_ >= 0.25f)
 	{
 		AnimTimer_ = 0.0f;
-		ChangeState(ClottyState::Move);
+		ChangeState(ClotState::Move);
 	}
 }
 
-void Clotty::MoveUpdate()
+void Clot::MoveUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 
@@ -168,20 +167,20 @@ void Clotty::MoveUpdate()
 	}
 }
 
-void Clotty::AttackUpdate()
+void Clot::AttackUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 	if (AnimTimer_ >= 0.3f && IsAttack_ == false)
 	{
 		IsAttack_ = true;
-		Shoot({300, 0}, ProjectileType::ENEMY_BASIC);
-		Shoot({-300, 0}, ProjectileType::ENEMY_BASIC);
-		Shoot({0, 300}, ProjectileType::ENEMY_BASIC);
-		Shoot({0, -300}, ProjectileType::ENEMY_BASIC);
+		Shoot({ 200, 200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ 200, -200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -200, 200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -200, -200 }, ProjectileType::ENEMY_BASIC);
 	}
 
 	if (AnimTimer_ >= 0.6f)
 	{
-		ChangeState(ClottyState::Idle);
+		ChangeState(ClotState::Idle);
 	}
 }
