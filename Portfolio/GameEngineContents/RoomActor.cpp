@@ -348,21 +348,21 @@ void RoomActor::Setting()
 		case ItemType::Money:
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
-			TmpObject->SetType(MoneyType::Normal);
+			TmpObject->SetType(MoneyType::Normal, false);
 			TmpObject->SetPosition(GetPosition() + TmpTilePos);
 			break;
 		}
 		case ItemType::MoneyBlack:
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
-			TmpObject->SetType(MoneyType::Black);
+			TmpObject->SetType(MoneyType::Black, false);
 			TmpObject->SetPosition(GetPosition() + TmpTilePos);
 			break;
 		}
 		case ItemType::MoneySilver:
 		{
 			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
-			TmpObject->SetType(MoneyType::Silver);
+			TmpObject->SetType(MoneyType::Silver, false);
 			TmpObject->SetPosition(GetPosition() + TmpTilePos);
 			break;
 		}
@@ -453,6 +453,12 @@ void RoomActor::AllMonsterAttack(float _Damage)
 void RoomActor::AddMonster(Monster* _Monster)
 {
 	MonsterVector_.push_back(_Monster);
+}
+
+float4 RoomActor::GetRandomPos()
+{
+	float4 TmpTilePos = { StartX + ScaleX * GameEngineRandom::MainRandom->RandomInt(0, 12), StartY + ScaleY * GameEngineRandom::MainRandom->RandomInt(0, 6) };
+	return GetPosition() + TmpTilePos;
 }
 
 void RoomActor::Start()
@@ -600,10 +606,10 @@ void RoomActor::DoorSetting()
 void RoomActor::MakeMapReward()
 {
 	// 박스 확정 테스트
-	BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
-	TmpObject->SetType(BoxType::Gold);
-	TmpObject->SetPosition(GetPosition());
-	return;
+	//BoxItem* TmpObject = GetLevel()->CreateActor<BoxItem>();
+	//TmpObject->SetType(BoxType::Gold);
+	//TmpObject->SetPosition(GetPosition());
+	//return;
 
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
 	if (0.0f <= RandomFloat && RandomFloat < 0.15f)

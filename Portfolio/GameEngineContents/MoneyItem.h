@@ -34,7 +34,7 @@ public:
 	MoneyItem& operator=(const MoneyItem& _Other) = delete;
 	MoneyItem& operator=(MoneyItem&& _Other) noexcept = delete;
 	
-	void SetType(MoneyType _Type);
+	void SetType(MoneyType _Type, bool _IsSoundOn = true);
 
 protected:
 

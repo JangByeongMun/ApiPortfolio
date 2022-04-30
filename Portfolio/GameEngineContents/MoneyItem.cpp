@@ -16,10 +16,14 @@ MoneyItem::~MoneyItem()
 {
 }
 
-void MoneyItem::SetType(MoneyType _Type)
+void MoneyItem::SetType(MoneyType _Type, bool _IsSoundOn)
 {
 	Type_ = _Type;
-	GameEngineSound::SoundPlayOneShotWithVolume("penny drop 1.wav", 0, 0.015f * Option_SFX);
+	if (true == _IsSoundOn)
+	{
+		GameEngineSound::SoundPlayOneShotWithVolume("penny drop 1.wav", 0, 0.015f * Option_SFX);
+	}
+
 	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	ShadowRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
 	Collision_ = CreateCollision("Item", {50, 50});

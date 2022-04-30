@@ -1,5 +1,6 @@
 #include "RoundWorm.h"
 #include <GameEngineBase/GameEngineRandom.h>
+#include "RoomActor.h"
 
 RoundWorm::RoundWorm() 
 	: State_(RoundWormState::Default)
@@ -14,11 +15,13 @@ RoundWorm::~RoundWorm()
 
 void RoundWorm::MoveRandomPos()
 {
-	float4 RandomPos = float4(GameEngineRandom::MainRandom->RandomFloat(-200.0f, 200.0f), GameEngineRandom::MainRandom->RandomFloat(-200.0f, 200.0f));
+	float4 RandomPos = Room_->GetRandomPos();
 	while (MonsterSetMoveToTeleport(RandomPos) == false)
 	{
-		RandomPos = float4(GameEngineRandom::MainRandom->RandomFloat(-200.0f, 200.0f), GameEngineRandom::MainRandom->RandomFloat(-200.0f, 200.0f));
+		RandomPos = Room_->GetRandomPos();
 	}
+
+	int a = 0;
 }
 
 void RoundWorm::Start()
@@ -94,6 +97,7 @@ void RoundWorm::HideStart()
 void RoundWorm::ShowStart()
 {
 	AnimTimer_ = 0.0f;
+	Collision_->On();
 	MoveRandomPos();
 }
 void RoundWorm::AttackStart()
@@ -125,6 +129,7 @@ void RoundWorm::HideUpdate()
 	if (0.6f <= AnimTimer_ && AnimTimer_ < 0.8f)
 	{
 		Renderer_->SetIndex(6);
+		Collision_->Off();
 	}
 	if (2.0f <= AnimTimer_)
 	{

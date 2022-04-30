@@ -69,6 +69,7 @@ public:
 
 	void AllMonsterAttack(float _Damage);
 	void AddMonster(Monster* _Monster);
+	float4 GetRandomPos();
 
 protected:
 
