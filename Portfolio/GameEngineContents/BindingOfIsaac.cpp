@@ -468,6 +468,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("monster_078_sucker.bmp");
 		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_244_roundworm.bmp");
+		Image->CutCount(4, 2);
 	}
 
 	/////////////////////////////////// BossMonster

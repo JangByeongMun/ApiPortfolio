@@ -24,6 +24,7 @@
 #include "Poop.h"
 #include "Gaper.h"
 #include "Sucker.h"
+#include "RoundWorm.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -220,6 +221,14 @@ void RoomActor::Setting()
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->SetMoveSpeed(100.0f);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::RoundWorm:
+		{
+			RoundWorm* TmpMonster = GetLevel()->CreateActor<RoundWorm>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}

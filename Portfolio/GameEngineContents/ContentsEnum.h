@@ -143,6 +143,7 @@ enum class MonsterType
 	Pooter,
 	Gaper,
 	Sucker,
+	RoundWorm,
 	Max,
 };
 

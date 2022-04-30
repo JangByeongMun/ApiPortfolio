@@ -91,6 +91,7 @@ void RandomRoomManager::MakeRooms()
 
 				TmpData.AddMonster(6, 3, MonsterType::Gaper);
 				TmpData.AddMonster(6, 6, MonsterType::Sucker);
+				TmpData.AddMonster(6, 6, MonsterType::RoundWorm);
 
 				TmpVector.push_back(TmpData);
 			}
