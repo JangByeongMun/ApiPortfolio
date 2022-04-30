@@ -25,6 +25,12 @@
 #include "Gaper.h"
 #include "Sucker.h"
 #include "RoundWorm.h"
+#include "BatteryItem.h"
+#include "BombItem.h"
+#include "BoxItem.h"
+#include "HeartItem.h"
+#include "KeyItem.h"
+#include "MoneyItem.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -293,6 +299,82 @@ void RoomActor::Setting()
 		float4 TmpTilePos = { StartX + ScaleX * 6, StartY + ScaleY * 2 };
 		ShopKeeper* TmpItem = GetLevel()->CreateActor<ShopKeeper>();
 		TmpItem->SetPosition(GetPosition() + TmpTilePos);
+	}
+
+	// 픽업 아이템 세팅
+	std::vector<RoomData::PickupData> TmpVector = Data_.AllPickUp_;
+	for (int i = 0; i < TmpVector.size(); i++)
+	{
+		float4 TmpTilePos = { StartX + ScaleX * TmpVector[i].X_, StartY + ScaleY * TmpVector[i].Y_ };
+		ItemType TmpType = TmpVector[i].Type_;
+
+		switch (TmpType)
+		{
+		case ItemType::Bomb:
+		{
+			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
+			TmpObject->SetType(BombType::Normal);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::BombTwo:
+		{
+			BombItem* TmpObject = GetLevel()->CreateActor<BombItem>();
+			TmpObject->SetType(BombType::Two);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::Key:
+		{
+			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+			TmpObject->SetType(KeyType::Normal);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::KeyTwo:
+		{
+			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+			TmpObject->SetType(KeyType::Two);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::keyMaster:
+		{
+			KeyItem* TmpObject = GetLevel()->CreateActor<KeyItem>();
+			TmpObject->SetType(KeyType::Master);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::Money:
+		{
+			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+			TmpObject->SetType(MoneyType::Normal);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::MoneyBlack:
+		{
+			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+			TmpObject->SetType(MoneyType::Black);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::MoneySilver:
+		{
+			MoneyItem* TmpObject = GetLevel()->CreateActor<MoneyItem>();
+			TmpObject->SetType(MoneyType::Silver);
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		case ItemType::Battery:
+		{
+			BatteryItem* TmpObject = GetLevel()->CreateActor<BatteryItem>();
+			TmpObject->SetPosition(GetPosition() + TmpTilePos);
+			break;
+		}
+		default:
+			break;
+		}
 	}
 
 	if (BossCount_ != 0)

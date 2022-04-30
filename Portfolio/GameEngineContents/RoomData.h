@@ -97,6 +97,23 @@ public:
 		int Y_;
 		ShopType Type_;
 	};
+	class PickupData
+	{
+	public:
+		PickupData(int _X, int _Y, ItemType _Type)
+			: X_(_X)
+			, Y_(_Y)
+			, Type_(_Type)
+		{
+		}
+		~PickupData()
+		{
+		}
+
+		int X_;
+		int Y_;
+		ItemType Type_;
+	};
 
 public:
 	RoomData();
@@ -110,6 +127,7 @@ public:
 	void AddPassive(int _X, int _Y);
 	void AddBoss(int _X, int _Y, BossType _Type);
 	void AddShop(int _X, int _Y, ShopType _Type);
+	void AddPickup(int _X, int _Y, ItemType _Type);
 	
 	inline void SetRoomType(RoomType _Type)
 	{
@@ -138,4 +156,5 @@ private:
 	std::vector<PassiveData> AllPassives_;
 	std::vector<BossData> AllBoss_;
 	std::vector<ShopData> AllShop_;
+	std::vector<PickupData> AllPickUp_;
 };

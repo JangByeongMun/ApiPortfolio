@@ -51,6 +51,12 @@ RoomData::RoomData(const RoomData& _Other)
 	{
 		AllShop_.push_back(_Other.AllShop_[i]);
 	}
+
+	AllPickUp_.clear();
+	for (int i = 0; i < _Other.AllPickUp_.size(); i++)
+	{
+		AllPickUp_.push_back(_Other.AllPickUp_[i]);
+	}
 }
 
 RoomData::~RoomData() 
@@ -91,6 +97,12 @@ RoomData& RoomData::operator=(RoomData& _Other)
 		AllShop_.push_back(_Other.AllShop_[i]);
 	}
 
+	AllPickUp_.clear();
+	for (int i = 0; i < _Other.AllPickUp_.size(); i++)
+	{
+		AllPickUp_.push_back(_Other.AllPickUp_[i]);
+	}
+
 	return *this;
 }
 
@@ -117,4 +129,9 @@ void RoomData::AddBoss(int _X, int _Y, BossType _Type)
 void RoomData::AddShop(int _X, int _Y, ShopType _Type)
 {
 	AllShop_.push_back(ShopData(_X, _Y, _Type));
+}
+
+void RoomData::AddPickup(int _X, int _Y, ItemType _Type)
+{
+	AllPickUp_.push_back(PickupData(_X, _Y, _Type));
 }

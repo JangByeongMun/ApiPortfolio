@@ -72,7 +72,7 @@ void RandomRoomManager::MakeRooms()
 			//	TmpVector.push_back(TmpData);
 			//}
 
-			{
+			/*{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddBlock(0, 5, BlockType::POOP);
@@ -92,6 +92,52 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddMonster(6, 3, MonsterType::Gaper);
 				TmpData.AddMonster(6, 6, MonsterType::Sucker);
 				TmpData.AddMonster(6, 6, MonsterType::RoundWorm);
+
+				TmpVector.push_back(TmpData);
+			}*/
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(4, 0, BlockType::STONE);
+				TmpData.AddBlock(5, 0, BlockType::STONE);
+				TmpData.AddBlock(7, 0, BlockType::STONE);
+				TmpData.AddBlock(8, 0, BlockType::STONE);
+
+				TmpData.AddBlock(0, 1, BlockType::STONE);
+				TmpData.AddBlock(1, 1, BlockType::STONE);
+				TmpData.AddBlock(2, 1, BlockType::STONE);
+				TmpData.AddBlock(3, 1, BlockType::STONE);
+				TmpData.AddBlock(9, 1, BlockType::STONE);
+				TmpData.AddBlock(10, 1, BlockType::STONE);
+				TmpData.AddBlock(11, 1, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::STONE);
+
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(1, 5, BlockType::STONE);
+				TmpData.AddBlock(2, 5, BlockType::STONE);
+				TmpData.AddBlock(3, 5, BlockType::STONE);
+				TmpData.AddBlock(9, 5, BlockType::STONE);
+				TmpData.AddBlock(10, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 5, BlockType::STONE);
+				TmpData.AddBlock(12, 5, BlockType::STONE);
+
+				TmpData.AddBlock(4, 6, BlockType::STONE);
+				TmpData.AddBlock(5, 6, BlockType::STONE);
+				TmpData.AddBlock(7, 6, BlockType::STONE);
+				TmpData.AddBlock(8, 6, BlockType::STONE);
+
+				TmpData.AddMonster(0, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(0, 6, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 6, MonsterType::RoundWorm);
+
+				TmpData.AddPickup(1, 0, ItemType::Money);
+				TmpData.AddPickup(2, 0, ItemType::Money);
+				TmpData.AddPickup(3, 0, ItemType::Money);
+				TmpData.AddPickup(9, 6, ItemType::Money);
+				TmpData.AddPickup(10, 6, ItemType::Money);
+				TmpData.AddPickup(11, 6, ItemType::Money);
 
 				TmpVector.push_back(TmpData);
 			}
