@@ -11,7 +11,7 @@ BodyMonster::~BodyMonster()
 
 void BodyMonster::BodySetting()
 {
-	BodyRenderer_ = CreateRenderer(static_cast<int>(ORDER::BACKPLAYER), RenderPivot::CENTER, { 0, 35 });
+	BodyRenderer_ = CreateRenderer(static_cast<int>(ORDER::BACKPLAYER), RenderPivot::CENTER, { 0, 40 });
 	BodyRenderer_->CreateAnimation("monster_000_bodies01_Right.bmp", "Idle", 0, 0, 0.1f, false);
 	BodyRenderer_->CreateAnimation("monster_000_bodies01_Right.bmp", "Move_Up", 0, 9, 0.1f, true);
 	BodyRenderer_->CreateAnimation("monster_000_bodies01_Right.bmp", "Move_Down", 0, 9, 0.1f, true);
@@ -21,7 +21,7 @@ void BodyMonster::BodySetting()
 }
 void BodyMonster::BodySettingBlood()
 {
-	BodyRenderer_ = CreateRenderer(static_cast<int>(ORDER::BACKPLAYER), RenderPivot::CENTER, { 0, 35 });
+	BodyRenderer_ = CreateRenderer(static_cast<int>(ORDER::BACKPLAYER), RenderPivot::CENTER, { 0, 40 });
 	BodyRenderer_->CreateAnimation("monster_000_bodies02_Right.bmp", "Idle", 0, 0, 0.1f, false);
 	BodyRenderer_->CreateAnimation("monster_000_bodies02_Right.bmp", "Move_Up", 0, 9, 0.1f, true);
 	BodyRenderer_->CreateAnimation("monster_000_bodies02_Right.bmp", "Move_Down", 0, 9, 0.1f, true);

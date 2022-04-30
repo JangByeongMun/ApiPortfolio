@@ -23,7 +23,7 @@
 #include "ContentsGlobal.h"
 #include "Poop.h"
 #include "Gaper.h"
-
+#include "Sucker.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -208,6 +208,15 @@ void RoomActor::Setting()
 		case MonsterType::Gaper:
 		{
 			Gaper* TmpMonster = GetLevel()->CreateActor<Gaper>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetMoveSpeed(100.0f);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Sucker:
+		{
+			Sucker* TmpMonster = GetLevel()->CreateActor<Sucker>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->SetMoveSpeed(100.0f);

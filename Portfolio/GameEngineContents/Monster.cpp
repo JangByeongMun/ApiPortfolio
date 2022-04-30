@@ -141,7 +141,9 @@ void Monster::Damaged(float _Damage)
 	if (HP_ <= 0)
 	{
 		MonsterDeath();
+		MakeRandomBlood(2, 5);
 		Room_->MinusMonsterCount();
+		Death();
 	}
 }
 

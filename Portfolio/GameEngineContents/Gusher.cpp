@@ -27,7 +27,8 @@ void Gusher::MonsterUpdate()
 	{
 		AttackTimer_ = 0.0f;
 		MoveDir_ = float4(GameEngineRandom::MainRandom->RandomFloat(-2, 2), GameEngineRandom::MainRandom->RandomFloat(-2, 2));
-		MoveDir_.Range2D(0.2f);
+		MoveDir_.Normal2D();
+		MoveDir_ *= GameEngineTime::GetDeltaTime() * MoveSpeed_;
 	}
 
 	MonsterSetMoveToWalk(MoveDir_);

@@ -6,12 +6,12 @@
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
 
-Pooter::Pooter() 
+Pooter::Pooter()
 	: IsAttackAnim(false)
 {
 }
 
-Pooter::~Pooter() 
+Pooter::~Pooter()
 {
 }
 
@@ -24,7 +24,7 @@ void Pooter::Start()
 	Renderer_->CreateAnimation("monster_001_pooter_Left.bmp", "monster_001_pooter_Attack_Left", 2, 15, 0.05f, false);
 	Renderer_->ChangeAnimation("monster_001_pooter_Idle_Left");
 
-	Collision_ = CreateCollision("Monster", {80, 80});
+	Collision_ = CreateCollision("Monster", { 80, 80 });
 
 	SetHP(8.0f);
 }
@@ -71,7 +71,7 @@ void Pooter::MonsterUpdate()
 		{
 			Renderer_->ChangeAnimation("monster_001_pooter_Idle_Right");
 		}
-		
+
 		MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 	}
 }
@@ -83,12 +83,7 @@ void Pooter::Attack()
 
 void Pooter::MonsterDeath()
 {
-	{
-		std::string TmpName = "DeathBurstSmall";
-		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
-		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.03f * Option_SFX);
-	}
-
-	MakeRandomBlood(2, 5);
-	Death();
+	std::string TmpName = "DeathBurstSmall";
+	TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
+	GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.03f * Option_SFX);
 }

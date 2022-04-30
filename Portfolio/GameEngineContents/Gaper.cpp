@@ -55,6 +55,4 @@ void Gaper::MonsterDeath()
 		GetRoom()->AddMonster(TmpMonster);
 		GetRoom()->AddMonsterCount();
 	}
-
-	Death();
 }
