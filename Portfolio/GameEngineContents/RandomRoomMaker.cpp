@@ -96,7 +96,7 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}*/
 
-			{
+			/*{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddBlock(4, 0, BlockType::STONE);
@@ -140,7 +140,23 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddPickup(11, 6, ItemType::Money);
 
 				TmpVector.push_back(TmpData);
+			}*/
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(0, 1, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::STONE);
+
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(12, 5, BlockType::STONE);
+
+				TmpData.AddMonster(6, 3, MonsterType::Clotty);
+
+				TmpVector.push_back(TmpData);
 			}
+
+
 
 			AllRooms_.insert({ 0, TmpVector });
 		}

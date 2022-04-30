@@ -144,6 +144,7 @@ enum class MonsterType
 	Gaper,
 	Sucker,
 	RoundWorm,
+	Clotty,
 	Max,
 };
 

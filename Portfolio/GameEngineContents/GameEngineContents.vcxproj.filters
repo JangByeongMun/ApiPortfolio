@@ -251,6 +251,9 @@
     <ClInclude Include="RoundWorm.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Clotty.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -504,6 +507,9 @@
       <Filter>Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="RoundWorm.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Clotty.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>

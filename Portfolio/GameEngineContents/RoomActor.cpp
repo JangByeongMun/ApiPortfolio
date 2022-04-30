@@ -31,6 +31,7 @@
 #include "HeartItem.h"
 #include "KeyItem.h"
 #include "MoneyItem.h"
+#include "Clotty.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -233,6 +234,14 @@ void RoomActor::Setting()
 		case MonsterType::RoundWorm:
 		{
 			RoundWorm* TmpMonster = GetLevel()->CreateActor<RoundWorm>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Clotty:
+		{
+			Clotty* TmpMonster = GetLevel()->CreateActor<Clotty>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);

@@ -35,6 +35,8 @@ void RoundWorm::Start()
 
 void RoundWorm::MonsterUpdate()
 {
+
+
 	StateUpdate();
 }
 

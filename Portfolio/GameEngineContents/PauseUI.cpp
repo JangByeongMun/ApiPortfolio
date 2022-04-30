@@ -306,7 +306,7 @@ void PauseUI::Update()
 
 	if (true == GameEngineInput::GetInst()->IsDown("PauseSpace") || true == GameEngineInput::GetInst()->IsDown("PauseEnter"))
 	{
-
+		Select(ArrowIndex_);
 	}
 }
 
@@ -327,12 +327,13 @@ void PauseUI::AddArrowIndex(int _Value)
 
 void PauseUI::Select(int _Index)
 {
+	GameEngineTime::SetPause(false);
 	if (_Index == 0)
 	{
-		GameEngineTime::SetPause(false);
+		TurnOn(false);
 	}
 	else if (_Index == 1)
 	{
-		GameEngine::GetInst().ChangeLevel("Loading");
+		GameEngine::GetInst().ChangeLevel("Menu");
 	}
 }
