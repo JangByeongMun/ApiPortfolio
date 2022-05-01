@@ -34,6 +34,7 @@
 #include "Clotty.h"
 #include "Iblob.h"
 #include "Clot.h"
+#include "BoomFly.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -262,6 +263,24 @@ void RoomActor::Setting()
 			Iblob* TmpMonster = GetLevel()->CreateActor<Iblob>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::BoomFlyNormal:
+		{
+			BoomFly* TmpMonster = GetLevel()->CreateActor<BoomFly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->Setting(BoomFlyType::Normal);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::BoomFlyRed:
+		{
+			BoomFly* TmpMonster = GetLevel()->CreateActor<BoomFly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->Setting(BoomFlyType::Red);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}

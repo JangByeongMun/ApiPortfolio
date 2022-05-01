@@ -483,6 +483,16 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(4, 3);
 		Image = GameEngineImageManager::GetInst()->Find("monster_075_lblob_Right.bmp");
 		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_071_clot_Left.bmp");
+		Image->CutCount(4, 3);
+		Image = GameEngineImageManager::GetInst()->Find("monster_071_clot_Right.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_096_boomfly.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("monster_101_redboomfly.bmp");
+		Image->CutCount(2, 1);
 	}
 
 	/////////////////////////////////// BossMonster

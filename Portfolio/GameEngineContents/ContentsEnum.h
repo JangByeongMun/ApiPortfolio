@@ -147,6 +147,8 @@ enum class MonsterType
 	Clot,
 	Clotty,
 	Iblob,
+	BoomFlyNormal,
+	BoomFlyRed,
 	Max,
 };
 
