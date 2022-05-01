@@ -17,6 +17,7 @@ BoxItem::BoxItem()
 	, AnimTimer_(0.0f)
 	, IsOpen_(false)
 	, IsSetting_(false)
+	, State_(BoxState::Default)
 {
 }
 
@@ -27,7 +28,6 @@ BoxItem::~BoxItem()
 void BoxItem::SetType(BoxType _Type)
 {
 	Type_ = _Type;
-	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
 
 	std::string TmpName = "";
 	switch (Type_)
@@ -42,72 +42,36 @@ void BoxItem::SetType(BoxType _Type)
 		break;
 	}
 
-	Renderer_->CreateAnimation(TmpName, "Idle", 0, 0, 0, false);
+	Renderer_->CreateAnimation(TmpName, "Idle", 0, 0, 0.1f, false);
 	Renderer_->CreateAnimation(TmpName, "Open", 1, 1, 0, false);
 	Renderer_->CreateAnimation(TmpName, "Appear", 6, 8, 0.1f, false);
 	Renderer_->CreateAnimation(TmpName, "Opening", 2, 4, 0.1f, false);
+	Renderer_->ChangeAnimation("Idle");
 
 	GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 0.01f * Option_SFX);
 
-	Renderer_->On();
-	Renderer_->ChangeAnimation("Appear");
-	AnimTimer_ = 0.0f;
+	ChangeState(BoxState::Appear);
+}
+
+void BoxItem::Start()
+{
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
+	//Renderer_->SetDeleteEndFrame_();
 }
 
 void BoxItem::Update()
 {
+	StateUpdate();
+
 	// 오픈여부 상관없이 플레이어와 충돌했을때
 	// 밀리도록 구현
-	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
-	{
-		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
-		TmpDir.Normal2D();
-		AddDir(TmpDir * 2.0f);
-	}
-	SetObjectMove();
-
-	AnimTimer_ += GameEngineTime::GetDeltaTime();
-	if (AnimTimer_ >= 0.3f)
-	{
-		Renderer_->ChangeAnimation("Idle");
-		Collision_ = CreateCollision("Box", { 90, 60 });
-	}
-
-	if (false == IsOpen_) // 닫혀있을떄
-	{
-		// 박스가 플레이어랑 충돌했을때
-		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
-		{
-			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
-			{
-				IsOpen_ = true;
-				AnimTimer_ = 0.0f;
-				Renderer_->ChangeAnimation("Opening");
-				NormalBoxReward();
-				GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
-			}
-			else if (BoxType::Gold == Type_) // 황금박스면 키가 잇어야 열린다
-			{
-				if (true == Player::MainPlayer->HaveKey())
-				{
-					Player::MainPlayer->MinusItem(ItemType::Key, 1);
-					IsOpen_ = true;
-					AnimTimer_ = 0.0f;
-					Renderer_->ChangeAnimation("Opening");
-					GoldBoxReward();
-					GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
-				}
-			}
-		}
-	}
-	else // 열려있을때
-	{
-		AnimTimer_ += GameEngineTime::GetDeltaTime();
-		if (AnimTimer_ >= 0.3f)
-		{
-			Renderer_->ChangeAnimation("Open");
-		}
-	}
+	//if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
+	//{
+	//	float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
+	//	TmpDir.Normal2D();
+	//	AddDir(TmpDir * 2.0f);
+	//}
+	//SetObjectMove();
 }
 
 void BoxItem::NormalBoxReward()
@@ -516,6 +480,111 @@ void BoxItem::GoldBoxReward()
 			TmpObject->SetPosition(GetPosition());
 			TmpObject->AddRanomDir(-10, 10);
 		}
+	}
+}
+
+void BoxItem::ChangeState(BoxState _State)
+{
+	if (State_ == _State)
+	{
+		return;
+	}
+
+	switch (_State)
+	{
+	case BoxState::Appear:
+		AppearStart();
+		break;
+	case BoxState::Idle:
+		IdleStart();
+		break;
+	case BoxState::Open:
+		OpenStart();
+		break;
+	default:
+		break;
+	}
+	State_ = _State;
+}
+
+void BoxItem::StateUpdate()
+{
+	switch (State_)
+	{
+	case BoxState::Appear:
+		AppearUpdate();
+		break;
+	case BoxState::Idle:
+		IdleUpdate();
+		break;
+	case BoxState::Open:
+		OpenUpdate();
+		break;
+	default:
+		break;
+	}
+}
+
+void BoxItem::AppearStart()
+{
+	AnimTimer_ = 0.0f;
+	Renderer_->ChangeAnimation("Appear");
+}
+
+void BoxItem::IdleStart()
+{
+	Renderer_->ChangeAnimation("Idle");
+}
+
+void BoxItem::OpenStart()
+{
+	IsOpen_ = true;
+	AnimTimer_ = 0.0f;
+	Renderer_->ChangeAnimation("Opening");
+	GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
+}
+
+void BoxItem::AppearUpdate()
+{
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	if (AnimTimer_ >= 0.3f)
+	{
+		Collision_ = CreateCollision("Box", { 90, 60 });
+		ChangeState(BoxState::Idle);
+	}
+}
+
+void BoxItem::IdleUpdate()
+{
+	if (false == IsOpen_) // 닫혀있을떄
+	{
+		// 박스가 플레이어랑 충돌했을때
+		if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
+		{
+			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
+			{
+				//NormalBoxReward();
+				ChangeState(BoxState::Open);
+			}
+			else if (BoxType::Gold == Type_) // 황금박스면 키가 잇어야 열린다
+			{
+				if (true == Player::MainPlayer->HaveKey())
+				{
+					Player::MainPlayer->MinusItem(ItemType::Key, 1);
+					//GoldBoxReward();
+					ChangeState(BoxState::Open);
+				}
+			}
+		}
+	}
+}
+
+void BoxItem::OpenUpdate()
+{
+	AnimTimer_ += GameEngineTime::GetDeltaTime();
+	if (AnimTimer_ >= 0.3f)
+	{
+		Renderer_->ChangeAnimation("Open");
 	}
 }
 

@@ -2,6 +2,14 @@
 #include <GameEngine/GameEngineActor.h>
 #include "ItemBase.h"
 
+enum class BoxState
+{
+	Default,
+	Appear,
+	Idle,
+	Open,
+};
+
 enum class BoxType
 {
 	Normal,
@@ -32,10 +40,24 @@ private:
 	float AnimTimer_;
 	bool IsOpen_;
 	bool IsSetting_;
+	BoxState State_;
 
+	void Start() override;
 	void Update();
 
 	void NormalBoxReward();
 	void GoldBoxReward();
+
+	//////// FSM
+	void ChangeState(BoxState _State);
+	void StateUpdate();
+
+	void AppearStart();
+	void IdleStart();
+	void OpenStart();
+
+	void AppearUpdate();
+	void IdleUpdate();
+	void OpenUpdate();
 };
 
