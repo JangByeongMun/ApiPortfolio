@@ -149,6 +149,9 @@ enum class MonsterType
 	Iblob,
 	BoomFlyNormal,
 	BoomFlyRed,
+	Mulliboom,
+	HostNormal,
+	HostRed,
 	Max,
 };
 

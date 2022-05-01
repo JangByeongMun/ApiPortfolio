@@ -27,6 +27,7 @@ void Pooter::Start()
 	Collision_ = CreateCollision("Monster", { 80, 80 });
 
 	SetHP(8.0f);
+	SetMoveSpeed(10.0f);
 }
 
 void Pooter::MonsterUpdate()

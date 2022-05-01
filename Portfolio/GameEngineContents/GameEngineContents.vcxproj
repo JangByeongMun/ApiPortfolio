@@ -289,6 +289,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Host.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Iblob.h">
       <SubType>
       </SubType>
@@ -303,6 +307,10 @@
     </ClInclude>
     <ClInclude Include="LoadingAnim2.h" />
     <ClInclude Include="Monstro.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Mulliboom.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -625,6 +633,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Host.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Iblob.cpp">
       <SubType>
       </SubType>
@@ -639,6 +651,10 @@
     </ClCompile>
     <ClCompile Include="LoadingAnim2.cpp" />
     <ClCompile Include="Monstro.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Mulliboom.cpp">
       <SubType>
       </SubType>
     </ClCompile>

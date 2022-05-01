@@ -493,6 +493,11 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(2, 1);
 		Image = GameEngineImageManager::GetInst()->Find("monster_101_redboomfly.bmp");
 		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_122_host.bmp");
+		Image->CutCount(3, 1);
+		Image = GameEngineImageManager::GetInst()->Find("monster_127_redhost.bmp");
+		Image->CutCount(3, 1);
 	}
 
 	/////////////////////////////////// BossMonster

@@ -74,6 +74,7 @@ public:
 protected:
 	float HP_;
 	float MaxHP_;
+	bool IsInvincibility; // ¹«Àû
 
 public:
 	inline void SetHP(float _HP)

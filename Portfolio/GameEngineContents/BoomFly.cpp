@@ -48,7 +48,7 @@ void BoomFly::MonsterDeath()
 	{
 	case BoomFlyType::Normal:
 	{
-		GetLevel()->CreateActor<BoomEffect>()->SetPosition(GetPosition());
+		GetLevel()->CreateActor<BoomEffect>()->Setting(GetPosition());
 		break;
 	}
 	case BoomFlyType::Red:

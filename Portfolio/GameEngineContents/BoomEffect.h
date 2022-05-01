@@ -14,11 +14,11 @@ public:
 	BoomEffect(BoomEffect&& _Other) noexcept = delete;
 	BoomEffect& operator=(const BoomEffect& _Other) = delete;
 	BoomEffect& operator=(BoomEffect&& _Other) noexcept = delete;
+	void Setting(float4 _Pos);
 
 protected:
 
 private:
-	void Start() override;
 	void MakeEffect();
 };
 

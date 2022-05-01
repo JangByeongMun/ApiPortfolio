@@ -15,6 +15,9 @@ void Sucker::Start()
 	Renderer_->CreateAnimation("monster_078_sucker_Left.bmp", "Idle_Left", 0, 1, 0.1f, true);
 	Renderer_->CreateAnimation("monster_078_sucker_Right.bmp", "Idle_Right", 0, 1, 0.1f, true);
 	Renderer_->ChangeAnimation("Idle_Left");
+
+	SetHP(10);
+	SetMoveSpeed(100.0f);
 }
 
 void Sucker::MonsterUpdate()

@@ -25,6 +25,7 @@ void Gaper::Start()
 
 	SetHP(10);
 	BodySetting();
+	SetMoveSpeed(100.0f);
 }
 
 void Gaper::MonsterUpdate()

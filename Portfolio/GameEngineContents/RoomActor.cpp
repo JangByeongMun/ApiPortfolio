@@ -35,6 +35,8 @@
 #include "Iblob.h"
 #include "Clot.h"
 #include "BoomFly.h"
+#include "Mulliboom.h"
+#include "Host.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -212,7 +214,6 @@ void RoomActor::Setting()
 			Pooter* TmpMonster = GetLevel()->CreateActor<Pooter>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
-			TmpMonster->SetMoveSpeed(10.0f);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
@@ -221,7 +222,6 @@ void RoomActor::Setting()
 			Gaper* TmpMonster = GetLevel()->CreateActor<Gaper>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
-			TmpMonster->SetMoveSpeed(100.0f);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
@@ -230,7 +230,6 @@ void RoomActor::Setting()
 			Sucker* TmpMonster = GetLevel()->CreateActor<Sucker>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
-			TmpMonster->SetMoveSpeed(100.0f);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
@@ -281,6 +280,32 @@ void RoomActor::Setting()
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->Setting(BoomFlyType::Red);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Mulliboom:
+		{
+			Mulliboom* TmpMonster = GetLevel()->CreateActor<Mulliboom>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::HostNormal:
+		{
+			Host* TmpMonster = GetLevel()->CreateActor<Host>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(HostType::Normal);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::HostRed:
+		{
+			Host* TmpMonster = GetLevel()->CreateActor<Host>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(HostType::Red);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}

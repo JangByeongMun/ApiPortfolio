@@ -266,6 +266,12 @@
     <ClInclude Include="BoomEffect.h">
       <Filter>Play\Effect</Filter>
     </ClInclude>
+    <ClInclude Include="Mulliboom.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
+    <ClInclude Include="Host.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -535,6 +541,12 @@
     </ClCompile>
     <ClCompile Include="BoomEffect.cpp">
       <Filter>Play\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="Mulliboom.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Host.cpp">
+      <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

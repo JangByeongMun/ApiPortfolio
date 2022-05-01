@@ -19,6 +19,7 @@ Monster::Monster()
 	, AttackDelay_(2.5f)
 	, MoveSpeed_(100.0f)
 	, HP_(0)
+	, IsInvincibility(false)
 {
 }
 
@@ -161,6 +162,11 @@ bool Monster::MonsterSetMoveToTeleport(float4 _Value)
 
 void Monster::Damaged(float _Damage)
 {
+	if (IsInvincibility == true)
+	{
+		return;
+	}
+
 	HP_ -= _Damage;
 
 	if (HP_ <= 0)
@@ -168,7 +174,7 @@ void Monster::Damaged(float _Damage)
 		MonsterDeath();
 		MakeRandomBlood(2, 5);
 		Room_->MinusMonsterCount();
-		Death();
+		Off();
 	}
 }
 
