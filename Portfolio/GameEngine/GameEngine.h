@@ -3,14 +3,14 @@
 #include <string>
 #include <GameEngineBase/GameEngineDebug.h>
 
-class GameEngineLevel;
+// 설명 : 게임엔진이란 게임 그자체의 시작점과 끝점 실행중을 담당
 class GameEngineImage;
+class GameEngineLevel;
 class GameEngine
 {
 public:
-	// constrcuter destructer
 	GameEngine();
-	virtual ~GameEngine();
+	~GameEngine();
 
 	// delete Function
 	GameEngine(const GameEngine& _Other) = delete;
@@ -18,16 +18,17 @@ public:
 	GameEngine& operator=(const GameEngine& _Other) = delete;
 	GameEngine& operator=(GameEngine&& _Other) noexcept = delete;
 
-	inline static GameEngineImage* BackBufferImage()
+	static inline GameEngineImage* BackBufferImage()
 	{
 		return BackBufferImage_;
 	}
+
 	static HDC BackBufferDC();
 
 	virtual void GameInit() = 0;
 	virtual void GameLoop() = 0;
 	virtual void GameEnd() = 0;
-	
+
 	template<typename GameType>
 	static void Start()
 	{
@@ -40,53 +41,35 @@ public:
 		EngineEnd();
 	}
 
-	inline static GameEngine& GetInst()
+	static GameEngine& GetInst()
 	{
 		if (nullptr == UserContents_)
 		{
-			MsgBoxAssert("Engine is not Start");
+			MsgBoxAssert("GEngine ERROR Engine Is Not Start ");
 		}
 
 		return *UserContents_;
 	}
 
 	void ChangeLevel(const std::string& _Name);
-	const GameEngineLevel* FindLevel(const std::string& _Name);
+	GameEngineLevel* FindLevel(const std::string& _Name);
 
 	static inline GameEngineLevel* GetPrevLevel()
 	{
 		return PrevLevel_;
 	}
 
-	inline static const GameEngineLevel* CurrentLevel()
-	{
-		return CurrentLevel_;
-	}
-
 protected:
-	template<typename levelType>
+	template<typename LevelType>
 	void CreateLevel(const std::string& _Name)
 	{
-		levelType* newLevel = new levelType();
-		newLevel->SetName(_Name);
-		GameEngineLevel* level = newLevel;
-		level->Loading();
-		AllLevel_.insert(std::make_pair(_Name, newLevel));
+		LevelType* NewLevel = new LevelType();
+		NewLevel->SetName(_Name);
+		GameEngineLevel* Level = NewLevel;
+		Level->Loading();
+		AllLevel_.insert(std::make_pair(_Name, NewLevel));
 	}
 
-	template<typename levelType>
-	void ResetLevel(const std::string& _Name)
-	{
-		std::map<std::string, GameEngineLevel*>::iterator FindIter = AllLevel_.find(_Name);
-		if (AllLevel_.end() != FindIter)
-		{
-			delete FindIter->second;
-			FindIter->second = nullptr;
-			AllLevel_.erase(FindIter);
-		}
-
-		CreateLevel<levelType>(_Name);
-	}
 
 private:
 	static std::map<std::string, GameEngineLevel*> AllLevel_;
@@ -94,8 +77,9 @@ private:
 	static GameEngineLevel* NextLevel_;
 	static GameEngineLevel* PrevLevel_;
 	static GameEngine* UserContents_;
-	static GameEngineImage* WindowMainImage_;
-	static GameEngineImage* BackBufferImage_;
+
+	static GameEngineImage* WindowMainImage_; // 그려지면 화면에 진짜 나오게 되는 이미지
+	static GameEngineImage* BackBufferImage_; // 깜빡임을 해결하려고 버퍼로 사용하는 이미지
 
 	static void WindowCreate();
 	static void EngineInit();

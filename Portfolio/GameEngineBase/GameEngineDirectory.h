@@ -7,24 +7,31 @@ class GameEngineDirectory : public GameEnginePath
 public:
 	// constrcuter destructer
 	GameEngineDirectory();
-	GameEngineDirectory(const std::string& _Path);
+	GameEngineDirectory(const char* _Path);
+	GameEngineDirectory(std::filesystem::path _Path);
+	GameEngineDirectory(const GameEngineDirectory& _Other);
 	~GameEngineDirectory();
 
 	// delete Function
-	GameEngineDirectory(const GameEngineDirectory& _Other) = delete;
-	GameEngineDirectory(GameEngineDirectory&& _Other) noexcept = delete;
-	GameEngineDirectory& operator=(const GameEngineDirectory& _Other) = delete;
-	GameEngineDirectory& operator=(GameEngineDirectory&& _Other) noexcept = delete;
+	//GameEngineDirectory(const GameEngineDirectory& _Other) = delete;
+	//GameEngineDirectory(GameEngineDirectory&& _Other) noexcept = delete;
+	//GameEngineDirectory& operator=(const GameEngineDirectory& _Other) = delete;
+	//GameEngineDirectory& operator=(GameEngineDirectory&& _Other) noexcept = delete;
 
-	void Move(const std::string& _Name);
 	void MoveParent();
+
 	void MoveParent(const std::string& _Name);
+
 	bool IsRoot();
 
-	// 확장자명을 받아서 현재위치의 해당 확장자를 가진 파일들 전부 가져오는함수
+	void Move(const std::string& _Name);
+
 	std::vector<GameEngineFile> GetAllFile(const std::string& _Ext = "");
 
+	std::vector<GameEngineDirectory> GetAllDirectory();
+
 protected:
+
 
 private:
 

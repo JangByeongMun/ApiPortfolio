@@ -9,8 +9,8 @@
 class GameEngineActor;
 struct ChangeOrderItem
 {
-	GameEngineActor* TargetObject;
-	int ChangeOrder;
+	GameEngineActor* TargetObject; // 이녀석을
+	int ChangeOrder; // 이렇게 바꿔라.
 };
 
 class GameEngine;
@@ -27,6 +27,8 @@ class GameEngineLevel : public GameEngineNameObject
 public:
 	// constrcuter destructer
 	GameEngineLevel();
+
+	// 소멸자 virtual 중요
 	virtual ~GameEngineLevel();
 
 	// delete Function
@@ -35,47 +37,48 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
-	inline static void IsDebugModeOn()
+	static void IsDebugModeOn()
 	{
 		IsDebug = true;
 	}
-	inline static void IsDebugModeOff()
+
+	static void IsDebugModeOff()
 	{
 		IsDebug = false;
 	}
-	inline static void IsDebugModeSwitch()
+
+	static void IsDebugModeSwitch()
 	{
 		IsDebug = !IsDebug;
-	}
-	inline static bool GetDebugMode()
-	{
-		return IsDebug;
 	}
 
 	template<typename ActorType>
 	ActorType* CreateActor(int _Order = 0, const std::string& _Name = "")
 	{
 		ActorType* NewActor = new ActorType();
+		GameEngineActor* StartActor = NewActor;
 		NewActor->GameEngineUpdateObject::SetOrder(_Order);
 		NewActor->SetName(_Name);
 		NewActor->SetLevel(this);
-
-		// 각 액터들마다 start가 다를수 있는데 이를 가상함수로 제작한후 밖에서 호출하지 못하도록 막은후 GameEngineActor에서만 호출가능하도록 구현
-		GameEngineActor* EngineActor = NewActor;
-		EngineActor->Start();
-
-		// ------------------------------------------
-		//std::map<int, std::list<GameEngineActor*>>::iterator findIter = allActor_.find(_order);
-		//if (findIter == allActor_.end())
-		//{
-		//	// make_pair 류중 제일 빠른것 (해당 데이터타입::밸류_타입) (크게 차이는 없다)
-		//	allActor_.insert(std::map<int, std::list<GameEngineActor*>>::value_type(_order, std::list<GameEngineActor*>()));
-		//}
-		// ------------------------------------------
-		// 배열 형식으로 사용하면 insert와 find를 동시에 할수 있다. - 즉 찾아보고 없으면 넣어줄수 있다는것
-		// 위의 스크립트를 하나로 뭉쳐서 만들어준것
+		StartActor->Start();
 		std::list<GameEngineActor*>& Group = AllActor_[_Order];
 		Group.push_back(NewActor);
+
+		//// _Order 액터들이 돌아가는 순서를 의미하게 된다.
+		//// insert와 find를 동시에
+		//std::map<int, std::list<GameEngineActor*>>::iterator FindGroup
+		//	= AllActor_.find(_Order);
+
+		//if (FindGroup == AllActor_.end())
+		//{
+
+		//	// AllActor_.insert(std::make_pair(_Order, std::list<GameEngineActor*>()));
+		//	// 이게더 빠름
+		//	AllActor_.insert(
+		//		std::map<int, std::list<GameEngineActor*>>::value_type(_Order, std::list<GameEngineActor*>())
+		//	);
+		//	FindGroup = AllActor_.find(_Order);
+		//}
 
 		return NewActor;
 	}
@@ -84,10 +87,17 @@ public:
 	{
 		return CameraPos_;
 	}
+
+	inline void ResetOn()
+	{
+		IsReset = true;
+	}
+
 	inline void MoveCameraPos(const float4& _Value)
 	{
 		CameraPos_ += _Value;
 	}
+
 	inline void SetCameraPos(const float4& _Value)
 	{
 		CameraPos_ = _Value;
@@ -98,54 +108,75 @@ public:
 	{
 		return dynamic_cast<ConvertType*>(FindActor(_Name));
 	}
+
 	GameEngineActor* FindActor(const std::string& _Name);
 
 	void RegistActor(const std::string& _Name, GameEngineActor* _Actor);
 
+	// 이 오더는 sort를 하겠다.
 	void YSortOn(int _SortOrder)
 	{
 		IsYSort_.insert(_SortOrder);
 	}
 
+	static inline bool GetDebugMode()
+	{
+		return false;
+	}
+
 protected:
+	// 시점함수
+	// 만들어지면서 리소스나 액터를 만들때 써라
 	virtual void Loading() = 0;
+	// 이 레벨이 현재 레벨일때 해야할일을 실행한다.
 	virtual void Update() = 0;
-
-	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}; // 이 씬으로 바뀌었을때 실행되는 함수
-	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}; // 이 씬이 바뀌었을때 실행되는 함수
-
-	void ActorLevelChangeStart(GameEngineLevel* _PrevLevel); // 이 씬으로 바뀌었을때 액터들 함수 실행
-	void ActorLevelChangeEnd(GameEngineLevel* _NextLevel); // 이 씬이 바뀌었을때 액터들 함수 실행
+	// Current레벨 => Next레벨로 이전할때 현재레벨이 실행하는 함수.
+	void ActorLevelChangeStart(GameEngineLevel* _PrevLevel);
+	virtual void LevelChangeStart(GameEngineLevel* _PrevLevel) {}
+	// Current레벨 => Next레벨로 이전할때 이전레벨이 실행하는 함수.
+	void ActorLevelChangeEnd(GameEngineLevel* _NextLevel);
+	virtual void LevelChangeEnd(GameEngineLevel* _NextLevel) {}
 
 	void ObjectLevelMoveCheck(GameEngineLevel* _NextLevel);
 
-	//////////////////// 액터
+	virtual void UserResetEnd() {}
+
 private:
 	static bool IsDebug;
 
+	bool IsReset;
+
+	// std::vector로 관리하는게 더 좋다고 생각..
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
+
 	std::map<std::string, GameEngineActor*> RegistActor_;
+
+	std::vector<ChangeOrderItem> ChangeOrderList;
+
 	float4 CameraPos_;
 
 	void ActorUpdate();
 	void ActorRender();
-	void ActorRelease();
 	void CollisionDebugRender();
-	void ChangeUpdateOrder(GameEngineActor* _Actor, int _NewOrder);
+	void ActorRelease();
 
-	//////////////////// 렌더러
 private:
 	std::map<int, std::list<GameEngineRenderer*>> AllRenderer_;
+
+	// 존재하냐 안하냐
 	std::set<int> IsYSort_;
-	std::vector<ChangeOrderItem> ChangeOrderList;
-	
+
 	void AddRenderer(GameEngineRenderer* _Renderer);
+
+	void ChangeUpdateOrder(GameEngineActor* _Actor, int _Oreder);
+
 	void ChangeRenderOrder(GameEngineRenderer* _Renderer, int _NewOrder);
 
-	//////////////////// 콜리젼
+
 private:
+	// 삭제는 액터가 하지만 실제 사용은 Level
+	// 여기서 함부로 GameEngineCollision*을 delete 하는 일이 있으면 안된다.,
 	std::map<std::string, std::list<GameEngineCollision*>> AllCollision_;
 
 	void AddCollision(const std::string& _GroupName, GameEngineCollision* _Collision);
 };
-

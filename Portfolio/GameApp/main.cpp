@@ -10,8 +10,8 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance,
 					_In_ int nCmdShow)
 {
 
-	GameEngineFile NewFile = "D:\\aaa.tt";
-	NewFile.Open(OpenMode::Write);
+	//GameEngineFile NewFile = "D:\\aaa.tt";
+	//NewFile.Open(OpenMode::Write);
 	
 	GameEngine::Start<BindingOfIsaac>();
 }

@@ -1,24 +1,26 @@
 #include "GameEnginePath.h"
 
-GameEnginePath::GameEnginePath() 
+GameEnginePath::GameEnginePath()
 {
 }
 
-GameEnginePath::GameEnginePath(const std::filesystem::path _Path)
-	:Path_(_Path)
+GameEnginePath::GameEnginePath(const std::filesystem::path& _Path)
+	: Path_(_Path)
 {
+
 }
 
-GameEnginePath::~GameEnginePath() 
+GameEnginePath::~GameEnginePath()
 {
 }
 
 void GameEnginePath::SetCurrentPath()
 {
+	// 현재 폴더.
 	Path_ = std::filesystem::current_path();
 }
 
-bool GameEnginePath::IsExists()
+bool GameEnginePath::IsExits()
 {
 	return std::filesystem::exists(Path_);
 }

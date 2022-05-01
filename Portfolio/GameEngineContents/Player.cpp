@@ -34,6 +34,7 @@
 #include "RandomRoomManager.h"
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
+#include "NewBoxItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -170,10 +171,10 @@ void Player::Update()
 		return;
 	}
 
-	if (GameEngine::CurrentLevel() != GameEngine::GetInst().FindLevel("Play"))
-	{
-		return;
-	}
+	//if (GameEngine::CurrentLevel() != GameEngine::GetInst().FindLevel("Play"))
+	//{
+	//	return;
+	//}
 
 	// 惑怕 包府
 	StateUpdate();
@@ -205,25 +206,24 @@ void Player::Update()
 		PlayerUI_->SetItemUI();
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
+	if (true == GameEngineInput::GetInst()->IsPress("Test2"))
 	{
 		{
-			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
+			NewBoxItem* TmpBox = GetLevel()->CreateActor<NewBoxItem>();
 			TmpBox->SetPosition(GetPosition());
-			TmpBox->SetType(BoxType::Gold);
 		}
 		
-		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
-			TmpHeart->Setting(HeartType::Black);
-		}
-
-		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
-			TmpHeart->Setting(HeartType::Red);
-		}
+		//{
+		//	HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		//	TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+		//	TmpHeart->Setting(HeartType::Black);
+		//}
+		//
+		//{
+		//	HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+		//	TmpHeart->SetPosition(GetPosition() + float4(100, 0));
+		//	TmpHeart->Setting(HeartType::Red);
+		//}
 	}
 
 	// 公利矫埃 备泅

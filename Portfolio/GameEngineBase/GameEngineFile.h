@@ -14,27 +14,33 @@ public:
 	// constrcuter destructer
 	GameEngineFile();
 	GameEngineFile(const char* _Path);
-	GameEngineFile(std::filesystem::path _path);
+	GameEngineFile(std::filesystem::path _Path);
 	GameEngineFile(const GameEngineFile& _Other);
 	~GameEngineFile();
 
+	// delete Function
 	void Open(OpenMode _Mode);
-	inline void ReadOpen()
+
+	void ReadOpen()
 	{
 		Open(OpenMode::Read);
 	}
-	inline void WriteOpen()
+
+	void WriteOpen()
 	{
 		Open(OpenMode::Write);
 	}
 
 	void Close();
-	inline void Create()
+
+	void Create()
 	{
 		Open(OpenMode::Write);
 		Close();
 	}
+
 protected:
+
 
 private:
 	FILE* FilePtr;

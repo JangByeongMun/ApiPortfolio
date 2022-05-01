@@ -30,7 +30,7 @@ BindingOfIsaac::~BindingOfIsaac()
 
 void BindingOfIsaac::ResetPlayLevel(const std::string& _Name)
 {
-	ResetLevel<PlayLevel>(_Name);
+	//ResetLevel<PlayLevel>(_Name);
 }
 
 void BindingOfIsaac::GameInit()

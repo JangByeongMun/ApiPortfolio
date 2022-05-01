@@ -100,6 +100,7 @@ public:
 	GameEngineRenderer* CreateRenderer(int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, const float4& _PivotPos = { 0,0 });
 	GameEngineRenderer* CreateRenderer(const std::string& _Image, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
 	GameEngineRenderer* CreateRendererToScale(const std::string& _Image, float4 _Scale, int _Order = static_cast<int>(EngineMax::RENDERORDERMAX), RenderPivot _PivotType = RenderPivot::CENTER, float4 _PivotPos = {0, 0});
+	
 	void Rendering();
 
 private:

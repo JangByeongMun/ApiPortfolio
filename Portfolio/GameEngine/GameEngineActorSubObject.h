@@ -1,7 +1,6 @@
 #pragma once
-#include "GameEngineActor.h"
+#include <GameEngine/GameEngineActor.h>
 
-// 설명 :
 class GameEngineActorSubObject : public GameEngineUpdateObject
 {
 	friend GameEngineActor;
@@ -9,7 +8,7 @@ class GameEngineActorSubObject : public GameEngineUpdateObject
 public:
 	// constrcuter destructer
 	GameEngineActorSubObject();
-	~GameEngineActorSubObject();
+	virtual ~GameEngineActorSubObject();
 
 	// delete Function
 	GameEngineActorSubObject(const GameEngineActorSubObject& _Other) = delete;
@@ -22,14 +21,18 @@ public:
 		return Actor_;
 	}
 
+
 	inline bool IsUpdate() override
 	{
+		//나의 IsUpdate_ && false == IsDeath_
 		return GameEngineUpdateObject::IsUpdate() && Actor_->IsUpdate();
 	}
+
 	inline bool IsDeath() override
 	{
-		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();
+		return GameEngineUpdateObject::IsDeath() || Actor_->IsDeath();//이거 ||로하면 터져..
 	}
+
 
 protected:
 	inline void SetActor(GameEngineActor* _Actor)
@@ -37,7 +40,10 @@ protected:
 		Actor_ = _Actor;
 	}
 
+
+
 private:
 	GameEngineActor* Actor_;
+
 };
 

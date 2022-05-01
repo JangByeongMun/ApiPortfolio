@@ -147,7 +147,7 @@ void Bomb::Boom()
 		Renderer->CreateAnimation("effect_029_explosion.bmp", "effect_029_explosion", 0, 11, 0.05f, false);
 		Renderer->ChangeAnimation("effect_029_explosion");
 		Renderer->SetPivot({ 0, -100 });
-		Renderer->SetDeleteEndFrame_(true);
+		//Renderer->SetDeleteEndFrame_(true);
 	}
 
 	{

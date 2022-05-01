@@ -263,6 +263,9 @@
     <ClInclude Include="BoomFly.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="NewBoxItem.h">
+      <Filter>Play\Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -529,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="BoomFly.cpp">
       <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="NewBoxItem.cpp">
+      <Filter>Play\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

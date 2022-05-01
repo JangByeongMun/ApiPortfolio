@@ -140,7 +140,7 @@ void Projectile::DestroyProjectile()
 		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp", static_cast<int>(ORDER::PLAYER));
 		TmpRenderer->CreateAnimation("effect_015_tearpoofa.bmp", "effect_015_tearpoofa", 0, 15, 0.02f, false);
 		TmpRenderer->ChangeAnimation("effect_015_tearpoofa");
-		TmpRenderer->SetDeleteEndFrame_(true);
+		//TmpRenderer->SetDeleteEndFrame_(true);
 		TmpRenderer->SetPivot(GetPosition());
 	}
 	else
@@ -148,7 +148,7 @@ void Projectile::DestroyProjectile()
 		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_003_bloodtear.bmp", static_cast<int>(ORDER::PLAYER));
 		TmpRenderer->CreateAnimation("effect_003_bloodtear.bmp", "effect_003_bloodtear", 0, 15, 0.02f, false);
 		TmpRenderer->ChangeAnimation("effect_003_bloodtear");
-		TmpRenderer->SetDeleteEndFrame_(true);
+		//TmpRenderer->SetDeleteEndFrame_(true);
 		TmpRenderer->SetPivot(GetPosition());
 	}
 	

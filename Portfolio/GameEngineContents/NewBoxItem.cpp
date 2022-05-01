@@ -13,10 +13,8 @@ NewBoxItem::~NewBoxItem()
 void NewBoxItem::Start()
 {
 	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
-	std::string TmpName = "pickup_005_chests_Gold.bmp";
-
-	Renderer_->CreateAnimation(TmpName, "Idle", 0, 0, 0.1f, true);
-	Renderer_->CreateAnimation(TmpName, "Appear", 6, 8, 0.1f, true);
+	Renderer_->CreateAnimation("pickup_005_chests_Gold.bmp", "Idle", 0, 0, 0.1f, true);
+	Renderer_->CreateAnimation("pickup_005_chests_Gold.bmp", "Appear", 6, 8, 0.1f, true);
 	Renderer_->ChangeAnimation("Idle");
 
 	ChangeState(NewBoxState::Appear);

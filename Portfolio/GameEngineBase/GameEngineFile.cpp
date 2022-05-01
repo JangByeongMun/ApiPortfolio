@@ -1,9 +1,10 @@
 #include "GameEngineFile.h"
 #include "GameEngineDebug.h"
 
-GameEngineFile::GameEngineFile() 
+GameEngineFile::GameEngineFile()
 	: FilePtr(nullptr)
 {
+
 }
 
 GameEngineFile::GameEngineFile(const char* _Path)
@@ -24,15 +25,26 @@ GameEngineFile::GameEngineFile(const GameEngineFile& _Other)
 	Path_ = _Other.Path_;
 }
 
-GameEngineFile::~GameEngineFile() 
+GameEngineFile::~GameEngineFile()
 {
 	GameEngineFile::Close();
 }
 
+void GameEngineFile::Close()
+{
+	if (nullptr != FilePtr)
+	{
+		fclose(FilePtr);
+		FilePtr = nullptr;
+	}
+}
+
+// "text"
+// 
+
 void GameEngineFile::Open(OpenMode _Mode)
 {
-	// r = read, w = write
-	// 뒤의 문자가 b냐 t냐에 따라서 저장하는 형식이 달라진다
+	// b냐 t냐에 따라서 파일이 저장되었을때의 최종적인 형식이 달라지게 된다.
 	std::string OpenMode = "";
 	switch (_Mode)
 	{
@@ -53,13 +65,3 @@ void GameEngineFile::Open(OpenMode _Mode)
 		MsgBoxAssert("파일이 정상적으로 열리지 않았습니다.");
 	}
 }
-
-void GameEngineFile::Close()
-{
-	if (nullptr != FilePtr)
-	{
-		fclose(FilePtr);
-		FilePtr = nullptr;
-	}
-}
-

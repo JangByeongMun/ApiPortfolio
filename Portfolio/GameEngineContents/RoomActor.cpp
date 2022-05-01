@@ -480,7 +480,7 @@ void RoomActor::CloseAllDoor()
 
 void RoomActor::SetBossHPUI(float _Value)
 {
-	BossHpRendererVector_[2]->SetIndexWithValue(0, { -1.0f, -1.0f }	, _Value);;
+	//BossHpRendererVector_[2]->SetIndexWithValue(0, { -1.0f, -1.0f }	, _Value);;
 }
 
 void RoomActor::AllMonsterAttack(float _Damage)
