@@ -317,7 +317,11 @@ void RandomRoomManager::Update()
 	}
 	else
 	{
-		FloorRenderer_->Death();
+		if (FloorRenderer_ != nullptr)
+		{
+			FloorRenderer_->Death();
+			FloorRenderer_ = nullptr;
+		}
 	}
 }
 bool RandomRoomManager::ExistPos(float4 _Pos)
