@@ -263,6 +263,9 @@
     <ClInclude Include="BoomFly.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="BoomEffect.h">
+      <Filter>Play\Effect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -529,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="BoomFly.cpp">
       <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomEffect.cpp">
+      <Filter>Play\Effect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

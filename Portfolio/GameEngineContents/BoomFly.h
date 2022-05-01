@@ -32,6 +32,5 @@ private:
 	void MonsterUpdate() override;
 	void MonsterDeath() override;
 	void MoveZigZag(float4 _Value);
-	void Boom();
 };
 

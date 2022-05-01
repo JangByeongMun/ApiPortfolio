@@ -56,7 +56,6 @@ void BoxItem::SetType(BoxType _Type)
 void BoxItem::Start()
 {
 	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
-	//Renderer_->SetDeleteEndFrame_();
 }
 
 void BoxItem::Update()
@@ -65,13 +64,13 @@ void BoxItem::Update()
 
 	// 오픈여부 상관없이 플레이어와 충돌했을때
 	// 밀리도록 구현
-	//if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
-	//{
-	//	float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
-	//	TmpDir.Normal2D();
-	//	AddDir(TmpDir * 2.0f);
-	//}
-	//SetObjectMove();
+	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
+	{
+		float4 TmpDir = GetPosition() - Player::MainPlayer->GetPosition();
+		TmpDir.Normal2D();
+		AddDir(TmpDir * 2.0f);
+	}
+	SetObjectMove();
 }
 
 void BoxItem::NormalBoxReward()
@@ -563,7 +562,7 @@ void BoxItem::IdleUpdate()
 		{
 			if (BoxType::Normal == Type_) // 노말박스면 그냥열림
 			{
-				//NormalBoxReward();
+				NormalBoxReward();
 				ChangeState(BoxState::Open);
 			}
 			else if (BoxType::Gold == Type_) // 황금박스면 키가 잇어야 열린다
@@ -571,7 +570,7 @@ void BoxItem::IdleUpdate()
 				if (true == Player::MainPlayer->HaveKey())
 				{
 					Player::MainPlayer->MinusItem(ItemType::Key, 1);
-					//GoldBoxReward();
+					GoldBoxReward();
 					ChangeState(BoxState::Open);
 				}
 			}

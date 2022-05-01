@@ -173,10 +173,10 @@ void Clot::AttackUpdate()
 	if (AnimTimer_ >= 0.3f && IsAttack_ == false)
 	{
 		IsAttack_ = true;
-		Shoot({ 200, 200 }, ProjectileType::ENEMY_BASIC);
-		Shoot({ 200, -200 }, ProjectileType::ENEMY_BASIC);
-		Shoot({ -200, 200 }, ProjectileType::ENEMY_BASIC);
-		Shoot({ -200, -200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ 300, 300 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ 300, -300 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -300, 300 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -300, -300 }, ProjectileType::ENEMY_BASIC);
 	}
 
 	if (AnimTimer_ >= 0.6f)
