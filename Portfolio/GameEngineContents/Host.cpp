@@ -86,7 +86,7 @@ void Host::IdleStart()
 
 	if (Type_ == HostType::Normal)
 	{
-		IsInvincibility = true;
+		IsInvincibility_ = true;
 	}
 }
 
@@ -96,8 +96,8 @@ void Host::AttackStart()
 	Renderer_->SetIndex(1);
 	
 	if (Type_ == HostType::Normal)
-	{
-		IsInvincibility = false;
+	{  
+		IsInvincibility_ = false;
 	}
 }
 

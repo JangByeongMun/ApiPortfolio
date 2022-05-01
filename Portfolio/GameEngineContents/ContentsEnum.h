@@ -152,6 +152,8 @@ enum class MonsterType
 	Mulliboom,
 	HostNormal,
 	HostRed,
+	FlyNormal,
+	FlyRed,
 	Max,
 };
 

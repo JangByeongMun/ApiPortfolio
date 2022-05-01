@@ -17,9 +17,10 @@ Monster::Monster()
 	, IsLeft_(true)
 	, AttackTimer_(0.0f)
 	, AttackDelay_(2.5f)
+	, IsAttack_(true)
 	, MoveSpeed_(100.0f)
 	, HP_(0)
-	, IsInvincibility(false)
+	, IsInvincibility_(false)
 {
 }
 
@@ -45,7 +46,10 @@ void Monster::Update()
 	// 몬스터 충돌시
 	if (nullptr != Collision_ && true == Collision_->CollisionCheckRect("Player"))
 	{
-		Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
+		if (IsAttack_ == true)
+		{
+			Player::MainPlayer->GetPlayerHP()->MinusHearts(true);
+		}
 	}
 }
 
@@ -162,7 +166,7 @@ bool Monster::MonsterSetMoveToTeleport(float4 _Value)
 
 void Monster::Damaged(float _Damage)
 {
-	if (IsInvincibility == true)
+	if (IsInvincibility_ == true)
 	{
 		return;
 	}

@@ -272,6 +272,9 @@
     <ClInclude Include="Host.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Fly.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -546,6 +549,9 @@
       <Filter>Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Host.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Fly.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>

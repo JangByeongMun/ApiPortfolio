@@ -49,12 +49,17 @@ protected:
 protected:
 	float AttackTimer_;
 	float AttackDelay_;
+	bool IsAttack_;
 
 public:
 	float4 AttackNormalDir();
 	inline void SetAttackDelay(float _Value)
 	{
 		AttackDelay_ = _Value;
+	}
+	inline void SetAttack(bool _Attack)
+	{
+		IsAttack_ = _Attack;
 	}
 
 ///////////////////////////////// 捞悼
@@ -74,7 +79,7 @@ public:
 protected:
 	float HP_;
 	float MaxHP_;
-	bool IsInvincibility; // 公利
+	bool IsInvincibility_; // 公利
 
 public:
 	inline void SetHP(float _HP)

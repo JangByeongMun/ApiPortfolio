@@ -37,6 +37,7 @@
 #include "BoomFly.h"
 #include "Mulliboom.h"
 #include "Host.h"
+#include "Fly.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -306,6 +307,24 @@ void RoomActor::Setting()
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->SetType(HostType::Red);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::FlyNormal:
+		{
+			Fly* TmpMonster = GetLevel()->CreateActor<Fly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(FlyType::Normal);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::FlyRed:
+		{
+			Fly* TmpMonster = GetLevel()->CreateActor<Fly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(FlyType::Red);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}
