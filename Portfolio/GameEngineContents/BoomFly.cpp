@@ -1,139 +1,110 @@
+#include "BoomFly.h"
+#include <GameEngine/GameEngineImageManager.h>
+#include "RandomRoomManager.h"
+#include <GameEngineBase/GameEngineWindow.h>
+#include "RoomActor.h"
 #include "Bomb.h"
-#include <GameEngineBase/GameEngineTime.h>
-#include <GameEngine/GameEngineRenderer.h>
-#include <GameEngineBase/GameEngineRandom.h>
+#include "ShopKeeper.h"
+#include <GameEngineBase/GameEngineSound.h>
 #include "PlayLevel.h"
-#include "Projectile.h"
 #include "Stone.h"
-#include "Monster.h"
 #include "Player.h"
 #include "PlayerUI.h"
-#include "PlayerHP.h"
+#include "PlayerHP.h"	
 #include "Poop.h"
 #include "Fire.h"
-#include "ItemBase.h"
-#include "ShopKeeper.h"
-#include "ContentsGlobal.h"
 
-Bomb::Bomb() 
-	: Renderer_(nullptr)
-	, Timer_ (0.0f)
-	, BombTime_(2.0f)
-	, IsExplode(false)
+BoomFly::BoomFly() 
+	: Type_(BoomFlyType::Normal)
+	, MoveDir_(1, 1)
 {
 }
 
-Bomb::~Bomb() 
+BoomFly::~BoomFly() 
 {
 }
 
-void Bomb::Start()
+void BoomFly::Setting(BoomFlyType _Type)
 {
-	Collision_ = CreateCollision("Bomb", { 80, 80 }, { 0, 0 });
-	Renderer_ = CreateRenderer(RenderPivot::CENTER, GetPosition());
-	Renderer_->CreateAnimation("pickup_016_bomb_One.bmp", "pickup_016_bomb_One", 0, 2, 0.2f, true);
-	Renderer_->ChangeAnimation("pickup_016_bomb_One");
+	Type_ = _Type;
+	Collision_ = CreateCollision("Monster", { 50, 50 });
+	Renderer_ = CreateRenderer(static_cast<int>(ORDER::PLAYER));
+	switch (_Type)
+	{
+	case BoomFlyType::Normal:
+		Renderer_->CreateAnimation("monster_096_boomfly.bmp", "Idle", 0, 1, 0.1f, true);
+		break;
+	case BoomFlyType::Red:
+		Renderer_->CreateAnimation("monster_101_redboomfly.bmp", "Idle", 0, 1, 0.1f, true);
+		break;
+	default:
+		break;
+	}
+
+	Renderer_->ChangeAnimation("Idle");
+	SetHP(20);
+	SetMoveSpeed(100.0f);
 }
 
-void Bomb::Update()
+void BoomFly::MonsterUpdate()
 {
-	if (true == IsExplode)
-	{
-		return;
-	}
-
-	Timer_ += GameEngineTime::GetDeltaTime();
-	BompAnimation();
-	
-	std::vector<GameEngineCollision*> CollisionResult_;
-	if (true == Collision_->CollisionResult("Projectile", CollisionResult_, CollisionType::Rect, CollisionType::Rect))
-	{
-		float4 MoveDir = { 0, 0 };
-		for (int i = 0; i < CollisionResult_.size(); i++)
-		{
-			if (CollisionResult_[i] == nullptr)
-			{
-				continue;
-			}
-
-			Projectile* TmpProjectile = static_cast<Projectile*>(CollisionResult_[i]->GetActor());
-			TmpProjectile->DestroyProjectile();
-
-			MoveDir += (GetPosition() - CollisionResult_[i]->GetCollisionPos());
-			MoveDir.Normal2D();
-			AddDir(MoveDir * 2.0f);
-		}
-
-		SetMove(MoveDir * 0.1f);
-	}
-	CollisionResult_.clear();
-
-	SetObjectMove();
-
-
-	if (Timer_ >= BombTime_)
-	{
-		Boom();
-	}
+	MoveZigZag(MoveDir_ * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 }
 
-void Bomb::BompAnimation()
+void BoomFly::MonsterDeath()
 {
-	if (Timer_ <= 0.25f)
+	switch (Type_)
 	{
-		Renderer_->SetScale({ 86, 106 });
+	case BoomFlyType::Normal:
+	{
+		//Boom();
+		break;
 	}
-	else if (Timer_ <= 0.5f)
+	case BoomFlyType::Red:
 	{
-		Renderer_->SetScale({ 106, 86 });
+		Shoot({ 300, 0 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ 200, 200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -200, 200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -300, 0 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ -200, -200 }, ProjectileType::ENEMY_BASIC);
+		Shoot({ 200, -200 }, ProjectileType::ENEMY_BASIC);
+		break;
 	}
-	else if (Timer_ <= 0.75f)
-	{
-		Renderer_->SetScale({ 86, 106 });
-	}
-	else if (Timer_ <= 1.0f)
-	{
-		Renderer_->SetScale({ 106, 86 });
-	}
-
-	else if (Timer_ <= 1.125f)
-	{
-		Renderer_->SetScale({ 66, 126 });
-	}
-	else if (Timer_ <= 1.25f)
-	{
-		Renderer_->SetScale({ 126, 66 });
-	}
-	else if (Timer_ <= 1.375f)
-	{
-		Renderer_->SetScale({ 66, 126 });
-	}
-	else if (Timer_ <= 1.5f)
-	{
-		Renderer_->SetScale({ 126, 66 });
-	}
-
-	else if (Timer_ <= 1.625f)
-	{
-		Renderer_->SetScale({ 66, 126 });
-	}
-	else if (Timer_ <= 1.75f)
-	{
-		Renderer_->SetScale({ 126, 66 });
-	}
-	else if (Timer_ <= 1.875f)
-	{
-		Renderer_->SetScale({ 66, 126 });
-	}
-	else if (Timer_ <= 2.0f)
-	{
-		Renderer_->SetScale({ 126, 66 });
+	default:
+		break;
 	}
 }
 
-void Bomb::Boom()
+void BoomFly::MoveZigZag(float4 _Value)
 {
-	IsExplode = true;
+	GameEngineImage* MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
+	float4 AddPivot = Room_->GetPosition() - GameEngineWindow::GetScale().Half();
+
+	// x축이나 y축으로 더이상 갈수없을경우 x나 y중 한군데를 제외하고 이동
+	float4 NextPos = GetPosition() + _Value;
+	float4 NextPos_x = GetPosition() + float4(_Value.x, _Value.y * -1);
+	float4 NextPos_y = GetPosition() + float4(_Value.x * -1, _Value.y);
+	int Color = MapColImage_->GetImagePixel(NextPos - AddPivot);
+	int Color_x = MapColImage_->GetImagePixel(NextPos_x - AddPivot);
+	int Color_y = MapColImage_->GetImagePixel(NextPos_y - AddPivot);
+	if (RGB(0, 0, 0) != Color)
+	{
+		SetMove(_Value);
+	}
+	else if (RGB(0, 0, 0) != Color_x)
+	{
+		SetMove(float4(_Value.x, 0));
+		MoveDir_ = float4(MoveDir_.x, MoveDir_.y * -1);
+	}
+	else if (RGB(0, 0, 0) != Color_y)
+	{
+		SetMove(float4(0, _Value.y));
+		MoveDir_ = float4(MoveDir_.x * -1, MoveDir_.y);
+	}
+}
+
+void BoomFly::Boom()
+{
 	// 폭발 이펙트 생성
 	{
 		GameEngineRenderer* Renderer = CreateRenderer("effect_029_explosion2.bmp", static_cast<int>(ORDER::UI));
@@ -262,7 +233,5 @@ void Bomb::Boom()
 			}
 		}
 	}
-
-	Off();
-	Death(1.0f);
 }
+

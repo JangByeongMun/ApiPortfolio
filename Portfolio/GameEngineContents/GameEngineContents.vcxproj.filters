@@ -260,6 +260,9 @@
     <ClInclude Include="Clot.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="BoomFly.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -522,6 +525,9 @@
       <Filter>Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Clot.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="BoomFly.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>

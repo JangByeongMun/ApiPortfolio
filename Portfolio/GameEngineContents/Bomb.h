@@ -17,6 +17,8 @@ public:
 	Bomb& operator=(const Bomb& _Other) = delete;
 	Bomb& operator=(Bomb&& _Other) noexcept = delete;
 
+	void Boom();
+
 protected:
 
 private:
