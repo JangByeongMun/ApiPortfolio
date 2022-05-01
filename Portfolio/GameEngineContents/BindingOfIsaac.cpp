@@ -511,6 +511,9 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(5, 2);
 		Image = GameEngineImageManager::GetInst()->Find("boss_004_monstro_Right.bmp");
 		Image->CutCount(5, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("boss_048_loki.bmp");
+		Image->CutCount(6, 3);
 	}
 
 	/////////////////////////////////// Map

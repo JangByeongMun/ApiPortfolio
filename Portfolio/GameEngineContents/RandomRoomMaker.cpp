@@ -151,7 +151,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(0, 5, BlockType::STONE);
 				TmpData.AddBlock(12, 5, BlockType::STONE);
 
-				TmpData.AddMonster(6, 3, MonsterType::FlyNormal);
+				TmpData.AddMonster(6, 3, MonsterType::BoomFlyNormal);
 				TmpData.AddMonster(4, 3, MonsterType::FlyRed);
 
 				TmpVector.push_back(TmpData);
@@ -221,7 +221,7 @@ void RandomRoomManager::MakeRooms()
 			std::vector<RoomData> TmpVector;
 			{
 				RoomData TmpData = RoomData();
-				TmpData.AddBoss(0, 0, BossType::Monstro);
+				TmpData.AddBoss(0, 0, BossType::Loki);
 
 				TmpData.RoomType_ = RoomType::Boss;
 				TmpVector.push_back(TmpData);

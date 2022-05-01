@@ -275,6 +275,9 @@
     <ClInclude Include="Fly.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Loki.h">
+      <Filter>Play\Monster\Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -553,6 +556,9 @@
     </ClCompile>
     <ClCompile Include="Fly.cpp">
       <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Loki.cpp">
+      <Filter>Play\Monster\Boss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

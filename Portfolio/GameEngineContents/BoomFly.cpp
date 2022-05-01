@@ -48,6 +48,7 @@ void BoomFly::MonsterDeath()
 	{
 	case BoomFlyType::Normal:
 	{
+		Collision_->Off();
 		GetLevel()->CreateActor<BoomEffect>()->Setting(GetPosition());
 		break;
 	}

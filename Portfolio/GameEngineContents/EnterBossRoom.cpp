@@ -101,6 +101,19 @@ void EnterBossRoom::Setting()
 		BossRenderers_.push_back(TmpRenderer);
 	}
 	break;
+	case BossType::Loki:
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer("portrait_69.0_loki.bmp", static_cast<int>(ORDER::FRONTUI));
+		TmpRenderer->SetPivot({ 200, 100 });
+		BossRenderers_.push_back(TmpRenderer);
+	}
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer("vsnames.bmp", static_cast<int>(ORDER::FRONTUI));
+		TmpRenderer->SetPivot({ 200, -250 });
+		TmpRenderer->SetIndex(28);
+		BossRenderers_.push_back(TmpRenderer);
+	}
+	break;
 	case BossType::Max:
 		break;
 	default:

@@ -38,6 +38,8 @@
 #include "Mulliboom.h"
 #include "Host.h"
 #include "Fly.h"
+#include "Loki.h"
+
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -366,7 +368,13 @@ void RoomActor::Setting()
 			TmpBoss->SetRoom(*this);
 			break;
 		}
-
+		case BossType::Loki:
+		{
+			Loki* TmpBoss = GetLevel()->CreateActor<Loki>();
+			TmpBoss->SetPosition(GetPosition());
+			TmpBoss->SetRoom(*this);
+			break;
+		}
 		case BossType::Max:
 			break;
 		default:

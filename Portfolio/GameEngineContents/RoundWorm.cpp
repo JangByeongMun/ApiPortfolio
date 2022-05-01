@@ -20,8 +20,6 @@ void RoundWorm::MoveRandomPos()
 	{
 		RandomPos = Room_->GetRandomPos();
 	}
-
-	int a = 0;
 }
 
 void RoundWorm::Start()
