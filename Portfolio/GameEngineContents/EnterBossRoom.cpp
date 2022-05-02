@@ -114,6 +114,8 @@ void EnterBossRoom::Setting()
 		BossRenderers_.push_back(TmpRenderer);
 	}
 	break;
+	case BossType::Mom:
+		break;
 	case BossType::Max:
 		break;
 	default:

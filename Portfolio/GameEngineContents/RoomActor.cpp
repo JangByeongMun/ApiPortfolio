@@ -64,14 +64,24 @@ void RoomActor::AddMonsterCount()
 
 void RoomActor::MinusMonsterCount()
 {
+	
 	MonsterCount_ -= 1;
 
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
 		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 0.015f * Option_SFX);
 		OpenAllDoor();
-		MakeMapReward();
 		Player::MainPlayer->AddGaze(1);
+
+		if (Data_.RoomType_ != RoomType::Boss)
+		{
+			MakeMapReward();
+		}
+		else
+		{
+			OpenNextStage();
+			MakePassive();
+		}
 	}
 }
 
@@ -81,10 +91,19 @@ void RoomActor::MinusBossCount()
 
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
+		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 0.015f * Option_SFX);
 		OpenAllDoor();
-		OpenNextStage();
-		MakePassive();
 		Player::MainPlayer->AddGaze(1);
+
+		if (Data_.RoomType_ != RoomType::Boss)
+		{
+			MakeMapReward();
+		}
+		else
+		{
+			MakePassive();
+			OpenNextStage();
+		}
 	}
 }
 
@@ -373,6 +392,10 @@ void RoomActor::Setting()
 			Loki* TmpBoss = GetLevel()->CreateActor<Loki>();
 			TmpBoss->SetPosition(GetPosition());
 			TmpBoss->SetRoom(*this);
+			break;
+		}
+		case BossType::Mom:
+		{
 			break;
 		}
 		case BossType::Max:

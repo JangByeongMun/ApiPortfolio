@@ -156,6 +156,7 @@ void Loki::DeadStart()
 	AnimTimer_ = 0.0f;
 	IsAnim_ = false;
 	Renderer_->ChangeAnimation("Dead");
+	Collision_->Off();
 
 	GameEngineRenderer* TmpRenderer = CreateRenderer("effect_002_bloodpoof.bmp", static_cast<int>(ORDER::FRONTUI));
 	TmpRenderer->CreateAnimation("effect_002_bloodpoof.bmp", "effect_002_bloodpoof", 0, 15, 0.04f, false);
@@ -176,7 +177,6 @@ void Loki::IdleUpdate()
 
 	MonsterSetMoveToWalk(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
 }
-
 void Loki::JumpUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
@@ -212,7 +212,6 @@ void Loki::JumpUpdate()
 		ChangeState(LokiState::Idle);
 	}
 }
-
 void Loki::ShootOnceUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
@@ -235,7 +234,6 @@ void Loki::ShootOnceUpdate()
 		ChangeState(LokiState::Idle);
 	}
 }
-
 void Loki::ShootTripleUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
@@ -288,7 +286,6 @@ void Loki::ShootTripleUpdate()
 		ChangeState(LokiState::Idle);
 	}
 }
-
 void Loki::SummonUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
@@ -299,6 +296,9 @@ void Loki::SummonUpdate()
 		TmpMonster->SetPosition(GetPosition());
 		TmpMonster->SetRoom(*Room_);
 		TmpMonster->Setting(BoomFlyType::Normal);
+
+		Room_->AddMonster(TmpMonster);
+		Room_->AddMonsterCount();
 	}
 
 	if (1.0f <= AnimTimer_)
@@ -306,7 +306,6 @@ void Loki::SummonUpdate()
 		ChangeState(LokiState::Idle);
 	}
 }
-
 void Loki::DeadUpdate()
 {
 	AnimTimer_ += GameEngineTime::GetDeltaTime();

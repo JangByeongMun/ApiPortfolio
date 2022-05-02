@@ -189,7 +189,7 @@ enum class BossType
 	Default,
 	Monstro,
 	Loki,
-
+	Mom,
 	Max,
 };
 
