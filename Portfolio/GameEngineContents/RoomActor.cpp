@@ -39,6 +39,7 @@
 #include "Host.h"
 #include "Fly.h"
 #include "Loki.h"
+#include "Mom.h"
 
 
 float StartX = -420.0f;
@@ -396,6 +397,9 @@ void RoomActor::Setting()
 		}
 		case BossType::Mom:
 		{
+			Mom* TmpBoss = GetLevel()->CreateActor<Mom>();
+			TmpBoss->SetPosition(GetPosition());
+			TmpBoss->SetRoom(*this);
 			break;
 		}
 		case BossType::Max:

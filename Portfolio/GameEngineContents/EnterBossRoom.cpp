@@ -115,6 +115,17 @@ void EnterBossRoom::Setting()
 	}
 	break;
 	case BossType::Mom:
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer("portrait_45.0_mom.bmp", static_cast<int>(ORDER::FRONTUI));
+		TmpRenderer->SetPivot({ 200, 100 });
+		BossRenderers_.push_back(TmpRenderer);
+	}
+	{
+		GameEngineRenderer* TmpRenderer = CreateRenderer("vsnames.bmp", static_cast<int>(ORDER::FRONTUI));
+		TmpRenderer->SetPivot({ 200, -250 });
+		TmpRenderer->SetIndex(12);
+		BossRenderers_.push_back(TmpRenderer);
+	}
 		break;
 	case BossType::Max:
 		break;

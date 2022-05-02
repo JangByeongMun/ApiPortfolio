@@ -221,7 +221,7 @@ void RandomRoomManager::MakeRooms()
 			std::vector<RoomData> TmpVector;
 			{
 				RoomData TmpData = RoomData();
-				TmpData.AddBoss(0, 0, BossType::Loki);
+				TmpData.AddBoss(0, 0, BossType::Mom);
 
 				TmpData.RoomType_ = RoomType::Boss;
 				TmpVector.push_back(TmpData);

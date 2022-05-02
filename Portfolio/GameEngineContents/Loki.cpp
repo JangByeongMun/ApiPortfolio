@@ -34,7 +34,7 @@ void Loki::Start()
 	ShadowRenderer_ = CreateRenderer("shadow.bmp", 0);
 	ShadowRenderer_->SetAlpha(70);
 	ShadowRenderer_->SetScale({ 100, 40 });
-	ShadowRenderer_->SetPivot({ 0, 90 });
+	ShadowRenderer_->SetPivot({ 0, 50 });
 
 	Collision_ = CreateCollision("Monster", { 80, 80 });
 	Renderer_ = CreateRenderer("boss_048_loki.bmp", static_cast<int>(ORDER::PLAYER));

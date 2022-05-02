@@ -514,6 +514,33 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("boss_048_loki.bmp");
 		Image->CutCount(6, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Door_Up.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Door_Down.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Door_Left.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Door_Right.bmp");
+		Image->CutCount(2, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Eye_Up.bmp");
+		Image->CutCount(3, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Eye_Down.bmp");
+		Image->CutCount(3, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Eye_Left.bmp");
+		Image->CutCount(3, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Eye_Right.bmp");
+		Image->CutCount(3, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Hand_Up.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Hand_Down.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Hand_Left.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("boss_054_mom_Hand_Right.bmp");
+		Image->CutCount(2, 1);
 	}
 
 	/////////////////////////////////// Map

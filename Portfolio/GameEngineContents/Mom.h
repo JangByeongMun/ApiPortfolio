@@ -28,9 +28,20 @@ protected:
 
 private:
 	MomState State_;
+	std::vector<GameEngineRenderer*> DoorRenderers_;
+	std::vector<GameEngineRenderer*> EyeRenderers_;
+	std::vector<GameEngineRenderer*> HandRenderers_;
+
+	GameEngineRenderer* LegRenderer_;
+	GameEngineRenderer* LegShadowRenderer_;
+	GameEngineCollision* LegCollision_;
+
+	std::vector<GameEngineCollision*> EyeCollision_;
+	std::vector<GameEngineCollision*> HandCollision_;
+	std::vector<GameEngineCollision*> HandCheckCollision_;
 	float AnimTimer_;
 	bool IsAnim_;
-	GameEngineRenderer* ShadowRenderer_;
+	int HandCheck_;
 
 	void Start() override;
 	void MonsterUpdate() override;
@@ -49,5 +60,8 @@ private:
 	void LegUpdate();
 	void SummonUpdate();
 	void DeadUpdate();
+
+	void ResetValue();
+	int HandCheck();
 };
 
