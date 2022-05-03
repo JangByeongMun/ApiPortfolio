@@ -71,6 +71,12 @@ Player::Player()
 	, IsUsingActive(false)
 	, AcheiveItemRender_(nullptr)
 	, CharacterType_(CharacterType::ISAAC)
+	, Have109_(false)
+	, Have245_(false)
+	, Have246_(false)
+	, Have302_(false)
+	, Have307_(false)
+	, AddDamageTo109_(0.0f)
 	, RoomPos_({0, 0})
 	, InvincibilityTimer_(0)
 	, InvisibleTimer_(0)
@@ -160,6 +166,8 @@ void Player::Start()
 
 	ChangeBodyState(PlayerBodyState::Idle);
 	ChangeHeadState(PlayerHeadState::Idle);
+
+	//Have245_ = true;
 }
 
 void Player::Update()
@@ -251,6 +259,12 @@ void Player::Update()
 			BodyRender_->SetAlpha(255);
 			HeadRender_->SetAlpha(255);
 		}
+	}
+
+	// 패시브 아이템 확인
+	if (true == Have109_)
+	{
+		AddDamageTo109_ += MoneyCount_ * 0.04f;
 	}
 }
 

@@ -374,7 +374,7 @@ void Mom::LegUpdate()
 		float4 LerpPos = float4::Lerp({ 100, -1000 }, {100, -470}, (AnimTimer_ - 2.5f) * 3.0f);
 		LegRenderer_->On();
 		LegRenderer_->SetPivot(LegShadowRenderer_->GetPivot() + LerpPos);
-		LegShadowRenderer_->SetAlpha(float4::LerpFloat(50, 90, (AnimTimer_ - 2.5f) * 3.0f));
+		LegShadowRenderer_->SetAlpha(static_cast<unsigned int>(float4::LerpFloat(50, 90, (AnimTimer_ - 2.5f) * 3.0f)));
 	}
 	if (2.7f <= AnimTimer_ && AnimTimer_ < 3.0f)
 	{
@@ -388,7 +388,7 @@ void Mom::LegUpdate()
 		LegCollision_->SetPivot(LegShadowRenderer_->GetPivot());
 		float4 LerpPos = float4::Lerp({ 100, -470 }, { 70, -1000 }, (AnimTimer_ - 4.0f) * 3.0f);
 		LegRenderer_->SetPivot(LegShadowRenderer_->GetPivot() + LerpPos);
-		LegShadowRenderer_->SetAlpha(float4::LerpFloat(90, 50, (AnimTimer_ - 4.0f) * 3.0f));
+		LegShadowRenderer_->SetAlpha(static_cast<unsigned int>(float4::LerpFloat(90, 50, (AnimTimer_ - 4.0f) * 3.0f)));
 	}
 
 	if (4.5f <= AnimTimer_)

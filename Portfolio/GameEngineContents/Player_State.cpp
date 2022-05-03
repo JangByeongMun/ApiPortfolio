@@ -244,26 +244,31 @@ void Player::HeadAttackUpdate()
 
 	std::string ChangeDirText = "Idle";
 	float4 AttackDir = float4::ZERO;
+	float4 OtherDir = float4::ZERO;
 	float TearDelay = 1 / AttackSpeed_;
 
 	if (true == GameEngineInput::GetInst()->IsPress("AttackLeft"))
 	{
 		AttackDir = float4::LEFT;
+		OtherDir = float4::DOWN;
 		ChangeDirText = "Left";
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("AttackRight"))
 	{
 		AttackDir = float4::RIGHT;
+		OtherDir = float4::DOWN;
 		ChangeDirText = "Right";
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("AttackUp"))
 	{
 		AttackDir = float4::UP;
+		OtherDir = float4::RIGHT;
 		ChangeDirText = "Up";
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("AttackDown"))
 	{
 		AttackDir = float4::DOWN;
+		OtherDir = float4::RIGHT;
 		ChangeDirText = "Down";
 	}
 
@@ -277,7 +282,15 @@ void Player::HeadAttackUpdate()
 		}
 		else
 		{
-			Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_);
+			if (true == Have245_)
+			{
+				Shoot(AttackDir * ShotSpeed_ * 500 + MoveDir_ * 150, ProjectileType::PLAYER_BASIC, AttackDir * 30 + OtherDir * 15, 1.0f, Damage_ + AddDamageTo109_);
+				Shoot(AttackDir * ShotSpeed_ * 500 + MoveDir_ * 150, ProjectileType::PLAYER_BASIC, AttackDir * 30 - OtherDir * 15, 1.0f, Damage_ + AddDamageTo109_);
+			}
+			else
+			{
+				Shoot(AttackDir * ShotSpeed_ * 500 + MoveDir_ * 150, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_ + AddDamageTo109_);
+			}
 		}
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");

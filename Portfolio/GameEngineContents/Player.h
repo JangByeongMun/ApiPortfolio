@@ -267,6 +267,8 @@ private:
 	bool Have302_;
 	bool Have307_;
 
+	float AddDamageTo109_;
+
 public:
 	void AddPassive(PassiveType _Type);
 	void AddPassiveEffect(PassiveType _Type);
