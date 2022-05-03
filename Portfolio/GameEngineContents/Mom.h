@@ -48,6 +48,7 @@ private:
 	void MonsterDeath() override;
 	void ChangeState(MomState _State);
 	void StateUpdate();
+	void CollisionCheck();
 
 	void IdleStart();
 	void HandStart();

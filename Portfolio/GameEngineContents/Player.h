@@ -261,13 +261,20 @@ public:
 ///////////////////////////////// 패시브 아이템
 private:
 	std::vector<PassiveType> PassiveVector_;
+	bool Have109_;
+	bool Have245_;
+	bool Have246_;
+	bool Have302_;
+	bool Have307_;
 
 public:
 	void AddPassive(PassiveType _Type);
 	void AddPassiveEffect(PassiveType _Type);
 	void MakeItemRenderer(PassiveType _Type);
 
-	void EffectItem1();
+	void EffectItem001();
+	void EffectItem072();
+	void EffectItemDefault(PassiveType _Type);
 
 ///////////////////////////////// 방
 private:

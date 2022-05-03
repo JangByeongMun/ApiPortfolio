@@ -724,7 +724,7 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("pickup_016_bomb_One.bmp");
 		Image->CutCount(3, 1);
 
-		Image = GameEngineImageManager::GetInst()->Find("costume_058_sadonion.bmp");
+		Image = GameEngineImageManager::GetInst()->Find("costume_001_sadonion.bmp");
 		Image->CutCount(3, 3);
 
 		Image = GameEngineImageManager::GetInst()->Find("pickup_005_chests_Normal.bmp");
@@ -732,6 +732,30 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("pickup_005_chests_Gold.bmp");
 		Image->CutCount(3, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_007_bloodofthemartyr.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_017_skeletonkey_white.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_019_boom.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_027_woodenspoon.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_031_momslipstick.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_072_rosary.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_109_moneyispower.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_015_heart.bmp");
+		Image->CutCount(5, 3);
 	}
 
 	/////////////////////////////////// Intro

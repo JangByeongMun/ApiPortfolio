@@ -34,6 +34,25 @@ void PassiveItem::Start()
 {
 	ItemNameVector_.push_back("None.bmp");
 	ItemNameVector_.push_back("collectibles_001_thesadonion.bmp");
+	ItemNameVector_.push_back("collectibles_004_cricketshead.bmp");
+	ItemNameVector_.push_back("collectibles_007_bloodofthemartyr.bmp");
+	ItemNameVector_.push_back("collectibles_012_magicmushroom.bmp");
+	ItemNameVector_.push_back("collectibles_015_heart.bmp");
+	ItemNameVector_.push_back("collectibles_017_skeletonkey.bmp");
+	ItemNameVector_.push_back("collectibles_019_boom.bmp");
+	ItemNameVector_.push_back("collectibles_022_lunch.bmp");
+	ItemNameVector_.push_back("collectibles_023_dinner.bmp");
+	ItemNameVector_.push_back("collectibles_027_woodenspoon.bmp");
+	ItemNameVector_.push_back("collectibles_031_momslipstick.bmp");
+	ItemNameVector_.push_back("collectibles_072_rosary.bmp");
+	ItemNameVector_.push_back("collectibles_109_moneyispower.bmp");
+	ItemNameVector_.push_back("collectibles_121_oddmushroomlarge.bmp");
+	ItemNameVector_.push_back("collectibles_226_blacklotus.bmp");
+	ItemNameVector_.push_back("collectibles_121_oddmushroomlarge.bmp");
+	ItemNameVector_.push_back("collectibles_245_2020.bmp");
+	ItemNameVector_.push_back("collectibles_246_bluemap.bmp");
+	ItemNameVector_.push_back("collectibles_302_leo.bmp");
+	ItemNameVector_.push_back("collectibles_307_capricorn.bmp");
 }
 
 void PassiveItem::Update()

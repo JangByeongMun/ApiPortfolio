@@ -182,8 +182,18 @@ void PlayerHP::AddMaxHp(int _Value, int _Heal)
 		_Heal = _Value;
 	}
 
-	MaxRedHP_ += _Value;
-	CurrentRedHP_ += _Heal;
+
+	if (_Heal >= MaxRedHP_)
+	{
+		MaxRedHP_ += _Value;
+		CurrentRedHP_ = MaxRedHP_;
+	}
+	else
+	{
+		MaxRedHP_ += _Value;
+		CurrentRedHP_ += _Heal;
+	}
+
 	UpdateUI();
 }
 
