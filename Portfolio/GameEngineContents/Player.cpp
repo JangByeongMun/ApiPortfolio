@@ -34,6 +34,7 @@
 #include "RandomRoomManager.h"
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
+#include "Stone.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -169,6 +170,7 @@ void Player::Start()
 
 	//Have245_ = true;
 	//Have246_ = true;
+	Have302_ = true;
 }
 
 void Player::Update()
@@ -267,6 +269,22 @@ void Player::Update()
 	{
 		AddDamageTo109_ += MoneyCount_ * 0.04f;
 	}
+
+	if (true == Have302_)
+	{
+		std::vector<GameEngineCollision*> ResultVector;
+		if (true == PlayerCollision_->CollisionResultRect("Stone", ResultVector))
+		{
+			for (int i = 0; i < ResultVector.size(); i++)
+			{
+				Stone* TmpStone = dynamic_cast<Stone*>(ResultVector[i]->GetActor());
+				if (nullptr != TmpStone)
+				{
+					TmpStone->BombStone();
+				}
+			}
+		}
+	}
 }
 
 void Player::LevelChangeStart(GameEngineLevel* _PrevLevel)
@@ -326,6 +344,11 @@ bool Player::CanMove(const float4& _Value)
 		false == PlayerCollision_->NextPosCollisionCheckRect("Wall", _Value) &&
 		false == PlayerCollision_->NextPosCollisionCheckRect("Poop", _Value)
 		)
+	{
+		return true;
+	}
+
+	if (true == Have302_ && true == PlayerCollision_->NextPosCollisionCheckRect("Stone", _Value))
 	{
 		return true;
 	}
