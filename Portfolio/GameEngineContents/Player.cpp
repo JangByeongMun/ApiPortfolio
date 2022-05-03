@@ -168,6 +168,7 @@ void Player::Start()
 	ChangeHeadState(PlayerHeadState::Idle);
 
 	//Have245_ = true;
+	//Have246_ = true;
 }
 
 void Player::Update()

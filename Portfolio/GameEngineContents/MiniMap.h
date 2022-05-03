@@ -37,6 +37,7 @@ public:
 	void MakeNode();
 	void ChangeMap(float4 _Dir);
 	void SeeAllMap();
+	void SeeSpecialRooms();
 
 protected:
 

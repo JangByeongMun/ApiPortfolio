@@ -228,6 +228,8 @@ void MiniMap::MakeNode()
 			BigNodeVecter_[i]->IconRenderer_->Off();
 		}
 	}
+
+	SeeSpecialRooms();
 }
 
 void MiniMap::ChangeMap(float4 _Dir)
@@ -446,4 +448,39 @@ void MiniMap::SeeAllMap()
 	}
 
 	ChangeMap({0, 0});
+}
+
+void MiniMap::SeeSpecialRooms()
+{
+	for (int i = 0; i < NodeVecter_.size(); i++)
+	{
+		if (nullptr != NodeVecter_[i]->IconRenderer_)
+		{
+			NodeVecter_[i]->State_ = NodeState::Past;
+			if (IsBigsize_)
+			{
+				NodeVecter_[i]->IconRenderer_->Off();
+			}
+			else
+			{
+				NodeVecter_[i]->IconRenderer_->On();
+			}
+		}
+	}
+
+	for (int i = 0; i < BigNodeVecter_.size(); i++)
+	{
+		if (nullptr != BigNodeVecter_[i]->IconRenderer_)
+		{
+			BigNodeVecter_[i]->State_ = NodeState::Past;
+			if (IsBigsize_)
+			{
+				BigNodeVecter_[i]->IconRenderer_->On();
+			}
+			else
+			{
+				BigNodeVecter_[i]->IconRenderer_->Off();
+			}
+		}
+	}
 }

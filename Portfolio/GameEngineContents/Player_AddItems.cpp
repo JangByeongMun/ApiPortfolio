@@ -6,6 +6,8 @@
 #include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
+#include "PlayerUI.h"
+#include "MiniMap.h"
 
 void Player::SetGaze(int _Value)
 {
@@ -149,6 +151,7 @@ void Player::AddPassiveEffect(PassiveType _Type)
 		break;
 	case PassiveType::Item246:
 		Have246_ = true;
+		PlayerUI_->MiniMap_->SeeSpecialRooms();
 		break;
 	case PassiveType::Item302:
 		Have302_ = true;
