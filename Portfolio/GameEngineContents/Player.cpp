@@ -245,8 +245,16 @@ void Player::Update()
 			PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
 			TmpPassiveItem->SetPosition(GetPosition()); //+ float4(100, 0));
 
-			//PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
-			TmpPassiveItem->Setting(PassiveType::Item307);
+			PassiveType TmpType;
+			int count = 0;
+			do
+			{
+				count++;
+				TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+
+			} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
+
+			TmpPassiveItem->Setting(TmpType);
 		}
 	}
 
