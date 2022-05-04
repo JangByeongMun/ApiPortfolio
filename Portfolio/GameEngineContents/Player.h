@@ -147,7 +147,7 @@ private:
 public:
 	inline float GetDamage()
 	{
-		return Damage_;
+		return Damage_ + AddDamageTo109_;
 	}
 	inline float GetAttackSpeed()
 	{
@@ -265,7 +265,6 @@ private:
 	bool Have245_;
 	bool Have246_;
 	bool Have302_;
-	bool Have307_;
 
 	float AddDamageTo109_;
 
@@ -273,10 +272,29 @@ public:
 	void AddPassive(PassiveType _Type);
 	void AddPassiveEffect(PassiveType _Type);
 	void MakeItemRenderer(PassiveType _Type);
+	bool IsAlreadyHave(PassiveType _Type);
 
 	void EffectItem001();
+	void EffectItem015();
 	void EffectItem072();
 	void EffectItemDefault(PassiveType _Type);
+
+	inline bool Have109()
+	{
+		return Have109_;
+	}
+	inline bool Have245()
+	{
+		return Have245_;
+	}
+	inline bool Have246()
+	{
+		return Have246_;
+	}
+	inline bool Have302()
+	{
+		return Have302_;
+	}
 
 ///////////////////////////////// ¹æ
 private:

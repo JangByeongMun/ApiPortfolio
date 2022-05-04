@@ -66,6 +66,8 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("PlayESC"))
 	{
 		GameEngineTime::Pause();
+		Player::MainPlayer->GetPlayerUI()->SetPauseUI();
+
 		bool Test = GameEngineTime::IsPause();
 		Player::MainPlayer->GetPlayerUI()->GetPausetUI()->TurnOn(Test);
 	}

@@ -142,7 +142,7 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}*/
 
-			{
+			/*{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddBlock(0, 1, BlockType::STONE);
@@ -157,7 +157,115 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
+			{
+				RoomData TmpData = RoomData();
 
+				TmpData.AddBlock(0, 0, BlockType::STONE);
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 1, BlockType::STONE);
+
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(0, 6, BlockType::STONE);
+				TmpData.AddBlock(1, 6, BlockType::STONE);
+
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::STONE);
+
+				TmpData.AddBlock(12, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+				TmpData.AddBlock(12, 6, BlockType::STONE);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 1, BlockType::STONE);
+
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(1, 6, BlockType::STONE);
+
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::STONE);
+
+				TmpData.AddBlock(12, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(4, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(5, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(6, 3, MonsterType::FlyRed);
+
+				TmpVector.push_back(TmpData);
+			}*/
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(0, 0, BlockType::STONE);
+				TmpData.AddBlock(1, 0, BlockType::THORN);
+				TmpData.AddBlock(0, 1, BlockType::THORN);
+
+				TmpData.AddBlock(0, 5, BlockType::THORN);
+				TmpData.AddBlock(0, 6, BlockType::STONE);
+				TmpData.AddBlock(1, 6, BlockType::THORN);
+
+				TmpData.AddBlock(11, 0, BlockType::THORN);
+				TmpData.AddBlock(12, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::THORN);
+
+				TmpData.AddBlock(12, 5, BlockType::THORN);
+				TmpData.AddBlock(11, 6, BlockType::THORN);
+				TmpData.AddBlock(12, 6, BlockType::STONE);
+
+				TmpData.AddPickup(5, 3, ItemType::Money);
+				TmpData.AddPickup(6, 2, ItemType::Money);
+				TmpData.AddPickup(6, 3, ItemType::Money);
+				TmpData.AddPickup(6, 4, ItemType::Money);
+				TmpData.AddPickup(7, 3, ItemType::Money);
+
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 1, BlockType::STONE);
+				TmpData.AddBlock(2, 1, BlockType::STONE);
+				TmpData.AddBlock(1, 2, BlockType::STONE);
+
+				TmpData.AddBlock(1, 4, BlockType::STONE);
+				TmpData.AddBlock(1, 5, BlockType::STONE);
+				TmpData.AddBlock(2, 5, BlockType::STONE);
+
+				TmpData.AddBlock(10, 1, BlockType::STONE);
+				TmpData.AddBlock(11, 1, BlockType::STONE);
+				TmpData.AddBlock(11, 2, BlockType::STONE);
+
+				TmpData.AddBlock(11, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 5, BlockType::STONE);
+
+				TmpData.AddBlock(5, 2, BlockType::FIRE);
+				TmpData.AddBlock(5, 3, BlockType::THORN);
+				TmpData.AddBlock(5, 4, BlockType::FIRE);
+				TmpData.AddBlock(6, 2, BlockType::THORN);
+				TmpData.AddPickup(6, 3, ItemType::keyMaster);
+				TmpData.AddBlock(6, 4, BlockType::THORN);
+				TmpData.AddBlock(7, 2, BlockType::FIRE);
+				TmpData.AddBlock(7, 3, BlockType::THORN);
+				TmpData.AddBlock(7, 4, BlockType::FIRE);
+
+				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+				TmpData.AddMonster(0, 5, MonsterType::Pooter);
+				TmpData.AddMonster(12, 0, MonsterType::Pooter);
+				TmpData.AddMonster(12, 5, MonsterType::Pooter);
+
+				TmpVector.push_back(TmpData);
+			}
 
 			AllRooms_.insert({ 0, TmpVector });
 		}

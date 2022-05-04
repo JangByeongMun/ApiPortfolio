@@ -40,6 +40,7 @@
 #include "Fly.h"
 #include "Loki.h"
 #include "Mom.h"
+#include "Thorn.h"
 
 
 float StartX = -420.0f;
@@ -214,7 +215,12 @@ void RoomActor::Setting()
 			break;
 		}
 		case BlockType::THORN:
+		{
+			Thorn* TmpActor = GetLevel()->CreateActor<Thorn>();
+			TmpActor->SetPosition(GetPosition() + TmpTilePos);
+			TmpActor->SetType(ThornType::Always);
 			break;
+		}
 		default:
 			break;
 		}
@@ -833,7 +839,13 @@ void RoomActor::MakePassive()
 	PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
 	TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
 
-	PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+	PassiveType TmpType;
+	do
+	{
+		TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+
+	} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
+
 	TmpPassiveItem->Setting(TmpType);
 }
 

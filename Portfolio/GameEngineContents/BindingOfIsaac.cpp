@@ -749,9 +749,21 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(8, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("costume_072_rosary.bmp");
-		Image->CutCount(8, 1);
+		Image->CutCount(8, 4);
 
 		Image = GameEngineImageManager::GetInst()->Find("costume_109_moneyispower.bmp");
+		Image->CutCount(8, 1);
+		
+		Image = GameEngineImageManager::GetInst()->Find("costume_226_blacklotus.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_245_2020.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_302_leo.bmp");
+		Image->CutCount(8, 1);
+
+		Image = GameEngineImageManager::GetInst()->Find("costume_307_capricorn.bmp");
 		Image->CutCount(8, 1);
 
 		Image = GameEngineImageManager::GetInst()->Find("costume_015_heart.bmp");

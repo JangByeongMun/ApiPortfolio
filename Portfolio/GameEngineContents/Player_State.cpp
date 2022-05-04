@@ -166,7 +166,7 @@ void Player::BodyIdleUpdate()
 			MoveDir_ = float4::ZERO;
 		}
 
-		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+		PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 400);
 	}
 }
 void Player::BodyMoveUpdate()
@@ -202,8 +202,8 @@ void Player::BodyMoveUpdate()
 	MoveDir_.Limit2D(1.0f);
 
 	BodyRender_->ChangeAnimation(GetBodyAnimationName() + ChangeDirText);
-	// MoveSpeed_는 인게임의 스피드수치, 450은 움직이는걸보고 대충 맞춘 값
-	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+	// MoveSpeed_는 인게임의 스피드수치, 400은 움직이는걸보고 대충 맞춘 값
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 400);
 }
 void Player::BodyAcheiveUpdate()
 {
@@ -391,7 +391,7 @@ void Player::HeadAcheiveUpdate()
 	}
 	MoveDir_.Limit2D(1.0f);
 
-	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 400);
 }
 void Player::HeadHittedUpdate()
 {
@@ -438,7 +438,7 @@ void Player::HeadHittedUpdate()
 	}
 	MoveDir_.Limit2D(1.0f);
 
-	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 450);
+	PlayerSetMove(MoveDir_ * GameEngineTime::GetDeltaTime() * MoveSpeed_ * 400);
 }
 void Player::HeadDeadUpdate()
 {

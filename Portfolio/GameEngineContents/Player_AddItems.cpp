@@ -96,6 +96,7 @@ void Player::AddPassiveEffect(PassiveType _Type)
 		Damage_ += 1.2f;
 		break;
 	case PassiveType::Item012:
+		GetPlayerHP()->AddMaxHp(1);
 		MoveSpeed_ += 0.4f;
 		Damage_ += 0.5f;
 		Range_ += 1.5f;
@@ -104,7 +105,7 @@ void Player::AddPassiveEffect(PassiveType _Type)
 		GetPlayerHP()->AddMaxHp(1, 12);
 		break;
 	case PassiveType::Item017:
-		for (int i = 0; i < 45; i++)
+		for (int i = 0; i < 60; i++)
 		{
 			AddItem(ItemType::KeyTwo);
 		}
@@ -135,8 +136,10 @@ void Player::AddPassiveEffect(PassiveType _Type)
 		break;
 	case PassiveType::Item109:
 		Have109_ = true;
+		AddItem(ItemType::MoneySilver);
 		break;
 	case PassiveType::Item121:
+		GetPlayerHP()->AddMaxHp(1, 0);
 		Damage_ += 0.4f;
 		Range_ += 0.25f;
 		MoveSpeed_ -= 0.1f;
@@ -157,7 +160,14 @@ void Player::AddPassiveEffect(PassiveType _Type)
 		Have302_ = true;
 		break;
 	case PassiveType::Item307:
-		Have307_ = true;
+		AddItem(ItemType::Money);
+		AddItem(ItemType::Key);
+		AddItem(ItemType::Bomb);
+		GetPlayerHP()->AddMaxHp(1);
+		Damage_ += 0.6f;
+		MoveSpeed_ += 0.5f;
+		Range_ += 1.5f;
+		AttackSpeed_ += 1.0f;
 		break;
 	default:
 		break;
@@ -170,22 +180,11 @@ void Player::MakeItemRenderer(PassiveType _Type)
 	case PassiveType::Item001:
 		EffectItem001();
 		break;
-	case PassiveType::Item004:
-		break;
-	case PassiveType::Item012:
-		break;
 	case PassiveType::Item015:
-		break;
-	case PassiveType::Item022:
-		break;
-	case PassiveType::Item023:
+		EffectItem015();
 		break;
 	case PassiveType::Item072:
 		EffectItem072();
-		break;
-	case PassiveType::Item121:
-		break;
-	case PassiveType::Item246:
 		break;
 
 	case PassiveType::Item007:
@@ -206,10 +205,22 @@ void Player::MakeItemRenderer(PassiveType _Type)
 	}
 }
 
+bool Player::IsAlreadyHave(PassiveType _Type)
+{
+	for (int i = 0; i < PassiveVector_.size(); i++)
+	{
+		if (PassiveVector_[i] == _Type)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
 void Player::EffectItem001()
 {
 	std::string Name = "costume_001_sadonion.bmp";
-	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -8 });
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -8 }, static_cast<int>(ORDER::FRONTPLAYER));
 	chracterRenderer_->CreateAnimation(Name, "Idle", 0, 2, 0.1f, true);
 	chracterRenderer_->CreateAnimation(Name, "Left_1", 6, 8, 0.1f, true);
 	chracterRenderer_->CreateAnimation(Name, "Left_2", 6, 8, 0.1f, true);
@@ -217,6 +228,23 @@ void Player::EffectItem001()
 	chracterRenderer_->CreateAnimation(Name, "Right_2", 3, 5, 0.1f, true);
 	chracterRenderer_->CreateAnimation(Name, "Up_1", 0, 2, 0.1f, true);
 	chracterRenderer_->CreateAnimation(Name, "Up_2", 0, 2, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Down_1", 0, 2, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Down_2", 0, 2, 0.1f, true);
+	chracterRenderer_->ChangeAnimation("Idle");
+	HeadAddRender_.push_back(chracterRenderer_);
+}
+
+void Player::EffectItem015()
+{
+	std::string Name = "costume_015_heart.bmp";
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 35 }, static_cast<int>(ORDER::FRONTPLAYER));
+	chracterRenderer_->CreateAnimation(Name, "Idle", 0, 2, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Left_1", 12, 14, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Left_2", 12, 14, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Right_1", 5, 7, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Right_2", 5, 7, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Up_1", 8, 9, 0.1f, false);
+	chracterRenderer_->CreateAnimation(Name, "Up_2", 8, 9, 0.1f, false);
 	chracterRenderer_->CreateAnimation(Name, "Down_1", 0, 2, 0.1f, true);
 	chracterRenderer_->CreateAnimation(Name, "Down_2", 0, 2, 0.1f, true);
 	chracterRenderer_->ChangeAnimation("Idle");
@@ -226,16 +254,16 @@ void Player::EffectItem001()
 void Player::EffectItem072()
 {
 	std::string Name = "costume_072_rosary.bmp";
-	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -8 });
-	chracterRenderer_->CreateAnimation(Name, "Idle", 0, 2, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Left_1", 6, 8, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Left_2", 6, 8, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Right_1", 3, 5, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Right_2", 3, 5, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Up_1", 0, 2, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Up_2", 0, 2, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Down_1", 0, 2, 0.1f, true);
-	chracterRenderer_->CreateAnimation(Name, "Down_2", 0, 2, 0.1f, true);
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { -10, 20 }, static_cast<int>(ORDER::FRONTPLAYER));
+	chracterRenderer_->CreateAnimation(Name, "Idle", 0, 1, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Left_1", 23, 23, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Left_2", 23, 23, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Right_1", 18, 18, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Right_2", 18, 18, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Up_1", 10, 11, 0.1f, false);
+	chracterRenderer_->CreateAnimation(Name, "Up_2", 10, 11, 0.1f, false);
+	chracterRenderer_->CreateAnimation(Name, "Down_1", 0, 1, 0.1f, true);
+	chracterRenderer_->CreateAnimation(Name, "Down_2", 0, 1, 0.1f, true);
 	chracterRenderer_->ChangeAnimation("Idle");
 	HeadAddRender_.push_back(chracterRenderer_);
 }
@@ -243,6 +271,7 @@ void Player::EffectItem072()
 void Player::EffectItemDefault(PassiveType _Type)
 {
 	std::string Name = "";
+	float4 TmpPos = { 0, -8 };
 	switch (_Type)
 	{
 	case PassiveType::Item007:
@@ -271,14 +300,16 @@ void Player::EffectItemDefault(PassiveType _Type)
 		break;
 	case PassiveType::Item302:
 		Name = "costume_302_leo.bmp";
+		TmpPos = { 0, -15 };
 		break;
 	case PassiveType::Item307:
 		Name = "costume_307_capricorn.bmp";
+		TmpPos = { 0, -15 };
 		break;
 	default:
 		break;
 	}
-	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, { 0, -8 });
+	GameEngineRenderer* chracterRenderer_ = CreateRenderer(RenderPivot::CENTER, TmpPos, static_cast<int>(ORDER::FRONTPLAYER));
 	chracterRenderer_->CreateAnimation(Name, "Idle", 0, 0, 0.1f, false);
 	chracterRenderer_->CreateAnimation(Name, "Up_1", 4, 4, 0.1f, false);
 	chracterRenderer_->CreateAnimation(Name, "Up_2", 4, 5, 0.1f, true);

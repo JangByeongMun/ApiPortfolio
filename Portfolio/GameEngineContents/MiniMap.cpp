@@ -229,7 +229,10 @@ void MiniMap::MakeNode()
 		}
 	}
 
-	SeeSpecialRooms();
+	if (true == Player::MainPlayer->Have246())
+	{
+		SeeSpecialRooms();
+	}
 }
 
 void MiniMap::ChangeMap(float4 _Dir)
@@ -418,33 +421,11 @@ void MiniMap::SeeAllMap()
 	for (int i = 0; i < NodeVecter_.size(); i++)
 	{
 		NodeVecter_[i]->State_ = NodeState::Past;
-		if (nullptr != NodeVecter_[i]->IconRenderer_)
-		{
-			if (IsBigsize_)
-			{
-				NodeVecter_[i]->IconRenderer_->Off();
-			}
-			else
-			{
-				NodeVecter_[i]->IconRenderer_->On();
-			}
-		}
 	}
 
 	for (int i = 0; i < BigNodeVecter_.size(); i++)
 	{
 		BigNodeVecter_[i]->State_ = NodeState::Past;
-		if (nullptr != BigNodeVecter_[i]->IconRenderer_)
-		{
-			if (IsBigsize_)
-			{
-				BigNodeVecter_[i]->IconRenderer_->On();
-			}
-			else
-			{
-				BigNodeVecter_[i]->IconRenderer_->Off();
-			}
-		}
 	}
 
 	ChangeMap({0, 0});
@@ -457,14 +438,6 @@ void MiniMap::SeeSpecialRooms()
 		if (nullptr != NodeVecter_[i]->IconRenderer_)
 		{
 			NodeVecter_[i]->State_ = NodeState::Past;
-			if (IsBigsize_)
-			{
-				NodeVecter_[i]->IconRenderer_->Off();
-			}
-			else
-			{
-				NodeVecter_[i]->IconRenderer_->On();
-			}
 		}
 	}
 
@@ -473,14 +446,8 @@ void MiniMap::SeeSpecialRooms()
 		if (nullptr != BigNodeVecter_[i]->IconRenderer_)
 		{
 			BigNodeVecter_[i]->State_ = NodeState::Past;
-			if (IsBigsize_)
-			{
-				BigNodeVecter_[i]->IconRenderer_->On();
-			}
-			else
-			{
-				BigNodeVecter_[i]->IconRenderer_->Off();
-			}
 		}
 	}
+
+	ChangeMap({ 0, 0 });
 }

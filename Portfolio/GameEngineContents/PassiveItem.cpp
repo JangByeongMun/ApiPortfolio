@@ -22,7 +22,7 @@ void PassiveItem::Setting(PassiveType _Type)
 	Type_ = _Type;
 
 	{
-	 	GameEngineRenderer* Renderer = CreateRenderer("levelitem_001_itemaltar.bmp", static_cast<int>(ORDER::PLAYER));
+	 	GameEngineRenderer* Renderer = CreateRenderer("levelitem_001_itemaltar.bmp", static_cast<int>(ORDER::BACKPLAYER));
 		Renderer->SetPivot({0, 20});
 	}
 
@@ -48,7 +48,6 @@ void PassiveItem::Start()
 	ItemNameVector_.push_back("collectibles_109_moneyispower.bmp");
 	ItemNameVector_.push_back("collectibles_121_oddmushroomlarge.bmp");
 	ItemNameVector_.push_back("collectibles_226_blacklotus.bmp");
-	ItemNameVector_.push_back("collectibles_121_oddmushroomlarge.bmp");
 	ItemNameVector_.push_back("collectibles_245_2020.bmp");
 	ItemNameVector_.push_back("collectibles_246_bluemap.bmp");
 	ItemNameVector_.push_back("collectibles_302_leo.bmp");

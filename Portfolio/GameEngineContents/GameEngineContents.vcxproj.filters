@@ -33,13 +33,13 @@
       <Filter>Play\Item</Filter>
     </ClInclude>
     <ClInclude Include="Door.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Fire.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Hole.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="MiniMap.h">
       <Filter>Play\UI</Filter>
@@ -48,13 +48,13 @@
       <Filter>Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="Poop.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Stone.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="StoneBlack.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Play\Player</Filter>
@@ -69,7 +69,7 @@
       <Filter>Play\Item</Filter>
     </ClInclude>
     <ClInclude Include="Thorn.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Accessory.h">
       <Filter>Play\Item</Filter>
@@ -90,10 +90,10 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="RandomRoomManager.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="RoomData.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="IntroPage.h">
       <Filter>Title</Filter>
@@ -105,7 +105,7 @@
       <Filter>Play\Option</Filter>
     </ClInclude>
     <ClInclude Include="MapPos.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="LoadingPage.h">
       <Filter>Loading</Filter>
@@ -174,7 +174,7 @@
       <Filter>Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="RoomActor.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
       <Filter>Play\Monster\Base</Filter>
@@ -207,10 +207,10 @@
       <Filter>Play\UI</Filter>
     </ClInclude>
     <ClInclude Include="Trapdoor.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="ClearBox.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="LoadingAnim1.h">
       <Filter>Loading</Filter>
@@ -228,10 +228,10 @@
       <Filter>Play\Item\Base</Filter>
     </ClInclude>
     <ClInclude Include="ShopItem.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="ShopKeeper.h">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClInclude>
     <ClInclude Include="HeartItem.h">
       <Filter>Play\Item</Filter>
@@ -315,13 +315,13 @@
       <Filter>Play\Item</Filter>
     </ClCompile>
     <ClCompile Include="Door.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Fire.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Hole.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="MiniMap.cpp">
       <Filter>Play\UI</Filter>
@@ -330,13 +330,13 @@
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="Poop.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Stone.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="StoneBlack.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Play\Player</Filter>
@@ -351,7 +351,7 @@
       <Filter>Play\Item</Filter>
     </ClCompile>
     <ClCompile Include="Thorn.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Accessory.cpp">
       <Filter>Play\Item</Filter>
@@ -372,10 +372,10 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="RandomRoomManager.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="RoomData.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="IntroPage.cpp">
       <Filter>Title</Filter>
@@ -453,7 +453,7 @@
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="RoomActor.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Play\Monster\Base</Filter>
@@ -486,13 +486,13 @@
       <Filter>Play\UI</Filter>
     </ClCompile>
     <ClCompile Include="Trapdoor.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Player_AddItems.cpp">
       <Filter>Play\Player</Filter>
     </ClCompile>
     <ClCompile Include="ClearBox.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="LoadingAnim1.cpp">
       <Filter>Loading</Filter>
@@ -510,10 +510,10 @@
       <Filter>Play\Item\Base</Filter>
     </ClCompile>
     <ClCompile Include="ShopItem.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="ShopKeeper.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="HeartItem.cpp">
       <Filter>Play\Item</Filter>
@@ -522,7 +522,7 @@
       <Filter>Play\Effect</Filter>
     </ClCompile>
     <ClCompile Include="RandomRoomMaker.cpp">
-      <Filter>Map</Filter>
+      <Filter>Play\Map</Filter>
     </ClCompile>
     <ClCompile Include="Mulligoon.cpp">
       <Filter>Play\Monster</Filter>
@@ -631,7 +631,7 @@
     <Filter Include="Play\Effect">
       <UniqueIdentifier>{969d834d-aa15-4771-9eca-58be72c053b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
+    <Filter Include="Play\Map">
       <UniqueIdentifier>{5f746567-a322-4fac-af26-4bb71bc32038}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

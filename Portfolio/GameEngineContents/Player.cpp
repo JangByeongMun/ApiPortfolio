@@ -35,6 +35,7 @@
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
 #include "Stone.h"
+#include "PassiveItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -76,7 +77,6 @@ Player::Player()
 	, Have245_(false)
 	, Have246_(false)
 	, Have302_(false)
-	, Have307_(false)
 	, AddDamageTo109_(0.0f)
 	, RoomPos_({0, 0})
 	, InvincibilityTimer_(0)
@@ -163,6 +163,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("SpaceBar", VK_SPACE);
 		GameEngineInput::GetInst()->CreateKey("Test1", 'R');
 		GameEngineInput::GetInst()->CreateKey("Test2", 'T');
+		GameEngineInput::GetInst()->CreateKey("ctrl", VK_CONTROL);
 	}
 
 	ChangeBodyState(PlayerBodyState::Idle);
@@ -170,7 +171,7 @@ void Player::Start()
 
 	//Have245_ = true;
 	//Have246_ = true;
-	Have302_ = true;
+	//Have302_ = true;
 }
 
 void Player::Update()
@@ -234,6 +235,18 @@ void Player::Update()
 			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
 			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
 			TmpHeart->Setting(HeartType::Red);
+		}
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("ctrl"))
+	{
+		if (true == GameEngineInput::GetInst()->IsDown("Test1"))
+		{
+			PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
+			TmpPassiveItem->SetPosition(GetPosition()); //+ float4(100, 0));
+
+			//PassiveType TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+			TmpPassiveItem->Setting(PassiveType::Item307);
 		}
 	}
 

@@ -54,7 +54,7 @@ bool ItemBase::CanMove(float4 _Value)
 }
 void ItemBase::SetObjectMove()
 {
-	Dir_.Limit2D(3.0f);
+	Dir_.Limit2D(5.0f);
 	if (true == CanMove(Dir_))
 	{
 		SetMove(Dir_);
