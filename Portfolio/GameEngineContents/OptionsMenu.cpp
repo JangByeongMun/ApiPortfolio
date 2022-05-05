@@ -74,7 +74,7 @@ void OptionsMenu::AddValue(int _Value)
 	{
 	case 0: 
 		VolumeSfx_->SetIndex(10 - Option_SFX);
-		GameEngineSound::SoundPlayOneShotWithVolume("plop.wav", 0, 0.01f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("plop.wav", 0, 1.0f * Option_SFX);
 		break;
 	case 1:
 		VolumeMusic_->SetIndex(10 - Option_MUSIC);

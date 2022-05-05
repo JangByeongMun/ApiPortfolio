@@ -156,7 +156,7 @@ void EnterBossRoom::Start()
 	}
 
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("castleportcullis.wav", 0, 0.01f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("castleportcullis.wav", 0, 1.0f * Option_SFX);
 	}
 }
 

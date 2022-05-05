@@ -48,7 +48,7 @@ void BoxItem::SetType(BoxType _Type)
 	Renderer_->CreateAnimation(TmpName, "Opening", 2, 4, 0.1f, false);
 	Renderer_->ChangeAnimation("Idle");
 
-	GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 0.01f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume("chest drop 1.wav", 0, 1.0f * Option_SFX);
 
 	ChangeState(BoxState::Appear);
 }
@@ -540,7 +540,7 @@ void BoxItem::OpenStart()
 	IsOpen_ = true;
 	AnimTimer_ = 0.0f;
 	Renderer_->ChangeAnimation("Opening");
-	GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 0.01f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume("chest open 1.wav", 0, 1.0f * Option_SFX);
 }
 
 void BoxItem::AppearUpdate()

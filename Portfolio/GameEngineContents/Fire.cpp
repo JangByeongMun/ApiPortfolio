@@ -105,7 +105,7 @@ void Fire::Update()
 
 	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
 	{
-		BGMPlayer_.SetVolume(5.0f * Option_SFX);
+		BGMPlayer_.SetVolume(1.0f * Option_SFX);
 	}
 	else
 	{

@@ -73,7 +73,7 @@ void PlayerHP::PlayerDeadCheck()
 		{
 			std::string TmpName = "IsaacDiesNew";
 			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
-			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 5.0f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
 		}
 	}
 	else
@@ -84,7 +84,7 @@ void PlayerHP::PlayerDeadCheck()
 		{
 			std::string TmpName = "hurtgrunt";
 			TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
-			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 5.0f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
 		}
 	}
 }

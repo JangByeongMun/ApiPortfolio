@@ -71,7 +71,7 @@ void RoomActor::MinusMonsterCount()
 
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 0.015f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 1.0f * Option_SFX);
 		OpenAllDoor();
 		Player::MainPlayer->AddGaze(1);
 
@@ -93,7 +93,7 @@ void RoomActor::MinusBossCount()
 
 	if (MonsterCount_ <= 0 && BossCount_ <= 0)
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 0.015f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 1.0f * Option_SFX);
 		OpenAllDoor();
 		Player::MainPlayer->AddGaze(1);
 

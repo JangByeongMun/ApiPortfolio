@@ -198,7 +198,7 @@ void Player::Update()
 			BombActor->SetPosition(GetPosition());
 			MinusItem(ItemType::Bomb, 1);
 
-			GameEngineSound::SoundPlayOneShotWithVolume("fetus land.wav", 0, 0.02f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume("fetus land.wav", 0, 1.0f * Option_SFX);
 		}
 	}
 
@@ -255,6 +255,11 @@ void Player::Update()
 			} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
 
 			TmpPassiveItem->Setting(TmpType);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("Test2"))
+		{
+			GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 1.0f * Option_SFX);
 		}
 	}
 
@@ -868,7 +873,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 		if (0 != FindRoom->GetMonsterCount() || 0 != FindRoom->GetBossCount())
 		{
 			FindRoom->CloseAllDoor();
-			GameEngineSound::SoundPlayOneShotWithVolume("door heavy close.wav", 0, 0.015f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume("door heavy close.wav", 0, 1.0f * Option_SFX);
 		}
 	}
 
