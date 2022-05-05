@@ -103,7 +103,7 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	{
 		BgmPlayer_ = GameEngineSound::SoundPlayControl("the depths.ogg");
 	}
-	BgmPlayer_.SetVolume(0.02f * Option_MUSIC);
+	BgmPlayer_.SetVolume(1.0f * Option_MUSIC);
 
 	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());
 	RandomRoomManager::GetInst()->ChangeFloor(CurrentFloor);

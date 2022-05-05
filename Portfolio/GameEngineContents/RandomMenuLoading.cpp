@@ -28,7 +28,7 @@ void RandomMenuLoading::Start()
 void RandomMenuLoading::RandomLoading()
 {
 	GameEngineSoundPlayer TmpPlayer = GameEngineSound::SoundPlayControlOneShot("MenuLoadingSound.ogg");
-	TmpPlayer.SetVolume(0.04f * Option_MUSIC);
+	TmpPlayer.SetVolume(1.0f * Option_MUSIC);
 
 	GameEngineRandom TmpRandom;
 	int SelectedIndex = TmpRandom.RandomInt(0, 5);
