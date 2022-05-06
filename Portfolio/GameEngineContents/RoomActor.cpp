@@ -41,7 +41,7 @@
 #include "Loki.h"
 #include "Mom.h"
 #include "Thorn.h"
-
+#include "FloatingKnight.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -353,6 +353,14 @@ void RoomActor::Setting()
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			TmpMonster->SetType(FlyType::Red);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::FloatingKnight:
+		{
+			FloatingKnight* TmpMonster = GetLevel()->CreateActor<FloatingKnight>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);
 			break;
 		}

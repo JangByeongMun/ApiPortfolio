@@ -35,9 +35,9 @@ void Fly::SetType(FlyType _Type)
 
 void Fly::Start()
 {
-	Renderer_ = CreateRenderer("monster_010_eternalfly.bmp", static_cast<int>(ORDER::PLAYER));
-	Renderer_->CreateAnimation("monster_010_eternalfly.bmp", "Normal", 0, 1, 0.1f, true);
-	Renderer_->CreateAnimation("monster_010_eternalfly.bmp", "Red", 4, 7, 0.1f, true);
+	Renderer_ = CreateRenderer("monster_010_fly.bmp", static_cast<int>(ORDER::PLAYER));
+	Renderer_->CreateAnimation("monster_010_fly.bmp", "Normal", 0, 1, 0.1f, true);
+	Renderer_->CreateAnimation("monster_010_fly.bmp", "Red", 4, 7, 0.1f, true);
 	Renderer_->ChangeAnimation("Normal");
 
 	DeadRenderer_ = CreateRenderer("monster_010_eternalfly_Dead.bmp", static_cast<int>(ORDER::PLAYER));

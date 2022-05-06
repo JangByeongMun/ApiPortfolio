@@ -164,6 +164,71 @@ bool Monster::MonsterSetMoveToTeleport(float4 _Value)
 	return false;
 }
 
+bool Monster::MonsterSetMoveToFlyReturn(float4 _Value)
+{
+	GameEngineImage* MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
+
+	// 룸마다 크기는 같으므로 보정치를 줘서 어떤룸에서도 똑같은 위치만큼만 이동할수있도록
+	RoomActor* FindRoom = RandomRoomManager::GetInst()->GetCurrentRoom();
+	float4 AddPivot = FindRoom->GetPosition() - GameEngineWindow::GetScale().Half();
+
+	// x축이나 y축으로 더이상 갈수없을경우 x나 y중 한군데를 제외하고 이동
+	float4 NextPos = GetPosition() + _Value;
+	float4 NextPos_x = GetPosition() + float4(_Value.x, 0);
+	float4 NextPos_y = GetPosition() + float4(0, _Value.y);
+	int Color = MapColImage_->GetImagePixel(NextPos - AddPivot);
+	int Color_x = MapColImage_->GetImagePixel(NextPos_x - AddPivot);
+	int Color_y = MapColImage_->GetImagePixel(NextPos_y - AddPivot);
+	if (RGB(0, 0, 0) != Color &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", _Value))
+	{
+		SetMove(_Value);
+		
+		if (_Value.Len2D() < 0.1f)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	else if (RGB(0, 0, 0) != Color_x &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", _Value))
+	{
+		float4 TmpPos = float4(_Value.x, 0);
+		SetMove(TmpPos);
+		
+		if (TmpPos.Len2D() < 0.1f)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	else if (RGB(0, 0, 0) != Color_y &&
+		false == Collision_->NextPosCollisionCheckRect("Wall", _Value))
+	{
+		float4 TmpPos = float4(0, _Value.y);
+		SetMove(TmpPos);
+
+		if (TmpPos.Len2D() < 0.1f)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	else
+	{
+		return false;
+	}
+}
+
 void Monster::Damaged(float _Damage)
 {
 	if (IsInvincibility_ == true)

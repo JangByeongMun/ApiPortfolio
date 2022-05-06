@@ -9,7 +9,7 @@ void RandomRoomManager::MakeRooms()
 		{
 			std::vector<RoomData> TmpVector;
 
-			{
+			/*{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddMonster(0, 1, MonsterType::Pooter);
@@ -297,7 +297,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -343,7 +342,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -368,7 +366,17 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddMonster(11, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
+			}*/
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
+				TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
+
+				TmpVector.push_back(TmpData);
 			}
+
 			AllRooms_.insert({ 0, TmpVector });
 		}
 

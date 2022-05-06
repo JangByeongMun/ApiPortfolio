@@ -52,6 +52,11 @@ void Projectile::Update()
 		DestroyProjectile();
 	}
 
+	if (true == Collision_->CollisionCheckRect("NoDamageMonster"))
+	{
+		DestroyProjectile();
+	}
+
 	// 불과 충돌했을때
 	{
 		std::vector<GameEngineCollision*> CollisionResult;

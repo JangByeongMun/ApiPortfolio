@@ -155,6 +155,7 @@ enum class MonsterType
 	HostRed,
 	FlyNormal,
 	FlyRed,
+	FloatingKnight,
 	Max,
 };
 
