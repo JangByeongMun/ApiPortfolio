@@ -43,6 +43,7 @@
 #include "Thorn.h"
 #include "FloatingKnight.h"
 #include "Boil.h"
+#include "Gut.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -368,6 +369,14 @@ void RoomActor::Setting()
 		case MonsterType::Boil:
 		{
 			Boil* TmpMonster = GetLevel()->CreateActor<Boil>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Gut:
+		{
+			Gut* TmpMonster = GetLevel()->CreateActor<Gut>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);

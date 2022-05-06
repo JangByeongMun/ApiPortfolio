@@ -293,6 +293,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Gut.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="HeartItem.h">
       <SubType>
       </SubType>
@@ -654,6 +658,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Gusher.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Gut.cpp">
       <SubType>
       </SubType>
     </ClCompile>

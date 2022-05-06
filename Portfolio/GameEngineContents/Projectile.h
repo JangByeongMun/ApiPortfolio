@@ -27,9 +27,13 @@ public:
 		Type_ = _Type;
 
 		int AddValue = 5;
-		if (false == IsPlayerProjectile())
+		if (false == IsPlayerProjectile() && Type_ == ProjectileType::ENEMY_BASIC)
 		{
 			AddValue += 16;
+		}
+		if (Type_ == ProjectileType::ENEMY_BASIC)
+		{
+			AddValue += 5;
 		}
 
 		if (2.0f <= Damage_ && Damage_ < 3.0f)
@@ -57,8 +61,28 @@ public:
 			AddValue += 5;
 		}
 
-		GameEngineRenderer* Renderer = CreateRenderer("tears.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
-		Renderer->SetIndex(AddValue);
+		std::string TmpName = "";
+		switch (Type_)
+		{
+		case ProjectileType::PLAYER_BASIC:
+			TmpName = "tears.bmp";
+			break;
+		case ProjectileType::ENEMY_BASIC:
+			TmpName = "tears.bmp";
+			break;
+		case ProjectileType::ENEMY_IPECAC:
+		{
+			GameEngineRenderer* TmpRenderer = CreateRenderer("shadow.bmp", RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::BACKPLAYER));
+			TmpRenderer->SetScale({ 40, 20 });
+			TmpRenderer->SetAlpha(100);
+		}
+			TmpName = "tears2.bmp";
+			break;
+		default:
+			break;
+		}
+		Renderer_ = CreateRenderer(TmpName, RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
+		Renderer_->SetIndex(AddValue);
 	}
 	inline void SetLifeTime_(float _Value)
 	{
@@ -83,6 +107,7 @@ public:
 protected:
 
 private:
+	GameEngineRenderer* Renderer_;
 	GameEngineCollision* Collision_;
 	ProjectileType Type_;
 	float4 Vec_;

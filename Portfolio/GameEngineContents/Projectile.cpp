@@ -11,9 +11,11 @@
 #include "PlayerHP.h"
 #include "Fire.h"
 #include "Poop.h"
+#include "BoomEffect.h"
 
 Projectile::Projectile() 
-	: Collision_()
+	: Renderer_(nullptr)
+	, Collision_(nullptr)
 	, Type_(ProjectileType::PLAYER_BASIC)
 	, Vec_({ 0, 0 })
 	, Lifetime_(0)
@@ -35,9 +37,25 @@ void Projectile::Update()
 {
 	CurrentTimer_ += GameEngineTime::GetDeltaTime();
 
-	if (Lifetime_ - CurrentTimer_ <= 0.3f)
+	if (ProjectileType::ENEMY_IPECAC == Type_)
 	{
-		Vec_ += {0, 600 * GameEngineTime::GetDeltaTime()};
+		if (Lifetime_ * 0.5f > CurrentTimer_)
+		{
+			float4 LerpPos = float4::Lerp({ 0, 0 }, {0, -150}, CurrentTimer_ / (Lifetime_ * 0.5f));
+			Renderer_->SetPivot(LerpPos);
+		}
+		else
+		{
+			float4 LerpPos = float4::Lerp({ 0, -150 }, { 0, 0 }, (CurrentTimer_ - (Lifetime_ * 0.5f)) / (Lifetime_ * 0.5f));
+			Renderer_->SetPivot(LerpPos);
+		}
+	}
+	else
+	{
+		if (Lifetime_ - CurrentTimer_ <= 0.3f)
+		{
+			Vec_ += {0, 600 * GameEngineTime::GetDeltaTime()};
+		}
 	}
 
 	// 설정한 시간이 지나면 삭제
@@ -140,21 +158,29 @@ void Projectile::DestroyProjectile()
 {
 	PlayLevel* TmpLevel = static_cast<PlayLevel*>(GetLevel());
 
-	if (true == IsPlayerProjectile())
+	if (Type_ == ProjectileType::ENEMY_IPECAC) // 구토제
 	{
-		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp", static_cast<int>(ORDER::PLAYER));
-		TmpRenderer->CreateAnimation("effect_015_tearpoofa.bmp", "effect_015_tearpoofa", 0, 15, 0.02f, false);
-		TmpRenderer->ChangeAnimation("effect_015_tearpoofa");
-		TmpRenderer->SetDeleteEndFrame_(true);
-		TmpRenderer->SetPivot(GetPosition());
+		TmpLevel->CreateActor<BoomEffect>()->Setting(GetPosition());
 	}
 	else
 	{
-		GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_003_bloodtear.bmp", static_cast<int>(ORDER::PLAYER));
-		TmpRenderer->CreateAnimation("effect_003_bloodtear.bmp", "effect_003_bloodtear", 0, 15, 0.02f, false);
-		TmpRenderer->ChangeAnimation("effect_003_bloodtear");
-		TmpRenderer->SetDeleteEndFrame_(true);
-		TmpRenderer->SetPivot(GetPosition());
+		if (true == IsPlayerProjectile())
+		{
+			GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_015_tearpoofa.bmp", static_cast<int>(ORDER::PLAYER));
+			TmpRenderer->CreateAnimation("effect_015_tearpoofa.bmp", "effect_015_tearpoofa", 0, 15, 0.02f, false);
+			TmpRenderer->ChangeAnimation("effect_015_tearpoofa");
+			TmpRenderer->SetDeleteEndFrame_(true);
+			TmpRenderer->SetPivot(GetPosition());
+		}
+		else
+		{
+			GameEngineRenderer* TmpRenderer = TmpLevel->GlobalActor->CreateRenderer("effect_003_bloodtear.bmp", static_cast<int>(ORDER::PLAYER));
+			TmpRenderer->CreateAnimation("effect_003_bloodtear.bmp", "effect_003_bloodtear", 0, 15, 0.02f, false);
+			TmpRenderer->ChangeAnimation("effect_003_bloodtear");
+			TmpRenderer->SetDeleteEndFrame_(true);
+			TmpRenderer->SetPivot(GetPosition());
+		}
+
 	}
 	
 	Death();

@@ -380,8 +380,8 @@ void RandomRoomManager::MakeRooms()
 			{
 				RoomData TmpData = RoomData();
 
-				TmpData.AddMonster(0, 1, MonsterType::Boil);
-				TmpData.AddMonster(12, 5, MonsterType::Boil);
+				TmpData.AddMonster(0, 1, MonsterType::Gut);
+				TmpData.AddMonster(12, 5, MonsterType::Gut);
 
 				TmpVector.push_back(TmpData);
 			}

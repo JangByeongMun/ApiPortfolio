@@ -388,6 +388,9 @@ void BindingOfIsaac::ImageCut()
 		Image = GameEngineImageManager::GetInst()->Find("tears.bmp");
 		Image->Cut({ 96, 96 });
 
+		Image = GameEngineImageManager::GetInst()->Find("tears2.bmp");
+		Image->Cut({ 96, 96 });
+
 		Image = GameEngineImageManager::GetInst()->Find("LoadingMap.bmp");
 		Image->Cut({ 96, 96 });
 
@@ -508,6 +511,9 @@ void BindingOfIsaac::ImageCut()
 		Image->CutCount(2, 2);
 
 		Image = GameEngineImageManager::GetInst()->Find("monster_087_boil.bmp");
+		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_089_gut.bmp");
 		Image->CutCount(4, 3);
 	}
 

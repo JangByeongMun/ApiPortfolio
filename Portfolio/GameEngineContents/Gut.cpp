@@ -1,17 +1,17 @@
-#include "Boil.h"
+#include "Gut.h"
 
-Boil::Boil() 
+Gut::Gut() 
 {
 }
 
-Boil::~Boil() 
+Gut::~Gut() 
 {
 }
 
-void Boil::Start()
+void Gut::Start()
 {
-	Renderer_ = CreateRenderer("monster_087_boil.bmp", static_cast<int>(ORDER::PLAYER));
-	Collision_ = CreateCollision("Monster", { 60, 60 }, {0, 20});
+	Renderer_ = CreateRenderer("monster_089_gut.bmp", static_cast<int>(ORDER::PLAYER));
+	Collision_ = CreateCollision("Monster", { 60, 60 }, { 0, 20 });
 
 	SetHP(20.0f);
 	Damaged(15.0f);
@@ -19,7 +19,7 @@ void Boil::Start()
 	SetAttackDelay(2.0f);
 }
 
-void Boil::MonsterUpdate()
+void Gut::MonsterUpdate()
 {
 	if (GetHP() < 20.0f)
 	{
@@ -31,11 +31,11 @@ void Boil::MonsterUpdate()
 		if (AttackTimer_ >= AttackDelay_)
 		{
 			AttackTimer_ = 0.0f;
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 2; i++)
 			{
 				float4 RandomPos = AttackNormalDir() * 350.0f;
 				RandomPos += float4(GameEngineRandom::MainRandom->RandomFloat(-2.0f, 2.0f), GameEngineRandom::MainRandom->RandomFloat(-2.0f, 2.0f)) * 60;
-				Shoot(RandomPos, ProjectileType::ENEMY_BASIC);
+				Shoot(RandomPos, ProjectileType::ENEMY_IPECAC);
 			}
 		}
 	}
