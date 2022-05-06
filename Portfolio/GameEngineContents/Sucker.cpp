@@ -37,8 +37,8 @@ void Sucker::MonsterUpdate()
 
 void Sucker::MonsterDeath()
 {
-	Shoot({300, 0}, ProjectileType::ENEMY_BASIC);
-	Shoot({-300, 0}, ProjectileType::ENEMY_BASIC);
-	Shoot({0, 300}, ProjectileType::ENEMY_BASIC);
-	Shoot({0, -300}, ProjectileType::ENEMY_BASIC);
+	Shoot({400, 0}, ProjectileType::ENEMY_BASIC);
+	Shoot({-400, 0}, ProjectileType::ENEMY_BASIC);
+	Shoot({0, 400}, ProjectileType::ENEMY_BASIC);
+	Shoot({0, -400}, ProjectileType::ENEMY_BASIC);
 }

@@ -368,21 +368,30 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}*/
 
+			//{
+			//	RoomData TmpData = RoomData();
+			//
+			//	TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
+			//	TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
+			//
+			//	TmpVector.push_back(TmpData);
+			//}
+			//
+			//{
+			//	RoomData TmpData = RoomData();
+			//
+			//	TmpData.AddMonster(0, 1, MonsterType::Boil);
+			//	TmpData.AddMonster(12, 5, MonsterType::Gut);
+			//
+			//	TmpVector.push_back(TmpData);
+			//}
+
 			{
 				RoomData TmpData = RoomData();
-
-				TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
-				TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
-
-				TmpVector.push_back(TmpData);
-			}
-
-			{
-				RoomData TmpData = RoomData();
-
-				TmpData.AddMonster(0, 1, MonsterType::Gut);
-				TmpData.AddMonster(12, 5, MonsterType::Gut);
-
+			
+				TmpData.AddMonster(0, 1, MonsterType::Sucker);
+				TmpData.AddMonster(12, 5, MonsterType::Spit);
+			
 				TmpVector.push_back(TmpData);
 			}
 

@@ -515,6 +515,11 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("monster_089_gut.bmp");
 		Image->CutCount(4, 3);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_079_spit_Left.bmp");
+		Image->CutCount(2, 1);
+		Image = GameEngineImageManager::GetInst()->Find("monster_079_spit_Right.bmp");
+		Image->CutCount(2, 1);
 	}
 
 	/////////////////////////////////// BossMonster

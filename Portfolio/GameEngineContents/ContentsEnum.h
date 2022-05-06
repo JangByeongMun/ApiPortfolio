@@ -138,6 +138,7 @@ enum class MonsterType
 	FloatingKnight,
 	Boil,
 	Gut,
+	Spit,
 	Max,
 };
 

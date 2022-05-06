@@ -31,9 +31,9 @@ public:
 		{
 			AddValue += 16;
 		}
-		if (Type_ == ProjectileType::ENEMY_BASIC)
+		if (Type_ == ProjectileType::ENEMY_IPECAC)
 		{
-			AddValue += 5;
+			AddValue += 3;
 		}
 
 		if (2.0f <= Damage_ && Damage_ < 3.0f)
