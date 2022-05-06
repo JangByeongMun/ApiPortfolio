@@ -41,12 +41,12 @@ void Projectile::Update()
 	{
 		if (Lifetime_ * 0.5f > CurrentTimer_)
 		{
-			float4 LerpPos = float4::Lerp({ 0, 0 }, {0, -150}, CurrentTimer_ / (Lifetime_ * 0.5f));
+			float4 LerpPos = float4::Lerp({ 0, 0 }, {0, -120}, CurrentTimer_ / (Lifetime_ * 0.5f));
 			Renderer_->SetPivot(LerpPos);
 		}
 		else
 		{
-			float4 LerpPos = float4::Lerp({ 0, -150 }, { 0, 0 }, (CurrentTimer_ - (Lifetime_ * 0.5f)) / (Lifetime_ * 0.5f));
+			float4 LerpPos = float4::Lerp({ 0, -120 }, { 0, 0 }, (CurrentTimer_ - (Lifetime_ * 0.5f)) / (Lifetime_ * 0.5f));
 			Renderer_->SetPivot(LerpPos);
 		}
 	}

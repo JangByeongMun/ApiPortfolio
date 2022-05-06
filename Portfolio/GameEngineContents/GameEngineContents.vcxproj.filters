@@ -293,6 +293,9 @@
     <ClInclude Include="Spit.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Charger.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -588,6 +591,9 @@
       <Filter>Play\Monster</Filter>
     </ClCompile>
     <ClCompile Include="Spit.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Charger.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>

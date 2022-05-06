@@ -223,6 +223,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Charger.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="ClearBox.h">
       <SubType>
       </SubType>
@@ -593,6 +597,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="CharacterMenu.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Charger.cpp">
       <SubType>
       </SubType>
     </ClCompile>

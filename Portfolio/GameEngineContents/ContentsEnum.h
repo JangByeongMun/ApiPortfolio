@@ -139,6 +139,7 @@ enum class MonsterType
 	Boil,
 	Gut,
 	Spit,
+	Charger,
 	Max,
 };
 

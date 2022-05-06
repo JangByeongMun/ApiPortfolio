@@ -45,6 +45,7 @@
 #include "Boil.h"
 #include "Gut.h"
 #include "Spit.h"
+#include "Charger.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -386,6 +387,14 @@ void RoomActor::Setting()
 		case MonsterType::Spit:
 		{
 			Spit* TmpMonster = GetLevel()->CreateActor<Spit>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			MonsterVector_.push_back(TmpMonster);
+			break;
+		}
+		case MonsterType::Charger:
+		{
+			Charger* TmpMonster = GetLevel()->CreateActor<Charger>();
 			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
 			TmpMonster->SetRoom(*this);
 			MonsterVector_.push_back(TmpMonster);

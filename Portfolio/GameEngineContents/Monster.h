@@ -71,6 +71,8 @@ public:
 	void MonsterSetMoveToWalk(float4 _Value);
 	bool MonsterSetMoveToTeleport(float4 _Value);
 	bool MonsterSetMoveToFlyReturn(float4 _Value);
+	bool MonsterSetMoveToWalkReturn(float4 _Value);
+
 	inline void SetMoveSpeed(float _Speed)
 	{
 		MoveSpeed_ = _Speed;
