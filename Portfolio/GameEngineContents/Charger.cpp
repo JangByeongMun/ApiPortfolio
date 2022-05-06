@@ -3,6 +3,9 @@
 
 Charger::Charger() 
 	: IsAttack_(false)
+	, Dir_(ChargerDir::None)
+	, MoveDir_(float4::ZERO)
+	, AnimTimer_(0.0f)
 {
 }
 

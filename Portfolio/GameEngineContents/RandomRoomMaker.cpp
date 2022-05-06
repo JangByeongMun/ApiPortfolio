@@ -3,13 +3,13 @@
 
 void RandomRoomManager::MakeRooms()
 {
-	// 1Ãþ
+	///////////////////////// 1Ãþ
 	{
 		// ±âº»¹æ
 		{
 			std::vector<RoomData> TmpVector;
 
-			/*{
+			{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddMonster(0, 1, MonsterType::Pooter);
@@ -27,7 +27,8 @@ void RandomRoomManager::MakeRooms()
 						TmpData.AddBlock(x, y, BlockType::STONE);
 					}
 				}
-				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+				TmpData.AddMonster(12, 0, MonsterType::Gaper);
+				TmpData.AddMonster(0, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -161,7 +162,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(12, 5, BlockType::STONE);
 
 				TmpData.AddMonster(6, 3, MonsterType::BoomFlyNormal);
-				TmpData.AddMonster(4, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(4, 3, MonsterType::BoomFlyRed);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -366,34 +367,43 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddMonster(11, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
-			}*/
+			}
 
-			//{
-			//	RoomData TmpData = RoomData();
-			//
-			//	TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
-			//	TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
-			//
-			//	TmpVector.push_back(TmpData);
-			//}
-			//
-			//{
-			//	RoomData TmpData = RoomData();
-			//
-			//	TmpData.AddMonster(0, 1, MonsterType::Boil);
-			//	TmpData.AddMonster(12, 5, MonsterType::Gut);
-			//
-			//	TmpVector.push_back(TmpData);
-			//}
+			{
+				RoomData TmpData = RoomData();
 
-			//{
-			//	RoomData TmpData = RoomData();
-			//
-			//	TmpData.AddMonster(0, 1, MonsterType::Sucker);
-			//	TmpData.AddMonster(12, 5, MonsterType::Spit);
-			//
-			//	TmpVector.push_back(TmpData);
-			//}
+				TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
+				TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Boil);
+				TmpData.AddMonster(12, 5, MonsterType::Gut);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Sucker);
+				TmpData.AddMonster(12, 5, MonsterType::Spit);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Spit);
+				TmpData.AddMonster(12, 5, MonsterType::Sucker);
+
+				TmpVector.push_back(TmpData);
+			}
 
 			{
 				RoomData TmpData = RoomData();
@@ -409,11 +419,133 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Charger);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Charger);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Gaper);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Gaper);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(2, 4, BlockType::POOP);
+				TmpData.AddBlock(10, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Gusher);
+				TmpData.AddMonster(6, 3, MonsterType::Gaper);
+				TmpData.AddMonster(11, 5, MonsterType::Gusher);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Boil);
+				TmpData.AddMonster(6, 3, MonsterType::Gut);
+				TmpData.AddMonster(5, 3, MonsterType::FlyNormal);
+				TmpData.AddMonster(7, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(11, 5, MonsterType::Boil);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::THORN);
+				TmpData.AddBlock(0, 1, BlockType::THORN);
+
+				TmpData.AddBlock(0, 5, BlockType::THORN);
+				TmpData.AddBlock(1, 6, BlockType::THORN);
+
+				TmpData.AddBlock(11, 0, BlockType::THORN);
+				TmpData.AddBlock(12, 1, BlockType::THORN);
+
+				TmpData.AddBlock(12, 5, BlockType::THORN);
+				TmpData.AddBlock(11, 6, BlockType::THORN);
+
+				TmpData.AddMonster(0, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(0, 6, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 6, MonsterType::RoundWorm);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::HostNormal);
+				TmpData.AddMonster(10, 5, MonsterType::HostRed);
+
+				TmpVector.push_back(TmpData);
+			}
+
 			AllRooms_.insert({ 0, TmpVector });
 		}
-
-
-
 
 		// »óÁ¡
 		{
@@ -584,6 +716,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);
 			}
+
 			AllTreasureRooms_.insert({ 0, TmpVector });
 		}
 
@@ -609,13 +742,24 @@ void RandomRoomManager::MakeRooms()
 		}
 	}
 
-	// 2Ãþ
+
+
+	///////////////////////// 2Ãþ
 	{
 		// ±âº»¹æ
 		{
 			std::vector<RoomData> TmpVector;
 
-			/*{
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Pooter);
+				TmpData.AddMonster(12, 5, MonsterType::Pooter);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
 				RoomData TmpData = RoomData();
 				for (int y = 1; y < 3; y++)
 				{
@@ -624,7 +768,8 @@ void RandomRoomManager::MakeRooms()
 						TmpData.AddBlock(x, y, BlockType::STONE);
 					}
 				}
-				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+				TmpData.AddMonster(12, 0, MonsterType::Gaper);
+				TmpData.AddMonster(0, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -758,7 +903,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(12, 5, BlockType::STONE);
 
 				TmpData.AddMonster(6, 3, MonsterType::BoomFlyNormal);
-				TmpData.AddMonster(4, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(4, 3, MonsterType::BoomFlyRed);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -894,7 +1039,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -940,7 +1084,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -965,13 +1108,179 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddMonster(11, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
-			}*/
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
+				TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
+
+				TmpVector.push_back(TmpData);
+			}
 
 			{
 				RoomData TmpData = RoomData();
 
 				TmpData.AddMonster(0, 1, MonsterType::Boil);
-				TmpData.AddMonster(12, 5, MonsterType::Boil);
+				TmpData.AddMonster(12, 5, MonsterType::Gut);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Sucker);
+				TmpData.AddMonster(12, 5, MonsterType::Spit);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Spit);
+				TmpData.AddMonster(12, 5, MonsterType::Sucker);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONEBLACK);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Charger);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Charger);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Charger);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Gaper);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Gaper);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(2, 4, BlockType::POOP);
+				TmpData.AddBlock(10, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Gusher);
+				TmpData.AddMonster(6, 3, MonsterType::Gaper);
+				TmpData.AddMonster(11, 5, MonsterType::Gusher);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Boil);
+				TmpData.AddMonster(6, 3, MonsterType::Gut);
+				TmpData.AddMonster(5, 3, MonsterType::FlyNormal);
+				TmpData.AddMonster(7, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(11, 5, MonsterType::Boil);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::THORN);
+				TmpData.AddBlock(0, 1, BlockType::THORN);
+
+				TmpData.AddBlock(0, 5, BlockType::THORN);
+				TmpData.AddBlock(1, 6, BlockType::THORN);
+
+				TmpData.AddBlock(11, 0, BlockType::THORN);
+				TmpData.AddBlock(12, 1, BlockType::THORN);
+
+				TmpData.AddBlock(12, 5, BlockType::THORN);
+				TmpData.AddBlock(11, 6, BlockType::THORN);
+
+				TmpData.AddMonster(0, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(0, 6, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 6, MonsterType::RoundWorm);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::HostNormal);
+				TmpData.AddMonster(10, 5, MonsterType::HostRed);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -1056,7 +1365,7 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-			AllShopRooms_.insert({ 0, TmpVector });
+			AllShopRooms_.insert({ 1, TmpVector });
 		}
 
 		// È²±Ý¹æ
@@ -1148,7 +1457,8 @@ void RandomRoomManager::MakeRooms()
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);
 			}
-			AllTreasureRooms_.insert({ 0, TmpVector });
+
+			AllTreasureRooms_.insert({ 1, TmpVector });
 		}
 
 		// º¸½º¹æ
@@ -1171,11 +1481,21 @@ void RandomRoomManager::MakeRooms()
 		}
 	}
 
-	// 3Ãþ
+
+	///////////////////////// 3Ãþ
 	{
 		// ±âº»¹æ
 		{
 			std::vector<RoomData> TmpVector;
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Pooter);
+				TmpData.AddMonster(12, 5, MonsterType::Pooter);
+
+				TmpVector.push_back(TmpData);
+			}
 
 			{
 				RoomData TmpData = RoomData();
@@ -1186,7 +1506,8 @@ void RandomRoomManager::MakeRooms()
 						TmpData.AddBlock(x, y, BlockType::STONE);
 					}
 				}
-				TmpData.AddMonster(0, 0, MonsterType::Pooter);
+				TmpData.AddMonster(12, 0, MonsterType::Gaper);
+				TmpData.AddMonster(0, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -1320,7 +1641,7 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(12, 5, BlockType::STONE);
 
 				TmpData.AddMonster(6, 3, MonsterType::BoomFlyNormal);
-				TmpData.AddMonster(4, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(4, 3, MonsterType::BoomFlyRed);
 
 				TmpVector.push_back(TmpData);
 			}
@@ -1456,7 +1777,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -1502,7 +1822,6 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
-
 			{
 				RoomData TmpData = RoomData();
 
@@ -1529,6 +1848,181 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::FloatingKnight);
+				TmpData.AddMonster(12, 5, MonsterType::FloatingKnight);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Boil);
+				TmpData.AddMonster(12, 5, MonsterType::Gut);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Sucker);
+				TmpData.AddMonster(12, 5, MonsterType::Spit);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Spit);
+				TmpData.AddMonster(12, 5, MonsterType::Sucker);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONEBLACK);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Charger);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Charger);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Charger);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::STONE);
+				TmpData.AddBlock(2, 4, BlockType::STONE);
+				TmpData.AddBlock(10, 2, BlockType::STONE);
+				TmpData.AddBlock(10, 4, BlockType::STONE);
+
+				TmpData.AddMonster(0, 1, MonsterType::Gaper);
+				TmpData.AddMonster(6, 3, MonsterType::Charger);
+				TmpData.AddMonster(12, 5, MonsterType::Gaper);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(2, 4, BlockType::POOP);
+				TmpData.AddBlock(10, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Gusher);
+				TmpData.AddMonster(6, 3, MonsterType::Gaper);
+				TmpData.AddMonster(11, 5, MonsterType::Gusher);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(2, 2, BlockType::POOP);
+				TmpData.AddBlock(10, 4, BlockType::POOP);
+
+				TmpData.AddMonster(1, 1, MonsterType::Boil);
+				TmpData.AddMonster(6, 3, MonsterType::Gut);
+				TmpData.AddMonster(5, 3, MonsterType::FlyNormal);
+				TmpData.AddMonster(7, 3, MonsterType::FlyRed);
+				TmpData.AddMonster(11, 5, MonsterType::Boil);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::THORN);
+				TmpData.AddBlock(0, 1, BlockType::THORN);
+
+				TmpData.AddBlock(0, 5, BlockType::THORN);
+				TmpData.AddBlock(1, 6, BlockType::THORN);
+
+				TmpData.AddBlock(11, 0, BlockType::THORN);
+				TmpData.AddBlock(12, 1, BlockType::THORN);
+
+				TmpData.AddBlock(12, 5, BlockType::THORN);
+				TmpData.AddBlock(11, 6, BlockType::THORN);
+
+				TmpData.AddMonster(0, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(0, 6, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 0, MonsterType::RoundWorm);
+				TmpData.AddMonster(12, 6, MonsterType::RoundWorm);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::Mulliboom);
+				TmpData.AddMonster(10, 5, MonsterType::Mulliboom);
+
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 0, BlockType::STONEBLACK);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+
+				TmpData.AddMonster(1, 1, MonsterType::HostNormal);
+				TmpData.AddMonster(10, 5, MonsterType::HostRed);
+
+				TmpVector.push_back(TmpData);
+			}
+
 			AllRooms_.insert({ 2, TmpVector });
 		}
 
@@ -1541,9 +2035,69 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddBlock(1, 1, BlockType::FIRE);
 				TmpData.AddBlock(11, 1, BlockType::FIRE);
 
-				TmpData.AddShop(4, 3, ShopType::Bomb);
-				TmpData.AddShop(6, 3, ShopType::Key);
-				TmpData.AddShop(8, 3, ShopType::Passive);
+				TmpData.AddShop(4, 4, ShopType::Bomb);
+				TmpData.AddShop(6, 4, ShopType::Key);
+				TmpData.AddShop(8, 4, ShopType::Passive);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(0, 0, BlockType::FIRE);
+				TmpData.AddBlock(0, 6, BlockType::FIRE);
+				TmpData.AddBlock(12, 0, BlockType::FIRE);
+				TmpData.AddBlock(12, 6, BlockType::FIRE);
+
+				TmpData.AddShop(4, 4, ShopType::Passive);
+				TmpData.AddShop(6, 4, ShopType::Bomb);
+				TmpData.AddShop(8, 4, ShopType::Bomb);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(0, 0, BlockType::FIRE);
+				TmpData.AddBlock(0, 6, BlockType::FIRE);
+				TmpData.AddBlock(12, 0, BlockType::FIRE);
+				TmpData.AddBlock(12, 6, BlockType::FIRE);
+
+				TmpData.AddShop(4, 4, ShopType::Key);
+				TmpData.AddShop(6, 4, ShopType::Heart);
+				TmpData.AddShop(8, 4, ShopType::Bomb);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(0, 0, BlockType::FIRE);
+				TmpData.AddBlock(0, 6, BlockType::FIRE);
+				TmpData.AddBlock(12, 0, BlockType::FIRE);
+				TmpData.AddBlock(12, 6, BlockType::FIRE);
+
+				TmpData.AddShop(4, 4, ShopType::Key);
+				TmpData.AddShop(6, 4, ShopType::Heart);
+				TmpData.AddShop(8, 4, ShopType::Bomb);
+
+				TmpData.RoomType_ = RoomType::Shop;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+				TmpData.AddBlock(0, 0, BlockType::POOP);
+				TmpData.AddBlock(0, 6, BlockType::POOP);
+				TmpData.AddBlock(12, 0, BlockType::POOP);
+				TmpData.AddBlock(12, 6, BlockType::POOP);
+
+				TmpData.AddShop(4, 4, ShopType::Key);
+				TmpData.AddShop(6, 4, ShopType::Passive);
+				TmpData.AddShop(8, 4, ShopType::Heart);
 
 				TmpData.RoomType_ = RoomType::Shop;
 				TmpVector.push_back(TmpData);
@@ -1583,6 +2137,65 @@ void RandomRoomManager::MakeRooms()
 				TmpData.RoomType_ = RoomType::Treasure;
 				TmpVector.push_back(TmpData);
 			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(0, 0, BlockType::STONE);
+				TmpData.AddBlock(1, 0, BlockType::STONE);
+				TmpData.AddBlock(0, 1, BlockType::STONE);
+
+				TmpData.AddBlock(0, 5, BlockType::STONE);
+				TmpData.AddBlock(0, 6, BlockType::STONE);
+				TmpData.AddBlock(1, 6, BlockType::STONE);
+
+				TmpData.AddBlock(11, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 0, BlockType::STONE);
+				TmpData.AddBlock(12, 1, BlockType::STONE);
+
+				TmpData.AddBlock(12, 5, BlockType::STONE);
+				TmpData.AddBlock(11, 6, BlockType::STONE);
+				TmpData.AddBlock(12, 6, BlockType::STONE);
+
+				TmpData.AddPassive(6, 4);
+
+				TmpData.RoomType_ = RoomType::Treasure;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddBlock(0, 0, BlockType::FIRE);
+
+				TmpData.AddBlock(0, 6, BlockType::FIRE);
+
+				TmpData.AddBlock(12, 0, BlockType::FIRE);
+
+				TmpData.AddBlock(12, 6, BlockType::FIRE);
+
+				TmpData.AddBlock(5, 4, BlockType::FIRE);
+				TmpData.AddBlock(7, 4, BlockType::FIRE);
+
+				TmpData.AddPassive(6, 4);
+
+				TmpData.RoomType_ = RoomType::Treasure;
+				TmpVector.push_back(TmpData);
+			}
+
+			{
+				RoomData TmpData = RoomData();
+
+
+				TmpData.AddBlock(4, 4, BlockType::FIRE);
+				TmpData.AddBlock(8, 4, BlockType::FIRE);
+
+				TmpData.AddPassive(6, 4);
+
+				TmpData.RoomType_ = RoomType::Treasure;
+				TmpVector.push_back(TmpData);
+			}
+
 			AllTreasureRooms_.insert({ 2, TmpVector });
 		}
 

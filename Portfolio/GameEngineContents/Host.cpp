@@ -115,7 +115,7 @@ void Host::AttackUpdate()
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 	if (AnimTimer_ >= 0.8f)
 	{
-		Shoot(AttackNormalDir() * 300.0f, ProjectileType::ENEMY_BASIC);
+		Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC);
 		ChangeState(HostState::Idle);
 	}
 }

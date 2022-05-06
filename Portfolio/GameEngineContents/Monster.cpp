@@ -20,6 +20,7 @@ Monster::Monster()
 	, IsAttack_(true)
 	, MoveSpeed_(100.0f)
 	, HP_(0)
+	, MaxHP_(0)
 	, IsInvincibility_(false)
 {
 }

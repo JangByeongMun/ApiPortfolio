@@ -123,6 +123,7 @@ enum class MonsterType
 	Default,
 	Pooter,
 	Gaper,
+	Gusher,
 	Sucker,
 	RoundWorm,
 	Clot,
