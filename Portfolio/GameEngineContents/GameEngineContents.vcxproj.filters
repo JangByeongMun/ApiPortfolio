@@ -284,6 +284,9 @@
     <ClInclude Include="FloatingKnight.h">
       <Filter>Play\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="Boil.h">
+      <Filter>Play\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BindingOfIsaac.cpp" />
@@ -570,6 +573,9 @@
       <Filter>Play\Monster\Boss</Filter>
     </ClCompile>
     <ClCompile Include="FloatingKnight.cpp">
+      <Filter>Play\Monster</Filter>
+    </ClCompile>
+    <ClCompile Include="Boil.cpp">
       <Filter>Play\Monster</Filter>
     </ClCompile>
   </ItemGroup>

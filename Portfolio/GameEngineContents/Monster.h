@@ -88,7 +88,12 @@ public:
 		MaxHP_ = _HP;
 		HP_ = _HP;
 	}
+	inline float GetHP()
+	{
+		return HP_;
+	}
 	virtual void Damaged(float _Damage);
+	virtual void Heal(float _Value);
 	void MakeRandomBlood(int _Min, int _Max);
 	virtual void MonsterDeath();
 };

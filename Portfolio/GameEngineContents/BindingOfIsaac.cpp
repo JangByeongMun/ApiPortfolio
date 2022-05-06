@@ -506,6 +506,9 @@ void BindingOfIsaac::ImageCut()
 
 		Image = GameEngineImageManager::GetInst()->Find("monster_254_floating knight.bmp");
 		Image->CutCount(2, 2);
+
+		Image = GameEngineImageManager::GetInst()->Find("monster_087_boil.bmp");
+		Image->CutCount(4, 3);
 	}
 
 	/////////////////////////////////// BossMonster

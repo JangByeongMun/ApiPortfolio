@@ -377,8 +377,19 @@ void RandomRoomManager::MakeRooms()
 				TmpVector.push_back(TmpData);
 			}
 
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Boil);
+				TmpData.AddMonster(12, 5, MonsterType::Boil);
+
+				TmpVector.push_back(TmpData);
+			}
+
 			AllRooms_.insert({ 0, TmpVector });
 		}
+
+
 
 
 		// ªÛ¡°
@@ -581,7 +592,7 @@ void RandomRoomManager::MakeRooms()
 		{
 			std::vector<RoomData> TmpVector;
 
-			{
+			/*{
 				RoomData TmpData = RoomData();
 				for (int y = 1; y < 3; y++)
 				{
@@ -931,7 +942,17 @@ void RandomRoomManager::MakeRooms()
 				TmpData.AddMonster(11, 5, MonsterType::Gaper);
 
 				TmpVector.push_back(TmpData);
+			}*/
+
+			{
+				RoomData TmpData = RoomData();
+
+				TmpData.AddMonster(0, 1, MonsterType::Boil);
+				TmpData.AddMonster(12, 5, MonsterType::Boil);
+
+				TmpVector.push_back(TmpData);
 			}
+
 			AllRooms_.insert({ 1, TmpVector });
 		}
 

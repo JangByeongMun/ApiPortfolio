@@ -247,6 +247,16 @@ void Monster::Damaged(float _Damage)
 	}
 }
 
+void Monster::Heal(float _Value)
+{
+	HP_ += _Value;
+
+	if (HP_ >= MaxHP_)
+	{
+		HP_ = MaxHP_;
+	}
+}
+
 void Monster::MakeRandomBlood(int _Min, int _Max)
 {
 	int RandomInt = GameEngineRandom::MainRandom->RandomInt(_Min, _Max);

@@ -156,6 +156,7 @@ enum class MonsterType
 	FlyNormal,
 	FlyRed,
 	FloatingKnight,
+	Boil,
 	Max,
 };
 
