@@ -273,7 +273,7 @@ void Player::HeadAttackUpdate()
 
 	if (NextAttackTime_ <= CurrentAttackTime_ && false == AttackDir.IsZero2D())
 	{
-		if (true == PlayLevel::GetDebugMode())
+		if (true == PlayLevel::GetDebugMode1or2())
 		{
 			Shoot(AttackDir * ShotSpeed_ * 500, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, 100);
 		}

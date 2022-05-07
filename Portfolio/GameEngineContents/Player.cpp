@@ -37,6 +37,7 @@
 #include "Stone.h"
 #include "PassiveItem.h"
 #include "BombItem.h"
+#include "MoneyItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -172,7 +173,7 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("Test8", 0x38);
 		GameEngineInput::GetInst()->CreateKey("Test9", 0x39);
 		GameEngineInput::GetInst()->CreateKey("Test0", 0x30);
-		GameEngineInput::GetInst()->CreateKey("ctrl", VK_CONTROL);
+		//GameEngineInput::GetInst()->CreateKey("ctrl", VK_CONTROL);
 	}
 
 	ChangeBodyState(PlayerBodyState::Idle);
@@ -219,6 +220,7 @@ void Player::Update()
 	}
 
 
+
 	/////////////////////////////////////////////////////// 디버깅용
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
@@ -251,74 +253,91 @@ void Player::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 	{
 		{
-			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
-			TmpBox->SetPosition(GetPosition() + float4(0, 100));
-			TmpBox->SetType(BoxType::Gold);
+			BoxItem* TmpObj = GetLevel()->CreateActor<BoxItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(BoxType::Gold);
 		}
 
 		{
-			KeyItem* TmpBox = GetLevel()->CreateActor<KeyItem>();
-			TmpBox->SetPosition(GetPosition() + float4(0, -100));
-			TmpBox->SetType(KeyType::Normal);
+			KeyItem* TmpObj = GetLevel()->CreateActor<KeyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, -100));
+			TmpObj->SetType(KeyType::Normal);
 		}
 
 		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
-			TmpHeart->Setting(HeartType::Black);
+			HeartItem* TmpObj = GetLevel()->CreateActor<HeartItem>();
+			TmpObj->SetPosition(GetPosition() + float4(-100, 0));
+			TmpObj->Setting(HeartType::Black);
 		}
 
 		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
-			TmpHeart->Setting(HeartType::Red);
+			HeartItem* TmpObj = GetLevel()->CreateActor<HeartItem>();
+			TmpObj->SetPosition(GetPosition() + float4(100, 0));
+			TmpObj->Setting(HeartType::Red);
 		}
 	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test3"))
 	{
 		{
-			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
-			TmpBox->SetPosition(GetPosition() + float4(0, 100));
-			TmpBox->SetType(BoxType::Gold);
+			MoneyItem* TmpObj = GetLevel()->CreateActor<MoneyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(MoneyType::Normal);
 		}
 
 		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
-			TmpHeart->Setting(HeartType::Black);
+			MoneyItem* TmpObj = GetLevel()->CreateActor<MoneyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(MoneyType::Black);
 		}
 
 		{
-			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
-			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
-			TmpHeart->Setting(HeartType::Red);
+			MoneyItem* TmpObj = GetLevel()->CreateActor<MoneyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(MoneyType::Silver);
+		}
+
+		{
+			HeartItem* TmpObj = GetLevel()->CreateActor<HeartItem>();
+			TmpObj->SetPosition(GetPosition() + float4(100, 0));
+			TmpObj->Setting(HeartType::Soul);
 		}
 	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("ctrl"))
+	if (true == GameEngineInput::GetInst()->IsDown("Test4"))
 	{
-		if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 		{
-			PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
-			TmpPassiveItem->SetPosition(GetPosition()); //+ float4(100, 0));
-
-			PassiveType TmpType;
-			int count = 0;
-			do
-			{
-				count++;
-				TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
-
-			} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
-
-			TmpPassiveItem->Setting(TmpType);
+			KeyItem* TmpObj = GetLevel()->CreateActor<KeyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(KeyType::Master);
 		}
 
-		if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 		{
-			GameEngineSound::SoundPlayOneShotWithVolume("door heavy open.wav", 0, 1.0f * Option_SFX);
+			BatteryItem* TmpObj = GetLevel()->CreateActor<BatteryItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
 		}
 	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test5"))
+	{
+		PassiveItem* TmpPassiveItem = GetLevel()->CreateActor<PassiveItem>();
+		TmpPassiveItem->SetPosition(GetPosition() + float4(100, 0));
+
+		PassiveType TmpType;
+		int count = 0;
+		do
+		{
+			count++;
+			TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
+
+		} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
+
+		TmpPassiveItem->Setting(TmpType);
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test6"))
+	{
+
+	}
+	/////////////////////////////////////////////////////// 디버깅용
+
+
 
 	// 무적시간 구현
 	if (InvincibilityTimer_ > 0.0f)
@@ -930,7 +949,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 		TmpPlayLevel->CameraLerp(GetLevel()->GetCameraPos(), FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
 	}
 
-	if (false == PlayLevel::GetDebugMode())
+	if (false == PlayLevel::GetDebugMode1or2())
 	{
 		if (0 != FindRoom->GetMonsterCount() || 0 != FindRoom->GetBossCount())
 		{

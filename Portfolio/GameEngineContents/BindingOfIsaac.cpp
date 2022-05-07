@@ -56,7 +56,6 @@ void BindingOfIsaac::GameInit()
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelLoading", 'C');
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelPlay", 'V');
 		GameEngineInput::GetInst()->CreateKey("ChangeLevelEnding", 'B');
-		GameEngineInput::GetInst()->CreateKey("ChangeLevelMenuLoading", 'N');
 	}
 }
 
@@ -1042,10 +1041,6 @@ void BindingOfIsaac::GameLoop()
 	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelEnding"))
 	{
 		ChangeLevel("Ending");
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("ChangeLevelMenuLoading"))
-	{
-		ChangeLevel("MenuLoading");
 	}
 }
 void BindingOfIsaac::GameEnd()

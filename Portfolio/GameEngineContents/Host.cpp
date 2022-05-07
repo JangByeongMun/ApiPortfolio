@@ -13,6 +13,7 @@ Host::~Host()
 
 void Host::SetType(HostType _Type)
 {
+	Type_ = _Type;
 	std::string TmpName;
 	switch (Type_)
 	{
@@ -20,7 +21,7 @@ void Host::SetType(HostType _Type)
 		TmpName = "monster_122_host.bmp";
 		break;
 	case HostType::Red:
-		TmpName = "monster_127_redhost";
+		TmpName = "monster_127_redhost.bmp";
 		break;
 	default:
 		break;

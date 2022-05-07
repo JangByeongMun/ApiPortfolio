@@ -52,6 +52,25 @@ public:
 		return IsDebug;
 	}
 
+
+	inline static void IsDebugModeOn2()
+	{
+		IsDebug2 = true;
+	}
+	inline static void IsDebugModeOff2()
+	{
+		IsDebug2 = false;
+	}
+	inline static void IsDebugModeSwitch2()
+	{
+		IsDebug2 = !IsDebug2;
+	}
+	inline static bool GetDebugMode1or2()
+	{
+		return IsDebug || IsDebug2;
+	}
+
+
 	template<typename ActorType>
 	ActorType* CreateActor(int _Order = 0, const std::string& _Name = "")
 	{
@@ -122,6 +141,7 @@ protected:
 	//////////////////// ╬вем
 private:
 	static bool IsDebug;
+	static bool IsDebug2;
 
 	std::map<int, std::list<GameEngineActor*>> AllActor_;
 	std::map<std::string, GameEngineActor*> RegistActor_;

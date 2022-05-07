@@ -47,6 +47,7 @@
 #include "Spit.h"
 #include "Charger.h"
 #include "Gusher.h"
+#include <GameEngineBase/GameEngineInput.h>
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -651,6 +652,30 @@ float4 RoomActor::GetRandomPos()
 void RoomActor::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
+
+
+	////////////////// 디버깅용 키입력
+	if (false == GameEngineInput::GetInst()->IsKey("TestH"))
+	{
+		GameEngineInput::GetInst()->CreateKey("TestH", 'H');
+		GameEngineInput::GetInst()->CreateKey("TestJ", 'J');
+		GameEngineInput::GetInst()->CreateKey("TestK", 'K');
+		GameEngineInput::GetInst()->CreateKey("TestL", 'L');
+		GameEngineInput::GetInst()->CreateKey("TestN", 'N');
+		GameEngineInput::GetInst()->CreateKey("TestM", 'M');
+		GameEngineInput::GetInst()->CreateKey("Test,", VK_OEM_COMMA);
+		GameEngineInput::GetInst()->CreateKey("Test.", VK_OEM_PERIOD);
+		GameEngineInput::GetInst()->CreateKey("ctrl", VK_CONTROL);
+		GameEngineInput::GetInst()->CreateKey("shift", VK_SHIFT);
+	}
+}
+
+void RoomActor::Update()
+{
+	if (this == RandomRoomManager::GetInst()->GetCurrentRoom())
+	{
+		DebugMonster();
+	}
 }
 
 void RoomActor::DoorSetting()
@@ -896,11 +921,13 @@ void RoomActor::MakePassive()
 	TmpPassiveItem->SetPosition(GetPosition() + TmpTilePos);
 
 	PassiveType TmpType;
+	int count = 0;
 	do
 	{
+		count++;
 		TmpType = static_cast<PassiveType>(GameEngineRandom::MainRandom->RandomInt(1, static_cast<int>(PassiveType::Max) - 1));
 
-	} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
+	} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
 
 	TmpPassiveItem->Setting(TmpType);
 }
@@ -929,4 +956,159 @@ std::string RoomActor::GetCurrentFloorName()
 
 	ReturnString += ".bmp";
 	return ReturnString;
+}
+
+void RoomActor::DebugMonster()
+{
+	float4 TmpTilePos = { StartX + ScaleX * 1, StartY + ScaleY * 1 };
+	if (true == GameEngineInput::GetInst()->IsPress("ctrl"))
+	{
+		if (true == GameEngineInput::GetInst()->IsDown("TestH"))
+		{
+			BoomFly* TmpMonster = GetLevel()->CreateActor<BoomFly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->Setting(BoomFlyType::Normal);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestJ"))
+		{
+			BoomFly* TmpMonster = GetLevel()->CreateActor<BoomFly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->Setting(BoomFlyType::Red);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestK"))
+		{
+			Mulliboom* TmpMonster = GetLevel()->CreateActor<Mulliboom>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestL"))
+		{
+			Host* TmpMonster = GetLevel()->CreateActor<Host>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(HostType::Normal);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestN"))
+		{
+			Host* TmpMonster = GetLevel()->CreateActor<Host>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(HostType::Red);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestM"))
+		{
+			Fly* TmpMonster = GetLevel()->CreateActor<Fly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(FlyType::Normal);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("Test,"))
+		{
+			Fly* TmpMonster = GetLevel()->CreateActor<Fly>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+			TmpMonster->SetType(FlyType::Red);
+		}
+		if (true == GameEngineInput::GetInst()->IsDown("Test."))
+		{
+			FloatingKnight* TmpMonster = GetLevel()->CreateActor<FloatingKnight>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("shift"))
+	{
+		if (true == GameEngineInput::GetInst()->IsDown("TestH"))
+		{
+			Boil* TmpMonster = GetLevel()->CreateActor<Boil>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestJ"))
+		{
+			Gut* TmpMonster = GetLevel()->CreateActor<Gut>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestK"))
+		{
+			Spit* TmpMonster = GetLevel()->CreateActor<Spit>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestL"))
+		{
+			Charger* TmpMonster = GetLevel()->CreateActor<Charger>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+	}
+	else
+	{
+		if (true == GameEngineInput::GetInst()->IsDown("TestH"))
+		{
+			Pooter* TmpMonster = GetLevel()->CreateActor<Pooter>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestJ"))
+		{
+			Gaper* TmpMonster = GetLevel()->CreateActor<Gaper>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestK"))
+		{
+			Gusher* TmpMonster = GetLevel()->CreateActor<Gusher>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestL"))
+		{
+			Sucker* TmpMonster = GetLevel()->CreateActor<Sucker>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+		
+		if (true == GameEngineInput::GetInst()->IsDown("TestN"))
+		{
+			RoundWorm* TmpMonster = GetLevel()->CreateActor<RoundWorm>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("TestM"))
+		{
+			Clot* TmpMonster = GetLevel()->CreateActor<Clot>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+
+		if (true == GameEngineInput::GetInst()->IsDown("Test,"))
+		{
+			Clotty* TmpMonster = GetLevel()->CreateActor<Clotty>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+		if (true == GameEngineInput::GetInst()->IsDown("Test."))
+		{
+			Iblob* TmpMonster = GetLevel()->CreateActor<Iblob>();
+			TmpMonster->SetPosition(GetPosition() + TmpTilePos);
+			TmpMonster->SetRoom(*this);
+		}
+	}
 }

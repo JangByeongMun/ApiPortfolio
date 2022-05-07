@@ -47,7 +47,7 @@ void Gaper::MonsterUpdate()
 void Gaper::MonsterDeath()
 {
 	float RandomFloat = GameEngineRandom::MainRandom->RandomFloat(0.0f, 1.0f);
-	if (RandomFloat <= 0.2f)
+	if (RandomFloat <= 0.5f)
 	{
 		Gusher* TmpMonster = GetLevel()->CreateActor<Gusher>();
 		TmpMonster->SetPosition(GetPosition());

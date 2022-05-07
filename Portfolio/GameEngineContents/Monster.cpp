@@ -323,7 +323,10 @@ void Monster::Damaged(float _Damage)
 	{
 		MonsterDeath();
 		MakeRandomBlood(2, 5);
-		Room_->MinusMonsterCount();
+		if (Room_ != nullptr)
+		{
+			Room_->MinusMonsterCount();
+		}
 		Off();
 	}
 }

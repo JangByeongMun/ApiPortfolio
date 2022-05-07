@@ -55,6 +55,7 @@ void PlayLevel::Loading()
 	{
 		GameEngineInput::GetInst()->CreateKey("PlayESC", VK_ESCAPE);
 		GameEngineInput::GetInst()->CreateKey("PlayP", 'P');
+		GameEngineInput::GetInst()->CreateKey("PlayCtrl", VK_CONTROL);
 	}
 
 	GlobalActor = CreateActor<GameEngineActor>();
@@ -74,6 +75,11 @@ void PlayLevel::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("PlayP"))
 	{
 		IsDebugModeSwitch();
+		Player::MainPlayer->GetPlayerUI()->DebugMiniMap();
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("PlayCtrl"))
+	{
+		IsDebugModeSwitch2();
 		Player::MainPlayer->GetPlayerUI()->DebugMiniMap();
 	}
 

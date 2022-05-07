@@ -86,8 +86,11 @@ private:
 	Trapdoor* Trapdoor_;
 
 	void Start() override;
+	void Update() override;
 	void DoorSetting();
 	void MakeMapReward();
 	void MakePassive();
 	std::string GetCurrentFloorName();
+
+	void DebugMonster();
 };
