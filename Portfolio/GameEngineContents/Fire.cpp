@@ -53,6 +53,7 @@ void Fire::AddFireHP(float _Value)
 		RandomDrop();
 		Renderer_->Off();
 		Collision_->Off();
+		BGMPlayer_.Stop();
 	}
 }
 

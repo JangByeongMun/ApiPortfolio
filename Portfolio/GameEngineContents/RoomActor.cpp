@@ -445,6 +445,7 @@ void RoomActor::Setting()
 			Monstro* TmpBoss = GetLevel()->CreateActor<Monstro>();
 			TmpBoss->SetPosition(GetPosition() + float4(0, -60));
 			TmpBoss->SetRoom(*this);
+			MonsterVector_.push_back(TmpBoss);
 			break;
 		}
 		case BossType::Loki:
@@ -452,6 +453,7 @@ void RoomActor::Setting()
 			Loki* TmpBoss = GetLevel()->CreateActor<Loki>();
 			TmpBoss->SetPosition(GetPosition());
 			TmpBoss->SetRoom(*this);
+			MonsterVector_.push_back(TmpBoss);
 			break;
 		}
 		case BossType::Mom:
@@ -459,6 +461,7 @@ void RoomActor::Setting()
 			Mom* TmpBoss = GetLevel()->CreateActor<Mom>();
 			TmpBoss->SetPosition(GetPosition());
 			TmpBoss->SetRoom(*this);
+			MonsterVector_.push_back(TmpBoss);
 			break;
 		}
 		case BossType::Max:

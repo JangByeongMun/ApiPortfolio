@@ -187,11 +187,18 @@ void PlayerHP::AddMaxHp(int _Value, int _Heal)
 	{
 		MaxRedHP_ += _Value;
 		CurrentRedHP_ = MaxRedHP_;
+		IsHalfRed_ = false;
 	}
 	else
 	{
 		MaxRedHP_ += _Value;
 		CurrentRedHP_ += _Heal;
+	}
+
+	while (MaxRedHP_ + CurrentAddHP_ > MaxCount)
+	{
+		CurrentAddHP_ -= 1;
+		AddHeartVector_.pop_back();
 	}
 
 	UpdateUI();
