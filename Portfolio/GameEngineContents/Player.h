@@ -194,6 +194,7 @@ public:
 		return MoneyCount_;
 	}
 	void BlackHeartDestroy();
+	void SetMasterkey(bool _Value);
 
 ///////////////////////////////// UI Ελ°ύ
 private:

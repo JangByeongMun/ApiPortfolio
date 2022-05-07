@@ -36,6 +36,7 @@
 #include "ContentsGlobal.h"
 #include "Stone.h"
 #include "PassiveItem.h"
+#include "BombItem.h"
 
 Player* Player::MainPlayer = nullptr;
 
@@ -78,12 +79,12 @@ Player::Player()
 	, Have246_(false)
 	, Have302_(false)
 	, AddDamageTo109_(0.0f)
-	, RoomPos_({0, 0})
+	, RoomPos_({ 0, 0 })
 	, InvincibilityTimer_(0)
 	, InvisibleTimer_(0)
 {
 }
-Player::~Player() 
+Player::~Player()
 {
 }
 
@@ -96,11 +97,11 @@ void Player::Start()
 	MapColImage_ = GameEngineImageManager::GetInst()->Find("basementTestCol.bmp");
 
 	{
-		AnimRender_.push_back(CreateRenderer("001_isaac_Anim.bmp", RenderPivot::CENTER, {0, 0}));
-		AnimRender_.push_back(CreateRenderer("003_cain_Anim.bmp", RenderPivot::CENTER, {0, 0}));
-		AnimRender_.push_back(CreateRenderer("002_magdalene_Anim.bmp", RenderPivot::CENTER, {0, 0}));
-		AnimRender_.push_back(CreateRenderer("004_judas_Anim.bmp", RenderPivot::CENTER, {0, 0}));
-		AnimRender_.push_back(CreateRenderer("006_bluebaby_Anim.bmp", RenderPivot::CENTER, {0, 0}));
+		AnimRender_.push_back(CreateRenderer("001_isaac_Anim.bmp", RenderPivot::CENTER, { 0, 0 }));
+		AnimRender_.push_back(CreateRenderer("003_cain_Anim.bmp", RenderPivot::CENTER, { 0, 0 }));
+		AnimRender_.push_back(CreateRenderer("002_magdalene_Anim.bmp", RenderPivot::CENTER, { 0, 0 }));
+		AnimRender_.push_back(CreateRenderer("004_judas_Anim.bmp", RenderPivot::CENTER, { 0, 0 }));
+		AnimRender_.push_back(CreateRenderer("006_bluebaby_Anim.bmp", RenderPivot::CENTER, { 0, 0 }));
 
 		for (int i = 0; i < AnimRender_.size(); i++)
 		{
@@ -116,7 +117,7 @@ void Player::Start()
 	BodyRender_->CreateAnimation("001_isaac.bmp", "Body_Idle", 8, 8, 0.1f, false);
 	BodyRender_->CreateAnimation("None.bmp", "None", 0, 0, 0, false);
 	BodyRender_->ChangeAnimation("Body_Idle");
-	
+
 	HeadRender_ = CreateRenderer(static_cast<int>(ORDER::PLAYER), RenderPivot::CENTER, { 0, -10 });
 	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_1", 2, 2, 0, false);
 	HeadRender_->CreateAnimation("001_isaac_left.bmp", "Head_Left_2", 2, 3, 0.1f, false);
@@ -161,8 +162,16 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("AttackDown", VK_DOWN);
 		GameEngineInput::GetInst()->CreateKey("Bomb", 'E');
 		GameEngineInput::GetInst()->CreateKey("SpaceBar", VK_SPACE);
-		GameEngineInput::GetInst()->CreateKey("Test1", 'R');
-		GameEngineInput::GetInst()->CreateKey("Test2", 'T');
+		GameEngineInput::GetInst()->CreateKey("Test1", 0x31); // 1¹ø
+		GameEngineInput::GetInst()->CreateKey("Test2", 0x32);
+		GameEngineInput::GetInst()->CreateKey("Test3", 0x33);
+		GameEngineInput::GetInst()->CreateKey("Test4", 0x34);
+		GameEngineInput::GetInst()->CreateKey("Test5", 0x35);
+		GameEngineInput::GetInst()->CreateKey("Test6", 0x36);
+		GameEngineInput::GetInst()->CreateKey("Test7", 0x37);
+		GameEngineInput::GetInst()->CreateKey("Test8", 0x38);
+		GameEngineInput::GetInst()->CreateKey("Test9", 0x39);
+		GameEngineInput::GetInst()->CreateKey("Test0", 0x30);
 		GameEngineInput::GetInst()->CreateKey("ctrl", VK_CONTROL);
 	}
 
@@ -209,22 +218,70 @@ void Player::Update()
 		GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
 	}
 
+
+	/////////////////////////////////////////////////////// µð¹ö±ë¿ë
 	if (true == GameEngineInput::GetInst()->IsDown("Test1"))
 	{
 		AddGaze(100);
-		AddItem(ItemType::KeyTwo);
-		AddItem(ItemType::BombTwo);
-		PlayerUI_->SetItemUI();
-	}
 
+		{
+			KeyItem* TmpObj = GetLevel()->CreateActor<KeyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, 100));
+			TmpObj->SetType(KeyType::Normal);
+		}
+
+		{
+			KeyItem* TmpObj = GetLevel()->CreateActor<KeyItem>();
+			TmpObj->SetPosition(GetPosition() + float4(0, -100));
+			TmpObj->SetType(KeyType::Two);
+		}
+
+		{
+			BombItem* TmpObj = GetLevel()->CreateActor<BombItem>();
+			TmpObj->SetPosition(GetPosition() + float4(-100, 0));
+			TmpObj->SetType(BombType::Normal);
+		}
+
+		{
+			BombItem* TmpObj = GetLevel()->CreateActor<BombItem>();
+			TmpObj->SetPosition(GetPosition() + float4(100, 0));
+			TmpObj->SetType(BombType::Two);
+		}
+	}
 	if (true == GameEngineInput::GetInst()->IsDown("Test2"))
 	{
 		{
 			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
-			TmpBox->SetPosition(GetPosition());
+			TmpBox->SetPosition(GetPosition() + float4(0, 100));
 			TmpBox->SetType(BoxType::Gold);
 		}
-		
+
+		{
+			KeyItem* TmpBox = GetLevel()->CreateActor<KeyItem>();
+			TmpBox->SetPosition(GetPosition() + float4(0, -100));
+			TmpBox->SetType(KeyType::Normal);
+		}
+
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
+			TmpHeart->Setting(HeartType::Black);
+		}
+
+		{
+			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
+			TmpHeart->SetPosition(GetPosition() + float4(100, 0));
+			TmpHeart->Setting(HeartType::Red);
+		}
+	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test3"))
+	{
+		{
+			BoxItem* TmpBox = GetLevel()->CreateActor<BoxItem>();
+			TmpBox->SetPosition(GetPosition() + float4(0, 100));
+			TmpBox->SetType(BoxType::Gold);
+		}
+
 		{
 			HeartItem* TmpHeart = GetLevel()->CreateActor<HeartItem>();
 			TmpHeart->SetPosition(GetPosition() + float4(-100, 0));
@@ -692,7 +749,7 @@ void Player::AddItem(ItemType _Type)
 		}
 		break;
 	case ItemType::keyMaster:
-		IsMasterKey_ = true;
+		SetMasterkey(true);
 		break;
 	case ItemType::Money:
 		MoneyCount_ += 1;
@@ -784,6 +841,11 @@ void Player::BlackHeartDestroy()
 	RandomRoomManager::GetInst()->FindRoom(RoomPos_)->AllMonsterAttack(40);
 }
 
+void Player::SetMasterkey(bool _Value)
+{
+	IsMasterKey_ = _Value;
+}
+
 PlayerHP* Player::GetPlayerHP()
 {
 	return PlayerUI_->PlayerHP_;
@@ -812,19 +874,19 @@ void Player::ChangeRoom(DoorDir _Dir)
 	switch (_Dir)
 	{
 	case DoorDir::Up:
-		GoDir = {0, -1};
+		GoDir = { 0, -1 };
 		otherSide = DoorDir::Down;
 		break;
 	case DoorDir::Down:
-		GoDir = {0, 1};
+		GoDir = { 0, 1 };
 		otherSide = DoorDir::Up;
 		break;
 	case DoorDir::Left:
-		GoDir = {-1, 0};
+		GoDir = { -1, 0 };
 		otherSide = DoorDir::Right;
 		break;
 	case DoorDir::Right:
-		GoDir = {1, 0};
+		GoDir = { 1, 0 };
 		otherSide = DoorDir::Left;
 		break;
 	default:
@@ -855,7 +917,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 	if (0 != FindRoom->GetBossCount())
 	{
 		GetLevel()->SetCameraPos(FindRoom->GetPosition() - GameEngineWindow::GetScale().Half());
-		
+
 		EnterBossRoom* TmpActor = GetLevel()->CreateActor<EnterBossRoom>();
 		TmpActor->SetPosition(FindRoom->GetPosition());
 		TmpActor->Setting();

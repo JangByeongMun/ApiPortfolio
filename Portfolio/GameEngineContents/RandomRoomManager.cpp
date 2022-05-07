@@ -23,9 +23,18 @@ void RandomRoomManager::LevelChangeEnd(GameEngineLevel* _NextLevel)
 
 bool RandomRoomManager::ChangeFloor(const int& _Floor)
 {
+	Player* TmpPlayer = Player::MainPlayer;
 	if (1 == _Floor)
 	{
-		Player::MainPlayer->SetPlayerInfo();
+		if (TmpPlayer != nullptr)
+		{
+			Player::MainPlayer->SetPlayerInfo();
+		}
+	}
+
+	if (TmpPlayer != nullptr)
+	{
+		Player::MainPlayer->SetMasterkey(false);
 	}
 
 	switch (_Floor)
