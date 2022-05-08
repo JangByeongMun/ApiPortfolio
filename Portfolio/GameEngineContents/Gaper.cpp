@@ -21,7 +21,7 @@ void Gaper::Start()
 	Renderer_->CreateAnimation("monster_017_gaper.bmp", "StartChase2", 2, 3, 0.1f, false);
 	Renderer_->ChangeAnimation("Idle");
 
-	Collision_ = CreateCollision("Monster", {40, 40});
+	Collision_ = CreateCollision("Monster", { 40, 40 }, { 0, 10 });
 
 	SetHP(10);
 	BodySetting();

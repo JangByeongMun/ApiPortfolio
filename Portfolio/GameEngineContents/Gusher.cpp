@@ -12,7 +12,7 @@ Gusher::~Gusher()
 
 void Gusher::Start()
 {
-	Collision_ = CreateCollision("Monster", { 40, 40 });
+	Collision_ = CreateCollision("Monster", { 40, 40 }, { 0, 10 });
 
 	SetHP(10);
 	BodySettingBlood();
@@ -31,7 +31,10 @@ void Gusher::MonsterUpdate()
 		MoveDir_ *= GameEngineTime::GetDeltaTime() * MoveSpeed_;
 	}
 
-	MonsterSetMoveToWalk(MoveDir_);
+	if (false == MonsterSetMoveToWalkReturn(MoveDir_))
+	{
+		AttackTimer_ += AttackDelay_;
+	}
 	BodyUpdate(MoveDir_);
 }
 

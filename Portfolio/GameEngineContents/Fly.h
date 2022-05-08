@@ -33,6 +33,7 @@ private:
 
 	void Start() override;
 	void MonsterUpdate() override;
+	void Update() override;
 	void MonsterDeath() override;
 };
 

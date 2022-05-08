@@ -48,13 +48,17 @@ void Fly::Start()
 	DeadRenderer_->ChangeAnimation("None");
 
 	BGMPlayer_ = GameEngineSound::SoundPlayControl("insect swarm.wav");
-	BGMPlayer_.SetVolume(1.0f * Option_SFX);
+	BGMPlayer_.SetVolume(0.0f * Option_SFX);
 }
 
 void Fly::MonsterUpdate()
 {
 	MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+}
 
+void Fly::Update()
+{
+	Monster::Update();
 	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
 	{
 		BGMPlayer_.SetVolume(1.0f * Option_SFX);
@@ -70,4 +74,5 @@ void Fly::MonsterDeath()
 	BGMPlayer_.Stop();
 	Renderer_->Off();
 	DeadRenderer_->ChangeAnimation("Dead");
+	BGMPlayer_.SetVolume(0.0f * Option_SFX);
 }
