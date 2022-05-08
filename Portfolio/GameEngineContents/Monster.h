@@ -39,6 +39,7 @@ protected:
 	void Start() override;
 	void Update() override;
 	virtual void MonsterUpdate() {};
+	virtual void MonsterDamaged() {};
 	inline void MonsterSetting(float _AttackDelay, float _MoveSpeed)
 	{
 		AttackDelay_ = _AttackDelay;

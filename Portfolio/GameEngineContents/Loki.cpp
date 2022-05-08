@@ -1,6 +1,9 @@
 #include "Loki.h"
 #include "RoomActor.h"
 #include "BoomFly.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
+
 
 Loki::Loki() 
 	: State_(LokiState::Idle)
@@ -150,6 +153,7 @@ void Loki::SummonStart()
 	AnimTimer_ = 0.0f;
 	IsAnim_ = false;
 	Renderer_->ChangeAnimation("Summon");
+	GameEngineSound::SoundPlayOneShotWithVolume("summonsound.wav", 0, 1.0f * Option_SFX);
 }
 void Loki::DeadStart()
 {

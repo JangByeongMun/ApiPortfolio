@@ -48,6 +48,7 @@
 #include "Charger.h"
 #include "Gusher.h"
 #include <GameEngineBase/GameEngineInput.h>
+#include "PlayLevel.h"
 
 float StartX = -420.0f;
 float StartY = -225.0f;
@@ -87,8 +88,8 @@ void RoomActor::MinusMonsterCount()
 		}
 		else
 		{
-			OpenNextStage();
 			MakePassive();
+			OpenNextStage();
 		}
 	}
 }
@@ -117,6 +118,12 @@ void RoomActor::MinusBossCount()
 
 void RoomActor::OpenNextStage()
 {
+	PlayLevel* TmpLevel = dynamic_cast<PlayLevel*>(GetLevel());
+	if (TmpLevel != nullptr)
+	{
+		TmpLevel->StopBossBGM();
+	}
+
 	if (3 == CurrentFloor)
 	{
 		ClearBox* ClearBox_ = GetLevel()->CreateActor<ClearBox>();
@@ -652,7 +659,6 @@ float4 RoomActor::GetRandomPos()
 void RoomActor::Start()
 {
 	SetPosition(GameEngineWindow::GetScale().Half());
-
 
 	////////////////// 디버깅용 키입력
 	if (false == GameEngineInput::GetInst()->IsKey("TestH"))

@@ -1,5 +1,6 @@
 #pragma once
 #include "Monster.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 enum class FlyType
 {
@@ -28,6 +29,7 @@ protected:
 private:
 	FlyType Type_;
 	GameEngineRenderer* DeadRenderer_;
+	GameEngineSoundPlayer BGMPlayer_;
 
 	void Start() override;
 	void MonsterUpdate() override;

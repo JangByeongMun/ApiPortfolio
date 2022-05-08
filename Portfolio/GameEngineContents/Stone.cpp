@@ -3,6 +3,7 @@
 #include "HeartItem.h"
 #include "ContentsEnum.h"
 #include "ContentsGlobal.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 Stone::Stone() 
 	: Renderer_(nullptr)
@@ -36,6 +37,10 @@ void Stone::BombStone()
 	default:
 		break;
 	}
+
+	std::string TmpName = "rock crumble";
+	TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+	GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
 
 	Renderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));
 	ShadowRenderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));

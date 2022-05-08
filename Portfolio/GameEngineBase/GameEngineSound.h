@@ -53,8 +53,8 @@ class GameEngineSoundPlayer
 	friend GameEngineSound;
 
 public:
-	void Play();
 	void Stop();
+	void Pause(bool _On);
 	void SetVolume(float _Volume);
 
 	GameEngineSoundPlayer();

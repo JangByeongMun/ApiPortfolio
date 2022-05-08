@@ -50,6 +50,8 @@ void Fire::AddFireHP(float _Value)
 			FirePlaceRenderer_[i]->ChangeAnimation("grid_fireplace_Off");
 		}
 
+		GameEngineSound::SoundPlayOneShotWithVolume("steam half sec.wav", 0, 1.0f * Option_SFX);
+
 		RandomDrop();
 		Renderer_->Off();
 		Collision_->Off();

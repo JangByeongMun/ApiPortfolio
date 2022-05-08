@@ -42,6 +42,18 @@ void PlayLevel::StopBGM()
 	BgmPlayer_.Stop();
 }
 
+void PlayLevel::StopBossBGM()
+{
+	BgmPlayer_.Pause(false);
+	BossBgmPlayer_.Pause(true);
+}
+
+void PlayLevel::PlayBossBGM()
+{
+	BgmPlayer_.Pause(true);
+	BossBgmPlayer_.Pause(false);
+}
+
 void PlayLevel::Loading()
 {
 	CreateActor<PlayBackGround>((int)ORDER::BACKGROUND);
@@ -100,16 +112,21 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	if (CurrentFloor == 1)
 	{
 		BgmPlayer_ = GameEngineSound::SoundPlayControl("BasementBGM.ogg");
+		BossBgmPlayer_ = GameEngineSound::SoundPlayControl("basic_boss_fight.ogg");
 	}
 	else if (CurrentFloor == 2)
 	{
 		BgmPlayer_ = GameEngineSound::SoundPlayControl("the caves.ogg");
+		BossBgmPlayer_ = GameEngineSound::SoundPlayControl("basic_boss_fight.ogg");
 	}
 	else if (CurrentFloor == 3)
 	{
 		BgmPlayer_ = GameEngineSound::SoundPlayControl("the depths.ogg");
+		BossBgmPlayer_ = GameEngineSound::SoundPlayControl("mom fight.ogg");
 	}
 	BgmPlayer_.SetVolume(1.0f * Option_MUSIC);
+	BossBgmPlayer_.SetVolume(1.0f * Option_MUSIC);
+	BossBgmPlayer_.Pause(true);
 
 	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());
 	RandomRoomManager::GetInst()->ChangeFloor(CurrentFloor);
@@ -117,5 +134,5 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 
 void PlayLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
 {
-	BgmPlayer_.Stop();
+	StopBGM();
 }

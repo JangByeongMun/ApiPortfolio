@@ -19,6 +19,8 @@ public:
 
 	void CameraLerp(float4 _Start, float4 _Goal);
 	void StopBGM();
+	void StopBossBGM();
+	void PlayBossBGM();
 
 	GameEngineActor* GlobalActor;
 
@@ -31,6 +33,7 @@ protected:
 
 private:
 	GameEngineSoundPlayer BgmPlayer_;
+	GameEngineSoundPlayer BossBgmPlayer_;
 
 	// 카메라 보간이동
 	bool IsLerp_;

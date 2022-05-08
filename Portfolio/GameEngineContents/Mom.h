@@ -39,6 +39,7 @@ private:
 	std::vector<GameEngineCollision*> EyeCollision_;
 	std::vector<GameEngineCollision*> HandCollision_;
 	std::vector<GameEngineCollision*> HandCheckCollision_;
+	std::vector<bool> IsHurt_;
 	float AnimTimer_;
 	bool IsAnim_;
 	int HandCheck_;
@@ -46,6 +47,8 @@ private:
 	void Start() override;
 	void MonsterUpdate() override;
 	void MonsterDeath() override;
+	void MonsterDamaged() override;
+
 	void ChangeState(MomState _State);
 	void StateUpdate();
 	void CollisionCheck();

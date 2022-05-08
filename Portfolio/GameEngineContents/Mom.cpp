@@ -7,6 +7,8 @@
 #include "RoomActor.h"
 #include "Player.h"
 #include "PlayerHP.h"
+#include <GameEngineBase/GameEngineSound.h>
+#include "ContentsGlobal.h"
 
 Mom::Mom() 
 	: State_(MomState::Idle)
@@ -201,6 +203,13 @@ void Mom::Start()
 		GameEngineCollision* TmpCollision_ = CreateCollision("Check", { 200, 200 }, { 400, 0 });
 		HandCheckCollision_.push_back(TmpCollision_);
 	}
+
+	IsHurt_.push_back(false);
+	IsHurt_.push_back(false);
+	IsHurt_.push_back(false);
+	IsHurt_.push_back(false);
+	IsHurt_.push_back(false);
+	IsHurt_.push_back(false);
 }
 
 void Mom::MonsterUpdate()
@@ -212,6 +221,52 @@ void Mom::MonsterUpdate()
 void Mom::MonsterDeath()
 {
 	ChangeState(MomState::Dead);
+}
+
+void Mom::MonsterDamaged()
+{
+	if (HP_ <= 600 && false == IsHurt_[0])
+	{
+		IsHurt_[0] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
+	else if (HP_ <= 500 && false == IsHurt_[1])
+	{
+		IsHurt_[1] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
+	else if (HP_ <= 400 && false == IsHurt_[2])
+	{
+		IsHurt_[2] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
+	else if (HP_ <= 300 && false == IsHurt_[3])
+	{
+		IsHurt_[3] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
+	else if (HP_ <= 200 && false == IsHurt_[4])
+	{
+		IsHurt_[4] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
+	else if (HP_ <= 100 && false == IsHurt_[5])
+	{
+		IsHurt_[5] = true;
+		std::string TmpName = "death burst small";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	}
 }
 
 void Mom::ChangeState(MomState _State)
@@ -293,6 +348,10 @@ void Mom::CollisionCheck()
 void Mom::IdleStart()
 {
 	ResetValue();
+
+	std::string TmpName = "mom";
+	TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
+	GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
 }
 void Mom::HandStart()
 {
@@ -307,6 +366,7 @@ void Mom::LegStart()
 {
 	ResetValue();
 	AnimTimer_ = 0.0f;
+	GameEngineSound::SoundPlayOneShotWithVolume("evil laugh.wav", 0, 1.0f * Option_SFX);
 
 	LegShadowRenderer_->On();
 }
@@ -328,6 +388,7 @@ void Mom::DeadStart()
 {
 	ResetValue();
 	AnimTimer_ = 0.0f;
+	GameEngineSound::SoundPlayOneShotWithVolume("vox death.wav", 0, 1.0f * Option_SFX);
 }
 
 void Mom::IdleUpdate()
@@ -424,6 +485,7 @@ void Mom::SummonUpdate()
 				AddPivot = { -50, 0 };
 			}
 
+			GameEngineSound::SoundPlayOneShotWithVolume("summonsound.wav", 0, 1.0f * Option_SFX);
 			if (true == EyeRenderers_[i]->IsUpdate())
 			{
 				int RandomInt = GameEngineRandom::MainRandom->RandomInt(0, 3);

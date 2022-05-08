@@ -178,10 +178,6 @@ void Player::Start()
 
 	ChangeBodyState(PlayerBodyState::Idle);
 	ChangeHeadState(PlayerHeadState::Idle);
-
-	//Have245_ = true;
-	//Have246_ = true;
-	//Have302_ = true;
 }
 
 void Player::Update()
@@ -330,10 +326,6 @@ void Player::Update()
 		} while (Player::MainPlayer->IsAlreadyHave(TmpType) == true && count <= 100); // 이미 가지고있는지 확인해서 이미 가지고 있는 아이템이면 또 랜덤 돌리기
 
 		TmpPassiveItem->Setting(TmpType);
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("Test6"))
-	{
-
 	}
 	/////////////////////////////////////////////////////// 디버깅용
 
@@ -940,6 +932,12 @@ void Player::ChangeRoom(DoorDir _Dir)
 		EnterBossRoom* TmpActor = GetLevel()->CreateActor<EnterBossRoom>();
 		TmpActor->SetPosition(FindRoom->GetPosition());
 		TmpActor->Setting();
+
+		PlayLevel* TmpLevel = dynamic_cast<PlayLevel*>(GetLevel());
+		if (TmpLevel != nullptr)
+		{
+			TmpLevel->PlayBossBGM();
+		}
 
 		GameEngineTime::Pause();
 	}

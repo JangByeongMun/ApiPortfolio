@@ -1,4 +1,6 @@
 #include "Fly.h"
+#include "ContentsGlobal.h"
+#include "RandomRoomManager.h"
 
 Fly::Fly() 
 	: Type_(FlyType::Normal)
@@ -44,15 +46,28 @@ void Fly::Start()
 	DeadRenderer_->CreateAnimation("monster_010_eternalfly_Dead.bmp", "Dead", 0, 11, 0.1f, false);
 	DeadRenderer_->CreateAnimation("None.bmp", "None", 0, 0, 0.1f, false);
 	DeadRenderer_->ChangeAnimation("None");
+
+	BGMPlayer_ = GameEngineSound::SoundPlayControl("insect swarm.wav");
+	BGMPlayer_.SetVolume(1.0f * Option_SFX);
 }
 
 void Fly::MonsterUpdate()
 {
 	MonsterSetMoveToFly(AttackNormalDir() * MoveSpeed_ * GameEngineTime::GetDeltaTime());
+
+	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
+	{
+		BGMPlayer_.SetVolume(1.0f * Option_SFX);
+	}
+	else
+	{
+		BGMPlayer_.SetVolume(0.0f * Option_SFX);
+	}
 }
 
 void Fly::MonsterDeath()
 {
+	BGMPlayer_.Stop();
 	Renderer_->Off();
 	DeadRenderer_->ChangeAnimation("Dead");
 }
