@@ -181,6 +181,7 @@ void Projectile::DestroyProjectile()
 			TmpRenderer->SetPivot(GetPosition());
 		}
 
+		GameEngineSound::SoundPlayOneShotWithVolume("tear block.wav", 0, 1.0f * Option_SFX);
 	}
 	
 	Death();

@@ -8,6 +8,7 @@
 #include "DeadReasonUI.h"
 #include "PlayLevel.h"
 #include <GameEngine/GameEngine.h>
+#include <GameEngineBase/GameEngineRandom.h>
 #include <GameEngineBase/GameEngineSound.h>
 #include "ContentsGlobal.h"
 
@@ -292,6 +293,10 @@ void Player::HeadAttackUpdate()
 				Shoot(AttackDir * ShotSpeed_ * 500 + MoveDir_ * 150, ProjectileType::PLAYER_BASIC, AttackDir * 30, 1.0f, Damage_ + AddDamageTo109_);
 			}
 		}
+
+		std::string TmpName = "tear fire";
+		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 2)) + ".wav";
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 
