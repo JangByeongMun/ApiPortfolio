@@ -29,7 +29,7 @@ void IntroManager::Play()
 	IsPlaying_ = true;
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("Intro.ogg");
-	BgmPlayer_.SetVolume(1.0f * Option_MUSIC);
+	BgmPlayer_.SetVolume(0.5f * Option_MUSIC);
 }
 
 void IntroManager::Stop()

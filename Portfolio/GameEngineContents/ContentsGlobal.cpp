@@ -5,6 +5,6 @@ BossType SelectedBossType = BossType::Default;
 
 int CurrentFloor = 1;
 
-int Option_SFX = 3;
-int Option_MUSIC = 3;
-int Option_MAPOPACITY = 3;
+int Option_SFX = 2;
+int Option_MUSIC = 2;
+int Option_MAPOPACITY = 2;

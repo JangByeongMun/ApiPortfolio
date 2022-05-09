@@ -204,7 +204,7 @@ void Player::Update()
 			BombActor->SetPosition(GetPosition());
 			MinusItem(ItemType::Bomb, 1);
 
-			GameEngineSound::SoundPlayOneShotWithVolume("fetus land.wav", 0, 1.0f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume("fetus land.wav", 0, 0.5f * Option_SFX);
 		}
 	}
 
@@ -952,7 +952,7 @@ void Player::ChangeRoom(DoorDir _Dir)
 		if (0 != FindRoom->GetMonsterCount() || 0 != FindRoom->GetBossCount())
 		{
 			FindRoom->CloseAllDoor();
-			GameEngineSound::SoundPlayOneShotWithVolume("door heavy close.wav", 0, 1.0f * Option_SFX);
+			GameEngineSound::SoundPlayOneShotWithVolume("door heavy close.wav", 0, 0.5f * Option_SFX);
 		}
 	}
 

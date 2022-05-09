@@ -30,11 +30,11 @@ void CharacterMenu::AddIndex(int _Index)
 {
 	if (_Index > 0)
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("character select right.wav", 0, 1.0f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("character select right.wav", 0, 0.5f * Option_SFX);
 	}
 	else
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("character select left.wav", 0, 1.0f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("character select left.wav", 0, 0.5f * Option_SFX);
 	}
 
 	CurrentIndex_ += _Index;

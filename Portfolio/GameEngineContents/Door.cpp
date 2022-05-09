@@ -110,7 +110,7 @@ void Door::Update()
 		{
 			if (true == Player::MainPlayer->HaveKey())
 			{
-				GameEngineSound::SoundPlayOneShotWithVolume("unlock.wav", 0, 1.0f * Option_SFX);
+				GameEngineSound::SoundPlayOneShotWithVolume("unlock.wav", 0, 0.5f * Option_SFX);
 				Player::MainPlayer->MinusItem(ItemType::Key, 1);
 				UnLock();
 			}

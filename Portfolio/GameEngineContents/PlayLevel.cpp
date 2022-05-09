@@ -124,8 +124,8 @@ void PlayLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 		BgmPlayer_ = GameEngineSound::SoundPlayControl("the depths.ogg");
 		BossBgmPlayer_ = GameEngineSound::SoundPlayControl("mom fight.ogg");
 	}
-	BgmPlayer_.SetVolume(1.0f * Option_MUSIC);
-	BossBgmPlayer_.SetVolume(1.0f * Option_MUSIC);
+	BgmPlayer_.SetVolume(0.5f * Option_MUSIC);
+	BossBgmPlayer_.SetVolume(0.5f * Option_MUSIC);
 	BossBgmPlayer_.Pause(true);
 
 	Player::MainPlayer->SetPosition(GameEngineWindow::GetScale().Half());

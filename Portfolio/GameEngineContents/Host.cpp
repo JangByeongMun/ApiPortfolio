@@ -1,4 +1,5 @@
 #include "Host.h"
+#include "Player.h"
 
 Host::Host() 
 	: Type_(HostType::Normal)
@@ -116,7 +117,33 @@ void Host::AttackUpdate()
 	AnimTimer_ += GameEngineTime::GetDeltaTime();
 	if (AnimTimer_ >= 0.8f)
 	{
-		Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC);
+		switch (Type_)
+		{
+		case HostType::Normal:
+			Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC);
+			break;
+		case HostType::Red:
+			Shoot(AttackNormalDir() * 500.0f, ProjectileType::ENEMY_BASIC);
+			Shoot(AttackLeftDir() * 500.0f, ProjectileType::ENEMY_BASIC);
+			Shoot(AttackRightDir() * 500.0f, ProjectileType::ENEMY_BASIC);
+			break;
+		default:
+			break;
+		}
 		ChangeState(HostState::Idle);
 	}
+}
+
+float4 Host::AttackLeftDir()
+{
+	float4 ReturnFloat4 = Player::MainPlayer->GetPosition() + float4(-100, 0) - GetPosition();
+	ReturnFloat4.Normal2D();
+	return ReturnFloat4;
+}
+
+float4 Host::AttackRightDir()
+{
+	float4 ReturnFloat4 = Player::MainPlayer->GetPosition() + float4(100, 0) - GetPosition();
+	ReturnFloat4.Normal2D();
+	return ReturnFloat4;
 }

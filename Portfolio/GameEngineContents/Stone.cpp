@@ -40,7 +40,7 @@ void Stone::BombStone()
 
 	std::string TmpName = "rock crumble";
 	TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
-	GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 1.0f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.5f * Option_SFX);
 
 	Renderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));
 	ShadowRenderer_->SetOrder(static_cast<int>(ORDER::BACKGROUND));

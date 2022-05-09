@@ -47,5 +47,7 @@ private:
 
 	void IdleUpdate();
 	void AttackUpdate();
+	float4 AttackLeftDir();
+	float4 AttackRightDir();
 };
 
