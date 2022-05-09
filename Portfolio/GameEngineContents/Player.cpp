@@ -211,8 +211,6 @@ void Player::Update()
 	if (true == GameEngineInput::GetInst()->IsDown("SpaceBar"))
 	{
 		UseActive();
-		float4 CurrentRoomPos = RandomRoomManager::GetInst()->FindRoom(Player::MainPlayer->GetCurrentRoomPos())->GetPosition();
-		GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
 	}
 
 
@@ -327,6 +325,12 @@ void Player::Update()
 
 		TmpPassiveItem->Setting(TmpType);
 	}
+	if (true == GameEngineInput::GetInst()->IsDown("Test6"))
+	{
+		float4 CurrentRoomPos = RandomRoomManager::GetInst()->FindRoom(Player::MainPlayer->GetCurrentRoomPos())->GetPosition();
+		GetLevel()->CreateActor<BlackHeartEffect>()->SetPosition(CurrentRoomPos);
+	}
+	
 	/////////////////////////////////////////////////////// µð¹ö±ë¿ë
 
 
