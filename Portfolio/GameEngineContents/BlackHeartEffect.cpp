@@ -21,7 +21,7 @@ BlackHeartEffect::~BlackHeartEffect()
 
 void BlackHeartEffect::Start()
 {
-	GameEngineSound::SoundPlayOneShotWithVolume("death card mix.wav", 0, 0.5f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume("death card mix.wav", 0, 0.1f * Option_SFX);
 
 	Renderer_ = CreateRenderer("giantbook_rebirth_002_blackheart.bmp", static_cast<int>(ORDER::FRONTUI));
 	Renderer_->SetScale({ 320, 320 });

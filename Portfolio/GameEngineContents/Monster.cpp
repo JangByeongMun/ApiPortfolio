@@ -324,7 +324,7 @@ void Monster::Damaged(float _Damage)
 	{
 		std::string TmpName = "death burst small";
 		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 3)) + ".wav";
-		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.1f * Option_SFX);
 
 		MonsterDeath();
 		MakeRandomBlood(2, 5);

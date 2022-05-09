@@ -49,7 +49,7 @@ void BoomEffect::MakeEffect()
 	{
 		std::string TmpName = "explosions";
 		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(0, 2)) + ".wav";
-		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.1f * Option_SFX);
 	}
 
 	{

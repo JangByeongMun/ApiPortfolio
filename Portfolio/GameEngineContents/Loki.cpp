@@ -153,7 +153,7 @@ void Loki::SummonStart()
 	AnimTimer_ = 0.0f;
 	IsAnim_ = false;
 	Renderer_->ChangeAnimation("Summon");
-	GameEngineSound::SoundPlayOneShotWithVolume("summonsound.wav", 0, 0.5f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume("summonsound.wav", 0, 0.1f * Option_SFX);
 }
 void Loki::DeadStart()
 {

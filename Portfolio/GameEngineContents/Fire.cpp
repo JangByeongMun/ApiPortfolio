@@ -50,7 +50,7 @@ void Fire::AddFireHP(float _Value)
 			FirePlaceRenderer_[i]->ChangeAnimation("grid_fireplace_Off");
 		}
 
-		GameEngineSound::SoundPlayOneShotWithVolume("steam half sec.wav", 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("steam half sec.wav", 0, 0.1f * Option_SFX);
 
 		RandomDrop();
 		Renderer_->Off();
@@ -108,7 +108,7 @@ void Fire::Update()
 
 	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
 	{
-		BGMPlayer_.SetVolume(0.5f * Option_SFX);
+		BGMPlayer_.SetVolume(0.1f * Option_SFX);
 	}
 	else
 	{

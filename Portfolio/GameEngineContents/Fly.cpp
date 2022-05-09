@@ -61,7 +61,7 @@ void Fly::Update()
 	Monster::Update();
 	if (RandomRoomManager::GetInst()->GetCurrentRoom() == Room_)
 	{
-		BGMPlayer_.SetVolume(0.5f * Option_SFX);
+		BGMPlayer_.SetVolume(0.1f * Option_SFX);
 	}
 	else
 	{

@@ -19,7 +19,7 @@ DeadReasonUI::~DeadReasonUI()
 
 void DeadReasonUI::Start()
 {
-	GameEngineSound::SoundPlayOneShotWithVolume("you died.ogg", 0, 0.5f * Option_MUSIC);
+	GameEngineSound::SoundPlayOneShotWithVolume("you died.ogg", 0, 0.1f * Option_MUSIC);
 
 	float4 TestPos = GetLevel()->GetCameraPos() + GameEngineWindow::GetScale().Half();
 	SetPosition(TestPos);

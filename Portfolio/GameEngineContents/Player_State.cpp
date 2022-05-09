@@ -19,7 +19,7 @@ void Player::SetAcheiveRenderer(const std::string& _Name)
 	AcheiveItemRender_ = CreateRenderer(_Name, static_cast<int>(ORDER::BACKUI));
 	AcheiveItemRender_->SetPivot({0, -30});
 	AcheiveItemRender_->Death(1.0f);
-	GameEngineSound::SoundPlayOneShotWithVolume("power up1.wav", 0, 0.5f * Option_SFX);
+	GameEngineSound::SoundPlayOneShotWithVolume("power up1.wav", 0, 0.1f * Option_SFX);
 }
 
 // Start
@@ -296,7 +296,7 @@ void Player::HeadAttackUpdate()
 
 		std::string TmpName = "tear fire";
 		TmpName += std::to_string(GameEngineRandom::MainRandom->RandomInt(1, 2)) + ".wav";
-		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume(TmpName, 0, 0.1f * Option_SFX);
 
 		HeadRender_->ChangeAnimation(GetHeadAnimationName() + ChangeDirText + "_2");
 

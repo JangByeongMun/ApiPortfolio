@@ -21,7 +21,7 @@ void MoneyItem::SetType(MoneyType _Type, bool _IsSoundOn)
 	Type_ = _Type;
 	if (true == _IsSoundOn)
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("penny drop 1.wav", 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("penny drop 1.wav", 0, 0.1f * Option_SFX);
 	}
 
 	Renderer_ = CreateRenderer(RenderPivot::CENTER, { 0, 0 }, static_cast<int>(ORDER::PLAYER));
@@ -170,7 +170,7 @@ void MoneyItem::DestroyUpdate()
 {
 	if (Renderer_->IsEndAnimation())
 	{
-		GameEngineSound::SoundPlayOneShotWithVolume("penny pickup 1.wav", 0, 0.5f * Option_SFX);
+		GameEngineSound::SoundPlayOneShotWithVolume("penny pickup 1.wav", 0, 0.1f * Option_SFX);
 		Off();
 	}
 }

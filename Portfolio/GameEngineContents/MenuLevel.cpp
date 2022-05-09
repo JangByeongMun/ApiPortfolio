@@ -83,7 +83,7 @@ void MenuLevel::Update()
 			break;
 		case 2:
 			Index2_->SelectMenu();
-			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.5f * Option_SFX);
+			GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.1f * Option_SFX);
 			break;
 		case 3:
 			Index3_->SelectIndex();
@@ -245,7 +245,7 @@ void MenuLevel::LevelChangeStart(GameEngineLevel* _PrevLevel)
 	}
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("MenuLevel.ogg");
-	BgmPlayer_.SetVolume(0.5f * Option_MUSIC);
+	BgmPlayer_.SetVolume(0.1f * Option_MUSIC);
 }
 
 void MenuLevel::LevelChangeEnd(GameEngineLevel* _NextLevel)
@@ -260,7 +260,7 @@ void MenuLevel::ChangeIndex(int _Index)
 	ChangeIndex_ = _Index;
 	CurrentIndex_ = ChangeIndex_;
 	CurrentPos_ = GetCameraPos();
-	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.5f * Option_SFX);
+	GameEngineSound::SoundPlayControlOneShot("book page turn.wav").SetVolume(0.1f * Option_SFX);
 }
 
 void MenuLevel::ChangeIndexImmediate(int _Index)
@@ -272,5 +272,5 @@ void MenuLevel::ChangeIndexImmediate(int _Index)
 
 void MenuLevel::ChangeBGMVolume()
 {
-	BgmPlayer_.SetVolume(0.5f * Option_MUSIC);
+	BgmPlayer_.SetVolume(0.1f * Option_MUSIC);
 }

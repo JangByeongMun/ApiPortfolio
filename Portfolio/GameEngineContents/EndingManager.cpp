@@ -24,7 +24,7 @@ void EndingManager::Play()
 	IsPlaying_ = true;
 
 	BgmPlayer_ = GameEngineSound::SoundPlayControl("Ending.ogg");
-	BgmPlayer_.SetVolume(0.5f * Option_MUSIC);
+	BgmPlayer_.SetVolume(0.1f * Option_MUSIC);
 }
 
 void EndingManager::Stop()
