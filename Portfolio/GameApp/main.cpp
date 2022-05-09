@@ -9,9 +9,5 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance,
 					_In_ char* lpCmdLine, // 기본적으로 wchar_t* 형의 디파인 자료형을 썻는데 위에서 멀티바이트로 바꼈으므로 char*로 변경
 					_In_ int nCmdShow)
 {
-
-	GameEngineFile NewFile = "D:\\aaa.tt";
-	NewFile.Open(OpenMode::Write);
-	
 	GameEngine::Start<BindingOfIsaac>();
 }
